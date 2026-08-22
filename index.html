@@ -78,14 +78,18 @@ main{flex:1;padding:20px 16px 40px}
 .feed-gallery.grid-2{grid-template-columns:1fr 1fr}
 .feed-gallery.grid-3{grid-template-columns:1fr 1fr;grid-template-rows:220px 220px}
 .feed-gallery.grid-3 .gallery-item:first-child{grid-row:span 2}
+.feed-gallery.grid-4{grid-template-columns:1fr 1fr;grid-template-rows:220px 220px}
 
 .gallery-item{position:relative;height:340px;overflow:hidden;cursor:pointer;background:#1e293b}
 .feed-gallery.grid-1 .gallery-item{height:440px}
+.feed-gallery.grid-4 .gallery-item{height:220px}
 @media (max-width:640px){
   .gallery-item{height:260px}
   .feed-gallery.grid-1 .gallery-item{height:320px}
   .feed-gallery.grid-3{grid-template-columns:1fr;grid-template-rows:auto}
   .feed-gallery.grid-3 .gallery-item:first-child{grid-row:auto;height:280px}
+  .feed-gallery.grid-4{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .feed-gallery.grid-4 .gallery-item{height:190px}
 }
 
 .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}
@@ -218,6 +222,36 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 const tripPosts = [
+  {
+    "id": "post-9",
+    "date": "Sun Aug 23, 2026 · 3:30 AM JST",
+    "location": "Don Quijote & McDonald's · Ueno, Tokyo",
+    "tag": "Midnight run",
+    "title": "Donki Mega-Store Hunt & Late-Night McDonald's Fries! 🐧🍟✨",
+    "caption": "Since we were already up and exploring, we kept the momentum rolling! First stop: the massive multi-level Don Quijote in Ueno for some essential contact solution for Alison. With Donki being gigantic, a quick essentials run naturally turned into browsing character goods, plushie aisles, and towering toy shelves.\n\nAfter winding through the neon aisles, we capped off the early morning expedition at McDonald's for fresh hot fries, piggyback rides by the touchscreen kiosks, and order pickups before strolling back through the quiet Tokyo streets. Now tucked back into bed for real!",
+    "media": [
+      {
+        "url": "assets/photos/32_mcdonalds_piggyback_kiosk.jpg",
+        "thumb": "assets/photos/32_mcdonalds_piggyback_kiosk.jpg",
+        "caption": "Piggyback rides and smiles at the late-night McDonald's touchscreen ordering kiosks!"
+      },
+      {
+        "url": "assets/photos/28_don_quijote_sanrio_plush_wall.jpg",
+        "thumb": "assets/photos/28_don_quijote_sanrio_plush_wall.jpg",
+        "caption": "Evelyn in absolute Sanrio heaven browsing the Hello Kitty and plushie wall at Donki."
+      },
+      {
+        "url": "assets/photos/30_don_quijote_boy_excited_aisle.jpg",
+        "thumb": "assets/photos/30_don_quijote_boy_excited_aisle.jpg",
+        "caption": "Pure midnight excitement exploring the packed Don Quijote aisles!"
+      },
+      {
+        "url": "assets/photos/33_mcdonalds_fries_order_pickup.jpg",
+        "thumb": "assets/photos/33_mcdonalds_fries_order_pickup.jpg",
+        "caption": "Hot fry run secured at the counter before heading back to sleep."
+      }
+    ]
+  },
   {
     "id": "post-8",
     "date": "Sun Aug 23, 2026 · 3:00 AM JST",
@@ -521,7 +555,8 @@ function renderFeed() {
   container.innerHTML = tripPosts.map(post => {
     let galleryHtml = '';
     if (post.media && post.media.length > 0) {
-      const gridClass = post.media.length === 1 ? 'grid-1' : post.media.length === 2 ? 'grid-2' : 'grid-3';
+      const len = post.media.length;
+      const gridClass = len === 1 ? 'grid-1' : len === 2 ? 'grid-2' : len === 3 ? 'grid-3' : 'grid-4';
       const itemsHtml = post.media.map(m => {
         return '<div class="gallery-item" onclick="openLightbox(\'' + m.url + '\', \'image\', \'' + esc(post.title) + '\')">' +
           '<img src="' + m.thumb + '" alt="' + esc(post.title) + '" loading="lazy">' +
