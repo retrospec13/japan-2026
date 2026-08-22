@@ -79,10 +79,19 @@ main{flex:1;padding:20px 16px 40px}
 .feed-gallery.grid-3{grid-template-columns:1fr 1fr;grid-template-rows:220px 220px}
 .feed-gallery.grid-3 .gallery-item:first-child{grid-row:span 2}
 .feed-gallery.grid-4{grid-template-columns:1fr 1fr;grid-template-rows:220px 220px}
+.feed-gallery.grid-5{grid-template-columns:repeat(6, 1fr);grid-template-rows:220px 200px}
+.feed-gallery.grid-5 .gallery-item:nth-child(1){grid-column:span 3}
+.feed-gallery.grid-5 .gallery-item:nth-child(2){grid-column:span 3}
+.feed-gallery.grid-5 .gallery-item:nth-child(3){grid-column:span 2}
+.feed-gallery.grid-5 .gallery-item:nth-child(4){grid-column:span 2}
+.feed-gallery.grid-5 .gallery-item:nth-child(5){grid-column:span 2}
+.feed-gallery.grid-6{grid-template-columns:repeat(3, 1fr);grid-template-rows:200px 200px}
+.feed-gallery.grid-7,.feed-gallery.grid-8{grid-template-columns:repeat(4, 1fr);grid-template-rows:auto}
 
 .gallery-item{position:relative;height:340px;overflow:hidden;cursor:pointer;background:#1e293b}
 .feed-gallery.grid-1 .gallery-item{height:440px}
 .feed-gallery.grid-4 .gallery-item{height:220px}
+.feed-gallery.grid-5 .gallery-item,.feed-gallery.grid-6 .gallery-item,.feed-gallery.grid-7 .gallery-item,.feed-gallery.grid-8 .gallery-item{height:200px}
 @media (max-width:640px){
   .gallery-item{height:260px}
   .feed-gallery.grid-1 .gallery-item{height:320px}
@@ -90,6 +99,10 @@ main{flex:1;padding:20px 16px 40px}
   .feed-gallery.grid-3 .gallery-item:first-child{grid-row:auto;height:280px}
   .feed-gallery.grid-4{grid-template-columns:1fr 1fr;grid-template-rows:auto}
   .feed-gallery.grid-4 .gallery-item{height:190px}
+  .feed-gallery.grid-5,.feed-gallery.grid-6,.feed-gallery.grid-7,.feed-gallery.grid-8{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .feed-gallery.grid-5 .gallery-item:nth-child(1),.feed-gallery.grid-5 .gallery-item:nth-child(2),.feed-gallery.grid-5 .gallery-item:nth-child(3),.feed-gallery.grid-5 .gallery-item:nth-child(4),.feed-gallery.grid-5 .gallery-item:nth-child(5){grid-column:auto}
+  .feed-gallery.grid-5 .gallery-item:first-child{grid-column:span 2;height:240px}
+  .feed-gallery.grid-5 .gallery-item,.feed-gallery.grid-6 .gallery-item,.feed-gallery.grid-7 .gallery-item,.feed-gallery.grid-8 .gallery-item{height:170px}
 }
 
 .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}
@@ -244,6 +257,16 @@ const tripPosts = [
         "url": "assets/photos/30_don_quijote_boy_excited_aisle.jpg",
         "thumb": "assets/photos/30_don_quijote_boy_excited_aisle.jpg",
         "caption": "Pure midnight excitement exploring the packed Don Quijote aisles!"
+      },
+      {
+        "url": "assets/photos/31_don_quijote_contact_solution_hunt.jpg",
+        "thumb": "assets/photos/31_don_quijote_contact_solution_hunt.jpg",
+        "caption": "Aunt Alison and Mom tracking down contact solution and browsing the mega-store."
+      },
+      {
+        "url": "assets/photos/29_don_quijote_toy_aisle_shopping.jpg",
+        "thumb": "assets/photos/29_don_quijote_toy_aisle_shopping.jpg",
+        "caption": "Navigating the character floor mats and endless shelves at Don Quijote."
       },
       {
         "url": "assets/photos/33_mcdonalds_fries_order_pickup.jpg",
@@ -556,7 +579,7 @@ function renderFeed() {
     let galleryHtml = '';
     if (post.media && post.media.length > 0) {
       const len = post.media.length;
-      const gridClass = len === 1 ? 'grid-1' : len === 2 ? 'grid-2' : len === 3 ? 'grid-3' : 'grid-4';
+      const gridClass = len === 1 ? 'grid-1' : len === 2 ? 'grid-2' : len === 3 ? 'grid-3' : len === 4 ? 'grid-4' : len === 5 ? 'grid-5' : len === 6 ? 'grid-6' : 'grid-8';
       const itemsHtml = post.media.map((m, mIdx) => {
         return '<div class="gallery-item" data-post-idx="' + pIdx + '" data-media-idx="' + mIdx + '">' +
           '<img src="' + m.thumb + '" alt="' + esc(m.caption || post.title) + '" loading="lazy">' +
