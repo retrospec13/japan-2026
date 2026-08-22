@@ -58,13 +58,10 @@ main{flex:1;padding:20px 16px 40px}
 .tab-pane{display:none}
 .tab-pane.active{display:block}
 
-/* Canvas Hint Banner */
-.hint-canvas-card{background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.1);position:relative;overflow:hidden}
-.hint-canvas-badge{background:rgba(37,99,235,.25);border:1px solid rgba(59,130,246,.5);color:#93c5fd;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:6px;display:inline-block;margin-bottom:3px}
-.hint-canvas-content{flex:1;min-width:0}
-.hint-canvas-title{color:#fff;font-size:14.5px;font-weight:700;margin:0 0 2px;display:flex;align-items:center;gap:6px}
-.hint-canvas-desc{color:#94a3b8;font-size:13px;margin:0;line-height:1.4}
-#hintCanvas{width:46px;height:46px;flex:0 0 46px;border-radius:12px;background:rgba(255,255,255,.05);display:block}
+/* Clean Canvas Hint Element */
+.hint-canvas-card{background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%);border-radius:var(--radius);padding:12px 18px;margin-bottom:20px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.1)}
+.hint-canvas-title{color:#fff;font-size:14.5px;font-weight:700;margin:0}
+#hintCanvas{width:40px;height:40px;flex:0 0 40px;border-radius:10px;background:rgba(255,255,255,.05);display:block}
 
 /* Live Feed / Blog Layout */
 .feed-stream{display:grid;gap:24px}
@@ -93,7 +90,6 @@ main{flex:1;padding:20px 16px 40px}
 
 .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}
 .gallery-item:hover img{transform:scale(1.03)}
-.gallery-badge{position:absolute;bottom:10px;right:10px;background:rgba(15,23,42,.75);backdrop-filter:blur(6px);color:#fff;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px}
 
 .feed-body{padding:18px 20px 20px}
 .feed-text{font-size:15.5px;line-height:1.65;color:#334155;margin:0;white-space:pre-line}
@@ -173,12 +169,8 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
       
       <!-- Interactive Canvas Reminder Banner -->
       <div class="hint-canvas-card">
-        <canvas id="hintCanvas" width="92" height="92"></canvas>
-        <div class="hint-canvas-content">
-          <div class="hint-canvas-badge">Interactive Viewer</div>
-          <div class="hint-canvas-title">Tap Any Photo for Full View & Captions</div>
-          <p class="hint-canvas-desc">Click or tap any picture in the journal to expand high-res photos and read full story details.</p>
-        </div>
+        <canvas id="hintCanvas" width="80" height="80"></canvas>
+        <div class="hint-canvas-title">Tap any photo in the journal to view full size</div>
       </div>
 
       <div class="feed-stream" id="feedContainer"></div>
@@ -227,61 +219,82 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 <script>
 const tripPosts = [
   {
-    "id": "post-0",
-    "date": "Fri Aug 21, 2026 · Early Morning",
-    "location": "Kalamazoo (AZO) → Chicago O’Hare (ORD)",
-    "tag": "Road trip detour",
-    "title": "The Great O’Hare Dash (Bird Strike Detour!) 🦅🚗💨",
-    "caption": "Trip started with pure chaos! We got to Kalamazoo Airport for our 6:00 AM flight, waited an hour, and then learned birds had gotten caught in the engine with the flight delayed until at least noon. Rather than miss our ANA flight to Tokyo, we grabbed our gear, booked it out of the airport, and drove to Chicago O’Hare like a bat out of hell. Made it to Terminal 1 with plenty of time to spare!",
-    "media": []
-  },
-  {
-    "id": "post-1",
-    "date": "Fri Aug 21, 2026 · Morning",
-    "location": "Chicago O’Hare (ORD) · Terminal 1",
-    "tag": "Pre-flight",
-    "title": "Checked In & Recharged at O’Hare",
-    "caption": "Arrived at O’Hare, checked our bags with ANA, and breezed through security. After the morning road rally from Kalamazoo, everyone got to sit back, grab breakfast in the lounge, and get excited for the long haul across the Pacific!",
+    "id": "post-7",
+    "date": "Sun Aug 23, 2026 · 2:00 AM JST",
+    "location": "Tabi Ueno · Tokyo Base",
+    "tag": "Earthquake update",
+    "title": "2:00 AM Earthquake Wake-Up Call! 🚨 (All Safe & Sound)",
+    "caption": "Right at 2:00 AM, the Japanese emergency cell broadcast alarm went off across Tokyo followed by a noticeable jolt and room swaying (Magnitude 5.9 centered in Southern Ibaraki, registered Shindo 4 here in Ueno).\n\nWoke everyone right up! But modern Tokyo buildings are built like tanks — zero issues, zero damage, and JMA confirmed zero tsunami risk. Kids are wide awake, making goofy faces in the mirror, and completely unfazed. Everyone is safe, happy, and heading back to sleep!",
     "media": [
       {
-        "url": "assets/photos/19_ohare_terminal_family_kids_luggage.jpg",
-        "thumb": "assets/photos/19_ohare_terminal_family_kids_luggage.jpg",
-        "caption": "All rolling together through the terminal — luggage in tow and ready for the gate."
+        "url": "assets/photos/24_kids_awake_mirror_goofy.jpg",
+        "thumb": "assets/photos/24_kids_awake_mirror_goofy.jpg",
+        "caption": "Wide awake and making faces in the room mirror post-earthquake."
       },
       {
-        "url": "assets/photos/18_ohare_terminal_boy_luggage.jpg",
-        "thumb": "assets/photos/18_ohare_terminal_boy_luggage.jpg",
-        "caption": "Mastering the terminal wheelie roll across O’Hare’s classic checkerboard floors."
-      },
-      {
-        "url": "assets/photos/17_polaris_lounge_boy_breakfast.jpg",
-        "thumb": "assets/photos/17_polaris_lounge_boy_breakfast.jpg",
-        "caption": "Pre-flight breakfast parfait and dining recharge before boarding."
+        "url": "assets/photos/23_earthquake_phone_alert.jpg",
+        "thumb": "assets/photos/23_earthquake_phone_alert.jpg",
+        "caption": "The 2:00 AM emergency broadcast alert that woke up the room."
       }
     ]
   },
   {
-    "id": "post-2",
-    "date": "Fri Aug 21, 2026 · 11:50 AM Departure",
-    "location": "ANA NH11 · Boeing 777-300ER (\"The Room\")",
-    "tag": "Flight day",
-    "title": "Boarding ANA to Tokyo Narita",
-    "caption": "Settled into ANA’s \"The Room\" business class suites for the 12+ hour flight across the international date line. Huge lie-flat beds, private sliding privacy doors, and plenty of room for everyone to stretch out and settle in.",
+    "id": "post-6",
+    "date": "Sat Aug 22, 2026 · Evening",
+    "location": "Tabi Ueno · Tokyo Base",
+    "tag": "Tokyo arrival",
+    "title": "Torrential Downpour, Wrong Hotel & Cozy Reunion! 🌧️🏨",
+    "caption": "Touchdown Tokyo! The taxi ride from Narita turned into an absolute torrential downpour. To add to the adventure, we accidentally got dropped off at the wrong hotel first and got thoroughly soaked running for cover! 🤣\n\nWe quickly sorted it out, made it to our real home base at Tabi Ueno, got dried off, and settled in. Reunited with Aunt Alison for a late-night room picnic and dinner spread on the floor. Everyone is exhausted from the long travel day but in great spirits — Evelyn already has high-priority demands to hit up some Tokyo thrift stores tomorrow!",
     "media": [
       {
-        "url": "assets/photos/01_inflight_girl_mom.jpg",
-        "thumb": "assets/photos/01_inflight_girl_mom.jpg",
-        "caption": "Headphones on, games loaded, and cozy in the suite with Mom."
+        "url": "assets/photos/21_tabi_ueno_family_room_dinner.jpg",
+        "thumb": "assets/photos/21_tabi_ueno_family_room_dinner.jpg",
+        "caption": "Room picnic and late-night dinner spread after drying off from the storm."
       },
       {
-        "url": "assets/photos/16_inflight_boy_headphones_smile.jpg",
-        "thumb": "assets/photos/16_inflight_boy_headphones_smile.jpg",
-        "caption": "All smiles and ready for 12 hours of flight time in comfort."
+        "url": "assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg",
+        "thumb": "assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg",
+        "caption": "Catching up over dinner with Aunt Alison at Tabi Ueno."
       },
       {
-        "url": "assets/photos/04_inflight_boy_3ds_straight.jpg",
-        "thumb": "assets/photos/04_inflight_boy_3ds_straight.jpg",
-        "caption": "Nintendo 3DS fired up and making quick work of the flight hours."
+        "url": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
+        "thumb": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
+        "caption": "Evelyn testing out the bed bounce before lights out!"
+      }
+    ]
+  },
+  {
+    "id": "post-5",
+    "date": "Sat Aug 22, 2026 · Rest & Relaxation",
+    "location": "ANA NH11 In-Flight",
+    "tag": "Rest",
+    "title": "Movies & Lie-Flat Suites",
+    "caption": "Cabin lights dimmed over the Northern Pacific for rest. Lie-flat beds made up with plush comforters, Japanese anime on the 24-inch 4K screens, and some much-needed sleep before touchdown.",
+    "media": [
+      {
+        "url": "assets/photos/09_inflight_boy_watching_doraemon.jpg",
+        "thumb": "assets/photos/09_inflight_boy_watching_doraemon.jpg",
+        "caption": "Watching Doraemon on the ultra-wide in-flight screen."
+      },
+      {
+        "url": "assets/photos/08_inflight_boy_sleeping_dark.jpg",
+        "thumb": "assets/photos/08_inflight_boy_sleeping_dark.jpg",
+        "caption": "Sound asleep in the lie-flat bed under the cabin ambient lighting."
+      }
+    ]
+  },
+  {
+    "id": "post-4",
+    "date": "Sat Aug 22, 2026 · Mid-Flight Surprise",
+    "location": "ANA NH11 In-Flight",
+    "tag": "Family",
+    "title": "Birthday Celebration at 35,000 Feet! 🎂",
+    "caption": "A wonderful surprise from the ANA cabin crew! They brought out a special \"Happy Birthday\" dessert plate crafted with fruit and sweet treats to celebrate mid-air.",
+    "media": [
+      {
+        "url": "assets/photos/07_inflight_family_birthday_cake_sharp.jpg",
+        "thumb": "assets/photos/07_inflight_family_birthday_cake_sharp.jpg",
+        "caption": "Surprise birthday plate and smiles in the suite."
       }
     ]
   },
@@ -311,64 +324,63 @@ const tripPosts = [
     ]
   },
   {
-    "id": "post-4",
-    "date": "Sat Aug 22, 2026 · Mid-Flight Surprise",
-    "location": "ANA NH11 In-Flight",
-    "tag": "Family",
-    "title": "Birthday Celebration at 35,000 Feet! 🎂",
-    "caption": "A wonderful surprise from the ANA cabin crew! They brought out a special \"Happy Birthday\" dessert plate crafted with fruit and sweet treats to celebrate mid-air.",
+    "id": "post-2",
+    "date": "Fri Aug 21, 2026 · 11:50 AM Departure",
+    "location": "ANA NH11 · Boeing 777-300ER (\"The Room\")",
+    "tag": "Flight day",
+    "title": "Boarding ANA to Tokyo Narita",
+    "caption": "Settled into ANA’s \"The Room\" business class suites for the 12+ hour flight across the international date line. Huge lie-flat beds, private sliding privacy doors, and plenty of room for everyone to stretch out and settle in.",
     "media": [
       {
-        "url": "assets/photos/07_inflight_family_birthday_cake_sharp.jpg",
-        "thumb": "assets/photos/07_inflight_family_birthday_cake_sharp.jpg",
-        "caption": "Surprise birthday plate and smiles in the suite."
+        "url": "assets/photos/01_inflight_girl_mom.jpg",
+        "thumb": "assets/photos/01_inflight_girl_mom.jpg",
+        "caption": "Headphones on, games loaded, and cozy in the suite with Mom."
+      },
+      {
+        "url": "assets/photos/16_inflight_boy_headphones_smile.jpg",
+        "thumb": "assets/photos/16_inflight_boy_headphones_smile.jpg",
+        "caption": "All smiles and ready for 12 hours of flight time in comfort."
+      },
+      {
+        "url": "assets/photos/04_inflight_boy_3ds_straight.jpg",
+        "thumb": "assets/photos/04_inflight_boy_3ds_straight.jpg",
+        "caption": "Nintendo 3DS fired up and making quick work of the flight hours."
       }
     ]
   },
   {
-    "id": "post-5",
-    "date": "Sat Aug 22, 2026 · Rest & Relaxation",
-    "location": "ANA NH11 In-Flight",
-    "tag": "Rest",
-    "title": "Movies & Lie-Flat Suites",
-    "caption": "Cabin lights dimmed over the Northern Pacific for rest. Lie-flat beds made up with plush comforters, Japanese anime on the 24-inch 4K screens, and some much-needed sleep before touchdown.",
+    "id": "post-1",
+    "date": "Fri Aug 21, 2026 · Morning",
+    "location": "Chicago O’Hare (ORD) · Terminal 1",
+    "tag": "Pre-flight",
+    "title": "Checked In & Recharged at O’Hare",
+    "caption": "Arrived at O’Hare, checked our bags with ANA, and breezed through security. After the morning road rally from Kalamazoo, everyone got to sit back, grab breakfast in the lounge, and get excited for the long haul across the Pacific!",
     "media": [
       {
-        "url": "assets/photos/09_inflight_boy_watching_doraemon.jpg",
-        "thumb": "assets/photos/09_inflight_boy_watching_doraemon.jpg",
-        "caption": "Watching Doraemon on the ultra-wide in-flight screen."
+        "url": "assets/photos/19_ohare_terminal_family_kids_luggage.jpg",
+        "thumb": "assets/photos/19_ohare_terminal_family_kids_luggage.jpg",
+        "caption": "All rolling together through the terminal — luggage in tow and ready for the gate."
       },
       {
-        "url": "assets/photos/08_inflight_boy_sleeping_dark.jpg",
-        "thumb": "assets/photos/08_inflight_boy_sleeping_dark.jpg",
-        "caption": "Sound asleep in the lie-flat bed under the cabin ambient lighting."
+        "url": "assets/photos/18_ohare_terminal_boy_luggage.jpg",
+        "thumb": "assets/photos/18_ohare_terminal_boy_luggage.jpg",
+        "caption": "Mastering the terminal wheelie roll across O’Hare’s classic checkerboard floors."
+      },
+      {
+        "url": "assets/photos/17_polaris_lounge_boy_breakfast.jpg",
+        "thumb": "assets/photos/17_polaris_lounge_boy_breakfast.jpg",
+        "caption": "Pre-flight breakfast parfait and dining recharge before boarding."
       }
     ]
   },
   {
-    "id": "post-6",
-    "date": "Sat Aug 22, 2026 · Evening",
-    "location": "Tabi Ueno · Tokyo Base",
-    "tag": "Tokyo arrival",
-    "title": "Torrential Downpour, Wrong Hotel & Cozy Reunion! 🌧️🏨",
-    "caption": "Touchdown Tokyo! The taxi ride from Narita turned into an absolute torrential downpour. To add to the adventure, we accidentally got dropped off at the wrong hotel first and got thoroughly soaked running for cover! 🤣\n\nWe quickly sorted it out, made it to our real home base at Tabi Ueno, got dried off, and settled in. Reunited with Aunt Alison for a late-night room picnic and dinner spread on the floor. Everyone is exhausted from the long travel day but in great spirits — Evelyn already has high-priority demands to hit up some Tokyo thrift stores tomorrow!",
-    "media": [
-      {
-        "url": "assets/photos/21_tabi_ueno_family_room_dinner.jpg",
-        "thumb": "assets/photos/21_tabi_ueno_family_room_dinner.jpg",
-        "caption": "Room picnic and late-night dinner spread after drying off from the storm."
-      },
-      {
-        "url": "assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg",
-        "thumb": "assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg",
-        "caption": "Catching up over dinner with Aunt Alison at Tabi Ueno."
-      },
-      {
-        "url": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
-        "thumb": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
-        "caption": "Evelyn testing out the bed bounce before lights out!"
-      }
-    ]
+    "id": "post-0",
+    "date": "Fri Aug 21, 2026 · Early Morning",
+    "location": "Kalamazoo (AZO) → Chicago O’Hare (ORD)",
+    "tag": "Road trip detour",
+    "title": "The Great O’Hare Dash (Bird Strike Detour!) 🦅🚗💨",
+    "caption": "Trip started with pure chaos! We got to Kalamazoo Airport for our 6:00 AM flight, waited an hour, and then learned birds had gotten caught in the engine with the flight delayed until at least noon. Rather than miss our ANA flight to Tokyo, we grabbed our gear, booked it out of the airport, and drove to Chicago O’Hare like a bat out of hell. Made it to Terminal 1 with plenty of time to spare!",
+    "media": []
   }
 ];
 
@@ -423,61 +435,50 @@ function initCanvasHint() {
 
   function render() {
     t += 0.04;
-    ctx.clearRect(0, 0, 92, 92);
+    ctx.clearRect(0, 0, 80, 80);
 
-    // Center point
-    const cx = 46;
-    const cy = 46;
+    const cx = 40;
+    const cy = 40;
 
-    // Glowing expanding ring
-    const pulse = (Math.sin(t) + 1) / 2; // 0..1
-    const r1 = 28 + pulse * 10;
+    const pulse = (Math.sin(t) + 1) / 2;
+    const r1 = 24 + pulse * 8;
     ctx.beginPath();
     ctx.arc(cx, cy, r1, 0, Math.PI * 2);
     ctx.strokeStyle = 'rgba(59, 130, 246, ' + (0.4 - pulse * 0.3) + ')';
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2.5;
     ctx.stroke();
 
-    // Inner glowing disc
     ctx.beginPath();
-    ctx.arc(cx, cy, 26, 0, Math.PI * 2);
+    ctx.arc(cx, cy, 22, 0, Math.PI * 2);
     ctx.fillStyle = '#2563eb';
     ctx.shadowColor = '#3b82f6';
-    ctx.shadowBlur = 12 + pulse * 6;
+    ctx.shadowBlur = 10 + pulse * 5;
     ctx.fill();
-    ctx.shadowBlur = 0; // reset
+    ctx.shadowBlur = 0;
 
-    // Photo / Expand Icon Drawn on Canvas
     ctx.strokeStyle = '#ffffff';
     ctx.fillStyle = '#ffffff';
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
-    // Outer frame rectangle
-    const bx = 34, by = 34, bw = 24, bh = 24;
+    const bx = 30, by = 30, bw = 20, bh = 20;
     ctx.strokeRect(bx, by, bw, bh);
 
-    // Expand corner arrows
-    const expandLen = 5 + Math.sin(t * 1.5) * 1.5;
-    
-    // Top-left arrow
     ctx.beginPath();
-    ctx.moveTo(bx - 3, by + 3);
-    ctx.lineTo(bx - 3, by - 3);
-    ctx.lineTo(bx + 3, by - 3);
+    ctx.moveTo(bx - 2, by + 2);
+    ctx.lineTo(bx - 2, by - 2);
+    ctx.lineTo(bx + 2, by - 2);
     ctx.stroke();
 
-    // Bottom-right arrow
     ctx.beginPath();
-    ctx.moveTo(bx + bw + 3, by + bh - 3);
-    ctx.lineTo(bx + bw + 3, by + bh + 3);
-    ctx.lineTo(bx + bw - 3, by + bh + 3);
+    ctx.moveTo(bx + bw + 2, by + bh - 2);
+    ctx.lineTo(bx + bw + 2, by + bh + 2);
+    ctx.lineTo(bx + bw - 2, by + bh + 2);
     ctx.stroke();
 
-    // Center small circle (shutter / target)
     ctx.beginPath();
-    ctx.arc(cx, cy, 3.5, 0, Math.PI * 2);
+    ctx.arc(cx, cy, 3, 0, Math.PI * 2);
     ctx.fill();
 
     requestAnimationFrame(render);
@@ -497,9 +498,8 @@ function renderFeed() {
     if (post.media && post.media.length > 0) {
       const gridClass = post.media.length === 1 ? 'grid-1' : post.media.length === 2 ? 'grid-2' : 'grid-3';
       const itemsHtml = post.media.map(m => {
-        return '<div class="gallery-item" onclick="openLightbox(\'' + m.url + '\', \'image\', \'' + esc(m.caption || post.title) + '\')">' +
-          '<img src="' + m.thumb + '" alt="' + esc(m.caption || post.title) + '" loading="lazy">' +
-          '<div class="gallery-badge">📷 Expand</div>' +
+        return '<div class="gallery-item" onclick="openLightbox(\'' + m.url + '\', \'image\', \'' + esc(post.title) + '\')">' +
+          '<img src="' + m.thumb + '" alt="' + esc(post.title) + '" loading="lazy">' +
         '</div>';
       }).join('');
       galleryHtml = '<div class="feed-gallery ' + gridClass + '">' + itemsHtml + '</div>';
