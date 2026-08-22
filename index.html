@@ -88,7 +88,7 @@ main{flex:1;padding:20px 16px 40px}
 .gallery-badge{position:absolute;bottom:10px;right:10px;background:rgba(15,23,42,.75);backdrop-filter:blur(6px);color:#fff;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px}
 
 .feed-body{padding:18px 20px 20px}
-.feed-text{font-size:15.5px;line-height:1.65;color:#334155;margin:0}
+.feed-text{font-size:15.5px;line-height:1.65;color:#334155;margin:0;white-space:pre-line}
 .feed-tag{margin-top:14px;display:inline-flex;font-size:12px;font-weight:700;color:var(--acc-dark);background:var(--acc2);padding:4px 10px;border-radius:6px}
 
 /* Map Section */
@@ -328,12 +328,28 @@ const tripPosts = [
   },
   {
     "id": "post-6",
-    "date": "Sat Aug 22, 2026 · 3:30 PM JST",
-    "location": "Tokyo Narita (NRT) → Tabi Ueno",
-    "tag": "Arrival",
-    "title": "Landed in Tokyo & Taxi-ing to Ueno! 🇯🇵",
-    "caption": "Touchdown at Tokyo Narita Terminal 1! Cleared customs, collected our bags, and we are now in transit straight to our first hotel base at Tabi Ueno. Excited to unpack, stretch our legs in Ueno Park, and kick off the Japan adventure!",
-    "media": []
+    "date": "Sat Aug 22, 2026 · Evening",
+    "location": "Tabi Ueno · Tokyo Base",
+    "tag": "Tokyo arrival",
+    "title": "Torrential Downpour, Wrong Hotel & Cozy Reunion! 🌧️🏨",
+    "caption": "Touchdown Tokyo! The taxi ride from Narita turned into an absolute torrential downpour. To add to the adventure, we accidentally got dropped off at the wrong hotel first and got thoroughly soaked running for cover! 🤣\n\nWe quickly sorted it out, made it to our real home base at Tabi Ueno, got dried off, and settled in. Reunited with Aunt Alison for a late-night room picnic and dinner spread on the floor. Everyone is exhausted from the long travel day but in great spirits — Evelyn already has high-priority demands to hit up some Tokyo thrift stores tomorrow!",
+    "media": [
+      {
+        "url": "assets/photos/21_tabi_ueno_family_room_dinner.jpg",
+        "thumb": "assets/photos/21_tabi_ueno_family_room_dinner.jpg",
+        "caption": "Room picnic and late-night dinner spread after drying off from the storm."
+      },
+      {
+        "url": "assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg",
+        "thumb": "assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg",
+        "caption": "Catching up over dinner with Aunt Alison at Tabi Ueno."
+      },
+      {
+        "url": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
+        "thumb": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
+        "caption": "Evelyn testing out the bed bounce before lights out!"
+      }
+    ]
   }
 ];
 
