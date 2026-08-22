@@ -228,7 +228,7 @@ const tripPosts = [
     "location": "Don Quijote & McDonald's · Ueno, Tokyo",
     "tag": "Midnight run",
     "title": "Donki Mega-Store Hunt & Late-Night McDonald's Fries! 🐧🍟✨",
-    "caption": "Since we were already up and exploring, we kept the momentum rolling! First stop: the massive multi-level Don Quijote in Ueno for some essential contact solution for Alison. With Donki being gigantic, a quick essentials run naturally turned into browsing character goods, plushie aisles, and towering toy shelves.\n\nAfter winding through the neon aisles, we capped off the early morning expedition at McDonald's for fresh hot fries, piggyback rides by the touchscreen kiosks, and order pickups before strolling back through the quiet Tokyo streets. Now tucked back into bed for real!",
+    "caption": "Since we were already up and exploring, we kept the momentum rolling! First stop: the massive multi-level Don Quijote in Ueno for some essential contact solution for Alison. With Donki being gigantic, a quick essentials run naturally turned into browsing character goods, plushie aisles, and towering toy shelves.\n\nAfter winding through the neon aisles, we capped off the early morning expedition at McDonald's for fresh hot fries, piggyback rides by the touchscreen kiosks, and order pickups before strolling back through the quiet Tokyo streets. Now back to bed!",
     "media": [
       {
         "url": "assets/photos/32_mcdonalds_piggyback_kiosk.jpg",
@@ -558,8 +558,9 @@ function renderFeed() {
       const len = post.media.length;
       const gridClass = len === 1 ? 'grid-1' : len === 2 ? 'grid-2' : len === 3 ? 'grid-3' : 'grid-4';
       const itemsHtml = post.media.map(m => {
-        return '<div class="gallery-item" onclick="openLightbox(\'' + m.url + '\', \'image\', \'' + esc(post.title) + '\')">' +
-          '<img src="' + m.thumb + '" alt="' + esc(post.title) + '" loading="lazy">' +
+        const cap = m.caption ? esc(m.caption) : esc(post.title);
+        return '<div class="gallery-item" onclick="openLightbox(\'' + m.url + '\', \'image\', \'' + cap.replace(/'/g, "\\'") + '\')">' +
+          '<img src="' + m.thumb + '" alt="' + cap + '" loading="lazy">' +
         '</div>';
       }).join('');
       galleryHtml = '<div class="feed-gallery ' + gridClass + '">' + itemsHtml + '</div>';
