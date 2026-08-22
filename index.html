@@ -58,6 +58,14 @@ main{flex:1;padding:20px 16px 40px}
 .tab-pane{display:none}
 .tab-pane.active{display:block}
 
+/* Canvas Hint Banner */
+.hint-canvas-card{background:linear-gradient(135deg, #1e293b 0%, #0f172a 100%);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.1);position:relative;overflow:hidden}
+.hint-canvas-badge{background:rgba(37,99,235,.25);border:1px solid rgba(59,130,246,.5);color:#93c5fd;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:6px;display:inline-block;margin-bottom:3px}
+.hint-canvas-content{flex:1;min-width:0}
+.hint-canvas-title{color:#fff;font-size:14.5px;font-weight:700;margin:0 0 2px;display:flex;align-items:center;gap:6px}
+.hint-canvas-desc{color:#94a3b8;font-size:13px;margin:0;line-height:1.4}
+#hintCanvas{width:46px;height:46px;flex:0 0 46px;border-radius:12px;background:rgba(255,255,255,.05);display:block}
+
 /* Live Feed / Blog Layout */
 .feed-stream{display:grid;gap:24px}
 .feed-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .15s ease}
@@ -144,7 +152,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
       <div style="font-size:13px;font-weight:600;color:var(--muted)">Aug 21 – Sep 2, 2026</div>
     </div>
     <h1>Japan Family Trip 2026</h1>
-    <p>We love and appreciate everyone who is following along! We will be sharing daily updates, photos, and videos from our journey across Japan, so please check back regularly.</p>
+    <p>Follow along with our travel updates, photos, videos, and map route!</p>
     <div class="route-tags">
       <span class="route-tag">Tokyo / Ueno</span>
       <span class="route-tag">Osaka</span>
@@ -162,6 +170,17 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
   <main>
     <!-- Live Feed Tab -->
     <section class="tab-pane active" id="paneFeed">
+      
+      <!-- Interactive Canvas Reminder Banner -->
+      <div class="hint-canvas-card">
+        <canvas id="hintCanvas" width="92" height="92"></canvas>
+        <div class="hint-canvas-content">
+          <div class="hint-canvas-badge">Interactive Viewer</div>
+          <div class="hint-canvas-title">Tap Any Photo for Full View & Captions</div>
+          <p class="hint-canvas-desc">Click or tap any picture in the journal to expand high-res photos and read full story details.</p>
+        </div>
+      </div>
+
       <div class="feed-stream" id="feedContainer"></div>
     </section>
 
@@ -395,6 +414,77 @@ function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+// Draw Canvas Pulse & Icon Animation
+function initCanvasHint() {
+  const canvas = document.getElementById('hintCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let t = 0;
+
+  function render() {
+    t += 0.04;
+    ctx.clearRect(0, 0, 92, 92);
+
+    // Center point
+    const cx = 46;
+    const cy = 46;
+
+    // Glowing expanding ring
+    const pulse = (Math.sin(t) + 1) / 2; // 0..1
+    const r1 = 28 + pulse * 10;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r1, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(59, 130, 246, ' + (0.4 - pulse * 0.3) + ')';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Inner glowing disc
+    ctx.beginPath();
+    ctx.arc(cx, cy, 26, 0, Math.PI * 2);
+    ctx.fillStyle = '#2563eb';
+    ctx.shadowColor = '#3b82f6';
+    ctx.shadowBlur = 12 + pulse * 6;
+    ctx.fill();
+    ctx.shadowBlur = 0; // reset
+
+    // Photo / Expand Icon Drawn on Canvas
+    ctx.strokeStyle = '#ffffff';
+    ctx.fillStyle = '#ffffff';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    // Outer frame rectangle
+    const bx = 34, by = 34, bw = 24, bh = 24;
+    ctx.strokeRect(bx, by, bw, bh);
+
+    // Expand corner arrows
+    const expandLen = 5 + Math.sin(t * 1.5) * 1.5;
+    
+    // Top-left arrow
+    ctx.beginPath();
+    ctx.moveTo(bx - 3, by + 3);
+    ctx.lineTo(bx - 3, by - 3);
+    ctx.lineTo(bx + 3, by - 3);
+    ctx.stroke();
+
+    // Bottom-right arrow
+    ctx.beginPath();
+    ctx.moveTo(bx + bw + 3, by + bh - 3);
+    ctx.lineTo(bx + bw + 3, by + bh + 3);
+    ctx.lineTo(bx + bw - 3, by + bh + 3);
+    ctx.stroke();
+
+    // Center small circle (shutter / target)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 3.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    requestAnimationFrame(render);
+  }
+  render();
+}
+
 function renderFeed() {
   const container = document.getElementById('feedContainer');
   if (!container) return;
@@ -557,6 +647,7 @@ function zoomTo(region) {
 document.addEventListener('DOMContentLoaded', () => {
   renderFeed();
   initMap();
+  initCanvasHint();
 });
 </script>
 </body>
