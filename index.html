@@ -58,18 +58,37 @@ main{flex:1;padding:20px 16px 40px}
 .tab-pane{display:none}
 .tab-pane.active{display:block}
 
-/* Live Feed */
-.feed-stream{display:grid;gap:20px}
+/* Live Feed / Blog Layout */
+.feed-stream{display:grid;gap:24px}
 .feed-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .15s ease}
-.feed-media{position:relative;background:#0f172a;max-height:480px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden}
-.feed-media img{width:100%;height:auto;max-height:480px;object-fit:cover;display:block}
-.feed-media video{width:100%;max-height:480px;display:block;background:#000}
-.feed-media-badge{position:absolute;top:12px;right:12px;background:rgba(15,23,42,.75);backdrop-filter:blur(6px);color:#fff;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700;letter-spacing:.03em;display:flex;align-items:center;gap:5px}
 
-.feed-body{padding:18px 20px}
-.feed-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px;font-size:13px;color:var(--muted);font-weight:600}
+.feed-header{padding:18px 20px 12px;border-bottom:1px solid #f8fafc}
+.feed-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted);font-weight:600;margin-bottom:6px}
 .feed-loc{color:var(--acc);font-weight:700;display:inline-flex;align-items:center;gap:4px}
-.feed-text{font-size:16px;line-height:1.6;color:#1e293b;margin:0}
+.feed-title{margin:0;font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+
+/* Media Gallery Grid inside a post */
+.feed-gallery{display:grid;gap:4px;background:#0f172a}
+.feed-gallery.grid-1{grid-template-columns:1fr}
+.feed-gallery.grid-2{grid-template-columns:1fr 1fr}
+.feed-gallery.grid-3{grid-template-columns:1fr 1fr;grid-template-rows:220px 220px}
+.feed-gallery.grid-3 .gallery-item:first-child{grid-row:span 2}
+
+.gallery-item{position:relative;height:340px;overflow:hidden;cursor:pointer;background:#1e293b}
+.feed-gallery.grid-1 .gallery-item{height:440px}
+@media (max-width:640px){
+  .gallery-item{height:260px}
+  .feed-gallery.grid-1 .gallery-item{height:320px}
+  .feed-gallery.grid-3{grid-template-columns:1fr;grid-template-rows:auto}
+  .feed-gallery.grid-3 .gallery-item:first-child{grid-row:auto;height:280px}
+}
+
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}
+.gallery-item:hover img{transform:scale(1.03)}
+.gallery-badge{position:absolute;bottom:10px;right:10px;background:rgba(15,23,42,.75);backdrop-filter:blur(6px);color:#fff;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px}
+
+.feed-body{padding:18px 20px 20px}
+.feed-text{font-size:15.5px;line-height:1.65;color:#334155;margin:0}
 .feed-tag{margin-top:14px;display:inline-flex;font-size:12px;font-weight:700;color:var(--acc-dark);background:var(--acc2);padding:4px 10px;border-radius:6px}
 
 /* Map Section */
@@ -93,11 +112,11 @@ main{flex:1;padding:20px 16px 40px}
 .custom-pin.transit{background:#475569}
 
 /* Lightbox Modal */
-.lightbox-modal{position:fixed;inset:0;background:rgba(15,23,42,.92);backdrop-filter:blur(8px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:16px;visibility:hidden;opacity:0;pointer-events:none;transition:all .2s ease}
+.lightbox-modal{position:fixed;inset:0;background:rgba(15,23,42,.94);backdrop-filter:blur(8px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:16px;visibility:hidden;opacity:0;pointer-events:none;transition:all .2s ease}
 .lightbox-modal.show{visibility:visible;opacity:1;pointer-events:auto}
-.lightbox-box{max-width:min(94vw,900px);max-height:min(90vh,760px);display:flex;flex-direction:column;align-items:center}
+.lightbox-box{max-width:min(94vw,1000px);max-height:min(90vh,820px);display:flex;flex-direction:column;align-items:center}
 .lightbox-box img,.lightbox-box video{max-width:100%;max-height:76vh;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.6);object-fit:contain}
-.lightbox-caption{color:#fff;margin-top:12px;font-size:15px;text-align:center;max-width:700px}
+.lightbox-caption{color:#f1f5f9;margin-top:14px;font-size:15px;text-align:center;max-width:720px;line-height:1.5}
 .lightbox-close{position:absolute;top:20px;right:20px;background:rgba(255,255,255,.2);color:#fff;border:0;border-radius:50%;width:42px;height:42px;font-size:24px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .lightbox-close:hover{background:rgba(255,255,255,.35)}
 
@@ -125,7 +144,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
       <div style="font-size:13px;font-weight:600;color:var(--muted)">Aug 21 – Sep 2, 2026</div>
     </div>
     <h1>Japan Family Trip 2026</h1>
-    <p>Follow along with our daily travel updates, photos, videos, and map route!</p>
+    <p>Follow along with our travel updates, photos, videos, and map route!</p>
     <div class="route-tags">
       <span class="route-tag">Tokyo / Ueno</span>
       <span class="route-tag">Osaka</span>
@@ -136,7 +155,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
   </header>
 
   <nav class="nav-wrap">
-    <button class="nav-btn active" id="tabFeed" onclick="switchTab('feed')">📸 Live Feed</button>
+    <button class="nav-btn active" id="tabFeed" onclick="switchTab('feed')">📸 Live Journal</button>
     <button class="nav-btn" id="tabMap" onclick="switchTab('map')">🗺️ Trip Map</button>
   </nav>
 
@@ -187,16 +206,125 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
-// --- TRIP POSTS (UPDATED IN REAL-TIME) ---
 const tripPosts = [
   {
-    id: 'post-1',
-    date: 'Fri Aug 21, 2026',
-    location: 'Chicago O’Hare (ORD) → Tokyo Narita (NRT)',
-    type: 'image',
-    mediaUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Keisei_Skyliner%2C_Tokyo_%2842371379350%29.jpg/960px-Keisei_Skyliner%2C_Tokyo_%2842371379350%29.jpg',
-    caption: 'Flight day! Boarding the flight to Tokyo. Next stop: Narita Airport and checking into Ueno! ✈️🇯🇵',
-    tag: 'Flight day'
+    "id": "post-1",
+    "date": "Fri Aug 21, 2026 · Morning",
+    "location": "Chicago O’Hare (ORD) · Terminal 1",
+    "tag": "Pre-flight",
+    "title": "The Journey Begins at O’Hare",
+    "caption": "Bags checked, boarding passes in hand, and fueling up for the long haul across the Pacific! We landed from Kalamazoo (AZO) early this morning, rechecked our bags at Terminal 1, and the kids are fully energized for Japan.",
+    "media": [
+      {
+        "url": "assets/photos/19_ohare_terminal_family_kids_luggage.jpg",
+        "thumb": "assets/photos/19_ohare_terminal_family_kids_luggage.jpg",
+        "caption": "All rolling together through the terminal — luggage in tow and ready for the gate."
+      },
+      {
+        "url": "assets/photos/18_ohare_terminal_boy_luggage.jpg",
+        "thumb": "assets/photos/18_ohare_terminal_boy_luggage.jpg",
+        "caption": "Mastering the terminal wheelie roll across O’Hare’s classic checkerboard floors."
+      },
+      {
+        "url": "assets/photos/17_polaris_lounge_boy_breakfast.jpg",
+        "thumb": "assets/photos/17_polaris_lounge_boy_breakfast.jpg",
+        "caption": "Pre-flight breakfast parfait and dining recharge before boarding."
+      }
+    ]
+  },
+  {
+    "id": "post-2",
+    "date": "Fri Aug 21, 2026 · 11:50 AM Departure",
+    "location": "ANA NH11 · Boeing 777-300ER (\"The Room\")",
+    "tag": "Flight day",
+    "title": "Boarding ANA to Tokyo Narita",
+    "caption": "Settled into ANA’s \"The Room\" business class suites for the 12+ hour flight across the international date line. Huge lie-flat beds, private sliding privacy doors, and plenty of room for everyone to stretch out and settle in.",
+    "media": [
+      {
+        "url": "assets/photos/01_inflight_girl_mom.jpg",
+        "thumb": "assets/photos/01_inflight_girl_mom.jpg",
+        "caption": "Headphones on, games loaded, and cozy in the suite with Mom."
+      },
+      {
+        "url": "assets/photos/16_inflight_boy_headphones_smile.jpg",
+        "thumb": "assets/photos/16_inflight_boy_headphones_smile.jpg",
+        "caption": "All smiles and ready for 12 hours of flight time in comfort."
+      },
+      {
+        "url": "assets/photos/04_inflight_boy_3ds_straight.jpg",
+        "thumb": "assets/photos/04_inflight_boy_3ds_straight.jpg",
+        "caption": "Nintendo 3DS fired up and making quick work of the flight hours."
+      }
+    ]
+  },
+  {
+    "id": "post-3",
+    "date": "Fri Aug 21, 2026 · In-Flight Dining",
+    "location": "Cruising over the Pacific Ocean",
+    "tag": "In-flight",
+    "title": "Multi-Course Dining & Chopsticks Practice",
+    "caption": "In-flight dining service started over the Pacific. Full Japanese meal service on crisp white tablecloths, noodle bowls, fresh fruit, and some serious chopstick practice before landing in Tokyo.",
+    "media": [
+      {
+        "url": "assets/photos/14_inflight_boy_holding_chopsticks.jpg",
+        "thumb": "assets/photos/14_inflight_boy_holding_chopsticks.jpg",
+        "caption": "Demonstrating chopstick mastery with the lunch spread."
+      },
+      {
+        "url": "assets/photos/10_inflight_boy_eating_noodles.jpg",
+        "thumb": "assets/photos/10_inflight_boy_eating_noodles.jpg",
+        "caption": "Enjoying hot Japanese noodle soup at 35,000 feet."
+      },
+      {
+        "url": "assets/photos/15_inflight_mom_girl_dining.jpg",
+        "thumb": "assets/photos/15_inflight_mom_girl_dining.jpg",
+        "caption": "White-tablecloth dinner service in the adjoining middle suite."
+      }
+    ]
+  },
+  {
+    "id": "post-4",
+    "date": "Sat Aug 22, 2026 · Mid-Flight Surprise",
+    "location": "ANA NH11 In-Flight",
+    "tag": "Family",
+    "title": "Birthday Celebration at 35,000 Feet! 🎂",
+    "caption": "A wonderful surprise from the ANA cabin crew! They brought out a special \"Happy Birthday\" dessert plate crafted with fruit and sweet treats to celebrate mid-air.",
+    "media": [
+      {
+        "url": "assets/photos/07_inflight_family_birthday_cake_sharp.jpg",
+        "thumb": "assets/photos/07_inflight_family_birthday_cake_sharp.jpg",
+        "caption": "Surprise birthday plate and smiles in the suite."
+      }
+    ]
+  },
+  {
+    "id": "post-5",
+    "date": "Sat Aug 22, 2026 · Rest & Relaxation",
+    "location": "ANA NH11 In-Flight",
+    "tag": "Rest",
+    "title": "Movies & Lie-Flat Suites",
+    "caption": "Cabin lights dimmed over the Northern Pacific for rest. Lie-flat beds made up with plush comforters, Japanese anime on the 24-inch 4K screens, and some much-needed sleep before touchdown.",
+    "media": [
+      {
+        "url": "assets/photos/09_inflight_boy_watching_doraemon.jpg",
+        "thumb": "assets/photos/09_inflight_boy_watching_doraemon.jpg",
+        "caption": "Watching Doraemon on the ultra-wide in-flight screen."
+      },
+      {
+        "url": "assets/photos/08_inflight_boy_sleeping_dark.jpg",
+        "thumb": "assets/photos/08_inflight_boy_sleeping_dark.jpg",
+        "caption": "Sound asleep in the lie-flat bed under the cabin ambient lighting."
+      }
+    ]
+  },
+  {
+    "id": "post-6",
+    "date": "Sat Aug 22, 2026 · 3:30 PM JST",
+    "location": "Tokyo Narita (NRT) → Tabi Ueno",
+    "tag": "Arrival",
+    "title": "Landed in Tokyo & Taxi-ing to Ueno! 🇯🇵",
+    "caption": "Touchdown at Tokyo Narita Terminal 1! Cleared customs, collected our bags, and we are now in transit straight to our first hotel base at Tabi Ueno. Excited to unpack, stretch our legs in Ueno Park, and kick off the Japan adventure!",
+    "media": []
   }
 ];
 
@@ -250,23 +378,32 @@ function renderFeed() {
     return;
   }
   container.innerHTML = tripPosts.map(post => {
-    let mediaHtml = '';
-    if (post.type === 'video') {
-      mediaHtml = '<div class="feed-media" onclick="openLightbox(\'' + post.mediaUrl + '\', \'video\', \'' + esc(post.caption) + '\')"><video src="' + post.mediaUrl + '" preload="metadata" muted playsinline></video><div class="feed-media-badge">▶ Video</div></div>';
-    } else if (post.mediaUrl) {
-      mediaHtml = '<div class="feed-media" onclick="openLightbox(\'' + post.mediaUrl + '\', \'image\', \'' + esc(post.caption) + '\')"><img src="' + post.mediaUrl + '" alt="' + esc(post.caption) + '" loading="lazy"><div class="feed-media-badge">📷 Photo</div></div>';
+    let galleryHtml = '';
+    if (post.media && post.media.length > 0) {
+      const gridClass = post.media.length === 1 ? 'grid-1' : post.media.length === 2 ? 'grid-2' : 'grid-3';
+      const itemsHtml = post.media.map(m => {
+        return '<div class="gallery-item" onclick="openLightbox(\'' + m.url + '\', \'image\', \'' + esc(m.caption || post.title) + '\')">' +
+          '<img src="' + m.thumb + '" alt="' + esc(m.caption || post.title) + '" loading="lazy">' +
+          '<div class="gallery-badge">📷 Expand</div>' +
+        '</div>';
+      }).join('');
+      galleryHtml = '<div class="feed-gallery ' + gridClass + '">' + itemsHtml + '</div>';
     }
-    return '<div class="feed-card">' +
-      mediaHtml +
-      '<div class="feed-body">' +
+
+    return '<article class="feed-card">' +
+      '<div class="feed-header">' +
         '<div class="feed-meta">' +
           '<span>' + esc(post.date) + '</span>' +
           (post.location ? '<span class="feed-loc">📍 ' + esc(post.location) + '</span>' : '') +
         '</div>' +
+        '<h2 class="feed-title">' + esc(post.title) + '</h2>' +
+      '</div>' +
+      galleryHtml +
+      '<div class="feed-body">' +
         '<p class="feed-text">' + esc(post.caption) + '</p>' +
         (post.tag ? '<div class="feed-tag">#' + esc(post.tag) + '</div>' : '') +
       '</div>' +
-    '</div>';
+    '</article>';
   }).join('');
 }
 
@@ -329,7 +466,6 @@ function switchTab(tab) {
 // Map Initialization
 let map = null;
 function initMap() {
-  // Start zoomed straight into Japan
   map = window.map = L.map('map', {
     zoomControl: true,
     worldCopyJump: false
@@ -373,7 +509,6 @@ function initMap() {
     });
   });
 
-  // Fit view tightly to Japan stops
   zoomTo('japan');
 }
 
@@ -381,8 +516,8 @@ function zoomTo(region) {
   if (!map) return;
   if (region === 'japan') {
     map.fitBounds([
-      [34.4, 134.5], // Kansai / Kinosaki area
-      [36.2, 140.6]  // Tokyo / Narita area
+      [34.4, 134.5],
+      [36.2, 140.6]
     ], { padding: [30, 30] });
   } else if (region === 'tokyo') {
     map.flyTo([35.69, 139.75], 11, { duration: 0.8 });
