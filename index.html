@@ -552,15 +552,14 @@ function renderFeed() {
     container.innerHTML = '<div class="feed-card" style="padding:40px;text-align:center"><p style="color:var(--muted)">No updates posted yet. As photos and videos are sent from the trip, they will appear here in real time!</p></div>';
     return;
   }
-  container.innerHTML = tripPosts.map(post => {
+  container.innerHTML = tripPosts.map((post, pIdx) => {
     let galleryHtml = '';
     if (post.media && post.media.length > 0) {
       const len = post.media.length;
       const gridClass = len === 1 ? 'grid-1' : len === 2 ? 'grid-2' : len === 3 ? 'grid-3' : 'grid-4';
-      const itemsHtml = post.media.map(m => {
-        const cap = m.caption ? esc(m.caption) : esc(post.title);
-        return '<div class="gallery-item" onclick="openLightbox(\'' + m.url + '\', \'image\', \'' + cap.replace(/'/g, "\\'") + '\')">' +
-          '<img src="' + m.thumb + '" alt="' + cap + '" loading="lazy">' +
+      const itemsHtml = post.media.map((m, mIdx) => {
+        return '<div class="gallery-item" data-post-idx="' + pIdx + '" data-media-idx="' + mIdx + '">' +
+          '<img src="' + m.thumb + '" alt="' + esc(m.caption || post.title) + '" loading="lazy">' +
         '</div>';
       }).join('');
       galleryHtml = '<div class="feed-gallery ' + gridClass + '">' + itemsHtml + '</div>';
@@ -582,6 +581,21 @@ function renderFeed() {
     '</article>';
   }).join('');
 }
+
+// Global click delegation for gallery items
+document.addEventListener('click', (e) => {
+  const item = e.target.closest('.gallery-item');
+  if (!item) return;
+  const pIdx = item.getAttribute('data-post-idx');
+  const mIdx = item.getAttribute('data-media-idx');
+  if (pIdx !== null && mIdx !== null) {
+    const post = tripPosts[parseInt(pIdx, 10)];
+    if (post && post.media && post.media[parseInt(mIdx, 10)]) {
+      const m = post.media[parseInt(mIdx, 10)];
+      openLightbox(m.url, m.type || 'image', m.caption || post.title);
+    }
+  }
+});
 
 // Lightbox
 function openLightbox(url, type, caption) {
