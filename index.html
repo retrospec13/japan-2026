@@ -63,6 +63,15 @@ main{flex:1;padding:20px 16px 40px}
 .hint-canvas-title{color:#fff;font-size:14.5px;font-weight:700;margin:0}
 #hintCanvas{width:40px;height:40px;flex:0 0 40px;border-radius:10px;background:rgba(255,255,255,.05);display:block}
 
+/* Day Filter Navigation */
+.day-filter-wrap{display:flex;gap:8px;overflow-x:auto;padding:4px 0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.day-filter-wrap::-webkit-scrollbar{display:none}
+.day-btn{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border:1px solid var(--line);background:#fff;color:#475569;border-radius:999px;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .15s ease;box-shadow:0 1px 2px rgba(0,0,0,.03);white-space:nowrap}
+.day-btn:hover{background:#f8fafc;border-color:#cbd5e1;color:var(--ink)}
+.day-btn.active{background:var(--acc);color:#fff;border-color:var(--acc);box-shadow:0 2px 8px rgba(37,99,235,.25)}
+.day-btn .day-count{display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;background:rgba(0,0,0,.06);color:inherit;padding:2px 7px;border-radius:999px;min-width:18px}
+.day-btn.active .day-count{background:rgba(255,255,255,.25);color:#fff}
+
 /* Live Feed / Blog Layout */
 .feed-stream{display:grid;gap:24px}
 .feed-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .15s ease}
@@ -190,6 +199,9 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
         <div class="hint-canvas-title">Tap any photo in the journal to view full size</div>
       </div>
 
+      
+      <!-- Day Filter Buttons -->
+      <div class="day-filter-wrap" id="dayFilterContainer"></div>
       <div class="feed-stream" id="feedContainer"></div>
     </section>
 
@@ -1046,14 +1058,85 @@ function initCanvasHint() {
   render();
 }
 
+// Day Filtering State & Helpers
+let selectedDay = 'all';
+
+function getPostDayKey(dateStr) {
+  if (!dateStr) return '';
+  const match = String(dateStr).match(/^([A-Za-z]{3}\s+[A-Za-z]{3}\s+\d{1,2})/);
+  return match ? match[1] : dateStr.split('·')[0].trim();
+}
+
+function getDayShortLabel(dayKey) {
+  // e.g. "Mon Aug 24" -> "Mon Aug 24" or "Today (Aug 24)"
+  return dayKey;
+}
+
+function renderDayFilter() {
+  const container = document.getElementById('dayFilterContainer');
+  if (!container) return;
+  
+  // Collect all days in chronological order of trip
+  const dayCounts = {};
+  const dayOrder = [];
+  
+  // Read posts to find unique days
+  tripPosts.forEach(post => {
+    const k = getPostDayKey(post.date);
+    if (!k) return;
+    if (!dayCounts[k]) {
+      dayCounts[k] = 0;
+      dayOrder.push(k);
+    }
+    dayCounts[k]++;
+  });
+  
+  // Custom metadata for rich pill buttons
+  const dayMeta = {
+    'Mon Aug 24': { label: 'Day 4 · Mon Aug 24', icon: '🎀' },
+    'Sun Aug 23': { label: 'Day 3 · Sun Aug 23', icon: '⛩️' },
+    'Sat Aug 22': { label: 'Day 2 · Sat Aug 22', icon: '🗼' },
+    'Fri Aug 21': { label: 'Day 1 · Fri Aug 21', icon: '✈️' }
+  };
+
+  let html = '<button class="day-btn ' + (selectedDay === 'all' ? 'active' : '') + '" onclick="selectDay(\'all\')">' +
+    '✨ All Days <span class="day-count">' + tripPosts.length + '</span>' +
+    '</button>';
+
+  dayOrder.forEach(dayKey => {
+    const meta = dayMeta[dayKey] || { label: dayKey, icon: '📅' };
+    const isActive = selectedDay === dayKey;
+    const count = dayCounts[dayKey] || 0;
+    html += '<button class="day-btn ' + (isActive ? 'active' : '') + '" onclick="selectDay(\'' + esc(dayKey) + '\')">' +
+      meta.icon + ' ' + esc(meta.label) + ' <span class="day-count">' + count + '</span>' +
+      '</button>';
+  });
+
+  container.innerHTML = html;
+}
+
+function selectDay(dayKey) {
+  selectedDay = dayKey;
+  renderDayFilter();
+  renderFeed();
+}
+
 function renderFeed() {
   const container = document.getElementById('feedContainer');
   if (!container) return;
-  if (!tripPosts.length) {
-    container.innerHTML = '<div class="feed-card" style="padding:40px;text-align:center"><p style="color:var(--muted)">No updates posted yet. As photos and videos are sent from the trip, they will appear here in real time!</p></div>';
+  
+  const filteredPosts = selectedDay === 'all' 
+    ? tripPosts 
+    : tripPosts.filter(p => getPostDayKey(p.date) === selectedDay);
+
+  if (!filteredPosts.length) {
+    container.innerHTML = '<div class="feed-card" style="padding:40px;text-align:center"><p style="color:var(--muted)">No updates found for this day.</p></div>';
     return;
   }
-  container.innerHTML = tripPosts.map((post, pIdx) => {
+  
+  container.innerHTML = filteredPosts.map((post) => {
+    // Find original index in tripPosts for lightbox click delegation
+    const pIdx = tripPosts.indexOf(post);
     let galleryHtml = '';
     if (post.media && post.media.length > 0) {
       const len = post.media.length;
@@ -1221,6 +1304,7 @@ function zoomTo(region) {
 
 // Init
 document.addEventListener('DOMContentLoaded', () => {
+  renderDayFilter();
   renderFeed();
   initMap();
   initCanvasHint();
