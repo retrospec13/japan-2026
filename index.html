@@ -135,6 +135,7 @@ main{flex:1;padding:20px 16px 40px}
 /* Map Marker Styles */
 .custom-pin{width:32px;height:32px;border-radius:50%;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,.25);border:2.5px solid #fff;cursor:pointer}
 .custom-pin.tokyo{background:#2563eb}
+.custom-pin.karuizawa{background:#10b981}
 .custom-pin.osaka{background:#f97316}
 .custom-pin.kyoto{background:#8b5cf6}
 .custom-pin.coast{background:#06b6d4}
@@ -177,6 +178,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
     <p>Follow along with our travel updates, photos, videos, and map route!</p>
     <div class="route-tags">
       <span class="route-tag">Tokyo / Ueno</span>
+      <span class="route-tag">Karuizawa (Nagano)</span>
       <span class="route-tag">Osaka</span>
       <span class="route-tag">Kyoto</span>
       <span class="route-tag">Mihama Coast</span>
@@ -218,6 +220,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
         <div class="map-quick-buttons">
           <button class="quick-btn" onclick="zoomTo('japan')">🇯🇵 All Japan</button>
           <button class="quick-btn" onclick="zoomTo('tokyo')">🗼 Tokyo</button>
+          <button class="quick-btn" onclick="zoomTo('karuizawa')">🌲 Karuizawa</button>
           <button class="quick-btn" onclick="zoomTo('kansai')">🏯 Osaka & Kyoto</button>
           <button class="quick-btn" onclick="zoomTo('coast')">🌊 Mihama & Kinosaki</button>
         </div>
@@ -247,6 +250,223 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 const tripPosts = [
+  {
+    "id": "post-30",
+    "date": "Tue Aug 25, 2026 \u00b7 Evening",
+    "location": "Dining Room & Courtyard \u00b7 Kyukaruizawa Kikyo, Karuizawa",
+    "tag": "Birthday dinner & cake surprise",
+    "title": "Evelyn's 7th birthday dinner and surprise strawberry shortcake",
+    "caption": "We dressed up for Evelyn's official birthday dinner downstairs at the hotel dining room looking out onto the courtyard garden. The staff surprised her with a candlelit fresh fruit and cream cake plate with a custom birthday message.\n\nShe made her birthday wish, blew out the candle with a big smile, and shared the cake around the table. Lincoln was waiting patiently for dinner while checking out the serene courtyard views, and Evelyn loved reading all the sweet birthday wishes from family back home on the phone. An incredible celebration to wrap up her 7th birthday.",
+    "media": [
+      {
+        "url": "assets/photos/155_kikyo_dinner_full_family_celebration_table.jpg",
+        "thumb": "assets/photos/155_kikyo_dinner_full_family_celebration_table.jpg",
+        "caption": "The whole family celebrating Evelyn's 7th birthday together at dinner."
+      },
+      {
+        "url": "assets/videos/evelyn_birthday_cake_surprise.mp4",
+        "thumb": "assets/photos/156_kikyo_dinner_family_table_cake_sparkle.jpg",
+        "type": "video",
+        "caption": "Evelyn getting surprised with her birthday cake and blowing out the candle."
+      },
+      {
+        "url": "assets/photos/156_kikyo_dinner_family_table_cake_sparkle.jpg",
+        "thumb": "assets/photos/156_kikyo_dinner_family_table_cake_sparkle.jpg",
+        "caption": "Birthday cake surprise at the dinner table with Brittany, Aunt Alison, and Lincoln."
+      },
+      {
+        "url": "assets/photos/157_kikyo_dinner_family_birthday_smiles.jpg",
+        "thumb": "assets/photos/157_kikyo_dinner_family_birthday_smiles.jpg",
+        "caption": "Big smiles at the table after the birthday cake surprise."
+      },
+      {
+        "url": "assets/photos/158_kikyo_dinner_lincoln_waiting_courtyard_view.jpg",
+        "thumb": "assets/photos/158_kikyo_dinner_lincoln_waiting_courtyard_view.jpg",
+        "caption": "Lincoln waiting at the table with views of the courtyard greenery."
+      },
+      {
+        "url": "assets/photos/159_kikyo_dinner_alison_evelyn_brittany_table.jpg",
+        "thumb": "assets/photos/159_kikyo_dinner_alison_evelyn_brittany_table.jpg",
+        "caption": "Brittany, Aunt Alison, and Evelyn chatting at the dinner table."
+      },
+      {
+        "url": "assets/photos/160_kikyo_dinner_evelyn_phone_birthday_wishes.jpg",
+        "thumb": "assets/photos/160_kikyo_dinner_evelyn_phone_birthday_wishes.jpg",
+        "caption": "Evelyn checking out birthday messages from home."
+      },
+      {
+        "url": "assets/photos/161_kikyo_dinner_mom_evelyn_alison_menu_chat.jpg",
+        "thumb": "assets/photos/161_kikyo_dinner_mom_evelyn_alison_menu_chat.jpg",
+        "caption": "Brittany, Aunt Alison, and Evelyn smiling before dinner."
+      }
+    ]
+  },
+  {
+    "id": "post-29",
+    "date": "Tue Aug 25, 2026 \u00b7 Late Afternoon",
+    "location": "Kyukaruizawa Kikyo, Curio Collection by Hilton \u00b7 Karuizawa, Nagano",
+    "tag": "Hilton stay & PJ dance",
+    "title": "Checking into Kyukaruizawa Kikyo, the EVELYN wing sign, and hotel PJ dancing",
+    "caption": "We checked into the Kyukaruizawa Kikyo, Curio Collection by Hilton in Karuizawa for our two-night stay. Walking down the third-floor hallway to our room, we saw the directional wall sign was labeled 301-307 / EVELYN. On her actual 7th birthday, the hotel wing literally had her name on it. Evelyn stood right underneath it with arms wide open, totally amazed.\n\nOnce we got into the room, the kids put on their hotel lounge pajamas and immediately broke into a full-on dance party before dinner. Lincoln was showing off his martial arts kicks, and Evelyn was spinning and jumping all over the room.",
+    "media": [
+      {
+        "url": "assets/photos/147_kikyo_hotel_evelyn_wing_sign_proud.jpg",
+        "thumb": "assets/photos/147_kikyo_hotel_evelyn_wing_sign_proud.jpg",
+        "caption": "Evelyn posing under the 301-307 / EVELYN floor sign on her birthday."
+      },
+      {
+        "url": "assets/photos/148_kikyo_hotel_evelyn_floor_sign_pose.jpg",
+        "thumb": "assets/photos/148_kikyo_hotel_evelyn_floor_sign_pose.jpg",
+        "caption": "Evelyn thrilled to find a hotel wing sharing her exact name."
+      },
+      {
+        "url": "assets/videos/evelyn_hotel_room_dance.mp4",
+        "thumb": "assets/photos/152_kikyo_hotel_evelyn_room_spinning_dance.jpg",
+        "type": "video",
+        "caption": "Evelyn dancing and spinning around the hotel room in Karuizawa."
+      },
+      {
+        "url": "assets/photos/149_kikyo_hotel_lincoln_room_pjs_dance_pose.jpg",
+        "thumb": "assets/photos/149_kikyo_hotel_lincoln_room_pjs_dance_pose.jpg",
+        "caption": "Lincoln rocking his hotel pajamas and showing off his dance moves."
+      },
+      {
+        "url": "assets/photos/150_kikyo_hotel_lincoln_room_pjs_karate_pose.jpg",
+        "thumb": "assets/photos/150_kikyo_hotel_lincoln_room_pjs_karate_pose.jpg",
+        "caption": "Lincoln striking a karate pose in his room pajamas."
+      },
+      {
+        "url": "assets/photos/151_kikyo_hotel_evelyn_room_pj_dance_jump.jpg",
+        "thumb": "assets/photos/151_kikyo_hotel_evelyn_room_pj_dance_jump.jpg",
+        "caption": "Evelyn getting airborne during the pre-dinner room dance."
+      },
+      {
+        "url": "assets/photos/153_kikyo_hotel_evelyn_room_happy_dance.jpg",
+        "thumb": "assets/photos/153_kikyo_hotel_evelyn_room_happy_dance.jpg",
+        "caption": "Dancing by the big window overlooking the Karuizawa trees."
+      },
+      {
+        "url": "assets/photos/162_kikyo_hotel_evelyn_happy_blur_twirl.jpg",
+        "thumb": "assets/photos/162_kikyo_hotel_evelyn_happy_blur_twirl.jpg",
+        "caption": "Pure birthday energy twirling around the room."
+      }
+    ]
+  },
+  {
+    "id": "post-28",
+    "date": "Tue Aug 25, 2026 \u00b7 Afternoon",
+    "location": "Joshin-etsu Expressway & Mount Myogi Pass \u00b7 Gunma to Nagano",
+    "tag": "Scenic mountain drive",
+    "title": "2.5-hour taxi ride into the Nagano mountains and Mount Myogi peaks",
+    "caption": "After escaping the Tokyo heat, we packed up our bags and took a 2.5-hour taxi ride northwest into the mountains toward Karuizawa. The highway route took us through long mountain tunnels and wound right past the dramatic jagged rock crags of Mount Myogi.\n\nThe views of the lush green mountain ridges against the blue sky were incredible, and it was a huge relief to see the temperature drop as we gained elevation into the resort highlands.",
+    "media": [
+      {
+        "url": "assets/photos/140_taxi_departure_mom_lincoln_evelyn_selfie.jpg",
+        "thumb": "assets/photos/140_taxi_departure_mom_lincoln_evelyn_selfie.jpg",
+        "caption": "Brittany, Lincoln, and Evelyn ready to head out for Karuizawa."
+      },
+      {
+        "url": "assets/photos/141_taxi_highway_myogi_mountains_view.jpg",
+        "thumb": "assets/photos/141_taxi_highway_myogi_mountains_view.jpg",
+        "caption": "The jagged rocky peaks of Mount Myogi rising above the highway."
+      },
+      {
+        "url": "assets/photos/142_taxi_highway_mountain_peaks_ridge.jpg",
+        "thumb": "assets/photos/142_taxi_highway_mountain_peaks_ridge.jpg",
+        "caption": "Lush forested ridges and rocky summits along the Joshin-etsu Expressway."
+      },
+      {
+        "url": "assets/photos/143_taxi_highway_sound_barrier_peaks.jpg",
+        "thumb": "assets/photos/143_taxi_highway_sound_barrier_peaks.jpg",
+        "caption": "Mountain views passing through the elevated highway barriers."
+      },
+      {
+        "url": "assets/photos/144_taxi_highway_mountain_valley_drive.jpg",
+        "thumb": "assets/photos/144_taxi_highway_mountain_valley_drive.jpg",
+        "caption": "Green mountain valleys on the climb up to Nagano Prefecture."
+      },
+      {
+        "url": "assets/photos/145_taxi_tunnel_highway_drive.jpg",
+        "thumb": "assets/photos/145_taxi_tunnel_highway_drive.jpg",
+        "caption": "Cruising through one of the long expressway mountain tunnels."
+      },
+      {
+        "url": "assets/photos/146_taxi_tunnel_lights_drive.jpg",
+        "thumb": "assets/photos/146_taxi_tunnel_lights_drive.jpg",
+        "caption": "Inside the mountain tunnel heading toward Karuizawa."
+      }
+    ]
+  },
+  {
+    "id": "post-27",
+    "date": "Tue Aug 25, 2026 \u00b7 Midday",
+    "location": "Ueno Zoological Gardens (Ueno Zoo) \u00b7 Ueno, Tokyo",
+    "tag": "Ueno Zoo & 106\u00b0F heat",
+    "title": "Brave animals, native Japanese horses, and 106\u00b0F real feel at Ueno Zoo",
+    "caption": "We spent part of the morning exploring Ueno Zoo, Japan's oldest zoo opened in 1882. With the heat index hitting a brutal 106\u00b0F real feel, we didn't last long, but we hit some great exhibits while we could.\n\nThe kids saw the North American bison, spotted the energetic White-mantled Black Colobus monkeys leaping in their tall canopy habitat, and checked out the native Japanese horses (Tokara, Noma, and Yonaguni pony breeds) in their paddock. Lincoln and Evelyn spent plenty of time parked right in front of the giant Power Breezer misting fans to cool off before we called it.",
+    "media": [
+      {
+        "url": "assets/photos/132_ueno_zoo_power_breezer_misting_fan_kids.jpg",
+        "thumb": "assets/photos/132_ueno_zoo_power_breezer_misting_fan_kids.jpg",
+        "caption": "Lincoln and Evelyn cooling off in front of the Power Breezer misting fan."
+      },
+      {
+        "url": "assets/photos/133_ueno_zoo_misting_fan_mom_kids_heat.jpg",
+        "thumb": "assets/photos/133_ueno_zoo_misting_fan_mom_kids_heat.jpg",
+        "caption": "Brittany and the kids soaking up the cold mist in the 106\u00b0F real feel heat."
+      },
+      {
+        "url": "assets/photos/134_ueno_zoo_japanese_native_horses_kids.jpg",
+        "thumb": "assets/photos/134_ueno_zoo_japanese_native_horses_kids.jpg",
+        "caption": "Lincoln and Evelyn reading about native Japanese horse breeds at the paddock."
+      },
+      {
+        "url": "assets/photos/135_ueno_zoo_horse_paddock_lincoln_evelyn.jpg",
+        "thumb": "assets/photos/135_ueno_zoo_horse_paddock_lincoln_evelyn.jpg",
+        "caption": "Watching the horses in the shaded corral."
+      },
+      {
+        "url": "assets/photos/136_ueno_zoo_white_mantled_black_colobus_family.jpg",
+        "thumb": "assets/photos/136_ueno_zoo_white_mantled_black_colobus_family.jpg",
+        "caption": "Brittany, Evelyn, and Lincoln watching the White-mantled Black Colobus monkeys."
+      },
+      {
+        "url": "assets/photos/137_ueno_zoo_colobus_monkey_enclosure.jpg",
+        "thumb": "assets/photos/137_ueno_zoo_colobus_monkey_enclosure.jpg",
+        "caption": "The tall mesh canopy enclosure for the Colobus monkeys."
+      },
+      {
+        "url": "assets/photos/138_ueno_zoo_colobus_canopy_trees_cage.jpg",
+        "thumb": "assets/photos/138_ueno_zoo_colobus_canopy_trees_cage.jpg",
+        "caption": "Colobus monkeys climbing among the timber perches."
+      },
+      {
+        "url": "assets/photos/139_ueno_zoo_lincoln_evelyn_pond_lookout.jpg",
+        "thumb": "assets/photos/139_ueno_zoo_lincoln_evelyn_pond_lookout.jpg",
+        "caption": "Lincoln and Evelyn looking out over the greenery and waterfowl paths."
+      }
+    ]
+  },
+  {
+    "id": "post-26",
+    "date": "Tue Aug 25, 2026 \u00b7 Morning",
+    "location": "Tabi Ueno & Dining Area \u00b7 Ueno, Tokyo",
+    "tag": "Birthday breakfast",
+    "title": "Birthday breakfast with Dad to start Evelyn's 7th birthday",
+    "caption": "Started off Evelyn's official 7th birthday with a relaxed morning breakfast together. Plates of fresh toast, fruit, eggs, and juice to get fueled up for the day.\n\nEvelyn was all smiles and full of energy knowing today was her big birthday celebration.",
+    "media": [
+      {
+        "url": "assets/photos/130_breakfast_dad_evelyn_selfie_smiles.jpg",
+        "thumb": "assets/photos/130_breakfast_dad_evelyn_selfie_smiles.jpg",
+        "caption": "Dad and Evelyn sharing birthday morning smiles at breakfast."
+      },
+      {
+        "url": "assets/photos/131_breakfast_dad_evelyn_table_morning.jpg",
+        "thumb": "assets/photos/131_breakfast_dad_evelyn_table_morning.jpg",
+        "caption": "Breakfast spread ready to kick off Evelyn's 7th birthday."
+      }
+    ]
+  },
   {
       "id": "post-25",
       "date": "Mon Aug 24, 2026 · Late Night",
@@ -1121,6 +1341,8 @@ const tripPosts = [
 
 // --- MAP PINS & ROUTE DATA ---
 const mapPins = [
+  { id: 'ueno-zoo', name: 'Ueno Zoological Gardens', city: 'tokyo', lat: 35.7164, lon: 139.7712, type: 'tokyo', icon: '🐵', tag: 'Ueno Zoo & Heat Index', desc: 'Japan\'s oldest zoo (1882) — White-mantled Colobus monkeys, native Japanese horses, American bison, and giant misting fans.' },
+  { id: 'karuizawa-hotel', name: 'Kyukaruizawa Kikyo, Curio Collection by Hilton', city: 'karuizawa', lat: 36.3551, lon: 138.6348, type: 'karuizawa', icon: '🌲', tag: 'Karuizawa Stay (Aug 25–27)', desc: 'Luxury mountain resort hotel in Karuizawa with the "EVELYN" wing sign, garden courtyard dining, and peaceful forest surroundings.' },
   { id: 'godzilla-store', name: 'Godzilla Store Tokyo', city: 'tokyo', lat: 35.6904, lon: 139.7056, type: 'tokyo', icon: '🦖', tag: 'Shinjuku Marui Annex', desc: 'World\'s official Godzilla retail mecca on 1F of Shinjuku Marui Annex with the giant Minus One statue & kaiju collectibles.' },
   { id: 'harakado', name: 'Tokyu Plaza Harajuku "Harakado" & Tamagotchi Factory', city: 'tokyo', lat: 35.6685, lon: 139.7052, type: 'tokyo', icon: '🍧', tag: 'Harajuku Sights & Sweets', desc: 'Tamagotchi Factory virtual pets, KAWAII Night Market monster rooftop pop-up, and giant strawberry kakigori shaved ice dessert feast.' },
   { id: 'nrt', name: 'Narita Airport', city: 'tokyo', lat: 35.7759, lon: 140.3929, type: 'transit', icon: '✈️', tag: 'Arrival & Departure', desc: 'Main arrival gateway. Take Keisei Skyliner straight into Ueno.' },
@@ -1143,6 +1365,7 @@ const mapPins = [
 const mainRouteCoords = [
   [35.7759, 140.3929], // Narita
   [35.7116, 139.7766], // Ueno Tokyo
+  [36.3551, 138.6348], // Karuizawa (Nagano)
   [35.6812, 139.7671], // Tokyo Sta
   [34.6686, 135.5017], // Osaka
   [34.9858, 135.7588], // Kyoto
@@ -1261,7 +1484,8 @@ function renderDayFilter() {
   
   // Custom metadata for rich pill buttons
   const dayMeta = {
-    'Mon Aug 24': { label: "Day 4 · Evelyn's Birthday 🎂", icon: '🎀' },
+    'Tue Aug 25': { label: "Day 5 · Karuizawa & Birthday 🎂", icon: '🌲' },
+    'Mon Aug 24': { label: "Day 4 · Sanrio Puroland 🎀", icon: '🎀' },
     'Sun Aug 23': { label: 'Day 3 · Sun Aug 23', icon: '⛩️' },
     'Sat Aug 22': { label: 'Day 2 · Sat Aug 22', icon: '🗼' },
     'Fri Aug 21': { label: 'Day 1 · Fri Aug 21', icon: '✈️' }
@@ -1462,7 +1686,9 @@ function zoomTo(region) {
       [36.2, 140.6]
     ], { padding: [30, 30] });
   } else if (region === 'tokyo') {
-    map.flyTo([35.712, 139.775], 14, { duration: 0.8 });
+    map.flyTo([35.712, 139.775], 13, { duration: 0.8 });
+  } else if (region === 'karuizawa') {
+    map.flyTo([36.355, 138.635], 14, { duration: 0.8 });
   } else if (region === 'kansai') {
     map.flyTo([34.85, 135.65], 10, { duration: 0.8 });
   } else if (region === 'coast') {
