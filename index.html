@@ -133,14 +133,37 @@ main{flex:1;padding:20px 16px 40px}
 .quick-btn:hover{background:#e2e8f0}
 
 /* Map Marker Styles */
-.custom-pin{width:32px;height:32px;border-radius:50%;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,.25);border:2.5px solid #fff;cursor:pointer}
+.custom-pin{width:32px;height:32px;border-radius:50%;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,.25);border:2.5px solid #fff;cursor:pointer;position:relative;transition:transform .15s ease}
+.custom-pin:hover{transform:scale(1.15);z-index:1000}
 .custom-pin.tokyo{background:#2563eb}
-.custom-pin.karuizawa{background:#10b981}
+.custom-pin.karuizawa{background:#059669}
 .custom-pin.osaka{background:#f97316}
 .custom-pin.kyoto{background:#8b5cf6}
 .custom-pin.coast{background:#06b6d4}
 .custom-pin.onsen{background:#10b981}
 .custom-pin.transit{background:#475569}
+
+/* Current active location pulse */
+.custom-pin.current{background:#10b981;border-color:#fff;box-shadow:0 0 0 4px rgba(16,185,129,.4),0 4px 12px rgba(0,0,0,.3)}
+.custom-pin.current::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid #10b981;animation:pinPulse 1.8s infinite}
+@keyframes pinPulse{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.5);opacity:0}}
+
+/* Planned upcoming pins */
+.custom-pin.planned{background:#94a3b8;opacity:.85;border-style:dashed}
+
+/* Map Header & Legend */
+.map-legend{display:flex;align-items:center;gap:12px;font-size:12.5px;font-weight:700;color:var(--muted);flex-wrap:wrap}
+.legend-item{display:inline-flex;align-items:center;gap:5px}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+.legend-dot.visited{background:#2563eb}
+.legend-dot.current{background:#10b981;box-shadow:0 0 0 2px #a7f3d0}
+.legend-dot.planned{background:#94a3b8}
+
+/* Place Modal Badge */
+.modal-status-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;font-size:11.5px;font-weight:800;margin-right:6px}
+.modal-status-badge.visited{background:#eff6ff;color:#1d4ed8}
+.modal-status-badge.current{background:#ecfdf5;color:#047857}
+.modal-status-badge.planned{background:#f1f5f9;color:#64748b}
 
 /* Lightbox Modal */
 .lightbox-modal{position:fixed;inset:0;background:rgba(15,23,42,.94);backdrop-filter:blur(8px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:16px;visibility:hidden;opacity:0;pointer-events:none;transition:all .2s ease}
@@ -213,16 +236,21 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
         <div class="map-header">
           <div>
             <h2>Route & Travel Stops</h2>
-            <p>Dotted lines trace our route across Tokyo and Japan. Tap any pin for details.</p>
+            <p>Interactive travel map. Solid pins show places visited; green pulse is current base.</p>
+          </div>
+          <div class="map-legend">
+            <span class="legend-item"><span class="legend-dot current"></span> Current Base</span>
+            <span class="legend-item"><span class="legend-dot visited"></span> Visited</span>
+            <span class="legend-item"><span class="legend-dot planned"></span> Planned Ahead</span>
           </div>
         </div>
         <div class="map-container" id="map"></div>
         <div class="map-quick-buttons">
           <button class="quick-btn" onclick="zoomTo('japan')">🇯🇵 All Japan</button>
-          <button class="quick-btn" onclick="zoomTo('tokyo')">🗼 Tokyo</button>
-          <button class="quick-btn" onclick="zoomTo('karuizawa')">🌲 Karuizawa</button>
-          <button class="quick-btn" onclick="zoomTo('kansai')">🏯 Osaka & Kyoto</button>
-          <button class="quick-btn" onclick="zoomTo('coast')">🌊 Mihama & Kinosaki</button>
+          <button class="quick-btn" onclick="zoomTo('karuizawa')">🌲 Karuizawa (Current)</button>
+          <button class="quick-btn" onclick="zoomTo('tokyo')">🗼 Tokyo (Visited)</button>
+          <button class="quick-btn" onclick="zoomTo('kansai')">🏯 Osaka & Kyoto (Ahead)</button>
+          <button class="quick-btn" onclick="zoomTo('coast')">🌊 Coast & Onsen (Ahead)</button>
         </div>
       </div>
     </section>
@@ -1341,47 +1369,306 @@ const tripPosts = [
 
 // --- MAP PINS & ROUTE DATA ---
 const mapPins = [
-  { id: 'ueno-zoo', name: 'Ueno Zoological Gardens', city: 'tokyo', lat: 35.7164, lon: 139.7712, type: 'tokyo', icon: '🐵', tag: 'Ueno Zoo & Heat Index', desc: 'Japan\'s oldest zoo (1882) — White-mantled Colobus monkeys, native Japanese horses, American bison, and giant misting fans.' },
-  { id: 'karuizawa-hotel', name: 'Kyukaruizawa Kikyo, Curio Collection by Hilton', city: 'karuizawa', lat: 36.3551, lon: 138.6348, type: 'karuizawa', icon: '🌲', tag: 'Karuizawa Stay (Aug 25–27)', desc: 'Luxury mountain resort hotel in Karuizawa with the "EVELYN" wing sign, garden courtyard dining, and peaceful forest surroundings.' },
-  { id: 'godzilla-store', name: 'Godzilla Store Tokyo', city: 'tokyo', lat: 35.6904, lon: 139.7056, type: 'tokyo', icon: '🦖', tag: 'Shinjuku Marui Annex', desc: 'World\'s official Godzilla retail mecca on 1F of Shinjuku Marui Annex with the giant Minus One statue & kaiju collectibles.' },
-  { id: 'harakado', name: 'Tokyu Plaza Harajuku "Harakado" & Tamagotchi Factory', city: 'tokyo', lat: 35.6685, lon: 139.7052, type: 'tokyo', icon: '🍧', tag: 'Harajuku Sights & Sweets', desc: 'Tamagotchi Factory virtual pets, KAWAII Night Market monster rooftop pop-up, and giant strawberry kakigori shaved ice dessert feast.' },
-  { id: 'nrt', name: 'Narita Airport', city: 'tokyo', lat: 35.7759, lon: 140.3929, type: 'transit', icon: '✈️', tag: 'Arrival & Departure', desc: 'Main arrival gateway. Take Keisei Skyliner straight into Ueno.' },
-  { id: 'ueno', name: 'Tabi Ueno & Ueno Base', city: 'tokyo', lat: 35.7116, lon: 139.7766, type: 'tokyo', icon: '🏨', tag: 'Tokyo Base (Aug 22–25)', desc: 'First stay in Tokyo. Walkable to Ueno Park, museums, and street markets.' },
-  { id: 'ueno-park', name: 'Ueno Park & Shrines', city: 'tokyo', lat: 35.7140, lon: 139.7741, type: 'tokyo', icon: '⛩️', tag: 'Shrines & Lotus Pond', desc: 'Hanazono Inari Shrine red torii gates, Shinobazu Pond lotus blossoms, and grand stone paths.' },
-  { id: 'ameyoko', name: 'Ameyoko Shopping Street', city: 'tokyo', lat: 35.7100, lon: 139.7747, type: 'tokyo', icon: '🍡', tag: 'Market Street & Food', desc: 'Historic bustling open-air market street between Ueno and Okachimachi with fresh fruit skewers, seafood izakayas, and vibrant stalls.' },
-  { id: 'yamashiroya', name: 'Yamashiroya Toy Store', city: 'tokyo', lat: 35.7122, lon: 139.7757, type: 'tokyo', icon: '🧸', tag: '6-Floor Toy Mecca', desc: 'Legendary 6-story toy & collectibles store right outside Ueno Station packed with Kirby, Pokémon, Tamagotchi, dolls, and towering gachapon walls.' },
-  { id: 'asakusa', name: 'Asakusa & Senso-ji', city: 'tokyo', lat: 35.7148, lon: 139.7967, type: 'tokyo', icon: '⛩️', tag: 'Tokyo Sights', desc: 'Historic temple district and market street.' },
-  { id: 'akiba', name: 'Akihabara', city: 'tokyo', lat: 35.7019, lon: 139.7744, type: 'tokyo', icon: '🎮', tag: 'Retro Games', desc: 'Retro game shopping and otaku culture central.' },
-  { id: 'harajuku', name: 'Harajuku & Meiji Shrine', city: 'tokyo', lat: 35.6708, lon: 139.7046, type: 'tokyo', icon: '🛍️', tag: 'Tokyo Exploration', desc: 'Tamagotchi Factory, HISEKI custom coin rings, and peaceful shrine forest.' },
-  { id: "puroland", name: "Sanrio Puroland", city: "tokyo", lat: 35.6255, lon: 139.4287, type: "tokyo", icon: "🎀", tag: "Evelyn's Birthday (Aug 24)", desc: "Indoor Hello Kitty & Sanrio wonderland — celebrating Evelyn's birthday with rides, character feasts & lucky claw wins!" },
-  { id: 'tokyo-st', name: 'Tokyo Station', city: 'tokyo', lat: 35.6812, lon: 139.7671, type: 'transit', icon: '🚄', tag: 'Shinkansen Hub', desc: 'Board the Tokaido Shinkansen bullet train to Osaka.' },
-  { id: 'osaka', name: 'Osaka / Namba & Dotonbori', city: 'osaka', lat: 34.6686, lon: 135.5017, type: 'osaka', icon: '🐙', tag: 'Osaka Stay (Aug 25–26)', desc: 'Street food, giant neon signs, Super Potato retro games, and vibrant night streets.' },
-  { id: 'kyoto', name: 'Kyoto Station & Temples', city: 'kyoto', lat: 34.9858, lon: 135.7588, type: 'kyoto', icon: '⛩️', tag: 'Kyoto Stay (Aug 26–28)', desc: 'Fushimi Inari torii gates, Nishiki market food stalls, and quiet hillside shrines.' },
-  { id: 'mihama', name: 'Mihama & Suishohama Beach', city: 'coast', lat: 35.6178, lon: 135.9701, type: 'coast', icon: '🌊', tag: 'Coast Stay (Aug 28–30)', desc: 'Quiet seaside town on Wakasa Bay with crystal clear beach waters and countryside feel.' },
-  { id: 'kinosaki', name: 'Kinosaki Onsen', city: 'onsen', lat: 35.6237, lon: 134.8138, type: 'onsen', icon: '♨️', tag: 'Onsen Stay (Aug 30–Sep 1)', desc: 'Atmospheric historic hot spring town with private baths, traditional ryokan, and yukata strolls.' }
+  // --- CURRENT BASE ---
+  {
+    id: 'karuizawa-hotel',
+    name: 'Kyukaruizawa Kikyo, Curio Collection by Hilton',
+    city: 'karuizawa',
+    status: 'current',
+    lat: 36.3551,
+    lon: 138.6348,
+    type: 'karuizawa',
+    icon: '🏨',
+    tag: 'Current Stay · Aug 25–27',
+    desc: 'Our mountain resort base in Karuizawa. The 3rd-floor hallway features the famous "301-307 / EVELYN" wing sign! Evelyn had her 7th birthday dinner celebration here with courtyard garden views, pj dancing in the suite, and surprise birthday cake.'
+  },
+
+  // --- PLACES VISITED ---
+  {
+    id: 'myogi-pass',
+    name: 'Mount Myogi Pass & Joshin-etsu Expressway',
+    city: 'karuizawa',
+    status: 'visited',
+    lat: 36.2987,
+    lon: 138.7562,
+    type: 'karuizawa',
+    icon: '⛰️',
+    tag: 'Scenic Mountain Drive · Aug 25',
+    desc: 'The dramatic 2.5-hour taxi drive through long mountain tunnels and right past the jagged rocky peaks of Mount Myogi into the cooler Nagano highlands.'
+  },
+  {
+    id: 'ueno-zoo',
+    name: 'Ueno Zoological Gardens (Ueno Zoo)',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7164,
+    lon: 139.7712,
+    type: 'tokyo',
+    icon: '🐵',
+    tag: 'Visited · Aug 25',
+    desc: 'Japan\'s oldest zoo (1882). Visited the White-mantled Black Colobus monkeys in their canopy habitat, the native Japanese horses paddock (Tokara, Noma, Yonaguni ponies), American bison, and cooled off at the Power Breezer misting fans in 106°F heat.'
+  },
+  {
+    id: 'yamashiroya',
+    name: 'Yamashiroya Toy Store & Claw Arcade',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7122,
+    lon: 139.7757,
+    type: 'tokyo',
+    icon: '🧸',
+    tag: 'Visited · Aug 23 & 24',
+    desc: 'Legendary 6-story toy & collectibles store outside Ueno Station. Lincoln hit the claw machine jackpot with a giant Kirby plush, and Evelyn won a sweet strawberry Hello Kitty!'
+  },
+  {
+    id: 'tokyo-izakaya',
+    name: 'Traditional Japanese Fusion Izakaya',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7092,
+    lon: 139.7761,
+    type: 'tokyo',
+    icon: '🍱',
+    tag: 'Visited · Aug 24 Dinner',
+    desc: 'Private dining booth with wooden cabinetry in Ueno. Lincoln tried authentic sushi rolls with chopsticks, and the kids loved their drinks with paper umbrellas.'
+  },
+  {
+    id: 'harakado',
+    name: 'Tokyu Plaza Harajuku "Harakado"',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.6685,
+    lon: 139.7052,
+    type: 'tokyo',
+    icon: '🍧',
+    tag: 'Visited · Aug 24 Afternoon',
+    desc: 'Harajuku shopping complex. Ordered the monster strawberry kakigori shaved ice and fruit dessert feast, checked out the rooftop KAWAII Night Market monster sculpture, and enjoyed Jingumae crossing views.'
+  },
+  {
+    id: 'tamagotchi-factory',
+    name: 'Tamagotchi Factory Harajuku',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.6698,
+    lon: 139.7048,
+    type: 'tokyo',
+    icon: '🥚',
+    tag: 'Visited · Aug 24 Afternoon',
+    desc: 'Tamagotchi retail hub in Harajuku. Evelyn posed with her big Cinnamoroll plush in front of the giant egg clock interactive display.'
+  },
+  {
+    id: 'godzilla-store',
+    name: 'Godzilla Store Tokyo',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.6904,
+    lon: 139.7056,
+    type: 'tokyo',
+    icon: '🦖',
+    tag: 'Visited · Aug 24 Afternoon',
+    desc: 'Official Godzilla mecca on 1F of Shinjuku Marui Annex with the towering Godzilla Minus One statue and kaiju collectibles.'
+  },
+  {
+    id: 'puroland',
+    name: 'Sanrio Puroland',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.6255,
+    lon: 139.4287,
+    type: 'tokyo',
+    icon: '🎀',
+    tag: 'Visited · Aug 24',
+    desc: 'Indoor Sanrio theme park in Tama Center. Evelyn\'s birthday celebration with the character boat ride, My Melody strawberry carriage, Pochacco pasta lunch, and winning a giant Cinnamoroll at the claw arcade!'
+  },
+  {
+    id: 'ueno-park-playground',
+    name: 'Ueno Local Park & Play Area',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7135,
+    lon: 139.7785,
+    type: 'tokyo',
+    icon: '🛝',
+    tag: 'Visited · Aug 24 Morning',
+    desc: 'Quiet neighborhood park where Lincoln and Evelyn rode the bouncy panda, elephant, and dinosaur spring riders and played on the swings before heading to the train.'
+  },
+  {
+    id: 'ameyoko-izakaya',
+    name: 'Ameyoko Market Alley Izakaya',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7095,
+    lon: 139.7745,
+    type: 'tokyo',
+    icon: '🍢',
+    tag: 'Visited · Aug 23 Lunch',
+    desc: 'Atmospheric open-air alleyway dining under the train tracks with cold mugs, chicken skewers, and gyoza right in the bustling heart of Ameyoko.'
+  },
+  {
+    id: 'ameyoko',
+    name: 'Ameyoko Shopping Street (アメ横)',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7100,
+    lon: 139.7747,
+    type: 'tokyo',
+    icon: '🍡',
+    tag: 'Visited · Aug 23 Midday',
+    desc: 'Historic vibrant market street beneath the Yamanote line tracks. Sampled fresh fruit skewers (chocolate strawberry and sweet melon) and soaked in the market energy.'
+  },
+  {
+    id: 'ueno-park',
+    name: 'Ueno Park & Hanazono Inari Shrine',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7140,
+    lon: 139.7741,
+    type: 'tokyo',
+    icon: '⛩️',
+    tag: 'Visited · Aug 23 Morning',
+    desc: 'Scenic stroll through Ueno Park, walking through the vivid red torii gate tunnel at Hanazono Inari Shrine, seeing Shinobazu lotus pond, and walking by JR Ueno Station.'
+  },
+  {
+    id: 'bistro-nohga',
+    name: 'Bistro Nohga (NOHGA HOTEL UENO)',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7118,
+    lon: 139.7779,
+    type: 'tokyo',
+    icon: '☕',
+    tag: 'Visited · Aug 23 Morning',
+    desc: 'Bright neighborhood breakfast and artisan coffee spot with warm brioche French toast, eggs, and fresh orange juice.'
+  },
+  {
+    id: 'donki-ueno',
+    name: 'Don Quijote & McDonald\'s Ueno',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7078,
+    lon: 139.7738,
+    type: 'tokyo',
+    icon: '🍟',
+    tag: 'Visited · Aug 23 (3:30 AM)',
+    desc: 'Late-night jet-lag expedition to the 24-hour Don Quijote megastore and McDonald\'s touchscreen kiosks for early morning snacks and piggyback rides.'
+  },
+  {
+    id: 'ueno',
+    name: 'Tabi Ueno (Tokyo Home Base)',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7116,
+    lon: 139.7766,
+    type: 'tokyo',
+    icon: '🏨',
+    tag: 'Tokyo Base · Aug 22–25',
+    desc: 'Our first family home base apartment hotel in Ueno, Tokyo. Walkable to Ueno Park, train stations, and local morning cafes.'
+  },
+  {
+    id: 'nrt',
+    name: 'Narita International Airport (NRT)',
+    city: 'tokyo',
+    status: 'visited',
+    lat: 35.7759,
+    lon: 140.3929,
+    type: 'transit',
+    icon: '✈️',
+    tag: 'Arrival · Aug 22',
+    desc: 'Touchdown in Tokyo after our ANA "The Room" flight across the Pacific, followed by our stormy arrival taxi ride into Ueno.'
+  },
+
+  // --- UPCOMING / PLANNED STOPS ---
+  {
+    id: 'tokyo-st',
+    name: 'Tokyo Station',
+    city: 'tokyo',
+    status: 'planned',
+    lat: 35.6812,
+    lon: 139.7671,
+    type: 'transit',
+    icon: '🚄',
+    tag: 'Planned Transit Hub',
+    desc: 'Future connection point for the high-speed Shinkansen bullet train heading west.'
+  },
+  {
+    id: 'osaka',
+    name: 'Osaka / Namba & Dotonbori',
+    city: 'osaka',
+    status: 'planned',
+    lat: 34.6686,
+    lon: 135.5017,
+    type: 'osaka',
+    icon: '🐙',
+    tag: 'Planned Stay · Aug 27–28',
+    desc: 'Upcoming stay in Osaka: vibrant neon lights of Dotonbori, street food (takoyaki & okonomiyaki), and retro gaming mecca Super Potato.'
+  },
+  {
+    id: 'kyoto',
+    name: 'Kyoto Station & Historic Temples',
+    city: 'kyoto',
+    status: 'planned',
+    lat: 34.9858,
+    lon: 135.7588,
+    type: 'kyoto',
+    icon: '⛩️',
+    tag: 'Planned Stay · Aug 28–30',
+    desc: 'Upcoming stay in Kyoto: historic shrines, Fushimi Inari thousand torii gates, and Nishiki Market food stalls.'
+  },
+  {
+    id: 'mihama',
+    name: 'Mihama & Suishohama Beach',
+    city: 'coast',
+    status: 'planned',
+    lat: 35.6178,
+    lon: 135.9701,
+    type: 'coast',
+    icon: '🌊',
+    tag: 'Planned Stay · Aug 30–Sep 1',
+    desc: 'Upcoming countryside seaside retreat along Wakasa Bay with crystal clear emerald waters and peaceful coastal scenery.'
+  },
+  {
+    id: 'kinosaki',
+    name: 'Kinosaki Onsen',
+    city: 'onsen',
+    status: 'planned',
+    lat: 35.6237,
+    lon: 134.8138,
+    type: 'onsen',
+    icon: '♨️',
+    tag: 'Planned Stay · Sep 1–2',
+    desc: 'Upcoming final stay: historic willow-lined hot spring town with private thermal onsen baths and traditional ryokan.'
+  }
 ];
 
-// Main route polyline across Japan
-const mainRouteCoords = [
-  [35.7759, 140.3929], // Narita
-  [35.7116, 139.7766], // Ueno Tokyo
-  [36.3551, 138.6348], // Karuizawa (Nagano)
-  [35.6812, 139.7671], // Tokyo Sta
+// Visited route from airport to Tokyo base to Karuizawa
+const visitedMainRoute = [
+  [35.7759, 140.3929], // Narita Airport
+  [35.7116, 139.7766], // Tabi Ueno
+  [36.2987, 138.7562], // Mount Myogi / Joshin-etsu Pass
+  [36.3551, 138.6348]  // Kyukaruizawa Kikyo (Current Base)
+];
+
+// Tokyo exploration path across visited spots
+const visitedTokyoRoute = [
+  [35.7116, 139.7766], // Tabi Ueno
+  [35.7164, 139.7712], // Ueno Zoo
+  [35.7140, 139.7741], // Ueno Park / Hanazono Inari
+  [35.7100, 139.7747], // Ameyoko / Yamashiroya
+  [35.6904, 139.7056], // Godzilla Store (Shinjuku)
+  [35.6685, 139.7052], // Harakado & Tamagotchi Factory (Harajuku)
+  [35.6255, 139.4287]  // Sanrio Puroland (Tama Center)
+];
+
+// Upcoming planned route across Kansai, Coast & Onsen
+const plannedRouteCoords = [
+  [36.3551, 138.6348], // Karuizawa
+  [35.6812, 139.7671], // Tokyo Station
   [34.6686, 135.5017], // Osaka
   [34.9858, 135.7588], // Kyoto
-  [35.6178, 135.9701], // Mihama
-  [35.6237, 134.8138], // Kinosaki
-  [35.6812, 139.7671], // Tokyo return
-  [35.7759, 140.3929]  // Narita return
-];
-
-// Local Tokyo exploration route
-const tokyoRouteCoords = [
-  [35.7116, 139.7766], // Ueno
-  [35.7148, 139.7967], // Asakusa
-  [35.7019, 139.7744], // Akiba
-  [35.6708, 139.7046], // Harajuku
-  [35.6255, 139.4287]  // Puroland
+  [35.6178, 135.9701], // Mihama Coast
+  [35.6237, 134.8138], // Kinosaki Onsen
+  [35.6812, 139.7671], // Tokyo Return
+  [35.7759, 140.3929]  // Narita Departure
 ];
 
 // --- RENDER FUNCTIONS ---
@@ -1601,8 +1888,15 @@ function openPlaceModal(pin) {
   const backdrop = document.getElementById('placeBackdrop');
   const content = document.getElementById('placeContent');
   if (!modal || !content) return;
+  
+  const statusLabel = pin.status === 'current' ? '🟢 Current Base' : pin.status === 'visited' ? '✅ Visited' : '⏳ Planned Ahead';
+  const statusClass = pin.status || 'visited';
+
   content.innerHTML = '<h3>' + pin.icon + ' ' + esc(pin.name) + '</h3>' +
-    '<div class="tag">' + esc(pin.tag) + '</div>' +
+    '<div style="margin-bottom:12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">' +
+      '<span class="modal-status-badge ' + statusClass + '">' + statusLabel + '</span>' +
+      '<span class="tag" style="margin:0">' + esc(pin.tag) + '</span>' +
+    '</div>' +
     '<p>' + esc(pin.desc) + '</p>' +
     '<a class="place-modal-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(pin.lat + ',' + pin.lon) + '">📍 Open in Google Maps ↗</a>';
   backdrop.classList.add('show');
@@ -1642,30 +1936,39 @@ function initMap() {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; CARTO'
   }).addTo(map);
 
-  // Main Journey Dotted Line (bold blue with dashed gaps)
-  L.polyline(mainRouteCoords, {
+  // 1. Visited Journey Line: Solid blue path
+  L.polyline(visitedMainRoute, {
     color: '#2563eb',
-    weight: 4,
-    opacity: 0.85,
-    dashArray: '8, 10',
+    weight: 4.5,
+    opacity: 0.9,
     lineCap: 'round',
     lineJoin: 'round'
   }).addTo(map);
 
-  // Local Tokyo Connection Dotted Line (coral dashed)
-  L.polyline(tokyoRouteCoords, {
+  // 2. Visited Tokyo Exploration: Vibrant coral dashed path
+  L.polyline(visitedTokyoRoute, {
     color: '#f97316',
-    weight: 3,
-    opacity: 0.75,
-    dashArray: '5, 8',
+    weight: 3.5,
+    opacity: 0.85,
+    dashArray: '6, 8',
+    lineCap: 'round'
+  }).addTo(map);
+
+  // 3. Planned Upcoming Journey Line: Subtle dashed gray path
+  L.polyline(plannedRouteCoords, {
+    color: '#94a3b8',
+    weight: 2.5,
+    opacity: 0.6,
+    dashArray: '4, 8',
     lineCap: 'round'
   }).addTo(map);
 
   // Markers
   mapPins.forEach(pin => {
+    const statusClass = pin.status === 'current' ? 'current' : pin.status === 'planned' ? 'planned' : 'visited';
     const icon = L.divIcon({
       className: '',
-      html: '<div class="custom-pin ' + pin.type + '">' + pin.icon + '</div>',
+      html: '<div class="custom-pin ' + pin.type + ' ' + statusClass + '" title="' + esc(pin.name) + '">' + pin.icon + '</div>',
       iconSize: [34, 34],
       iconAnchor: [17, 17]
     });
@@ -1683,12 +1986,12 @@ function zoomTo(region) {
   if (region === 'japan') {
     map.fitBounds([
       [34.4, 134.5],
-      [36.2, 140.6]
+      [36.6, 140.6]
     ], { padding: [30, 30] });
-  } else if (region === 'tokyo') {
-    map.flyTo([35.712, 139.775], 13, { duration: 0.8 });
   } else if (region === 'karuizawa') {
     map.flyTo([36.355, 138.635], 14, { duration: 0.8 });
+  } else if (region === 'tokyo') {
+    map.flyTo([35.695, 139.755], 12, { duration: 0.8 });
   } else if (region === 'kansai') {
     map.flyTo([34.85, 135.65], 10, { duration: 0.8 });
   } else if (region === 'coast') {
