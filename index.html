@@ -95,12 +95,12 @@ main{flex:1;padding:20px 16px 40px}
 .feed-gallery.grid-5 .gallery-item:nth-child(4){grid-column:span 2}
 .feed-gallery.grid-5 .gallery-item:nth-child(5){grid-column:span 2}
 .feed-gallery.grid-6{grid-template-columns:repeat(3, 1fr);grid-template-rows:200px 200px}
-.feed-gallery.grid-7,.feed-gallery.grid-8{grid-template-columns:repeat(4, 1fr);grid-template-rows:auto}
+.feed-gallery.grid-7,.feed-gallery.grid-8,.feed-gallery.grid-9,.feed-gallery.grid-10,.feed-gallery.grid-many{grid-template-columns:repeat(4, 1fr);grid-template-rows:auto}
 
 .gallery-item{position:relative;height:340px;overflow:hidden;cursor:pointer;background:#1e293b}
 .feed-gallery.grid-1 .gallery-item{height:440px}
 .feed-gallery.grid-4 .gallery-item{height:220px}
-.feed-gallery.grid-5 .gallery-item,.feed-gallery.grid-6 .gallery-item,.feed-gallery.grid-7 .gallery-item,.feed-gallery.grid-8 .gallery-item{height:200px}
+.feed-gallery.grid-5 .gallery-item,.feed-gallery.grid-6 .gallery-item,.feed-gallery.grid-7 .gallery-item,.feed-gallery.grid-8 .gallery-item,.feed-gallery.grid-9 .gallery-item,.feed-gallery.grid-10 .gallery-item,.feed-gallery.grid-many .gallery-item{height:200px}
 @media (max-width:640px){
   .gallery-item{height:260px}
   .feed-gallery.grid-1 .gallery-item{height:320px}
@@ -108,10 +108,10 @@ main{flex:1;padding:20px 16px 40px}
   .feed-gallery.grid-3 .gallery-item:first-child{grid-row:auto;height:280px}
   .feed-gallery.grid-4{grid-template-columns:1fr 1fr;grid-template-rows:auto}
   .feed-gallery.grid-4 .gallery-item{height:190px}
-  .feed-gallery.grid-5,.feed-gallery.grid-6,.feed-gallery.grid-7,.feed-gallery.grid-8{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .feed-gallery.grid-5,.feed-gallery.grid-6,.feed-gallery.grid-7,.feed-gallery.grid-8,.feed-gallery.grid-9,.feed-gallery.grid-10,.feed-gallery.grid-many{grid-template-columns:1fr 1fr;grid-template-rows:auto}
   .feed-gallery.grid-5 .gallery-item:nth-child(1),.feed-gallery.grid-5 .gallery-item:nth-child(2),.feed-gallery.grid-5 .gallery-item:nth-child(3),.feed-gallery.grid-5 .gallery-item:nth-child(4),.feed-gallery.grid-5 .gallery-item:nth-child(5){grid-column:auto}
   .feed-gallery.grid-5 .gallery-item:first-child{grid-column:span 2;height:240px}
-  .feed-gallery.grid-5 .gallery-item,.feed-gallery.grid-6 .gallery-item,.feed-gallery.grid-7 .gallery-item,.feed-gallery.grid-8 .gallery-item{height:170px}
+  .feed-gallery.grid-5 .gallery-item,.feed-gallery.grid-6 .gallery-item,.feed-gallery.grid-7 .gallery-item,.feed-gallery.grid-8 .gallery-item,.feed-gallery.grid-9 .gallery-item,.feed-gallery.grid-10 .gallery-item,.feed-gallery.grid-many .gallery-item{height:170px}
 }
 
 .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}
@@ -298,6 +298,16 @@ const tripPosts = [
         "caption": "Evelyn getting surprised with her birthday cake and blowing out the candle."
       },
       {
+        "url": "assets/photos/168_kikyo_dinner_evelyn_cake_candle_gaze_brittany.jpg",
+        "thumb": "assets/photos/168_kikyo_dinner_evelyn_cake_candle_gaze_brittany.jpg",
+        "caption": "Evelyn making a wish as the birthday candle flickers on her cake."
+      },
+      {
+        "url": "assets/photos/169_kikyo_dinner_happy_birthday_evelyn_plate_brittany.jpg",
+        "thumb": "assets/photos/169_kikyo_dinner_happy_birthday_evelyn_plate_brittany.jpg",
+        "caption": "The custom Happy Birthday Evelyn fruit cake presentation plate."
+      },
+      {
         "url": "assets/photos/156_kikyo_dinner_family_table_cake_sparkle.jpg",
         "thumb": "assets/photos/156_kikyo_dinner_family_table_cake_sparkle.jpg",
         "caption": "Birthday cake surprise at the dinner table with Brittany, Aunt Alison, and Lincoln."
@@ -343,9 +353,9 @@ const tripPosts = [
         "caption": "Evelyn posing under the 301-307 / EVELYN floor sign on her birthday."
       },
       {
-        "url": "assets/photos/148_kikyo_hotel_evelyn_floor_sign_pose.jpg",
-        "thumb": "assets/photos/148_kikyo_hotel_evelyn_floor_sign_pose.jpg",
-        "caption": "Evelyn thrilled to find a hotel wing sharing her exact name."
+        "url": "assets/photos/164_kikyo_hotel_evelyn_wing_sign_brittany.jpg",
+        "thumb": "assets/photos/164_kikyo_hotel_evelyn_wing_sign_brittany.jpg",
+        "caption": "Evelyn beaming with arms wide under her namesake hotel wing sign."
       },
       {
         "url": "assets/videos/evelyn_hotel_room_dance.mp4",
@@ -354,14 +364,19 @@ const tripPosts = [
         "caption": "Evelyn dancing and spinning around the hotel room in Karuizawa."
       },
       {
-        "url": "assets/photos/149_kikyo_hotel_lincoln_room_pjs_dance_pose.jpg",
-        "thumb": "assets/photos/149_kikyo_hotel_lincoln_room_pjs_dance_pose.jpg",
-        "caption": "Lincoln rocking his hotel pajamas and showing off his dance moves."
+        "url": "assets/photos/165_kikyo_hotel_lincoln_evelyn_pj_pose_brittany.jpg",
+        "thumb": "assets/photos/165_kikyo_hotel_lincoln_evelyn_pj_pose_brittany.jpg",
+        "caption": "Lincoln and Evelyn ready in their hotel lounge pajamas and slippers."
       },
       {
-        "url": "assets/photos/150_kikyo_hotel_lincoln_room_pjs_karate_pose.jpg",
-        "thumb": "assets/photos/150_kikyo_hotel_lincoln_room_pjs_karate_pose.jpg",
-        "caption": "Lincoln striking a karate pose in his room pajamas."
+        "url": "assets/photos/166_kikyo_hotel_lincoln_ninja_karate_pj_brittany.jpg",
+        "thumb": "assets/photos/166_kikyo_hotel_lincoln_ninja_karate_pj_brittany.jpg",
+        "caption": "Lincoln breaking out his best karate stance in the hotel room."
+      },
+      {
+        "url": "assets/photos/167_kikyo_hotel_evelyn_victory_dance_pj_brittany.jpg",
+        "thumb": "assets/photos/167_kikyo_hotel_evelyn_victory_dance_pj_brittany.jpg",
+        "caption": "Evelyn's victory dance and pure birthday hype in her pajamas."
       },
       {
         "url": "assets/photos/151_kikyo_hotel_evelyn_room_pj_dance_jump.jpg",
@@ -1819,7 +1834,7 @@ function renderFeed() {
     let galleryHtml = '';
     if (post.media && post.media.length > 0) {
       const len = post.media.length;
-      const gridClass = len === 1 ? 'grid-1' : len === 2 ? 'grid-2' : len === 3 ? 'grid-3' : len === 4 ? 'grid-4' : len === 5 ? 'grid-5' : len === 6 ? 'grid-6' : 'grid-8';
+      const gridClass = len === 1 ? 'grid-1' : len === 2 ? 'grid-2' : len === 3 ? 'grid-3' : len === 4 ? 'grid-4' : len === 5 ? 'grid-5' : len === 6 ? 'grid-6' : len === 7 ? 'grid-7' : len === 8 ? 'grid-8' : len === 9 ? 'grid-9' : len === 10 ? 'grid-10' : 'grid-many';
       const itemsHtml = post.media.map((m, mIdx) => {
         return '<div class="gallery-item" data-post-idx="' + pIdx + '" data-media-idx="' + mIdx + '">' +
           '<img src="' + m.thumb + '" alt="' + esc(m.caption || post.title) + '" loading="lazy">' +
