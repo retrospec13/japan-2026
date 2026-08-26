@@ -137,6 +137,7 @@ main{flex:1;padding:20px 16px 40px}
 .custom-pin:hover{transform:scale(1.15);z-index:1000}
 .custom-pin.tokyo{background:#2563eb}
 .custom-pin.karuizawa{background:#059669}
+.custom-pin.atami{background:#0ea5e9}
 .custom-pin.osaka{background:#f97316}
 .custom-pin.kyoto{background:#8b5cf6}
 .custom-pin.coast{background:#06b6d4}
@@ -202,6 +203,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
     <div class="route-tags">
       <span class="route-tag">Tokyo / Ueno</span>
       <span class="route-tag">Karuizawa (Nagano)</span>
+      <span class="route-tag">Atami Beach</span>
       <span class="route-tag">Osaka</span>
       <span class="route-tag">Kyoto</span>
       <span class="route-tag">Mihama Coast</span>
@@ -248,6 +250,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
         <div class="map-quick-buttons">
           <button class="quick-btn" onclick="zoomTo('japan')">🇯🇵 All Japan</button>
           <button class="quick-btn" onclick="zoomTo('karuizawa')">🌲 Karuizawa (Current)</button>
+          <button class="quick-btn" onclick="zoomTo('atami')">🏖️ Atami (Next Stop)</button>
           <button class="quick-btn" onclick="zoomTo('tokyo')">🗼 Tokyo (Visited)</button>
           <button class="quick-btn" onclick="zoomTo('kansai')">🏯 Osaka & Kyoto (Ahead)</button>
           <button class="quick-btn" onclick="zoomTo('coast')">🌊 Coast & Onsen (Ahead)</button>
@@ -278,6 +281,86 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 const tripPosts = [
+  {
+    "id": "post-38",
+    "date": "Wed Aug 26, 2026 · Evening",
+    "location": "TsuruTonTan UDON NOODLE Brasserie · Kyu-Karuizawa",
+    "tag": "Dinner & Matcha Ice Cream",
+    "title": "Fantastic dinner at TsuruTonTan and matcha vanilla crepe ice creams",
+    "caption": "We finished out the night at TsuruTonTan UDON NOODLE Brasserie in Kyu-Karuizawa for dinner, and the food was fantastic. We grabbed a cozy booth with woven cane screens and ordered steaming udon hot pots, side dishes, rice bowls, and sushi rolls from the touch tablet.\n\nLincoln tackled a big roll with chopsticks and dug straight into his rice, while Evelyn enjoyed her noodle soup. The kids were completely exhausted after the huge day of climbing and crafting at Toy Kingdom, but they hung in there like champions just long enough to get their matcha and vanilla crepe ice cream cones for dessert.\n\nNext stop is Atami and we are heading straight to the beach!",
+    "media": [
+      {
+        "url": "assets/photos/239_tsurutontan_dinner_kids_holding_matcha_ice_cream.jpg",
+        "thumb": "assets/photos/239_tsurutontan_dinner_kids_holding_matcha_ice_cream.jpg",
+        "caption": "Lincoln and Evelyn with their matcha and vanilla crepe ice cream cones after dinner."
+      },
+      {
+        "url": "assets/photos/240_tsurutontan_dinner_brittany_evelyn_rice_table.jpg",
+        "thumb": "assets/photos/240_tsurutontan_dinner_brittany_evelyn_rice_table.jpg",
+        "caption": "Brittany and Evelyn at the dining table with bowls of rice and side dishes."
+      },
+      {
+        "url": "assets/photos/241_tsurutontan_dinner_lincoln_eating_big_bite_rice.jpg",
+        "thumb": "assets/photos/241_tsurutontan_dinner_lincoln_eating_big_bite_rice.jpg",
+        "caption": "Lincoln getting a big mouthful of rice with chopsticks."
+      },
+      {
+        "url": "assets/photos/242_tsurutontan_dinner_family_table_steaming_hotpot_fun.jpg",
+        "thumb": "assets/photos/242_tsurutontan_dinner_family_table_steaming_hotpot_fun.jpg",
+        "caption": "Dinner table fun with steaming hot pots, Brittany, Aunt Alison, Evelyn, and Lincoln."
+      },
+      {
+        "url": "assets/photos/243_tsurutontan_dinner_dad_lincoln_booth_smiles.jpg",
+        "thumb": "assets/photos/243_tsurutontan_dinner_dad_lincoln_booth_smiles.jpg",
+        "caption": "John and Lincoln sharing smiles in the dining booth."
+      },
+      {
+        "url": "assets/photos/244_tsurutontan_dinner_lincoln_eating_sushi_roll_chopsticks.jpg",
+        "thumb": "assets/photos/244_tsurutontan_dinner_lincoln_eating_sushi_roll_chopsticks.jpg",
+        "caption": "Lincoln going all in on a sushi roll with chopsticks."
+      },
+      {
+        "url": "assets/photos/245_tsurutontan_dinner_brittany_evelyn_noodle_table.jpg",
+        "thumb": "assets/photos/245_tsurutontan_dinner_brittany_evelyn_noodle_table.jpg",
+        "caption": "Evelyn enjoying her bowl at the table with Brittany."
+      },
+      {
+        "url": "assets/photos/246_tsurutontan_dinner_family_booth_tablet_menu.jpg",
+        "thumb": "assets/photos/246_tsurutontan_dinner_family_booth_tablet_menu.jpg",
+        "caption": "Family group selfie at the booth with the ordering tablet on the table."
+      }
+    ]
+  },
+  {
+    "id": "post-37",
+    "date": "Wed Aug 26, 2026 · Late Afternoon",
+    "location": "Church Street Karuizawa & Old Karuizawa Ginza · Karuizawa, Nagano",
+    "tag": "Evening Stroll & Heart Sculpture",
+    "title": "Evening walk through Church Street Karuizawa and family totem selfies",
+    "caption": "Before dinner, we took an evening walk around the cobblestone paths of Church Street Karuizawa and Old Ginza. The mountain air was nice and cool as the sun began setting over the plaza.\n\nLincoln and Evelyn stopped at the glowing illuminated heart sculpture in the courtyard, checking out the carved wooden owl sitting at its base. Then we stacked up for a four-person family totem selfie outside the stone entrance with all our silly faces, while Evelyn showed off her colorful Tamagotchi toy.",
+    "media": [
+      {
+        "url": "assets/photos/235_karuizawa_evening_walk_heart_sculpture_lincoln_evelyn.jpg",
+        "thumb": "assets/photos/235_karuizawa_evening_walk_heart_sculpture_lincoln_evelyn.jpg",
+        "caption": "Lincoln and Evelyn admiring the illuminated heart sculpture and carved owl in the Church Street courtyard."
+      },
+      {
+        "url": "assets/photos/236_karuizawa_evening_walk_family_totem_smile.jpg",
+        "thumb": "assets/photos/236_karuizawa_evening_walk_family_totem_smile.jpg",
+        "caption": "Family totem selfie stack with John, Brittany, Lincoln, and Evelyn."
+      },
+      {
+        "url": "assets/photos/237_karuizawa_evening_walk_evelyn_courtyard_pose.jpg",
+        "thumb": "assets/photos/237_karuizawa_evening_walk_evelyn_courtyard_pose.jpg",
+        "caption": "Evelyn holding her toy on the cobblestones near the greenery and stone wall."
+      },
+      {
+        "url": "assets/photos/238_karuizawa_evening_walk_family_totem_funny_faces.jpg",
+        "thumb": "assets/photos/238_karuizawa_evening_walk_family_totem_funny_faces.jpg",
+        "caption": "Goofy family totem selfie with Evelyn making binocular eyes with her toy!"
+      }
+    ]
+  },
   {
     "id": "post-36",
     "date": "Wed Aug 26, 2026 · Afternoon",
@@ -1786,6 +1869,30 @@ const mapPins = [
 
   // --- PLACES VISITED ---
   {
+    id: 'tsurutontan-karuizawa',
+    name: 'TsuruTonTan UDON NOODLE Brasserie Karuizawa',
+    city: 'karuizawa',
+    status: 'visited',
+    lat: 36.3575,
+    lon: 138.6360,
+    type: 'karuizawa',
+    icon: '🍜',
+    tag: 'Visited · Aug 26 Dinner',
+    desc: 'Botanical resort-style restaurant in Kyu-Karuizawa. Fantastic artisan udon hot pots, rice bowls, sushi rolls, and matcha-vanilla crepe ice cream dessert.'
+  },
+  {
+    id: 'church-street-karuizawa',
+    name: 'Church Street Karuizawa Plaza & Heart Sculpture',
+    city: 'karuizawa',
+    status: 'visited',
+    lat: 36.3582,
+    lon: 138.6358,
+    type: 'karuizawa',
+    icon: '❤️',
+    tag: 'Visited · Aug 26 Evening',
+    desc: 'Open-air shopping & dining courtyard in Old Karuizawa with cobblestone paths, illuminated heart arch sculpture, and carved woodland owl.'
+  },
+  {
     id: 'karuizawa-toy-kingdom',
     name: 'Karuizawa Toy Kingdom (軽井沢おもちゃ王国)',
     city: 'karuizawa',
@@ -2004,6 +2111,18 @@ const mapPins = [
     desc: 'Future connection point for the high-speed Shinkansen bullet train heading west.'
   },
   {
+    id: 'atami-beach',
+    name: 'Atami Sun Beach & Onsen Coast',
+    city: 'atami',
+    status: 'planned',
+    lat: 35.0968,
+    lon: 139.0760,
+    type: 'atami',
+    icon: '🏖️',
+    tag: 'Planned Stay · Next Stop',
+    desc: 'Upcoming coastal stop: palm-lined Atami Sun Beach on Sagami Bay, ocean breezes, swimming, and seaside onsen relaxation.'
+  },
+  {
     id: 'osaka',
     name: 'Osaka / Namba & Dotonbori',
     city: 'osaka',
@@ -2076,7 +2195,7 @@ const visitedTokyoRoute = [
 // Upcoming planned route across Kansai, Coast & Onsen
 const plannedRouteCoords = [
   [36.3551, 138.6348], // Karuizawa
-  [35.6812, 139.7671], // Tokyo Station
+  [35.0968, 139.0760], // Atami Sun Beach
   [34.6686, 135.5017], // Osaka
   [34.9858, 135.7588], // Kyoto
   [35.6178, 135.9701], // Mihama Coast
@@ -2409,6 +2528,8 @@ function zoomTo(region) {
     map.flyTo([35.695, 139.755], 12, { duration: 0.8 });
   } else if (region === 'kansai') {
     map.flyTo([34.85, 135.65], 10, { duration: 0.8 });
+  } else if (region === 'atami') {
+    map.flyTo([35.097, 139.076], 13, { duration: 0.8 });
   } else if (region === 'coast') {
     map.flyTo([35.62, 135.4], 9, { duration: 0.8 });
   }
