@@ -188,6 +188,149 @@ main{flex:1;padding:20px 16px 40px}
 
 /* Footer */
 footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);background:#fff;margin-top:auto}
+
+/* New Photos Notification Banner & Highlights Showcase */
+.new-photos-notification {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+  color: #fff;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all .15s ease;
+  border: 1px solid rgba(255,255,255,.25);
+}
+.new-photos-notification:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(255,255,255,.45);
+}
+.new-photos-btn {
+  background: #fff;
+  color: #1d4ed8;
+  font-weight: 800;
+  font-size: 13.5px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  transition: all .15s ease;
+}
+.new-photos-btn:hover {
+  background: #f8fafc;
+  transform: scale(1.03);
+}
+
+.highlights-section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 20px;
+  margin-bottom: 24px;
+}
+.highlights-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+.highlights-title {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.highlights-badge {
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
+}
+.highlight-card {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .2s ease;
+  display: flex;
+  flex-direction: column;
+}
+.highlight-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--acc);
+}
+.highlight-thumb {
+  height: 145px;
+  overflow: hidden;
+  background: #1e293b;
+  position: relative;
+}
+.highlight-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+}
+.highlight-card:hover .highlight-thumb img {
+  transform: scale(1.06);
+}
+.highlight-meta {
+  padding: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.highlight-loc {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--acc);
+  margin-bottom: 4px;
+}
+.highlight-caption {
+  font-size: 12.5px;
+  color: #334155;
+  line-height: 1.45;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.highlight-day-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  margin-top: 8px;
+}
 </style>
 </head>
 <body>
@@ -219,6 +362,32 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
   <main>
     <!-- Live Feed Tab -->
     <section class="tab-pane active" id="paneFeed">
+      <!-- New Photos Notification Banner -->
+      <div class="new-photos-notification" onclick="scrollToHighlights()">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="font-size:26px;">📸</span>
+          <div>
+            <div style="font-weight:800;font-size:15.5px;letter-spacing:-.01em;">New photos have been added for previous days!</div>
+            <div style="font-size:13px;opacity:.92;margin-top:2px;">Expanded Karuizawa pottery painting, adventure obstacle courses, Church Street heart arch & brand new Atami Pearl Star ocean suite onsen.</div>
+          </div>
+        </div>
+        <button class="new-photos-btn" onclick="event.stopPropagation();scrollToHighlights()">
+          Press here to see what was just added →
+        </button>
+      </div>
+
+      <!-- Newly Added Photos Highlights Showcase -->
+      <div class="highlights-section" id="newPhotosHighlights">
+        <div class="highlights-header">
+          <div>
+            <h3 class="highlights-title">✨ Newly Added & Expanded Photos</h3>
+            <p style="margin:4px 0 0;font-size:13px;color:var(--muted)">Browse all 24 newly added photos highlighting Karuizawa activities, Shinkansen Gran Class, and the Pearl Star Hotel suite & private balcony onsen</p>
+          </div>
+          <span class="highlights-badge">24 New Photos Added</span>
+        </div>
+        <div class="highlights-grid" id="highlightsGrid"></div>
+      </div>
+
       
       <!-- Interactive Canvas Reminder Banner -->
       <div class="hint-canvas-card">
@@ -282,9 +451,149 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 <script>
 const tripPosts = [
   {
+    "id": "post-43",
+    "date": "Thu Aug 27, 2026 \u00b7 Late Afternoon",
+    "location": "Private Balcony Rotenburo Onsen \u00b7 Atami Pearl Star Hotel",
+    "tag": "Private Balcony Onsen & Water Dolphins",
+    "title": "Water dolphins! Soaking in our private open-air balcony onsen overlooking the sea",
+    "caption": "The centerpiece of our suite is our private open-air hot spring bath (rotenburo) built directly into the balcony deck facing the ocean. As soon as the thermal mineral water was ready, Lincoln and Evelyn hopped straight into their swimsuits and jumped in.\n\nIn Evelyn's own words, they are complete water dolphins! The kids spent the entire late afternoon splashing, swimming, and soaking in the warm steaming onsen bath while looking out over the open waters of Sagami Bay and the distant mountain coastlines. Watching the waves roll in while soaking in natural hot springs right on your own balcony is unbeatable.",
+    "media": [
+      {
+        "url": "assets/photos/300_pearl_star_onsen_lincoln_evelyn_water_dolphins.jpg",
+        "thumb": "assets/photos/300_pearl_star_onsen_lincoln_evelyn_water_dolphins.jpg",
+        "caption": "Lincoln and Evelyn in their element\u2014water dolphins swimming in the open-air balcony bath!"
+      },
+      {
+        "url": "assets/photos/301_pearl_star_onsen_kids_soaking_terrace_bath.jpg",
+        "thumb": "assets/photos/301_pearl_star_onsen_kids_soaking_terrace_bath.jpg",
+        "caption": "Lincoln and Evelyn soaking happily in the warm thermal water with wooden bath buckets on hand."
+      },
+      {
+        "url": "assets/photos/302_pearl_star_onsen_evelyn_lincoln_ocean_horizon.jpg",
+        "thumb": "assets/photos/302_pearl_star_onsen_evelyn_lincoln_ocean_horizon.jpg",
+        "caption": "Looking out over the balcony edge toward the vast blue Pacific horizon from the warm bath."
+      },
+      {
+        "url": "assets/photos/303_pearl_star_onsen_kids_relaxing_steaming_tub.jpg",
+        "thumb": "assets/photos/303_pearl_star_onsen_kids_relaxing_steaming_tub.jpg",
+        "caption": "Kids leaning against the stone rim of the rotenburo bath enjoying the soothing hot springs."
+      },
+      {
+        "url": "assets/photos/304_pearl_star_onsen_kids_warm_bath_smiles.jpg",
+        "thumb": "assets/photos/304_pearl_star_onsen_kids_warm_bath_smiles.jpg",
+        "caption": "Big smiles from Lincoln and Evelyn as they splash and paddle around the deep stone tub."
+      },
+      {
+        "url": "assets/photos/305_pearl_star_onsen_kids_splashing_sea_view.jpg",
+        "thumb": "assets/photos/305_pearl_star_onsen_kids_splashing_sea_view.jpg",
+        "caption": "Splashing fun in the private hot spring with the Atami coastline in the background."
+      },
+      {
+        "url": "assets/photos/306_pearl_star_onsen_lincoln_evelyn_playful_bath.jpg",
+        "thumb": "assets/photos/306_pearl_star_onsen_lincoln_evelyn_playful_bath.jpg",
+        "caption": "Evelyn and Lincoln having a wonderful time in their private terrace bath."
+      },
+      {
+        "url": "assets/photos/307_pearl_star_onsen_kids_coastal_mountain_view.jpg",
+        "thumb": "assets/photos/307_pearl_star_onsen_kids_coastal_mountain_view.jpg",
+        "caption": "Resting at the edge of the tub looking across to the mountains of the Izu Peninsula."
+      },
+      {
+        "url": "assets/photos/308_pearl_star_onsen_peaceful_ocean_bath_soak.jpg",
+        "thumb": "assets/photos/308_pearl_star_onsen_peaceful_ocean_bath_soak.jpg",
+        "caption": "Peaceful moments in the balcony onsen as the afternoon clouds settle over Sagami Bay."
+      }
+    ]
+  },
+  {
+    "id": "post-42",
+    "date": "Thu Aug 27, 2026 \u00b7 Afternoon",
+    "location": "Suite Ocean Terrace \u00b7 Atami Pearl Star Hotel",
+    "tag": "Balcony Terrace & Sagami Bay Views",
+    "title": "Balcony terrace overlooking Atami Sun Beach, Sagami Bay, and Atami Castle",
+    "caption": "Stepping out onto our wide private balcony deck, the ocean views of Sagami Bay and Atami Sun Beach are breathtaking. Looking across the palm-lined harbor, you can see the yachts docked in the marina, families playing on the sand, and Atami Castle (\u71b1\u6d77\u57ce) perched high up on the lush green mountain ridge at the point.\n\nEvelyn danced across the wooden deck in her sandals, Brittany stretched out on the wicker lounger taking in the ocean breeze, and John and Brittany snapped a sunny coastal selfie overlooking the bay. After a busy morning of travel, having our own breezy ocean overlook is pure relaxation.",
+    "media": [
+      {
+        "url": "assets/photos/296_pearl_star_balcony_atami_beach_castle_panorama.jpg",
+        "thumb": "assets/photos/296_pearl_star_balcony_atami_beach_castle_panorama.jpg",
+        "caption": "Panoramic coastal view from our balcony overlooking Atami Sun Beach, the marina, and Atami Castle atop the mountain ridge."
+      },
+      {
+        "url": "assets/photos/295_pearl_star_balcony_dad_mom_ocean_selfie.jpg",
+        "thumb": "assets/photos/295_pearl_star_balcony_dad_mom_ocean_selfie.jpg",
+        "caption": "John and Brittany smiling together on the private balcony with the bay and mountains behind them."
+      },
+      {
+        "url": "assets/photos/294_pearl_star_balcony_evelyn_deck_dance_pose.jpg",
+        "thumb": "assets/photos/294_pearl_star_balcony_evelyn_deck_dance_pose.jpg",
+        "caption": "Evelyn striking a happy pose on the wooden deck outside the sliding glass suite doors."
+      },
+      {
+        "url": "assets/photos/297_pearl_star_balcony_brittany_lounger_relaxation.jpg",
+        "thumb": "assets/photos/297_pearl_star_balcony_brittany_lounger_relaxation.jpg",
+        "caption": "Brittany relaxing on the balcony lounger with eyes closed, enjoying the sea air."
+      },
+      {
+        "url": "assets/photos/298_pearl_star_balcony_lincoln_evelyn_smiles_selfie.jpg",
+        "thumb": "assets/photos/298_pearl_star_balcony_lincoln_evelyn_smiles_selfie.jpg",
+        "caption": "Lincoln and Evelyn sharing cheeky smiles out on the terrace."
+      },
+      {
+        "url": "assets/photos/299_pearl_star_balcony_brittany_evelyn_ocean_gaze.jpg",
+        "thumb": "assets/photos/299_pearl_star_balcony_brittany_evelyn_ocean_gaze.jpg",
+        "caption": "Brittany and Evelyn standing together by the glass railing taking in the panoramic sea horizon."
+      }
+    ]
+  },
+  {
+    "id": "post-41",
+    "date": "Thu Aug 27, 2026 \u00b7 Afternoon",
+    "location": "Atami Pearl Star Hotel (\u71b1\u6d77\u30d1\u30fc\u30eb\u30b9\u30bf\u30fc\u30db\u30c6\u30eb) \u00b7 Atami, Shizuoka",
+    "tag": "Grand Ocean Suite & Room Tour",
+    "title": "Checking into our massive ocean suite at Pearl Star Hotel: tatami room, two baths & plenty of space",
+    "caption": "We got the keys to our suite at the Pearl Star Hotel and everyone was thrilled the moment we stepped inside. The room is enormous and beautifully laid out in modern Japanese ryokan style with smooth wood framing, sliding shoji screens, warm lantern lights, and a full tatami mat living area overlooking the sea.\n\nThe family loves how spacious it is\u2014everyone is happy they have their own beds, their own room, and two separate full bathrooms! Lincoln gave a big peace sign as we explored the desks and lounge areas, Evelyn checked out the welcome treats and flower arrangement, and there is more than enough room for the whole crew to unpack and recharge.",
+    "media": [
+      {
+        "url": "assets/photos/291_pearl_star_suite_grand_tatami_beds_layout.jpg",
+        "thumb": "assets/photos/291_pearl_star_suite_grand_tatami_beds_layout.jpg",
+        "caption": "The expansive suite layout with tatami lounge, twin beds, separate living zone, and floor-to-ceiling windows."
+      },
+      {
+        "url": "assets/photos/290_pearl_star_suite_tatami_ocean_terrace_view.jpg",
+        "thumb": "assets/photos/290_pearl_star_suite_tatami_ocean_terrace_view.jpg",
+        "caption": "Tatami mat living area looking straight out to the private balcony onsen and Sagami Bay."
+      },
+      {
+        "url": "assets/photos/289_pearl_star_suite_living_room_lounge_lamps.jpg",
+        "thumb": "assets/photos/289_pearl_star_suite_living_room_lounge_lamps.jpg",
+        "caption": "Spacious central lounge with illuminated Japanese lantern lamps and comfortable sofas."
+      },
+      {
+        "url": "assets/photos/293_pearl_star_suite_hallway_desk_living_terrace.jpg",
+        "thumb": "assets/photos/293_pearl_star_suite_hallway_desk_living_terrace.jpg",
+        "caption": "Looking down the long suite corridor featuring dedicated executive desks and open terrace views."
+      },
+      {
+        "url": "assets/photos/292_pearl_star_suite_lincoln_peace_sign_entry.jpg",
+        "thumb": "assets/photos/292_pearl_star_suite_lincoln_peace_sign_entry.jpg",
+        "caption": "Lincoln giving a big peace sign in his cap and green tee in the new suite hallway."
+      },
+      {
+        "url": "assets/photos/288_pearl_star_suite_evelyn_room_snack_dress.jpg",
+        "thumb": "assets/photos/288_pearl_star_suite_evelyn_room_snack_dress.jpg",
+        "caption": "Evelyn in her kitten-print dress enjoying an afternoon treat by the bed."
+      },
+      {
+        "url": "assets/photos/287_pearl_star_suite_welcome_table_tea_flowers.jpg",
+        "thumb": "assets/photos/287_pearl_star_suite_welcome_table_tea_flowers.jpg",
+        "caption": "In-room welcome table with fresh colorful flowers, artisan tea set, and hotel gifts."
+      }
+    ]
+  },
+  {
     "id": "post-40",
-    "date": "Thu Aug 27, 2026 · Afternoon",
-    "location": "Atami Pearl Star Hotel (熱海パールスターホテル) · Atami, Shizuoka",
+    "date": "Thu Aug 27, 2026 \u00b7 Afternoon",
+    "location": "Atami Pearl Star Hotel (\u71b1\u6d77\u30d1\u30fc\u30eb\u30b9\u30bf\u30fc\u30db\u30c6\u30eb) \u00b7 Atami, Shizuoka",
     "tag": "Seaside Arrival & Ocean Lounge",
     "title": "Arriving in Atami and relaxing in the ocean lounge at Pearl Star Hotel",
     "caption": "Two train rides later, we arrived at our coastal destination: Atami Pearl Star Hotel, perched right on Sagami Bay overlooking Atami Sun Beach.\n\nWhile waiting to check in, we settled into the beautiful open lounge with floor-to-ceiling windows looking out over the water. The staff welcomed us with iced Japanese tea and sweet wagashi treats. The kids relaxed in the comfortable booths after the morning of travel, and the ocean view is stunning.",
@@ -333,8 +642,8 @@ const tripPosts = [
   },
   {
     "id": "post-39",
-    "date": "Thu Aug 27, 2026 · Morning",
-    "location": "Karuizawa Station to Shinkansen Gran Class · Nagano & Shizuoka",
+    "date": "Thu Aug 27, 2026 \u00b7 Morning",
+    "location": "Karuizawa Station to Shinkansen Gran Class \u00b7 Nagano & Shizuoka",
     "tag": "Bullet Train & Rainy Departure",
     "title": "Leaving Karuizawa in rain ponchos and riding the Shinkansen down to the coast",
     "caption": "We said goodbye to Karuizawa and headed to the train station in light rain, with Lincoln and Evelyn bundled up in their bright red and pink ponchos. On the platform, Evelyn and Lincoln found the Car 12 Shinkansen boarding marker and posed proudly.\n\nOnce aboard the high-speed bullet train, we settled into the luxurious Gran Class cabin. Evelyn set up her favorite dolls on the window sill to watch the Japanese countryside fly by, while Brittany relaxed with her Kindle. Lincoln waved happily from his roomy seat alongside Dad as we zoomed south toward Tokyo and Atami.",
@@ -378,13 +687,38 @@ const tripPosts = [
         "url": "assets/photos/259_shinkansen_gran_class_evelyn_window_dolls.jpg",
         "thumb": "assets/photos/259_shinkansen_gran_class_evelyn_window_dolls.jpg",
         "caption": "Evelyn looking out the Shinkansen window with her dolls standing guard."
+      },
+      {
+        "url": "assets/photos/282_karuizawa_station_evelyn_pink_poncho_suitcase.jpg",
+        "thumb": "assets/photos/282_karuizawa_station_evelyn_pink_poncho_suitcase.jpg",
+        "caption": "Evelyn in her hooded pink rain poncho holding her suitcase handle at the station."
+      },
+      {
+        "url": "assets/photos/283_karuizawa_station_lincoln_red_rain_jacket.jpg",
+        "thumb": "assets/photos/283_karuizawa_station_lincoln_red_rain_jacket.jpg",
+        "caption": "Lincoln in his bright red rain jacket and cap carrying his backpack at the concourse."
+      },
+      {
+        "url": "assets/photos/284_karuizawa_platform_dad_holding_lincoln_trains.jpg",
+        "thumb": "assets/photos/284_karuizawa_platform_dad_holding_lincoln_trains.jpg",
+        "caption": "John holding Lincoln up on the platform as Lincoln takes photos of the Shinkansen."
+      },
+      {
+        "url": "assets/photos/285_shinkansen_evelyn_laughing_seat_joy.jpg",
+        "thumb": "assets/photos/285_shinkansen_evelyn_laughing_seat_joy.jpg",
+        "caption": "Evelyn laughing with pure joy in her Gran Class leather armchair seat."
+      },
+      {
+        "url": "assets/photos/286_shinkansen_evelyn_doll_window_smile.jpg",
+        "thumb": "assets/photos/286_shinkansen_evelyn_doll_window_smile.jpg",
+        "caption": "Evelyn smiling happily with her doll perched in the bullet train window."
       }
     ]
   },
   {
     "id": "post-38",
-    "date": "Wed Aug 26, 2026 · Evening",
-    "location": "TsuruTonTan UDON NOODLE Brasserie · Kyu-Karuizawa",
+    "date": "Wed Aug 26, 2026 \u00b7 Evening",
+    "location": "TsuruTonTan UDON NOODLE Brasserie \u00b7 Kyu-Karuizawa",
     "tag": "Dinner & Matcha Ice Cream",
     "title": "Fantastic dinner at TsuruTonTan and matcha vanilla crepe ice creams",
     "caption": "We finished out the night at TsuruTonTan UDON NOODLE Brasserie in Kyu-Karuizawa for dinner, and the food was fantastic. We grabbed a cozy booth with woven cane screens and ordered steaming udon hot pots, side dishes, rice bowls, and sushi rolls from the touch tablet.\n\nLincoln tackled a big roll with chopsticks and dug straight into his rice, while Evelyn enjoyed her noodle soup. The kids were completely exhausted after the huge day of climbing and crafting at Toy Kingdom, but they hung in there like champions just long enough to get their matcha and vanilla crepe ice cream cones for dessert.\n\nNext stop is Atami and we are heading straight to the beach!",
@@ -433,8 +767,8 @@ const tripPosts = [
   },
   {
     "id": "post-37",
-    "date": "Wed Aug 26, 2026 · Late Afternoon",
-    "location": "Church Street Karuizawa & Old Karuizawa Ginza · Karuizawa, Nagano",
+    "date": "Wed Aug 26, 2026 \u00b7 Late Afternoon",
+    "location": "Church Street Karuizawa & Old Karuizawa Ginza \u00b7 Karuizawa, Nagano",
     "tag": "Evening Stroll & Heart Sculpture",
     "title": "Evening walk through Church Street Karuizawa and family totem selfies",
     "caption": "Before dinner, we took an evening walk around the cobblestone paths of Church Street Karuizawa and Old Ginza. The mountain air was nice and cool as the sun began setting over the plaza.\n\nLincoln and Evelyn stopped at the glowing illuminated heart sculpture in the courtyard, checking out the carved wooden owl sitting at its base. Then we stacked up for a four-person family totem selfie outside the stone entrance with all our silly faces, while Evelyn showed off her colorful Tamagotchi toy.",
@@ -458,16 +792,31 @@ const tripPosts = [
         "url": "assets/photos/238_karuizawa_evening_walk_family_totem_funny_faces.jpg",
         "thumb": "assets/photos/238_karuizawa_evening_walk_family_totem_funny_faces.jpg",
         "caption": "Goofy family totem selfie with Evelyn making binocular eyes with her toy!"
+      },
+      {
+        "url": "assets/photos/279_church_street_evelyn_glowing_heart_arch_lookout.jpg",
+        "thumb": "assets/photos/279_church_street_evelyn_glowing_heart_arch_lookout.jpg",
+        "caption": "Evelyn standing beneath the giant glowing heart arch at Church Street Karuizawa."
+      },
+      {
+        "url": "assets/photos/280_church_street_evelyn_heart_sculpture_owl_pose.jpg",
+        "thumb": "assets/photos/280_church_street_evelyn_heart_sculpture_owl_pose.jpg",
+        "caption": "Evelyn posing beside the carved wooden owl at the heart sculpture base."
+      },
+      {
+        "url": "assets/photos/281_church_street_evelyn_illuminated_heart_smile.jpg",
+        "thumb": "assets/photos/281_church_street_evelyn_illuminated_heart_smile.jpg",
+        "caption": "Evelyn smiling in the twilight courtyard framed by the illuminated heart."
       }
     ]
   },
   {
     "id": "post-36",
-    "date": "Wed Aug 26, 2026 · Afternoon",
-    "location": "Mori no Taiken Hiroba (Forest Workshop) · Karuizawa Toy Kingdom",
+    "date": "Wed Aug 26, 2026 \u00b7 Afternoon",
+    "location": "Mori no Taiken Hiroba (Forest Workshop) \u00b7 Karuizawa Toy Kingdom",
     "tag": "Woodland crafts & fairy gardens",
     "title": "Wrapping up Toy Kingdom with handmade woodland crafts and fairy gardens",
-    "caption": "To wrap up our day at Toy Kingdom, we stopped by the open-air forest craft workshop (森の体験広場) to make natural wood crafts using twigs, bark, bamboo, and pinecones.\n\nEvelyn built her own miniature fairy garden area complete with a spiral wooden staircase tower, moss accents, and a birch bark roof. Lincoln designed a full multi-level jungle gym play area with bamboo climbing posts, platforms, and a shaded shelter. The kids used glue guns and natural materials to bring their creations to life, including little smiling acorn nutter guys lounging in a suspended walnut shell swing.\n\nWhen they finished, the kids proudly held up their completed woodland masterpieces together on the path outside the trees with huge smiles.",
+    "caption": "To wrap up our day at Toy Kingdom, we stopped by the open-air forest craft workshop (\u68ee\u306e\u4f53\u9a13\u5e83\u5834) to make natural wood crafts using twigs, bark, bamboo, and pinecones.\n\nEvelyn built her own miniature fairy garden area complete with a spiral wooden staircase tower, moss accents, and a birch bark roof. Lincoln designed a full multi-level jungle gym play area with bamboo climbing posts, platforms, and a shaded shelter. The kids used glue guns and natural materials to bring their creations to life, including little smiling acorn nutter guys lounging in a suspended walnut shell swing.\n\nWhen they finished, the kids proudly held up their completed woodland masterpieces together on the path outside the trees with huge smiles.",
     "media": [
       {
         "url": "assets/photos/247_toy_kingdom_woodcraft_final_kids_holding_crafts_smile.jpg",
@@ -516,11 +865,10 @@ const tripPosts = [
       }
     ]
   },
-  
   {
     "id": "post-35",
-    "date": "Wed Aug 26, 2026 · Afternoon",
-    "location": "Waterwheel Plaza & Charcoal Grill · Karuizawa Toy Kingdom",
+    "date": "Wed Aug 26, 2026 \u00b7 Afternoon",
+    "location": "Waterwheel Plaza & Charcoal Grill \u00b7 Karuizawa Toy Kingdom",
     "tag": "Salt-grilled trout lunch",
     "title": "Fresh salt-grilled rainbow trout skewers hot off the charcoal grill",
     "caption": "After the fish catching in the stream, we took our fresh trout over to the charcoal grill station where they salted and cooked them over hot coals. Lincoln got his whole roasted trout on a stick and could not wait to dig in.\n\nHe held up his prize catch with a huge grin and polished off the entire fish for lunch.",
@@ -559,11 +907,11 @@ const tripPosts = [
   },
   {
     "id": "post-34",
-    "date": "Wed Aug 26, 2026 · Midday",
-    "location": "Waterwheel Plaza Stream · Karuizawa Toy Kingdom",
+    "date": "Wed Aug 26, 2026 \u00b7 Midday",
+    "location": "Waterwheel Plaza Stream \u00b7 Karuizawa Toy Kingdom",
     "tag": "Bare-handed stream fish catching",
     "title": "Wading into the mountain stream and catching trout bare-handed",
-    "caption": "Next up, we headed down to the Waterwheel Plaza (水車の広場) for Nijimasu Tsukamidori (ニジマスのつかみどり). We got our tickets from the kiosk and the kids kicked off their shoes to wade right into the ice-cold mountain stream pool.\n\nThe crystal-clear water was full of lively rainbow trout darting across the blue floor. Lincoln crouched low, tracked them through the shallows, and splashed after them bare-handed with total focus until he cornered one against the rocks and scooped it into his basket. Evelyn waded all through the pool stalking the fish, and everyone had a blast in the cold stream water.",
+    "caption": "Next up, we headed down to the Waterwheel Plaza (\u6c34\u8eca\u306e\u5e83\u5834) for Nijimasu Tsukamidori (\u30cb\u30b8\u30de\u30b9\u306e\u3064\u304b\u307f\u3069\u308a). We got our tickets from the kiosk and the kids kicked off their shoes to wade right into the ice-cold mountain stream pool.\n\nThe crystal-clear water was full of lively rainbow trout darting across the blue floor. Lincoln crouched low, tracked them through the shallows, and splashed after them bare-handed with total focus until he cornered one against the rocks and scooped it into his basket. Evelyn waded all through the pool stalking the fish, and everyone had a blast in the cold stream water.",
     "media": [
       {
         "url": "assets/photos/207_toy_kingdom_stream_fishing_ticket_vending_machine.jpg",
@@ -654,11 +1002,11 @@ const tripPosts = [
   },
   {
     "id": "post-33",
-    "date": "Wed Aug 26, 2026 · Late Morning",
-    "location": "Waku-Waku Great Adventure Forest · Karuizawa Toy Kingdom",
+    "date": "Wed Aug 26, 2026 \u00b7 Late Morning",
+    "location": "Waku-Waku Great Adventure Forest \u00b7 Karuizawa Toy Kingdom",
     "tag": "Tree top adventure & ziplines",
     "title": "Adventure gear on: Climbing treehouses and ziplining through the canopy",
-    "caption": "After painting our pottery, we put on our adventure gear: helmets, knee pads, and elbow guards, and headed into the Waku-Waku Great Adventure Forest (わくわく大冒険の森).\n\nIt's a massive outdoor climbing and treehouse obstacle course built right into the pine canopy and natural volcanic rock. Lincoln and Evelyn crossed high wooden suspension bridges, climbed multi-story cedar treehouses, and Lincoln flew down the forest zipline through the woods.",
+    "caption": "After painting our pottery, we put on our adventure gear: helmets, knee pads, and elbow guards, and headed into the Waku-Waku Great Adventure Forest (\u308f\u304f\u308f\u304f\u5927\u5192\u967a\u306e\u68ee).\n\nIt's a massive outdoor climbing and treehouse obstacle course built right into the pine canopy and natural volcanic rock. Lincoln and Evelyn crossed high wooden suspension bridges, climbed multi-story cedar treehouses, and Lincoln flew down the forest zipline through the woods.",
     "media": [
       {
         "url": "assets/photos/193_toy_kingdom_adventure_walking_to_forest_course.jpg",
@@ -729,16 +1077,56 @@ const tripPosts = [
         "url": "assets/photos/206_toy_kingdom_adventure_lincoln_zipline_close_glide.jpg",
         "thumb": "assets/photos/206_toy_kingdom_adventure_lincoln_zipline_close_glide.jpg",
         "caption": "Lincoln cruising on the zip-rope glide with a firm grip."
+      },
+      {
+        "url": "assets/photos/268_toy_kingdom_adventure_evelyn_aerial_cable_car.jpg",
+        "thumb": "assets/photos/268_toy_kingdom_adventure_evelyn_aerial_cable_car.jpg",
+        "caption": "Evelyn riding the wooden aerial cable car across the forest clearing."
+      },
+      {
+        "url": "assets/photos/278_toy_kingdom_adventure_evelyn_treetop_cable_ride.jpg",
+        "thumb": "assets/photos/278_toy_kingdom_adventure_evelyn_treetop_cable_ride.jpg",
+        "caption": "Evelyn gliding smoothly in the suspended wooden crate ride."
+      },
+      {
+        "url": "assets/photos/269_toy_kingdom_adventure_evelyn_obstacle_ramp_climb.jpg",
+        "thumb": "assets/photos/269_toy_kingdom_adventure_evelyn_obstacle_ramp_climb.jpg",
+        "caption": "Evelyn scrambling up the wooden timber obstacle ramp."
+      },
+      {
+        "url": "assets/photos/274_toy_kingdom_adventure_evelyn_timber_scramble.jpg",
+        "thumb": "assets/photos/274_toy_kingdom_adventure_evelyn_timber_scramble.jpg",
+        "caption": "Evelyn navigating the log incline course in her safety helmet and pads."
+      },
+      {
+        "url": "assets/photos/270_toy_kingdom_adventure_lincoln_rock_wall_scramble.jpg",
+        "thumb": "assets/photos/270_toy_kingdom_adventure_lincoln_rock_wall_scramble.jpg",
+        "caption": "Lincoln scaling the natural rock scramble beneath the treetop bridges."
+      },
+      {
+        "url": "assets/photos/271_toy_kingdom_adventure_lincoln_stump_stepping_path.jpg",
+        "thumb": "assets/photos/271_toy_kingdom_adventure_lincoln_stump_stepping_path.jpg",
+        "caption": "Lincoln balancing across the wooden tree stump path."
+      },
+      {
+        "url": "assets/photos/277_toy_kingdom_adventure_evelyn_bridge_helmet_smile.jpg",
+        "thumb": "assets/photos/277_toy_kingdom_adventure_evelyn_bridge_helmet_smile.jpg",
+        "caption": "Evelyn smiling brightly from the forest canopy walkway."
+      },
+      {
+        "url": "assets/photos/275_toy_kingdom_kids_train_rail_ride.jpg",
+        "thumb": "assets/photos/275_toy_kingdom_kids_train_rail_ride.jpg",
+        "caption": "The colorful mini kids train rolling along the park tracks."
       }
     ]
   },
   {
     "id": "post-32",
-    "date": "Wed Aug 26, 2026 · Morning (9:30 AM)",
-    "location": "Handmade Workshop Hands! · Karuizawa Toy Kingdom",
+    "date": "Wed Aug 26, 2026 \u00b7 Morning (9:30 AM)",
+    "location": "Handmade Workshop Hands! \u00b7 Karuizawa Toy Kingdom",
     "tag": "Pottery painting & kiln cooking",
     "title": "40-minute taxi to Karuizawa Toy Kingdom, pottery painting, and Mom's flower pot",
-    "caption": "We took a 40-minute taxi ride up into the mountains to Karuizawa Toy Kingdom (軽井沢おもちゃ王国).\n\nFirst thing we did was pottery painting at Handmade Workshop Hands! (手作り工房 Hands!). We sat down at the long wooden studio table with all the glaze bowls. Evelyn and Lincoln painted their pieces with brushes and glazes, Mom painted her own flower pot, and then they did the whole kiln cooking right there on-site after everyone painted.",
+    "caption": "We took a 40-minute taxi ride up into the mountains to Karuizawa Toy Kingdom (\u8efd\u4e95\u6ca2\u304a\u3082\u3061\u3083\u738b\u56fd).\n\nFirst thing we did was pottery painting at Handmade Workshop Hands! (\u624b\u4f5c\u308a\u5de5\u623f Hands!). We sat down at the long wooden studio table with all the glaze bowls. Evelyn and Lincoln painted their pieces with brushes and glazes, Mom painted her own flower pot, and then they did the whole kiln cooking right there on-site after everyone painted.",
     "media": [
       {
         "url": "assets/photos/180_toy_kingdom_arrival_one_day_passes.jpg",
@@ -804,6 +1192,21 @@ const tripPosts = [
         "url": "assets/photos/192_toy_kingdom_pottery_family_finishing_for_kiln.jpg",
         "thumb": "assets/photos/192_toy_kingdom_pottery_family_finishing_for_kiln.jpg",
         "caption": "Finishing up all the pottery pieces before loading them into the kiln."
+      },
+      {
+        "url": "assets/photos/272_toy_kingdom_pottery_dad_helping_evelyn_paint.jpg",
+        "thumb": "assets/photos/272_toy_kingdom_pottery_dad_helping_evelyn_paint.jpg",
+        "caption": "John helping Evelyn detail her ceramic piece at the pottery studio table."
+      },
+      {
+        "url": "assets/photos/273_toy_kingdom_pottery_lincoln_focus_brushwork.jpg",
+        "thumb": "assets/photos/273_toy_kingdom_pottery_lincoln_focus_brushwork.jpg",
+        "caption": "Lincoln applying glaze with careful brushwork."
+      },
+      {
+        "url": "assets/photos/276_toy_kingdom_pottery_studio_table_wide_instructor.jpg",
+        "thumb": "assets/photos/276_toy_kingdom_pottery_studio_table_wide_instructor.jpg",
+        "caption": "Wide view of the family and studio instructor around the glaze painting table."
       }
     ]
   },
@@ -1100,875 +1503,1046 @@ const tripPosts = [
     ]
   },
   {
-      "id": "post-25",
-      "date": "Mon Aug 24, 2026 · Late Night",
-      "location": "Yamashiroya Arcade & Claw Machines · Ueno, Tokyo",
-      "tag": "Claw machine jackpot",
-      "title": "Nighttime claw machine wins on the walk back to the hotel",
-      "caption": "On the walk back to the hotel after dinner, we stopped in at the arcade to try the claw machines one last time. Lincoln stepped up to the crane completely on his own, lined up the drop, and pulled out this giant fluffy Kirby plush. He was grinning from ear to ear strutting down the aisle carrying his trophy.\n\nEvelyn wanted another shot too and ended up winning a sweet strawberry Hello Kitty stuffy to go with the giant Cinnamoroll she won earlier this morning. Both kids were running on fumes by the end of the night after miles of walking, but they went to bed happy. Everyone is going to sleep like a rock tonight.",
-      "media": [
-        {
-          "url": "assets/photos/126_claw_machine_lincoln_kirby_win_thrill.jpg",
-          "thumb": "assets/photos/126_claw_machine_lincoln_kirby_win_thrill.jpg",
-          "caption": "Lincoln right after winning the giant Kirby plush all by himself."
-        },
-        {
-          "url": "assets/photos/129_claw_machine_evelyn_hello_kitty_win.jpg",
-          "thumb": "assets/photos/129_claw_machine_evelyn_hello_kitty_win.jpg",
-          "caption": "Evelyn with her strawberry Hello Kitty win."
-        },
-        {
-          "url": "assets/photos/127_claw_machine_lincoln_kirby_aisle_walk.jpg",
-          "thumb": "assets/photos/127_claw_machine_lincoln_kirby_aisle_walk.jpg",
-          "caption": "Lincoln taking his victory lap through the arcade aisle."
-        },
-        {
-          "url": "assets/photos/128_claw_machine_lincoln_mom_evelyn_kirby.jpg",
-          "thumb": "assets/photos/128_claw_machine_lincoln_mom_evelyn_kirby.jpg",
-          "caption": "Brittany, Evelyn, and Lincoln with the night's plushie haul."
-        }
-      ]
-    },
-    {
-      "id": "post-24",
-      "date": "Mon Aug 24, 2026 · Evening",
-      "location": "Traditional Japanese Fusion Izakaya · Ueno, Tokyo",
-      "tag": "Dinner & sushi",
-      "title": "Japanese fusion dinner in Ueno and Lincoln's first sushi rolls",
-      "caption": "We finished out the day with dinner at an authentic Japanese fusion spot in Ueno. The place had traditional wooden tansu cabinetry, private dining booths, and drinks served with little paper umbrellas that the kids immediately took over.\n\nLincoln decided he wanted to try real sushi rolls for the first time, and he handled the chopsticks with zero issues. Both kids were completely wiped out from walking around Puroland and Harajuku all day. Evelyn crashed hard and was sound asleep on my shoulder for a bit before dinner arrived, but she perked right back up once the hot dishes and noodles hit the table.",
-      "media": [
-        {
-          "url": "assets/photos/121_dinner_family_table_thumbs_up.jpg",
-          "thumb": "assets/photos/121_dinner_family_table_thumbs_up.jpg",
-          "caption": "Lincoln giving two thumbs up at our dinner booth."
-        },
-        {
-          "url": "assets/photos/123_dinner_lincoln_authentic_rolls_chopsticks.jpg",
-          "thumb": "assets/photos/123_dinner_lincoln_authentic_rolls_chopsticks.jpg",
-          "caption": "Lincoln trying authentic sushi rolls for the first time."
-        },
-        {
-          "url": "assets/photos/122_dinner_lincoln_chopsticks_umbrella_drink.jpg",
-          "thumb": "assets/photos/122_dinner_lincoln_chopsticks_umbrella_drink.jpg",
-          "caption": "Lincoln with his drink and paper umbrella."
-        },
-        {
-          "url": "assets/photos/124_dinner_lincoln_mom_alison_dining.jpg",
-          "thumb": "assets/photos/124_dinner_lincoln_mom_alison_dining.jpg",
-          "caption": "Brittany, Aunt Alison, and Lincoln at the dinner table."
-        },
-        {
-          "url": "assets/photos/125_dinner_dad_sleepy_evelyn_cuddle.jpg",
-          "thumb": "assets/photos/125_dinner_dad_sleepy_evelyn_cuddle.jpg",
-          "caption": "Evelyn completely passed out on Dad before the food showed up."
-        }
-      ]
-    },
-    {
-      "id": "post-23",
-      "date": "Mon Aug 24, 2026 · Late Afternoon",
-      "location": "Tokyu Plaza Harajuku 'Harakado' · Harajuku, Tokyo",
-      "tag": "Dessert feast & view",
-      "title": "Monster shaved ice and fruit dessert feast at Harakado",
-      "caption": "After walking through Harajuku and checking out the shops, we stopped inside Tokyu Plaza Harajuku Harakado to get dessert. We ended up ordering three different items, including an enormous strawberry kakigori shaved ice topped with sweet whipped cream, and an overflowing bowl of ice cream with fresh melon, mango, and berries.\n\nLincoln took charge of pouring the condensed milk over the giant mountain of shaved ice, and Evelyn folded her cloth napkin into a sun hat for the table. Before leaving, we went out onto the open air rooftop terrace, which looks right out over the busy Jingumae intersection below.",
-      "media": [
-        {
-          "url": "assets/photos/116_harakado_dessert_lincoln_evelyn_kakigori.jpg",
-          "thumb": "assets/photos/116_harakado_dessert_lincoln_evelyn_kakigori.jpg",
-          "caption": "Lincoln and Evelyn with the giant strawberry kakigori shaved ice."
-        },
-        {
-          "url": "assets/videos/harakado_kakigori_shaved_ice.mp4",
-          "thumb": "assets/photos/115_harakado_kakigori_lincoln_pour.jpg",
-          "type": "video",
-          "caption": "Lincoln pouring the condensed milk over the strawberry shaved ice."
-        },
-        {
-          "url": "assets/photos/117_harakado_dessert_fruit_bowl_mom_alison.jpg",
-          "thumb": "assets/photos/117_harakado_dessert_fruit_bowl_mom_alison.jpg",
-          "caption": "Aunt Alison and Evelyn with the fruit and ice cream bowl."
-        },
-        {
-          "url": "assets/photos/118_harakado_terrace_jingumae_crossing_view.jpg",
-          "thumb": "assets/photos/118_harakado_terrace_jingumae_crossing_view.jpg",
-          "caption": "View looking down at the Jingumae intersection from the Harakado roof terrace."
-        },
-        {
-          "url": "assets/photos/119_harakado_dessert_jj_alison_smiles.jpg",
-          "thumb": "assets/photos/119_harakado_dessert_jj_alison_smiles.jpg",
-          "caption": "John and Brittany relaxing at the cafe table."
-        },
-        {
-          "url": "assets/photos/120_harakado_evelyn_napkin_hat_cute.jpg",
-          "thumb": "assets/photos/120_harakado_evelyn_napkin_hat_cute.jpg",
-          "caption": "Evelyn turning her table napkin into a sun hat."
-        }
-      ]
-    },
-    {
-      "id": "post-22",
-      "date": "Mon Aug 24, 2026 · Afternoon",
-      "location": "Tamagotchi Factory & Harajuku KAWAII Night Market · Harajuku, Tokyo",
-      "tag": "Tamagotchi & pop-up",
-      "title": "Tamagotchi Factory and the KAWAII Night Market pop-up event",
-      "caption": "From Shinjuku, we headed over to Harajuku to check out the Tamagotchi Factory. Evelyn carried her big Cinnamoroll plush everywhere we went and posed right in front of the giant Tamagotchi egg interactive clock display, checking out all the custom shells, virtual pet releases, and keychains.\n\nInside Tokyu Plaza Harajuku Harakado, we ran into the KAWAII Night Market pop-up event on the 6th and 7th floors. The rooftop terrace had this massive purple horned monster art installation set up for photos, along with festival displays and a life sized Chopper cutout from the One Piece Mugiwara store.",
-      "media": [
-        {
-          "url": "assets/photos/112_tamagotchi_factory_evelyn_giant_display.jpg",
-          "thumb": "assets/photos/112_tamagotchi_factory_evelyn_giant_display.jpg",
-          "caption": "Evelyn posing in front of the giant Tamagotchi egg display with Cinnamoroll."
-        },
-        {
-          "url": "assets/photos/113_harakado_rooftop_kawaii_monster_statue.jpg",
-          "thumb": "assets/photos/113_harakado_rooftop_kawaii_monster_statue.jpg",
-          "caption": "The giant purple monster installation on the Harakado roof terrace."
-        },
-        {
-          "url": "assets/photos/114_harakado_kawaii_night_market_poster.jpg",
-          "thumb": "assets/photos/114_harakado_kawaii_night_market_poster.jpg",
-          "caption": "The KAWAII Night Market festival event poster at Harakado."
-        },
-        {
-          "url": "assets/photos/114c_one_piece_mugiwara_chopper_display.jpg",
-          "thumb": "assets/photos/114c_one_piece_mugiwara_chopper_display.jpg",
-          "caption": "Chopper display from the One Piece store holding cotton candy."
-        },
-        {
-          "url": "assets/photos/114b_harakado_mall_maze_directory.jpg",
-          "thumb": "assets/photos/114b_harakado_mall_maze_directory.jpg",
-          "caption": "Checking out the building layout and event directory inside Harakado."
-        }
-      ]
-    },
-    {
-      "id": "post-21",
-      "date": "Mon Aug 24, 2026 · Afternoon",
-      "location": "Godzilla Store Tokyo · Shinjuku Marui Annex 1F",
-      "tag": "Kaiju shopping",
-      "title": "Godzilla Store Tokyo and the giant Minus One statue in Shinjuku",
-      "caption": "Right after leaving Sanrio Puroland, we took the train straight into Shinjuku to visit the official Godzilla Store Tokyo on the first floor of Shinjuku Marui Annex.\n\nLincoln is a huge Godzilla fan, so walking up to the massive Godzilla Minus One statue guarding the front entrance was huge for him. He posed right next to it, hit a victory roar flex, and spent plenty of time digging through the shelves of figures, exclusive vinyl models, t-shirts, and posters.",
-      "media": [
-        {
-          "url": "assets/photos/110_godzilla_store_lincoln_flex_roar.jpg",
-          "thumb": "assets/photos/110_godzilla_store_lincoln_flex_roar.jpg",
-          "caption": "Lincoln hitting a Godzilla flex in front of the Minus One statue."
-        },
-        {
-          "url": "assets/photos/109_godzilla_store_lincoln_pose.jpg",
-          "thumb": "assets/photos/109_godzilla_store_lincoln_pose.jpg",
-          "caption": "Standing next to Godzilla at the official store entrance in Shinjuku."
-        },
-        {
-          "url": "assets/photos/111_godzilla_store_lincoln_statue_smile.jpg",
-          "thumb": "assets/photos/111_godzilla_store_lincoln_statue_smile.jpg",
-          "caption": "Lincoln checking out the Godzilla figures and merch shelves."
-        }
-      ]
-    },
-    {
-      "id": "post-20",
-      "date": "Mon Aug 24, 2026 · Afternoon",
-      "location": "Sanrio Puroland · Tama Center, Tokyo",
-      "tag": "Birthday celebration",
-      "title": "Riding the unicorn carousel and strawberry carriages at Puroland",
-      "caption": "We spent the afternoon exploring the rest of Puroland's attractions. Evelyn rode the royal My Melody strawberry carriage photo spot while holding her giant Cinnamoroll plush, and we got some great family photos together along the main staircase and character walls.\n\nDown in Puro Village, Evelyn picked out a pastel unicorn on the Sanrio Character Carousel, and we stopped by the carnival spin the wheel game where the staff rang bells and cheered on the kids. Non stop energy the entire time we were there.",
-      "media": [
-        {
-          "url": "assets/photos/103_my_melody_strawberry_carriage_kids.jpg",
-          "thumb": "assets/photos/103_my_melody_strawberry_carriage_kids.jpg",
-          "caption": "Evelyn and Lincoln in the My Melody strawberry carriage with Cinnamoroll."
-        },
-        {
-          "url": "assets/photos/107_sanrio_carousel_evelyn_unicorn_ride.jpg",
-          "thumb": "assets/photos/107_sanrio_carousel_evelyn_unicorn_ride.jpg",
-          "caption": "Evelyn riding the pastel unicorn on the Sanrio carousel."
-        },
-        {
-          "url": "assets/photos/101_sanrio_spin_wheel_carnival_game.jpg",
-          "thumb": "assets/photos/101_sanrio_spin_wheel_carnival_game.jpg",
-          "caption": "Watching the carnival spin wheel game."
-        },
-        {
-          "url": "assets/photos/105_sanrio_super_star_photo_booth_kids.jpg",
-          "thumb": "assets/photos/105_sanrio_super_star_photo_booth_kids.jpg",
-          "caption": "Lincoln and Evelyn inside the giant star photo frame."
-        },
-        {
-          "url": "assets/photos/106_sanrio_family_selfie_staircase.jpg",
-          "thumb": "assets/photos/106_sanrio_family_selfie_staircase.jpg",
-          "caption": "Family group selfie on the village staircase."
-        },
-        {
-          "url": "assets/photos/108_sanrio_puroland_dad_evelyn_selfie.jpg",
-          "thumb": "assets/photos/108_sanrio_puroland_dad_evelyn_selfie.jpg",
-          "caption": "Dad and Evelyn in Puro Village."
-        },
-        {
-          "url": "assets/photos/104_my_melody_strawberry_carriage_evelyn.jpg",
-          "thumb": "assets/photos/104_my_melody_strawberry_carriage_evelyn.jpg",
-          "caption": "Evelyn sitting in the strawberry carriage with her plush."
-        },
-        {
-          "url": "assets/photos/102_sanrio_spin_wheel_game_host_turn.jpg",
-          "thumb": "assets/photos/102_sanrio_spin_wheel_game_host_turn.jpg",
-          "caption": "The staff host running the prize wheel."
-        }
-      ]
-    },
-    {
-      "id": "post-19",
-      "date": "Mon Aug 24, 2026 · Midday",
-      "location": "Sanrio Rainbow World Restaurant · Tama Center, Tokyo",
-      "tag": "Birthday lunch",
-      "title": "Birthday lunch at the Rainbow World Restaurant",
-      "caption": "For Evelyn's birthday lunch, we went up to the 4th floor to eat at the Sanrio Rainbow World Restaurant. The whole dining area is split into seven rainbow colored character zones with overhead arches and murals.\n\nWe ordered themed dishes for the table, including meat sauce pasta with Pochacco's face right on top, savory noodles, and a rolled My Melody strawberry crepe with fresh fruit and whipped cream. Evelyn loved having her birthday crepe right in the middle of Hello Kitty land.",
-      "media": [
-        {
-          "url": "assets/photos/96_pochacco_bolognese_pasta_plate.jpg",
-          "thumb": "assets/photos/96_pochacco_bolognese_pasta_plate.jpg",
-          "caption": "The Pochacco meat sauce pasta dish."
-        },
-        {
-          "url": "assets/photos/97_my_melody_strawberry_crepe.jpg",
-          "thumb": "assets/photos/97_my_melody_strawberry_crepe.jpg",
-          "caption": "The My Melody fresh strawberry crepe."
-        },
-        {
-          "url": "assets/photos/98_rainbow_world_evelyn_enjoying_crepe.jpg",
-          "thumb": "assets/photos/98_rainbow_world_evelyn_enjoying_crepe.jpg",
-          "caption": "Evelyn eating her strawberry birthday crepe."
-        },
-        {
-          "url": "assets/photos/94_rainbow_world_restaurant_entry_display.jpg",
-          "thumb": "assets/photos/94_rainbow_world_restaurant_entry_display.jpg",
-          "caption": "The rainbow archway entrance to the restaurant."
-        },
-        {
-          "url": "assets/photos/99_rainbow_world_restaurant_family_table.jpg",
-          "thumb": "assets/photos/99_rainbow_world_restaurant_family_table.jpg",
-          "caption": "Dad and the kids at our lunch table."
-        },
-        {
-          "url": "assets/photos/100_rainbow_world_evelyn_juice_spaghetti.jpg",
-          "thumb": "assets/photos/100_rainbow_world_evelyn_juice_spaghetti.jpg",
-          "caption": "Evelyn having lunch with her juice and pasta."
-        },
-        {
-          "url": "assets/photos/95_rainbow_world_restaurant_colorful_plaza.jpg",
-          "thumb": "assets/photos/95_rainbow_world_restaurant_colorful_plaza.jpg",
-          "caption": "Looking across the rainbow dining hall."
-        }
-      ]
-    },
-    {
-      "id": "post-18",
-      "date": "Mon Aug 24, 2026 · Morning",
-      "location": "Sanrio Puroland Arcade & Gift Shop · Tama Center, Tokyo",
-      "tag": "Birthday prize & shop",
-      "title": "First try claw machine win and character headbands",
-      "caption": "Pure beginner's luck this morning in the Puroland arcade. We walked up to the giant UFO catcher claw machine, dropped in a coin, and snagged this massive fluffy Cinnamoroll plush on the very first attempt. Evelyn was thrilled and carried that giant stuffy around the rest of the park.\n\nAfter that, we hit the main gift shop so the kids could get character headbands. Evelyn picked out pink sparkly My Melody bunny ears with a jeweled ribbon, while the boys grabbed Badtz-Maru. They printed some souvenir shots on their instant camera and showed off their gear with Brittany and Aunt Alison.",
-      "media": [
-        {
-          "url": "assets/photos/88_claw_machine_big_cinnamoroll_win.jpg",
-          "thumb": "assets/photos/88_claw_machine_big_cinnamoroll_win.jpg",
-          "caption": "Evelyn holding her giant Cinnamoroll plush right after the claw machine win."
-        },
-        {
-          "url": "assets/photos/89_claw_machine_cinnamoroll_hug_smiles.jpg",
-          "thumb": "assets/photos/89_claw_machine_cinnamoroll_hug_smiles.jpg",
-          "caption": "Big hugs for the giant birthday plush."
-        },
-        {
-          "url": "assets/photos/90_sanrio_shop_evelyn_my_melody_ears.jpg",
-          "thumb": "assets/photos/90_sanrio_shop_evelyn_my_melody_ears.jpg",
-          "caption": "Evelyn wearing her sparkly My Melody headband at the shop register."
-        },
-        {
-          "url": "assets/photos/92_sanrio_shop_kids_badtz_maru_my_melody.jpg",
-          "thumb": "assets/photos/92_sanrio_shop_kids_badtz_maru_my_melody.jpg",
-          "caption": "Lincoln and Evelyn showing off their Badtz-Maru and My Melody headbands."
-        },
-        {
-          "url": "assets/photos/91_sanrio_shop_counter_kids_excitement.jpg",
-          "thumb": "assets/photos/91_sanrio_shop_counter_kids_excitement.jpg",
-          "caption": "Checking out at the shop register."
-        },
-        {
-          "url": "assets/photos/93_sanrio_shop_mom_alison_kids_browsing.jpg",
-          "thumb": "assets/photos/93_sanrio_shop_mom_alison_kids_browsing.jpg",
-          "caption": "Brittany, Aunt Alison, and the kids checking out the gift shop aisles."
-        }
-      ]
-    },
-    {
-      "id": "post-17",
-      "date": "Mon Aug 24, 2026 · Morning",
-      "location": "Sanrio Puroland Entrance & Puro Village · Tama Center, Tokyo",
-      "tag": "Evelyn's birthday",
-      "title": "Arriving at Sanrio Puroland for Evelyn's birthday",
-      "caption": "Today was the big highlight for Evelyn: celebrating her 7th birthday at Sanrio Puroland in Tama Center. We walked up to the castle style entrance under clear skies and stepped inside the climate controlled park.\n\nEvelyn grabbed the official park map right away and took charge of guiding us down the spiral staircases into Puro Village. Right in the middle is the huge Wisdom Tree lit up with lights, surrounded by storybook cottages, pastel bridges, and anniversary displays.",
-      "media": [
-        {
-          "url": "assets/photos/81_sanrio_puroland_grand_entrance.jpg",
-          "thumb": "assets/photos/81_sanrio_puroland_grand_entrance.jpg",
-          "caption": "The main castle entrance at Sanrio Puroland."
-        },
-        {
-          "url": "assets/photos/82_puroland_evelyn_studying_park_map.jpg",
-          "thumb": "assets/photos/82_puroland_evelyn_studying_park_map.jpg",
-          "caption": "Evelyn checking the park map to pick our first stop."
-        },
-        {
-          "url": "assets/photos/83_puroland_puro_village_wisdom_tree.jpg",
-          "thumb": "assets/photos/83_puroland_puro_village_wisdom_tree.jpg",
-          "caption": "The glowing Wisdom Tree in the middle of Puro Village."
-        },
-        {
-          "url": "assets/photos/85_puroland_character_staircase_mom_kids.jpg",
-          "thumb": "assets/photos/85_puroland_character_staircase_mom_kids.jpg",
-          "caption": "Brittany and the kids on the spiral staircase heading down to the village."
-        },
-        {
-          "url": "assets/photos/84_puroland_upper_plaza_view.jpg",
-          "thumb": "assets/photos/84_puroland_upper_plaza_view.jpg",
-          "caption": "Looking down into Puro Village from the upper floor."
-        },
-        {
-          "url": "assets/photos/86_puroland_35th_anniversary_entrance.jpg",
-          "thumb": "assets/photos/86_puroland_35th_anniversary_entrance.jpg",
-          "caption": "The 35th Anniversary Hello Kitty entrance display."
-        },
-        {
-          "url": "assets/photos/87_puroland_plaza_bench_evelyn_twirl.jpg",
-          "thumb": "assets/photos/87_puroland_plaza_bench_evelyn_twirl.jpg",
-          "caption": "Evelyn in the outdoor plaza outside the front entrance."
-        }
-      ]
-    },
-    {
-      "id": "post-16",
-      "date": "Mon Aug 24, 2026 · Morning",
-      "location": "Keio Line & Tokyo Train System · Tokyo",
-      "tag": "First train ride",
-      "title": "First Japan train ride on the Keio Line to Tama Center",
-      "caption": "Our first local train ride of the trip: taking the Keio Line commuter train out to western Tokyo. We found our track, watched the digital departure boards, and got everyone on board without any trouble.\n\nThe trains here are spotless, quiet, and run right on the second. The kids sat together on the purple velvet bench seats watching the dense Tokyo neighborhoods open up into greener hills as we headed toward Tama Center.",
-      "media": [
-        {
-          "url": "assets/photos/76_first_train_station_platform_family.jpg",
-          "thumb": "assets/photos/76_first_train_station_platform_family.jpg",
-          "caption": "Waiting on the platform as our commuter train pulls in."
-        },
-        {
-          "url": "assets/photos/77_train_ride_dad_son_selfie.jpg",
-          "thumb": "assets/photos/77_train_ride_dad_son_selfie.jpg",
-          "caption": "Dad and Lincoln on our first Japan train ride."
-        },
-        {
-          "url": "assets/photos/78_train_ride_mom_evelyn_alison_seating.jpg",
-          "thumb": "assets/photos/78_train_ride_mom_evelyn_alison_seating.jpg",
-          "caption": "Brittany, Evelyn, and Aunt Alison on the train seats."
-        },
-        {
-          "url": "assets/photos/79_train_ride_boy_smiling_view.jpg",
-          "thumb": "assets/photos/79_train_ride_boy_smiling_view.jpg",
-          "caption": "Lincoln watching the scenery go by out the train window."
-        },
-        {
-          "url": "assets/photos/80_train_station_platform_perspective.jpg",
-          "thumb": "assets/photos/80_train_station_platform_perspective.jpg",
-          "caption": "Looking down the covered station platform."
-        }
-      ]
-    },
-    {
-      "id": "post-15",
-      "date": "Mon Aug 24, 2026 · Early Morning",
-      "location": "Ueno Neighborhood & Local Park · Ueno, Tokyo",
-      "tag": "Morning & park",
-      "title": "Morning walk in Ueno and playground animal rides",
-      "caption": "We got an early start to Monday morning with a walk through the quiet neighborhood streets of Ueno. On our way toward the station, we found a small local park with swing sets and bouncy spring animal riders.\n\nThe kids hopped right onto the dinosaur, elephant, and panda riders, and took turns on the swings. We picked up some fresh fruit skewers, including chocolate covered strawberries with sprinkles, to fuel up before heading to the train station for Evelyn's birthday trip.",
-      "media": [
-        {
-          "url": "assets/photos/71_ueno_morning_walk_alison_evelyn.jpg",
-          "thumb": "assets/photos/71_ueno_morning_walk_alison_evelyn.jpg",
-          "caption": "Aunt Alison and Evelyn walking through the morning streets of Ueno."
-        },
-        {
-          "url": "assets/photos/73_ueno_playground_evelyn_panda_ride.jpg",
-          "thumb": "assets/photos/73_ueno_playground_evelyn_panda_ride.jpg",
-          "caption": "Evelyn on the playground panda rocker."
-        },
-        {
-          "url": "assets/photos/72_ueno_park_playground_spring_riders.jpg",
-          "thumb": "assets/photos/72_ueno_park_playground_spring_riders.jpg",
-          "caption": "Lincoln and Evelyn on the dinosaur and elephant spring riders."
-        },
-        {
-          "url": "assets/photos/74_ueno_playground_kids_swings.jpg",
-          "thumb": "assets/photos/74_ueno_playground_kids_swings.jpg",
-          "caption": "Lincoln and Evelyn on the park swings."
-        },
-        {
-          "url": "assets/photos/75_ueno_morning_chocolate_fruit_treat.jpg",
-          "thumb": "assets/photos/75_ueno_morning_chocolate_fruit_treat.jpg",
-          "caption": "Chocolate drizzled strawberry skewer with sprinkles."
-        }
-      ]
-    },
-    {
-      "id": "post-14",
-      "date": "Sun Aug 23, 2026 · Afternoon",
-      "location": "Yamashiroya (ヤマシロヤ) · Ueno, Tokyo",
-      "tag": "Toy shopping",
-      "title": "Yamashiroya 6-Story Toy Mecca: Kirby, Pokémon, Tamagotchi & Gachapon! 🧸🎮🎀",
-      "caption": "Next stop was the legendary Yamashiroya right outside Ueno Station — six entire floors overflowing with toys, collectibles, plushies, anime merch, and video game goods!\n\nWe kicked things off outside along the street browsing the endless walls of colorful gachapon capsule machines. Inside, Evelyn was on a mission in the Kirby aisle picking out miniature room blind boxes and cute figures, while the boys combed through Pokémon gear, Tamagotchi, collectible keychains, and novelty character snacks. An absolute treasure trove!",
-      "media": [
-        {
-          "url": "assets/photos/66_yamashiroya_gachapon_wall.jpg",
-          "thumb": "assets/photos/66_yamashiroya_gachapon_wall.jpg",
-          "caption": "Standing before the towering multi-level wall of colorful gachapon capsule dispensers!"
-        },
-        {
-          "url": "assets/photos/69_yamashiroya_kirby_blind_boxes.jpg",
-          "thumb": "assets/photos/69_yamashiroya_kirby_blind_boxes.jpg",
-          "caption": "Evelyn in toy heaven picking out adorable Kirby miniature room diorama blind boxes."
-        },
-        {
-          "url": "assets/photos/70_yamashiroya_toy_aisle_haul.jpg",
-          "thumb": "assets/photos/70_yamashiroya_toy_aisle_haul.jpg",
-          "caption": "Posing in the packed aisles surrounded by Pokémon gear, Tamagotchi, and character collectibles!"
-        },
-        {
-          "url": "assets/photos/67_yamashiroya_gachapon_street_machines.jpg",
-          "thumb": "assets/photos/67_yamashiroya_gachapon_street_machines.jpg",
-          "caption": "Scouting out the streetfront gachapon banks right outside Yamashiroya's main entrance."
-        },
-        {
-          "url": "assets/photos/68_yamashiroya_gachapon_street_alt.jpg",
-          "thumb": "assets/photos/68_yamashiroya_gachapon_street_alt.jpg",
-          "caption": "Hunting for the rarest character figures among the endless capsule machines."
-        }
-      ]
-    },
-    {
-      "id": "post-13",
-      "date": "Sun Aug 23, 2026 · Lunchtime",
-      "location": "Ameyoko Market Alley Izakaya · Ueno, Tokyo",
-      "tag": "Market lunch",
-      "title": "Ameyoko Alley Lunch: Ramen, Dumplings & Family Smiles! 🍜🥟🍻",
-      "caption": "After pounding the pavement through the markets, we grabbed a cozy table at an open-air alley restaurant tucked right under the market awnings. Surrounded by vibrant Japanese food banners and cold draft beer posters, we ordered up steaming bowls of ramen, crispy gyoza dumplings, skewers, and cold drinks.\n\nGreat food, lots of laughs, goofy table selfies, and a much-needed energy recharge before hitting the afternoon toy shops!",
-      "media": [
-        {
-          "url": "assets/photos/61_ameyoko_lunch_family_smiles.jpg",
-          "thumb": "assets/photos/61_ameyoko_lunch_family_smiles.jpg",
-          "caption": "Big family smiles and funny faces over our izakaya lunch feast in the market alley!"
-        },
-        {
-          "url": "assets/photos/62_ameyoko_lunch_family_peace.jpg",
-          "thumb": "assets/photos/62_ameyoko_lunch_family_peace.jpg",
-          "caption": "Throwing up peace signs under the market menu banners and ice-cold drink posters."
-        },
-        {
-          "url": "assets/photos/64_ameyoko_lunch_jj_alison_smiles.jpg",
-          "thumb": "assets/photos/64_ameyoko_lunch_jj_alison_smiles.jpg",
-          "caption": "John and Brittany taking a quick breather over lunch before our toy shopping spree."
-        },
-        {
-          "url": "assets/photos/65_ameyoko_lunch_mom_peace_sign.jpg",
-          "thumb": "assets/photos/65_ameyoko_lunch_mom_peace_sign.jpg",
-          "caption": "Aunt Alison and the kids throwing up peace signs as our steaming ramen and dishes hit the table."
-        },
-        {
-          "url": "assets/photos/63_ameyoko_lunch_jj_tongue_silly.jpg",
-          "thumb": "assets/photos/63_ameyoko_lunch_jj_tongue_silly.jpg",
-          "caption": "Silly selfies keeping the good energy rolling at the lunch table."
-        }
-      ]
-    },
-    {
-      "id": "post-12",
-      "date": "Sun Aug 23, 2026 · Midday",
-      "location": "Ameyoko Shopping Street (アメ横) · Ueno, Tokyo",
-      "tag": "Street market",
-      "title": "Strolling Ameyoko Market & Fresh Chocolate Fruit Skewers! 🍡🍓🐟",
-      "caption": "Headed straight into the heart of Ameya Yokocho (Ameyoko), Ueno's legendary bustling open-air market street stretching beneath the railway lines. The lively pedestrian street was packed with market stalls, giant hanging seafood signs, street food vendors, and clothing shops.\n\nWe stopped by the colorful fresh fruit stall showcasing chilled skewers of sweet red melon, juicy pineapple, watermelon, and fresh strawberries. Evelyn got an epic chocolate-drizzled strawberry skewer topped with sprinkles that made the market walk even sweeter!",
-      "media": [
-        {
-          "url": "assets/photos/56_ameyoko_ueno_entrance_gate.jpg",
-          "thumb": "assets/photos/56_ameyoko_ueno_entrance_gate.jpg",
-          "caption": "Stepping beneath the iconic neon archway into the bustling Ameyoko shopping street."
-        },
-        {
-          "url": "assets/photos/58_ameyoko_fresh_fruit_skewers_stand.jpg",
-          "thumb": "assets/photos/58_ameyoko_fresh_fruit_skewers_stand.jpg",
-          "caption": "Checking out the colorful chilled fruit skewers — sweet red melon, juicy pineapple, and strawberries!"
-        },
-        {
-          "url": "assets/photos/59_ameyoko_evelyn_choco_strawberry.jpg",
-          "thumb": "assets/photos/59_ameyoko_evelyn_choco_strawberry.jpg",
-          "caption": "Evelyn thrilled with her towering chocolate-drizzled strawberry skewer topped with sprinkles!"
-        },
-        {
-          "url": "assets/photos/57_ameyoko_market_street_walk.jpg",
-          "thumb": "assets/photos/57_ameyoko_market_street_walk.jpg",
-          "caption": "Wandering through the lively market alleyways packed with shops and overhead lanterns."
-        },
-        {
-          "url": "assets/photos/60_ameyoko_giant_fish_izakaya.jpg",
-          "thumb": "assets/photos/60_ameyoko_giant_fish_izakaya.jpg",
-          "caption": "Passing the giant hanging tuna sculpture and glowing paper lanterns outside a seafood izakaya."
-        }
-      ]
-    },
-    {
-      "id": "post-11",
-      "date": "Sun Aug 23, 2026 · Mid-Morning",
-      "location": "Ueno Park, Hanazono Inari Shrine & JR Ueno Station",
-      "tag": "Park & shrines",
-      "title": "Ueno Park Exploration: Crimson Torii Gates, Shinobazu Lotus & Pokémon Stamp Rally! ⛩️🌸⚡",
-      "caption": "After our morning breakfast feast, we set out on foot to explore Ueno Park! We climbed the grand stone stairs, checked the giant neighborhood guide map with the kids, and wandered into the peaceful shaded grounds of Hanazono Inari Shrine.\n\nWalking beneath the endless tunnel of vibrant crimson Torii gates and stone fox statues was pure magic. We strolled past the towering summer lotus pads blanketing Shinobazu Pond, took some great father-and-son selfies by the park monuments, and headed into JR Ueno Station where the kids tracked down the official JR East Pokémon Stamp Rally station to stamp their collector booklets!",
-      "media": [
-        {
-          "url": "assets/photos/45_ueno_park_stone_stairs.jpg",
-          "thumb": "assets/photos/45_ueno_park_stone_stairs.jpg",
-          "caption": "Climbing the grand stone staircase leading up into the lush greenery of Ueno Park."
-        },
-        {
-          "url": "assets/photos/46_ueno_park_area_map_kids.jpg",
-          "thumb": "assets/photos/46_ueno_park_area_map_kids.jpg",
-          "caption": "The kids studying the giant Ueno Station & Park area guide map before starting our route!"
-        },
-        {
-          "url": "assets/photos/47_hanazono_inari_torii_entrance.jpg",
-          "thumb": "assets/photos/47_hanazono_inari_torii_entrance.jpg",
-          "caption": "Arriving at the entrance of Hanazono Inari Shrine framed by stone fox guardians."
-        },
-        {
-          "url": "assets/photos/48_hanazono_inari_torii_gates_kids.jpg",
-          "thumb": "assets/photos/48_hanazono_inari_torii_gates_kids.jpg",
-          "caption": "The kids striking poses before the vibrant red Torii gate pathway at Hanazono Inari Shrine."
-        },
-        {
-          "url": "assets/photos/49_hanazono_inari_torii_tunnel_walk.jpg",
-          "thumb": "assets/photos/49_hanazono_inari_torii_tunnel_walk.jpg",
-          "caption": "Wandering through the magical shaded tunnel of crimson Torii gates."
-        },
-        {
-          "url": "assets/photos/50_ueno_shrine_stone_path_walk.jpg",
-          "thumb": "assets/photos/50_ueno_shrine_stone_path_walk.jpg",
-          "caption": "Exploring the peaceful mossy stone lantern pathways around the shrine grounds."
-        },
-        {
-          "url": "assets/photos/51_shinobazu_pond_lotus_evelyn.jpg",
-          "thumb": "assets/photos/51_shinobazu_pond_lotus_evelyn.jpg",
-          "caption": "Evelyn gazing out over the massive sea of summer lotus pads covering Shinobazu Pond."
-        },
-        {
-          "url": "assets/photos/52_shinobazu_pond_lotus_blooms.jpg",
-          "thumb": "assets/photos/52_shinobazu_pond_lotus_blooms.jpg",
-          "caption": "Endless giant lotus leaves and summer blooms blanketing the waters of Shinobazu Pond."
-        },
-        {
-          "url": "assets/photos/53_ueno_father_son_smiling_selfie.jpg",
-          "thumb": "assets/photos/53_ueno_father_son_smiling_selfie.jpg",
-          "caption": "Father & son selfie smiling in front of the historic Ueno Park stone monument!"
-        },
-        {
-          "url": "assets/photos/54_ueno_pokemon_stamp_station_boy.jpg",
-          "thumb": "assets/photos/54_ueno_pokemon_stamp_station_boy.jpg",
-          "caption": "Locating the official JR East Pokémon Stamp Rally station table inside Ueno Station!"
-        },
-        {
-          "url": "assets/photos/55_ueno_pokemon_stamp_rally_kids.jpg",
-          "thumb": "assets/photos/55_ueno_pokemon_stamp_rally_kids.jpg",
-          "caption": "Stamping our official Pokémon Stamp Rally adventure book to claim the Ueno Station badge!"
-        }
-      ]
-    },
-    {
-      "id": "post-10",
-      "date": "Sun Aug 23, 2026 · Morning",
-      "location": "Bistro Nohga · Ueno, Tokyo",
-      "tag": "Breakfast feast",
-      "title": "Morning Feast at Bistro Nohga & Polaroid Street Walk! 🥞☕📸",
-      "caption": "Started Sunday morning with a delicious sit-down breakfast at Bistro Nohga in Ueno. We loaded up the table with fluffy soufflé-style pancakes, fresh summer berry bowls, pastries, eggs, and hot coffee to recharge for the big day ahead.\n\nAfter dining, Evelyn had her purple instant camera ready to go, snapping and printing photos right on the street as we strolled through the morning Ueno neighborhood!",
-      "media": [
-        {
-          "url": "assets/photos/36_elevator_heading_to_breakfast.jpg",
-          "thumb": "assets/photos/36_elevator_heading_to_breakfast.jpg",
-          "caption": "Heading down the elevator bright and early for our Sunday morning breakfast."
-        },
-        {
-          "url": "assets/photos/37_bistro_nohga_entrance_family.jpg",
-          "thumb": "assets/photos/37_bistro_nohga_entrance_family.jpg",
-          "caption": "Arriving at Bistro Nohga in Ueno for our morning table reservation."
-        },
-        {
-          "url": "assets/photos/38_bistro_nohga_boy_mom_menu.jpg",
-          "thumb": "assets/photos/38_bistro_nohga_boy_mom_menu.jpg",
-          "caption": "Scouting out the breakfast sets and fluffy pancake options on the menu with Mom."
-        },
-        {
-          "url": "assets/photos/39_bistro_nohga_alison_dining.jpg",
-          "thumb": "assets/photos/39_bistro_nohga_alison_dining.jpg",
-          "caption": "Brittany and Aunt Alison enjoying morning coffee and breakfast by the sunlit window."
-        },
-        {
-          "url": "assets/photos/40_bistro_nohga_pancakes_family_table.jpg",
-          "thumb": "assets/photos/40_bistro_nohga_pancakes_family_table.jpg",
-          "caption": "Towering fluffy Japanese soufflé pancakes, fresh summer berry bowl, and morning coffee spread!"
-        },
-        {
-          "url": "assets/photos/41_bistro_nohga_evelyn_mom_table.jpg",
-          "thumb": "assets/photos/41_bistro_nohga_evelyn_mom_table.jpg",
-          "caption": "Evelyn and Mom ready to dig into breakfast."
-        },
-        {
-          "url": "assets/photos/42_bistro_nohga_evelyn_clapping.jpg",
-          "thumb": "assets/photos/42_bistro_nohga_evelyn_clapping.jpg",
-          "caption": "Evelyn clapping with excitement at the breakfast table as the food arrives!"
-        },
-        {
-          "url": "assets/photos/43_evelyn_instax_camera_print.jpg",
-          "thumb": "assets/photos/43_evelyn_instax_camera_print.jpg",
-          "caption": "Evelyn showing off her freshly printed instant Polaroid on the morning streets of Ueno."
-        },
-        {
-          "url": "assets/photos/44_ueno_morning_street_stroll.jpg",
-          "thumb": "assets/photos/44_ueno_morning_street_stroll.jpg",
-          "caption": "Strolling through the quiet morning neighborhood streets of Ueno toward the park."
-        }
-      ]
-    },
-    {
-      "id": "post-9",
-      "date": "Sun Aug 23, 2026 · 3:30 AM JST",
-      "location": "Don Quijote & McDonald's · Ueno, Tokyo",
-      "tag": "Midnight run",
-      "title": "Donki Mega-Store Hunt & Late-Night McDonald's Fries! 🐧🍟✨",
-      "caption": "Since we were already up and exploring, we kept the momentum rolling! First stop: the massive multi-level Don Quijote in Ueno for some essential contact solution for Alison. With Donki being gigantic, a quick essentials run naturally turned into browsing character goods, plushie aisles, and towering toy shelves.\n\nAfter winding through the neon aisles, we capped off the early morning expedition at McDonald's for fresh hot fries, piggyback rides by the touchscreen kiosks, and order pickups before strolling back through the quiet Tokyo streets. Now back to bed!",
-      "media": [
-        {
-          "url": "assets/photos/32_mcdonalds_piggyback_kiosk.jpg",
-          "thumb": "assets/photos/32_mcdonalds_piggyback_kiosk.jpg",
-          "caption": "Piggyback rides and smiles at the late-night McDonald's touchscreen ordering kiosks!"
-        },
-        {
-          "url": "assets/photos/28_don_quijote_sanrio_plush_wall.jpg",
-          "thumb": "assets/photos/28_don_quijote_sanrio_plush_wall.jpg",
-          "caption": "Evelyn in absolute Sanrio heaven browsing the Hello Kitty and plushie wall at Donki."
-        },
-        {
-          "url": "assets/photos/30_don_quijote_boy_excited_aisle.jpg",
-          "thumb": "assets/photos/30_don_quijote_boy_excited_aisle.jpg",
-          "caption": "Pure midnight excitement exploring the packed Don Quijote aisles!"
-        },
-        {
-          "url": "assets/photos/31_don_quijote_contact_solution_hunt.jpg",
-          "thumb": "assets/photos/31_don_quijote_contact_solution_hunt.jpg",
-          "caption": "Aunt Alison and Mom tracking down contact solution and browsing the mega-store."
-        },
-        {
-          "url": "assets/photos/29_don_quijote_toy_aisle_shopping.jpg",
-          "thumb": "assets/photos/29_don_quijote_toy_aisle_shopping.jpg",
-          "caption": "Navigating the character floor mats and endless shelves at Don Quijote."
-        },
-        {
-          "url": "assets/photos/33_mcdonalds_fries_order_pickup.jpg",
-          "thumb": "assets/photos/33_mcdonalds_fries_order_pickup.jpg",
-          "caption": "Hot fry run secured at the counter before heading back to sleep."
-        }
-      ]
-    },
-    {
-      "id": "post-8",
-      "date": "Sun Aug 23, 2026 · 3:00 AM JST",
-      "location": "Higashiueno Alleys · Ueno, Tokyo",
-      "tag": "Early morning",
-      "title": "3:00 AM Ueno Alley Walk & Konbini Snack Raid! 🏪✨",
-      "caption": "With everyone fully awake from the flight time change and the earthquake excitement, we laced up and headed out into the quiet Tokyo night air. Walked the brick-paved alleyways of Higashiueno, raided the local 7-Eleven for drinks, fruit jellies, yogurts, and iced coffees, and hit the illuminated street vending machines for epic ninja pose-downs. Pure Tokyo midnight adventure!",
-      "media": [
-        {
-          "url": "assets/photos/26_7eleven_early_snack_raid.jpg",
-          "thumb": "assets/photos/26_7eleven_early_snack_raid.jpg",
-          "caption": "Victory snack haul in the 7-Eleven refrigerated aisle!"
-        },
-        {
-          "url": "assets/photos/27_ueno_vending_machine_poses.jpg",
-          "thumb": "assets/photos/27_ueno_vending_machine_poses.jpg",
-          "caption": "Power poses outside the glowing Kirin & Asahi vending machines."
-        },
-        {
-          "url": "assets/photos/25_early_am_ueno_alley_walk.jpg",
-          "thumb": "assets/photos/25_early_am_ueno_alley_walk.jpg",
-          "caption": "Quiet brick-paved alleys of Higashiueno under the streetlamps."
-        }
-      ]
-    },
-    {
-      "id": "post-7",
-      "date": "Sun Aug 23, 2026 · 2:00 AM JST",
-      "location": "Tabi Ueno · Tokyo Base",
-      "tag": "Earthquake update",
-      "title": "2:00 AM Earthquake Wake-Up Call! 🚨 (All Safe & Sound)",
-      "caption": "Right at 2:00 AM, the Japanese emergency cell broadcast alarm went off across Tokyo followed by a noticeable jolt and room swaying (Magnitude 5.9 centered in Southern Ibaraki, registered Shindo 4 here in Ueno).\n\nWoke everyone right up! But modern Tokyo buildings are built like tanks — zero issues, zero damage, and JMA confirmed zero tsunami risk. Kids are wide awake, making goofy faces in the mirror, and completely unfazed. Everyone is safe, happy, and heading back to sleep!",
-      "media": [
-        {
-          "url": "assets/photos/24_kids_awake_mirror_goofy.jpg",
-          "thumb": "assets/photos/24_kids_awake_mirror_goofy.jpg",
-          "caption": "Wide awake and making faces in the room mirror post-earthquake."
-        },
-        {
-          "url": "assets/photos/23_earthquake_phone_alert.jpg",
-          "thumb": "assets/photos/23_earthquake_phone_alert.jpg",
-          "caption": "The 2:00 AM emergency broadcast alert that woke up the room."
-        }
-      ]
-    },
-    {
-      "id": "post-6",
-      "date": "Sat Aug 22, 2026 · Evening",
-      "location": "Tabi Ueno · Tokyo Base",
-      "tag": "Tokyo arrival",
-      "title": "Torrential Downpour, Wrong Hotel & Cozy Reunion! 🌧️🏨",
-      "caption": "Touchdown Tokyo! The taxi ride from Narita turned into an absolute torrential downpour. To add to the adventure, we accidentally got dropped off at the wrong hotel first and got thoroughly soaked running for cover! 🤣\n\nWe quickly sorted it out, made it to our real home base at Tabi Ueno, got dried off, and settled in. Reunited with Aunt Alison for a late-night room picnic and dinner spread on the floor. Everyone is exhausted from the long travel day but in great spirits — Evelyn already has high-priority demands to hit up some Tokyo thrift stores tomorrow!",
-      "media": [
-        {
-          "url": "assets/photos/21_tabi_ueno_family_room_dinner.jpg",
-          "thumb": "assets/photos/21_tabi_ueno_family_room_dinner.jpg",
-          "caption": "Room picnic and late-night dinner spread after drying off from the storm."
-        },
-        {
-          "url": "assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg",
-          "thumb": "assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg",
-          "caption": "Catching up over dinner with Aunt Alison at Tabi Ueno."
-        },
-        {
-          "url": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
-          "thumb": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
-          "caption": "Evelyn testing out the bed bounce before lights out!"
-        }
-      ]
-    },
-    {
-      "id": "post-5",
-      "date": "Sat Aug 22, 2026 · Rest & Relaxation",
-      "location": "ANA NH11 In-Flight",
-      "tag": "Rest",
-      "title": "Movies & Lie-Flat Suites",
-      "caption": "Cabin lights dimmed over the Northern Pacific for rest. Lie-flat beds made up with plush comforters, Japanese anime on the 24-inch 4K screens, and some much-needed sleep before touchdown.",
-      "media": [
-        {
-          "url": "assets/photos/09_inflight_boy_watching_doraemon.jpg",
-          "thumb": "assets/photos/09_inflight_boy_watching_doraemon.jpg",
-          "caption": "Watching Doraemon on the ultra-wide in-flight screen."
-        },
-        {
-          "url": "assets/photos/08_inflight_boy_sleeping_dark.jpg",
-          "thumb": "assets/photos/08_inflight_boy_sleeping_dark.jpg",
-          "caption": "Sound asleep in the lie-flat bed under the cabin ambient lighting."
-        }
-      ]
-    },
-    {
-      "id": "post-4",
-      "date": "Sat Aug 22, 2026 · Mid-Flight Surprise",
-      "location": "ANA NH11 In-Flight",
-      "tag": "Family",
-      "title": "Birthday Celebration at 35,000 Feet! 🎂",
-      "caption": "A wonderful surprise from the ANA cabin crew! They brought out a special \"Happy Birthday\" dessert plate crafted with fruit and sweet treats to celebrate mid-air.",
-      "media": [
-        {
-          "url": "assets/photos/07_inflight_family_birthday_cake_sharp.jpg",
-          "thumb": "assets/photos/07_inflight_family_birthday_cake_sharp.jpg",
-          "caption": "Surprise birthday plate and smiles in the suite."
-        }
-      ]
-    },
-    {
-      "id": "post-3",
-      "date": "Fri Aug 21, 2026 · In-Flight Dining",
-      "location": "Cruising over the Pacific Ocean",
-      "tag": "In-flight",
-      "title": "Multi-Course Dining & Chopsticks Practice",
-      "caption": "In-flight dining service started over the Pacific. Full Japanese meal service on crisp white tablecloths, noodle bowls, fresh fruit, and some serious chopstick practice before landing in Tokyo.",
-      "media": [
-        {
-          "url": "assets/photos/14_inflight_boy_holding_chopsticks.jpg",
-          "thumb": "assets/photos/14_inflight_boy_holding_chopsticks.jpg",
-          "caption": "Demonstrating chopstick mastery with the lunch spread."
-        },
-        {
-          "url": "assets/photos/10_inflight_boy_eating_noodles.jpg",
-          "thumb": "assets/photos/10_inflight_boy_eating_noodles.jpg",
-          "caption": "Enjoying hot Japanese noodle soup at 35,000 feet."
-        },
-        {
-          "url": "assets/photos/15_inflight_mom_girl_dining.jpg",
-          "thumb": "assets/photos/15_inflight_mom_girl_dining.jpg",
-          "caption": "White-tablecloth dinner service in the adjoining middle suite."
-        }
-      ]
-    },
-    {
-      "id": "post-2",
-      "date": "Fri Aug 21, 2026 · 11:50 AM Departure",
-      "location": "ANA NH11 · Boeing 777-300ER (\"The Room\")",
-      "tag": "Flight day",
-      "title": "Boarding ANA to Tokyo Narita",
-      "caption": "Settled into ANA’s \"The Room\" business class suites for the 12+ hour flight across the international date line. Huge lie-flat beds, private sliding privacy doors, and plenty of room for everyone to stretch out and settle in.",
-      "media": [
-        {
-          "url": "assets/photos/01_inflight_girl_mom.jpg",
-          "thumb": "assets/photos/01_inflight_girl_mom.jpg",
-          "caption": "Headphones on, games loaded, and cozy in the suite with Mom."
-        },
-        {
-          "url": "assets/photos/16_inflight_boy_headphones_smile.jpg",
-          "thumb": "assets/photos/16_inflight_boy_headphones_smile.jpg",
-          "caption": "All smiles and ready for 12 hours of flight time in comfort."
-        },
-        {
-          "url": "assets/photos/04_inflight_boy_3ds_straight.jpg",
-          "thumb": "assets/photos/04_inflight_boy_3ds_straight.jpg",
-          "caption": "Nintendo 3DS fired up and making quick work of the flight hours."
-        }
-      ]
-    },
-    {
-      "id": "post-1",
-      "date": "Fri Aug 21, 2026 · Morning",
-      "location": "Chicago O’Hare (ORD) · Terminal 1",
-      "tag": "Pre-flight",
-      "title": "Checked In & Recharged at O’Hare",
-      "caption": "Arrived at O’Hare, checked our bags with ANA, and breezed through security. After the morning road rally from Kalamazoo, everyone got to sit back, grab breakfast in the lounge, and get excited for the long haul across the Pacific!",
-      "media": [
-        {
-          "url": "assets/photos/19_ohare_terminal_family_kids_luggage.jpg",
-          "thumb": "assets/photos/19_ohare_terminal_family_kids_luggage.jpg",
-          "caption": "All rolling together through the terminal — luggage in tow and ready for the gate."
-        },
-        {
-          "url": "assets/photos/18_ohare_terminal_boy_luggage.jpg",
-          "thumb": "assets/photos/18_ohare_terminal_boy_luggage.jpg",
-          "caption": "Mastering the terminal wheelie roll across O’Hare’s classic checkerboard floors."
-        },
-        {
-          "url": "assets/photos/17_polaris_lounge_boy_breakfast.jpg",
-          "thumb": "assets/photos/17_polaris_lounge_boy_breakfast.jpg",
-          "caption": "Pre-flight breakfast parfait and dining recharge before boarding."
-        }
-      ]
-    },
-    {
-      "id": "post-0",
-      "date": "Fri Aug 21, 2026 · Early Morning",
-      "location": "Kalamazoo (AZO) → Chicago O’Hare (ORD)",
-      "tag": "Road trip detour",
-      "title": "The Great O’Hare Dash (Bird Strike Detour!) 🦅🚗💨",
-      "caption": "Trip started with pure chaos! We got to Kalamazoo Airport for our 6:00 AM flight, waited an hour, and then learned birds had gotten caught in the engine with the flight delayed until at least noon. Rather than miss our ANA flight to Tokyo, we grabbed our gear, booked it out of the airport, and drove to Chicago O’Hare like a bat out of hell. Made it to Terminal 1 with plenty of time to spare!",
-      "media": []
-    }
+    "id": "post-25",
+    "date": "Mon Aug 24, 2026 \u00b7 Late Night",
+    "location": "Yamashiroya Arcade & Claw Machines \u00b7 Ueno, Tokyo",
+    "tag": "Claw machine jackpot",
+    "title": "Nighttime claw machine wins on the walk back to the hotel",
+    "caption": "On the walk back to the hotel after dinner, we stopped in at the arcade to try the claw machines one last time. Lincoln stepped up to the crane completely on his own, lined up the drop, and pulled out this giant fluffy Kirby plush. He was grinning from ear to ear strutting down the aisle carrying his trophy.\n\nEvelyn wanted another shot too and ended up winning a sweet strawberry Hello Kitty stuffy to go with the giant Cinnamoroll she won earlier this morning. Both kids were running on fumes by the end of the night after miles of walking, but they went to bed happy. Everyone is going to sleep like a rock tonight.",
+    "media": [
+      {
+        "url": "assets/photos/126_claw_machine_lincoln_kirby_win_thrill.jpg",
+        "thumb": "assets/photos/126_claw_machine_lincoln_kirby_win_thrill.jpg",
+        "caption": "Lincoln right after winning the giant Kirby plush all by himself."
+      },
+      {
+        "url": "assets/photos/129_claw_machine_evelyn_hello_kitty_win.jpg",
+        "thumb": "assets/photos/129_claw_machine_evelyn_hello_kitty_win.jpg",
+        "caption": "Evelyn with her strawberry Hello Kitty win."
+      },
+      {
+        "url": "assets/photos/127_claw_machine_lincoln_kirby_aisle_walk.jpg",
+        "thumb": "assets/photos/127_claw_machine_lincoln_kirby_aisle_walk.jpg",
+        "caption": "Lincoln taking his victory lap through the arcade aisle."
+      },
+      {
+        "url": "assets/photos/128_claw_machine_lincoln_mom_evelyn_kirby.jpg",
+        "thumb": "assets/photos/128_claw_machine_lincoln_mom_evelyn_kirby.jpg",
+        "caption": "Brittany, Evelyn, and Lincoln with the night's plushie haul."
+      }
+    ]
+  },
+  {
+    "id": "post-24",
+    "date": "Mon Aug 24, 2026 \u00b7 Evening",
+    "location": "Traditional Japanese Fusion Izakaya \u00b7 Ueno, Tokyo",
+    "tag": "Dinner & sushi",
+    "title": "Japanese fusion dinner in Ueno and Lincoln's first sushi rolls",
+    "caption": "We finished out the day with dinner at an authentic Japanese fusion spot in Ueno. The place had traditional wooden tansu cabinetry, private dining booths, and drinks served with little paper umbrellas that the kids immediately took over.\n\nLincoln decided he wanted to try real sushi rolls for the first time, and he handled the chopsticks with zero issues. Both kids were completely wiped out from walking around Puroland and Harajuku all day. Evelyn crashed hard and was sound asleep on my shoulder for a bit before dinner arrived, but she perked right back up once the hot dishes and noodles hit the table.",
+    "media": [
+      {
+        "url": "assets/photos/121_dinner_family_table_thumbs_up.jpg",
+        "thumb": "assets/photos/121_dinner_family_table_thumbs_up.jpg",
+        "caption": "Lincoln giving two thumbs up at our dinner booth."
+      },
+      {
+        "url": "assets/photos/123_dinner_lincoln_authentic_rolls_chopsticks.jpg",
+        "thumb": "assets/photos/123_dinner_lincoln_authentic_rolls_chopsticks.jpg",
+        "caption": "Lincoln trying authentic sushi rolls for the first time."
+      },
+      {
+        "url": "assets/photos/122_dinner_lincoln_chopsticks_umbrella_drink.jpg",
+        "thumb": "assets/photos/122_dinner_lincoln_chopsticks_umbrella_drink.jpg",
+        "caption": "Lincoln with his drink and paper umbrella."
+      },
+      {
+        "url": "assets/photos/124_dinner_lincoln_mom_alison_dining.jpg",
+        "thumb": "assets/photos/124_dinner_lincoln_mom_alison_dining.jpg",
+        "caption": "Brittany, Aunt Alison, and Lincoln at the dinner table."
+      },
+      {
+        "url": "assets/photos/125_dinner_dad_sleepy_evelyn_cuddle.jpg",
+        "thumb": "assets/photos/125_dinner_dad_sleepy_evelyn_cuddle.jpg",
+        "caption": "Evelyn completely passed out on Dad before the food showed up."
+      }
+    ]
+  },
+  {
+    "id": "post-23",
+    "date": "Mon Aug 24, 2026 \u00b7 Late Afternoon",
+    "location": "Tokyu Plaza Harajuku 'Harakado' \u00b7 Harajuku, Tokyo",
+    "tag": "Dessert feast & view",
+    "title": "Monster shaved ice and fruit dessert feast at Harakado",
+    "caption": "After walking through Harajuku and checking out the shops, we stopped inside Tokyu Plaza Harajuku Harakado to get dessert. We ended up ordering three different items, including an enormous strawberry kakigori shaved ice topped with sweet whipped cream, and an overflowing bowl of ice cream with fresh melon, mango, and berries.\n\nLincoln took charge of pouring the condensed milk over the giant mountain of shaved ice, and Evelyn folded her cloth napkin into a sun hat for the table. Before leaving, we went out onto the open air rooftop terrace, which looks right out over the busy Jingumae intersection below.",
+    "media": [
+      {
+        "url": "assets/photos/116_harakado_dessert_lincoln_evelyn_kakigori.jpg",
+        "thumb": "assets/photos/116_harakado_dessert_lincoln_evelyn_kakigori.jpg",
+        "caption": "Lincoln and Evelyn with the giant strawberry kakigori shaved ice."
+      },
+      {
+        "url": "assets/videos/harakado_kakigori_shaved_ice.mp4",
+        "thumb": "assets/photos/115_harakado_kakigori_lincoln_pour.jpg",
+        "type": "video",
+        "caption": "Lincoln pouring the condensed milk over the strawberry shaved ice."
+      },
+      {
+        "url": "assets/photos/117_harakado_dessert_fruit_bowl_mom_alison.jpg",
+        "thumb": "assets/photos/117_harakado_dessert_fruit_bowl_mom_alison.jpg",
+        "caption": "Aunt Alison and Evelyn with the fruit and ice cream bowl."
+      },
+      {
+        "url": "assets/photos/118_harakado_terrace_jingumae_crossing_view.jpg",
+        "thumb": "assets/photos/118_harakado_terrace_jingumae_crossing_view.jpg",
+        "caption": "View looking down at the Jingumae intersection from the Harakado roof terrace."
+      },
+      {
+        "url": "assets/photos/119_harakado_dessert_jj_alison_smiles.jpg",
+        "thumb": "assets/photos/119_harakado_dessert_jj_alison_smiles.jpg",
+        "caption": "John and Brittany relaxing at the cafe table."
+      },
+      {
+        "url": "assets/photos/120_harakado_evelyn_napkin_hat_cute.jpg",
+        "thumb": "assets/photos/120_harakado_evelyn_napkin_hat_cute.jpg",
+        "caption": "Evelyn turning her table napkin into a sun hat."
+      }
+    ]
+  },
+  {
+    "id": "post-22",
+    "date": "Mon Aug 24, 2026 \u00b7 Afternoon",
+    "location": "Tamagotchi Factory & Harajuku KAWAII Night Market \u00b7 Harajuku, Tokyo",
+    "tag": "Tamagotchi & pop-up",
+    "title": "Tamagotchi Factory and the KAWAII Night Market pop-up event",
+    "caption": "From Shinjuku, we headed over to Harajuku to check out the Tamagotchi Factory. Evelyn carried her big Cinnamoroll plush everywhere we went and posed right in front of the giant Tamagotchi egg interactive clock display, checking out all the custom shells, virtual pet releases, and keychains.\n\nInside Tokyu Plaza Harajuku Harakado, we ran into the KAWAII Night Market pop-up event on the 6th and 7th floors. The rooftop terrace had this massive purple horned monster art installation set up for photos, along with festival displays and a life sized Chopper cutout from the One Piece Mugiwara store.",
+    "media": [
+      {
+        "url": "assets/photos/112_tamagotchi_factory_evelyn_giant_display.jpg",
+        "thumb": "assets/photos/112_tamagotchi_factory_evelyn_giant_display.jpg",
+        "caption": "Evelyn posing in front of the giant Tamagotchi egg display with Cinnamoroll."
+      },
+      {
+        "url": "assets/photos/113_harakado_rooftop_kawaii_monster_statue.jpg",
+        "thumb": "assets/photos/113_harakado_rooftop_kawaii_monster_statue.jpg",
+        "caption": "The giant purple monster installation on the Harakado roof terrace."
+      },
+      {
+        "url": "assets/photos/114_harakado_kawaii_night_market_poster.jpg",
+        "thumb": "assets/photos/114_harakado_kawaii_night_market_poster.jpg",
+        "caption": "The KAWAII Night Market festival event poster at Harakado."
+      },
+      {
+        "url": "assets/photos/114c_one_piece_mugiwara_chopper_display.jpg",
+        "thumb": "assets/photos/114c_one_piece_mugiwara_chopper_display.jpg",
+        "caption": "Chopper display from the One Piece store holding cotton candy."
+      },
+      {
+        "url": "assets/photos/114b_harakado_mall_maze_directory.jpg",
+        "thumb": "assets/photos/114b_harakado_mall_maze_directory.jpg",
+        "caption": "Checking out the building layout and event directory inside Harakado."
+      }
+    ]
+  },
+  {
+    "id": "post-21",
+    "date": "Mon Aug 24, 2026 \u00b7 Afternoon",
+    "location": "Godzilla Store Tokyo \u00b7 Shinjuku Marui Annex 1F",
+    "tag": "Kaiju shopping",
+    "title": "Godzilla Store Tokyo and the giant Minus One statue in Shinjuku",
+    "caption": "Right after leaving Sanrio Puroland, we took the train straight into Shinjuku to visit the official Godzilla Store Tokyo on the first floor of Shinjuku Marui Annex.\n\nLincoln is a huge Godzilla fan, so walking up to the massive Godzilla Minus One statue guarding the front entrance was huge for him. He posed right next to it, hit a victory roar flex, and spent plenty of time digging through the shelves of figures, exclusive vinyl models, t-shirts, and posters.",
+    "media": [
+      {
+        "url": "assets/photos/110_godzilla_store_lincoln_flex_roar.jpg",
+        "thumb": "assets/photos/110_godzilla_store_lincoln_flex_roar.jpg",
+        "caption": "Lincoln hitting a Godzilla flex in front of the Minus One statue."
+      },
+      {
+        "url": "assets/photos/109_godzilla_store_lincoln_pose.jpg",
+        "thumb": "assets/photos/109_godzilla_store_lincoln_pose.jpg",
+        "caption": "Standing next to Godzilla at the official store entrance in Shinjuku."
+      },
+      {
+        "url": "assets/photos/111_godzilla_store_lincoln_statue_smile.jpg",
+        "thumb": "assets/photos/111_godzilla_store_lincoln_statue_smile.jpg",
+        "caption": "Lincoln checking out the Godzilla figures and merch shelves."
+      }
+    ]
+  },
+  {
+    "id": "post-20",
+    "date": "Mon Aug 24, 2026 \u00b7 Afternoon",
+    "location": "Sanrio Puroland \u00b7 Tama Center, Tokyo",
+    "tag": "Birthday celebration",
+    "title": "Riding the unicorn carousel and strawberry carriages at Puroland",
+    "caption": "We spent the afternoon exploring the rest of Puroland's attractions. Evelyn rode the royal My Melody strawberry carriage photo spot while holding her giant Cinnamoroll plush, and we got some great family photos together along the main staircase and character walls.\n\nDown in Puro Village, Evelyn picked out a pastel unicorn on the Sanrio Character Carousel, and we stopped by the carnival spin the wheel game where the staff rang bells and cheered on the kids. Non stop energy the entire time we were there.",
+    "media": [
+      {
+        "url": "assets/photos/103_my_melody_strawberry_carriage_kids.jpg",
+        "thumb": "assets/photos/103_my_melody_strawberry_carriage_kids.jpg",
+        "caption": "Evelyn and Lincoln in the My Melody strawberry carriage with Cinnamoroll."
+      },
+      {
+        "url": "assets/photos/107_sanrio_carousel_evelyn_unicorn_ride.jpg",
+        "thumb": "assets/photos/107_sanrio_carousel_evelyn_unicorn_ride.jpg",
+        "caption": "Evelyn riding the pastel unicorn on the Sanrio carousel."
+      },
+      {
+        "url": "assets/photos/101_sanrio_spin_wheel_carnival_game.jpg",
+        "thumb": "assets/photos/101_sanrio_spin_wheel_carnival_game.jpg",
+        "caption": "Watching the carnival spin wheel game."
+      },
+      {
+        "url": "assets/photos/105_sanrio_super_star_photo_booth_kids.jpg",
+        "thumb": "assets/photos/105_sanrio_super_star_photo_booth_kids.jpg",
+        "caption": "Lincoln and Evelyn inside the giant star photo frame."
+      },
+      {
+        "url": "assets/photos/106_sanrio_family_selfie_staircase.jpg",
+        "thumb": "assets/photos/106_sanrio_family_selfie_staircase.jpg",
+        "caption": "Family group selfie on the village staircase."
+      },
+      {
+        "url": "assets/photos/108_sanrio_puroland_dad_evelyn_selfie.jpg",
+        "thumb": "assets/photos/108_sanrio_puroland_dad_evelyn_selfie.jpg",
+        "caption": "Dad and Evelyn in Puro Village."
+      },
+      {
+        "url": "assets/photos/104_my_melody_strawberry_carriage_evelyn.jpg",
+        "thumb": "assets/photos/104_my_melody_strawberry_carriage_evelyn.jpg",
+        "caption": "Evelyn sitting in the strawberry carriage with her plush."
+      },
+      {
+        "url": "assets/photos/102_sanrio_spin_wheel_game_host_turn.jpg",
+        "thumb": "assets/photos/102_sanrio_spin_wheel_game_host_turn.jpg",
+        "caption": "The staff host running the prize wheel."
+      }
+    ]
+  },
+  {
+    "id": "post-19",
+    "date": "Mon Aug 24, 2026 \u00b7 Midday",
+    "location": "Sanrio Rainbow World Restaurant \u00b7 Tama Center, Tokyo",
+    "tag": "Birthday lunch",
+    "title": "Birthday lunch at the Rainbow World Restaurant",
+    "caption": "For Evelyn's birthday lunch, we went up to the 4th floor to eat at the Sanrio Rainbow World Restaurant. The whole dining area is split into seven rainbow colored character zones with overhead arches and murals.\n\nWe ordered themed dishes for the table, including meat sauce pasta with Pochacco's face right on top, savory noodles, and a rolled My Melody strawberry crepe with fresh fruit and whipped cream. Evelyn loved having her birthday crepe right in the middle of Hello Kitty land.",
+    "media": [
+      {
+        "url": "assets/photos/96_pochacco_bolognese_pasta_plate.jpg",
+        "thumb": "assets/photos/96_pochacco_bolognese_pasta_plate.jpg",
+        "caption": "The Pochacco meat sauce pasta dish."
+      },
+      {
+        "url": "assets/photos/97_my_melody_strawberry_crepe.jpg",
+        "thumb": "assets/photos/97_my_melody_strawberry_crepe.jpg",
+        "caption": "The My Melody fresh strawberry crepe."
+      },
+      {
+        "url": "assets/photos/98_rainbow_world_evelyn_enjoying_crepe.jpg",
+        "thumb": "assets/photos/98_rainbow_world_evelyn_enjoying_crepe.jpg",
+        "caption": "Evelyn eating her strawberry birthday crepe."
+      },
+      {
+        "url": "assets/photos/94_rainbow_world_restaurant_entry_display.jpg",
+        "thumb": "assets/photos/94_rainbow_world_restaurant_entry_display.jpg",
+        "caption": "The rainbow archway entrance to the restaurant."
+      },
+      {
+        "url": "assets/photos/99_rainbow_world_restaurant_family_table.jpg",
+        "thumb": "assets/photos/99_rainbow_world_restaurant_family_table.jpg",
+        "caption": "Dad and the kids at our lunch table."
+      },
+      {
+        "url": "assets/photos/100_rainbow_world_evelyn_juice_spaghetti.jpg",
+        "thumb": "assets/photos/100_rainbow_world_evelyn_juice_spaghetti.jpg",
+        "caption": "Evelyn having lunch with her juice and pasta."
+      },
+      {
+        "url": "assets/photos/95_rainbow_world_restaurant_colorful_plaza.jpg",
+        "thumb": "assets/photos/95_rainbow_world_restaurant_colorful_plaza.jpg",
+        "caption": "Looking across the rainbow dining hall."
+      }
+    ]
+  },
+  {
+    "id": "post-18",
+    "date": "Mon Aug 24, 2026 \u00b7 Morning",
+    "location": "Sanrio Puroland Arcade & Gift Shop \u00b7 Tama Center, Tokyo",
+    "tag": "Birthday prize & shop",
+    "title": "First try claw machine win and character headbands",
+    "caption": "Pure beginner's luck this morning in the Puroland arcade. We walked up to the giant UFO catcher claw machine, dropped in a coin, and snagged this massive fluffy Cinnamoroll plush on the very first attempt. Evelyn was thrilled and carried that giant stuffy around the rest of the park.\n\nAfter that, we hit the main gift shop so the kids could get character headbands. Evelyn picked out pink sparkly My Melody bunny ears with a jeweled ribbon, while the boys grabbed Badtz-Maru. They printed some souvenir shots on their instant camera and showed off their gear with Brittany and Aunt Alison.",
+    "media": [
+      {
+        "url": "assets/photos/88_claw_machine_big_cinnamoroll_win.jpg",
+        "thumb": "assets/photos/88_claw_machine_big_cinnamoroll_win.jpg",
+        "caption": "Evelyn holding her giant Cinnamoroll plush right after the claw machine win."
+      },
+      {
+        "url": "assets/photos/89_claw_machine_cinnamoroll_hug_smiles.jpg",
+        "thumb": "assets/photos/89_claw_machine_cinnamoroll_hug_smiles.jpg",
+        "caption": "Big hugs for the giant birthday plush."
+      },
+      {
+        "url": "assets/photos/90_sanrio_shop_evelyn_my_melody_ears.jpg",
+        "thumb": "assets/photos/90_sanrio_shop_evelyn_my_melody_ears.jpg",
+        "caption": "Evelyn wearing her sparkly My Melody headband at the shop register."
+      },
+      {
+        "url": "assets/photos/92_sanrio_shop_kids_badtz_maru_my_melody.jpg",
+        "thumb": "assets/photos/92_sanrio_shop_kids_badtz_maru_my_melody.jpg",
+        "caption": "Lincoln and Evelyn showing off their Badtz-Maru and My Melody headbands."
+      },
+      {
+        "url": "assets/photos/91_sanrio_shop_counter_kids_excitement.jpg",
+        "thumb": "assets/photos/91_sanrio_shop_counter_kids_excitement.jpg",
+        "caption": "Checking out at the shop register."
+      },
+      {
+        "url": "assets/photos/93_sanrio_shop_mom_alison_kids_browsing.jpg",
+        "thumb": "assets/photos/93_sanrio_shop_mom_alison_kids_browsing.jpg",
+        "caption": "Brittany, Aunt Alison, and the kids checking out the gift shop aisles."
+      }
+    ]
+  },
+  {
+    "id": "post-17",
+    "date": "Mon Aug 24, 2026 \u00b7 Morning",
+    "location": "Sanrio Puroland Entrance & Puro Village \u00b7 Tama Center, Tokyo",
+    "tag": "Evelyn's birthday",
+    "title": "Arriving at Sanrio Puroland for Evelyn's birthday",
+    "caption": "Today was the big highlight for Evelyn: celebrating her 7th birthday at Sanrio Puroland in Tama Center. We walked up to the castle style entrance under clear skies and stepped inside the climate controlled park.\n\nEvelyn grabbed the official park map right away and took charge of guiding us down the spiral staircases into Puro Village. Right in the middle is the huge Wisdom Tree lit up with lights, surrounded by storybook cottages, pastel bridges, and anniversary displays.",
+    "media": [
+      {
+        "url": "assets/photos/81_sanrio_puroland_grand_entrance.jpg",
+        "thumb": "assets/photos/81_sanrio_puroland_grand_entrance.jpg",
+        "caption": "The main castle entrance at Sanrio Puroland."
+      },
+      {
+        "url": "assets/photos/82_puroland_evelyn_studying_park_map.jpg",
+        "thumb": "assets/photos/82_puroland_evelyn_studying_park_map.jpg",
+        "caption": "Evelyn checking the park map to pick our first stop."
+      },
+      {
+        "url": "assets/photos/83_puroland_puro_village_wisdom_tree.jpg",
+        "thumb": "assets/photos/83_puroland_puro_village_wisdom_tree.jpg",
+        "caption": "The glowing Wisdom Tree in the middle of Puro Village."
+      },
+      {
+        "url": "assets/photos/85_puroland_character_staircase_mom_kids.jpg",
+        "thumb": "assets/photos/85_puroland_character_staircase_mom_kids.jpg",
+        "caption": "Brittany and the kids on the spiral staircase heading down to the village."
+      },
+      {
+        "url": "assets/photos/84_puroland_upper_plaza_view.jpg",
+        "thumb": "assets/photos/84_puroland_upper_plaza_view.jpg",
+        "caption": "Looking down into Puro Village from the upper floor."
+      },
+      {
+        "url": "assets/photos/86_puroland_35th_anniversary_entrance.jpg",
+        "thumb": "assets/photos/86_puroland_35th_anniversary_entrance.jpg",
+        "caption": "The 35th Anniversary Hello Kitty entrance display."
+      },
+      {
+        "url": "assets/photos/87_puroland_plaza_bench_evelyn_twirl.jpg",
+        "thumb": "assets/photos/87_puroland_plaza_bench_evelyn_twirl.jpg",
+        "caption": "Evelyn in the outdoor plaza outside the front entrance."
+      }
+    ]
+  },
+  {
+    "id": "post-16",
+    "date": "Mon Aug 24, 2026 \u00b7 Morning",
+    "location": "Keio Line & Tokyo Train System \u00b7 Tokyo",
+    "tag": "First train ride",
+    "title": "First Japan train ride on the Keio Line to Tama Center",
+    "caption": "Our first local train ride of the trip: taking the Keio Line commuter train out to western Tokyo. We found our track, watched the digital departure boards, and got everyone on board without any trouble.\n\nThe trains here are spotless, quiet, and run right on the second. The kids sat together on the purple velvet bench seats watching the dense Tokyo neighborhoods open up into greener hills as we headed toward Tama Center.",
+    "media": [
+      {
+        "url": "assets/photos/76_first_train_station_platform_family.jpg",
+        "thumb": "assets/photos/76_first_train_station_platform_family.jpg",
+        "caption": "Waiting on the platform as our commuter train pulls in."
+      },
+      {
+        "url": "assets/photos/77_train_ride_dad_son_selfie.jpg",
+        "thumb": "assets/photos/77_train_ride_dad_son_selfie.jpg",
+        "caption": "Dad and Lincoln on our first Japan train ride."
+      },
+      {
+        "url": "assets/photos/78_train_ride_mom_evelyn_alison_seating.jpg",
+        "thumb": "assets/photos/78_train_ride_mom_evelyn_alison_seating.jpg",
+        "caption": "Brittany, Evelyn, and Aunt Alison on the train seats."
+      },
+      {
+        "url": "assets/photos/79_train_ride_boy_smiling_view.jpg",
+        "thumb": "assets/photos/79_train_ride_boy_smiling_view.jpg",
+        "caption": "Lincoln watching the scenery go by out the train window."
+      },
+      {
+        "url": "assets/photos/80_train_station_platform_perspective.jpg",
+        "thumb": "assets/photos/80_train_station_platform_perspective.jpg",
+        "caption": "Looking down the covered station platform."
+      }
+    ]
+  },
+  {
+    "id": "post-15",
+    "date": "Mon Aug 24, 2026 \u00b7 Early Morning",
+    "location": "Ueno Neighborhood & Local Park \u00b7 Ueno, Tokyo",
+    "tag": "Morning & park",
+    "title": "Morning walk in Ueno and playground animal rides",
+    "caption": "We got an early start to Monday morning with a walk through the quiet neighborhood streets of Ueno. On our way toward the station, we found a small local park with swing sets and bouncy spring animal riders.\n\nThe kids hopped right onto the dinosaur, elephant, and panda riders, and took turns on the swings. We picked up some fresh fruit skewers, including chocolate covered strawberries with sprinkles, to fuel up before heading to the train station for Evelyn's birthday trip.",
+    "media": [
+      {
+        "url": "assets/photos/71_ueno_morning_walk_alison_evelyn.jpg",
+        "thumb": "assets/photos/71_ueno_morning_walk_alison_evelyn.jpg",
+        "caption": "Aunt Alison and Evelyn walking through the morning streets of Ueno."
+      },
+      {
+        "url": "assets/photos/73_ueno_playground_evelyn_panda_ride.jpg",
+        "thumb": "assets/photos/73_ueno_playground_evelyn_panda_ride.jpg",
+        "caption": "Evelyn on the playground panda rocker."
+      },
+      {
+        "url": "assets/photos/72_ueno_park_playground_spring_riders.jpg",
+        "thumb": "assets/photos/72_ueno_park_playground_spring_riders.jpg",
+        "caption": "Lincoln and Evelyn on the dinosaur and elephant spring riders."
+      },
+      {
+        "url": "assets/photos/74_ueno_playground_kids_swings.jpg",
+        "thumb": "assets/photos/74_ueno_playground_kids_swings.jpg",
+        "caption": "Lincoln and Evelyn on the park swings."
+      },
+      {
+        "url": "assets/photos/75_ueno_morning_chocolate_fruit_treat.jpg",
+        "thumb": "assets/photos/75_ueno_morning_chocolate_fruit_treat.jpg",
+        "caption": "Chocolate drizzled strawberry skewer with sprinkles."
+      }
+    ]
+  },
+  {
+    "id": "post-14",
+    "date": "Sun Aug 23, 2026 \u00b7 Afternoon",
+    "location": "Yamashiroya (\u30e4\u30de\u30b7\u30ed\u30e4) \u00b7 Ueno, Tokyo",
+    "tag": "Toy shopping",
+    "title": "Yamashiroya 6-Story Toy Mecca: Kirby, Pok\u00e9mon, Tamagotchi & Gachapon! \ud83e\uddf8\ud83c\udfae\ud83c\udf80",
+    "caption": "Next stop was the legendary Yamashiroya right outside Ueno Station \u2014 six entire floors overflowing with toys, collectibles, plushies, anime merch, and video game goods!\n\nWe kicked things off outside along the street browsing the endless walls of colorful gachapon capsule machines. Inside, Evelyn was on a mission in the Kirby aisle picking out miniature room blind boxes and cute figures, while the boys combed through Pok\u00e9mon gear, Tamagotchi, collectible keychains, and novelty character snacks. An absolute treasure trove!",
+    "media": [
+      {
+        "url": "assets/photos/66_yamashiroya_gachapon_wall.jpg",
+        "thumb": "assets/photos/66_yamashiroya_gachapon_wall.jpg",
+        "caption": "Standing before the towering multi-level wall of colorful gachapon capsule dispensers!"
+      },
+      {
+        "url": "assets/photos/69_yamashiroya_kirby_blind_boxes.jpg",
+        "thumb": "assets/photos/69_yamashiroya_kirby_blind_boxes.jpg",
+        "caption": "Evelyn in toy heaven picking out adorable Kirby miniature room diorama blind boxes."
+      },
+      {
+        "url": "assets/photos/70_yamashiroya_toy_aisle_haul.jpg",
+        "thumb": "assets/photos/70_yamashiroya_toy_aisle_haul.jpg",
+        "caption": "Posing in the packed aisles surrounded by Pok\u00e9mon gear, Tamagotchi, and character collectibles!"
+      },
+      {
+        "url": "assets/photos/67_yamashiroya_gachapon_street_machines.jpg",
+        "thumb": "assets/photos/67_yamashiroya_gachapon_street_machines.jpg",
+        "caption": "Scouting out the streetfront gachapon banks right outside Yamashiroya's main entrance."
+      },
+      {
+        "url": "assets/photos/68_yamashiroya_gachapon_street_alt.jpg",
+        "thumb": "assets/photos/68_yamashiroya_gachapon_street_alt.jpg",
+        "caption": "Hunting for the rarest character figures among the endless capsule machines."
+      }
+    ]
+  },
+  {
+    "id": "post-13",
+    "date": "Sun Aug 23, 2026 \u00b7 Lunchtime",
+    "location": "Ameyoko Market Alley Izakaya \u00b7 Ueno, Tokyo",
+    "tag": "Market lunch",
+    "title": "Ameyoko Alley Lunch: Ramen, Dumplings & Family Smiles! \ud83c\udf5c\ud83e\udd5f\ud83c\udf7b",
+    "caption": "After pounding the pavement through the markets, we grabbed a cozy table at an open-air alley restaurant tucked right under the market awnings. Surrounded by vibrant Japanese food banners and cold draft beer posters, we ordered up steaming bowls of ramen, crispy gyoza dumplings, skewers, and cold drinks.\n\nGreat food, lots of laughs, goofy table selfies, and a much-needed energy recharge before hitting the afternoon toy shops!",
+    "media": [
+      {
+        "url": "assets/photos/61_ameyoko_lunch_family_smiles.jpg",
+        "thumb": "assets/photos/61_ameyoko_lunch_family_smiles.jpg",
+        "caption": "Big family smiles and funny faces over our izakaya lunch feast in the market alley!"
+      },
+      {
+        "url": "assets/photos/62_ameyoko_lunch_family_peace.jpg",
+        "thumb": "assets/photos/62_ameyoko_lunch_family_peace.jpg",
+        "caption": "Throwing up peace signs under the market menu banners and ice-cold drink posters."
+      },
+      {
+        "url": "assets/photos/64_ameyoko_lunch_jj_alison_smiles.jpg",
+        "thumb": "assets/photos/64_ameyoko_lunch_jj_alison_smiles.jpg",
+        "caption": "John and Brittany taking a quick breather over lunch before our toy shopping spree."
+      },
+      {
+        "url": "assets/photos/65_ameyoko_lunch_mom_peace_sign.jpg",
+        "thumb": "assets/photos/65_ameyoko_lunch_mom_peace_sign.jpg",
+        "caption": "Aunt Alison and the kids throwing up peace signs as our steaming ramen and dishes hit the table."
+      },
+      {
+        "url": "assets/photos/63_ameyoko_lunch_jj_tongue_silly.jpg",
+        "thumb": "assets/photos/63_ameyoko_lunch_jj_tongue_silly.jpg",
+        "caption": "Silly selfies keeping the good energy rolling at the lunch table."
+      }
+    ]
+  },
+  {
+    "id": "post-12",
+    "date": "Sun Aug 23, 2026 \u00b7 Midday",
+    "location": "Ameyoko Shopping Street (\u30a2\u30e1\u6a2a) \u00b7 Ueno, Tokyo",
+    "tag": "Street market",
+    "title": "Strolling Ameyoko Market & Fresh Chocolate Fruit Skewers! \ud83c\udf61\ud83c\udf53\ud83d\udc1f",
+    "caption": "Headed straight into the heart of Ameya Yokocho (Ameyoko), Ueno's legendary bustling open-air market street stretching beneath the railway lines. The lively pedestrian street was packed with market stalls, giant hanging seafood signs, street food vendors, and clothing shops.\n\nWe stopped by the colorful fresh fruit stall showcasing chilled skewers of sweet red melon, juicy pineapple, watermelon, and fresh strawberries. Evelyn got an epic chocolate-drizzled strawberry skewer topped with sprinkles that made the market walk even sweeter!",
+    "media": [
+      {
+        "url": "assets/photos/56_ameyoko_ueno_entrance_gate.jpg",
+        "thumb": "assets/photos/56_ameyoko_ueno_entrance_gate.jpg",
+        "caption": "Stepping beneath the iconic neon archway into the bustling Ameyoko shopping street."
+      },
+      {
+        "url": "assets/photos/58_ameyoko_fresh_fruit_skewers_stand.jpg",
+        "thumb": "assets/photos/58_ameyoko_fresh_fruit_skewers_stand.jpg",
+        "caption": "Checking out the colorful chilled fruit skewers \u2014 sweet red melon, juicy pineapple, and strawberries!"
+      },
+      {
+        "url": "assets/photos/59_ameyoko_evelyn_choco_strawberry.jpg",
+        "thumb": "assets/photos/59_ameyoko_evelyn_choco_strawberry.jpg",
+        "caption": "Evelyn thrilled with her towering chocolate-drizzled strawberry skewer topped with sprinkles!"
+      },
+      {
+        "url": "assets/photos/57_ameyoko_market_street_walk.jpg",
+        "thumb": "assets/photos/57_ameyoko_market_street_walk.jpg",
+        "caption": "Wandering through the lively market alleyways packed with shops and overhead lanterns."
+      },
+      {
+        "url": "assets/photos/60_ameyoko_giant_fish_izakaya.jpg",
+        "thumb": "assets/photos/60_ameyoko_giant_fish_izakaya.jpg",
+        "caption": "Passing the giant hanging tuna sculpture and glowing paper lanterns outside a seafood izakaya."
+      }
+    ]
+  },
+  {
+    "id": "post-11",
+    "date": "Sun Aug 23, 2026 \u00b7 Mid-Morning",
+    "location": "Ueno Park, Hanazono Inari Shrine & JR Ueno Station",
+    "tag": "Park & shrines",
+    "title": "Ueno Park Exploration: Crimson Torii Gates, Shinobazu Lotus & Pok\u00e9mon Stamp Rally! \u26e9\ufe0f\ud83c\udf38\u26a1",
+    "caption": "After our morning breakfast feast, we set out on foot to explore Ueno Park! We climbed the grand stone stairs, checked the giant neighborhood guide map with the kids, and wandered into the peaceful shaded grounds of Hanazono Inari Shrine.\n\nWalking beneath the endless tunnel of vibrant crimson Torii gates and stone fox statues was pure magic. We strolled past the towering summer lotus pads blanketing Shinobazu Pond, took some great father-and-son selfies by the park monuments, and headed into JR Ueno Station where the kids tracked down the official JR East Pok\u00e9mon Stamp Rally station to stamp their collector booklets!",
+    "media": [
+      {
+        "url": "assets/photos/45_ueno_park_stone_stairs.jpg",
+        "thumb": "assets/photos/45_ueno_park_stone_stairs.jpg",
+        "caption": "Climbing the grand stone staircase leading up into the lush greenery of Ueno Park."
+      },
+      {
+        "url": "assets/photos/46_ueno_park_area_map_kids.jpg",
+        "thumb": "assets/photos/46_ueno_park_area_map_kids.jpg",
+        "caption": "The kids studying the giant Ueno Station & Park area guide map before starting our route!"
+      },
+      {
+        "url": "assets/photos/47_hanazono_inari_torii_entrance.jpg",
+        "thumb": "assets/photos/47_hanazono_inari_torii_entrance.jpg",
+        "caption": "Arriving at the entrance of Hanazono Inari Shrine framed by stone fox guardians."
+      },
+      {
+        "url": "assets/photos/48_hanazono_inari_torii_gates_kids.jpg",
+        "thumb": "assets/photos/48_hanazono_inari_torii_gates_kids.jpg",
+        "caption": "The kids striking poses before the vibrant red Torii gate pathway at Hanazono Inari Shrine."
+      },
+      {
+        "url": "assets/photos/49_hanazono_inari_torii_tunnel_walk.jpg",
+        "thumb": "assets/photos/49_hanazono_inari_torii_tunnel_walk.jpg",
+        "caption": "Wandering through the magical shaded tunnel of crimson Torii gates."
+      },
+      {
+        "url": "assets/photos/50_ueno_shrine_stone_path_walk.jpg",
+        "thumb": "assets/photos/50_ueno_shrine_stone_path_walk.jpg",
+        "caption": "Exploring the peaceful mossy stone lantern pathways around the shrine grounds."
+      },
+      {
+        "url": "assets/photos/51_shinobazu_pond_lotus_evelyn.jpg",
+        "thumb": "assets/photos/51_shinobazu_pond_lotus_evelyn.jpg",
+        "caption": "Evelyn gazing out over the massive sea of summer lotus pads covering Shinobazu Pond."
+      },
+      {
+        "url": "assets/photos/52_shinobazu_pond_lotus_blooms.jpg",
+        "thumb": "assets/photos/52_shinobazu_pond_lotus_blooms.jpg",
+        "caption": "Endless giant lotus leaves and summer blooms blanketing the waters of Shinobazu Pond."
+      },
+      {
+        "url": "assets/photos/53_ueno_father_son_smiling_selfie.jpg",
+        "thumb": "assets/photos/53_ueno_father_son_smiling_selfie.jpg",
+        "caption": "Father & son selfie smiling in front of the historic Ueno Park stone monument!"
+      },
+      {
+        "url": "assets/photos/54_ueno_pokemon_stamp_station_boy.jpg",
+        "thumb": "assets/photos/54_ueno_pokemon_stamp_station_boy.jpg",
+        "caption": "Locating the official JR East Pok\u00e9mon Stamp Rally station table inside Ueno Station!"
+      },
+      {
+        "url": "assets/photos/55_ueno_pokemon_stamp_rally_kids.jpg",
+        "thumb": "assets/photos/55_ueno_pokemon_stamp_rally_kids.jpg",
+        "caption": "Stamping our official Pok\u00e9mon Stamp Rally adventure book to claim the Ueno Station badge!"
+      }
+    ]
+  },
+  {
+    "id": "post-10",
+    "date": "Sun Aug 23, 2026 \u00b7 Morning",
+    "location": "Bistro Nohga \u00b7 Ueno, Tokyo",
+    "tag": "Breakfast feast",
+    "title": "Morning Feast at Bistro Nohga & Polaroid Street Walk! \ud83e\udd5e\u2615\ud83d\udcf8",
+    "caption": "Started Sunday morning with a delicious sit-down breakfast at Bistro Nohga in Ueno. We loaded up the table with fluffy souffl\u00e9-style pancakes, fresh summer berry bowls, pastries, eggs, and hot coffee to recharge for the big day ahead.\n\nAfter dining, Evelyn had her purple instant camera ready to go, snapping and printing photos right on the street as we strolled through the morning Ueno neighborhood!",
+    "media": [
+      {
+        "url": "assets/photos/36_elevator_heading_to_breakfast.jpg",
+        "thumb": "assets/photos/36_elevator_heading_to_breakfast.jpg",
+        "caption": "Heading down the elevator bright and early for our Sunday morning breakfast."
+      },
+      {
+        "url": "assets/photos/37_bistro_nohga_entrance_family.jpg",
+        "thumb": "assets/photos/37_bistro_nohga_entrance_family.jpg",
+        "caption": "Arriving at Bistro Nohga in Ueno for our morning table reservation."
+      },
+      {
+        "url": "assets/photos/38_bistro_nohga_boy_mom_menu.jpg",
+        "thumb": "assets/photos/38_bistro_nohga_boy_mom_menu.jpg",
+        "caption": "Scouting out the breakfast sets and fluffy pancake options on the menu with Mom."
+      },
+      {
+        "url": "assets/photos/39_bistro_nohga_alison_dining.jpg",
+        "thumb": "assets/photos/39_bistro_nohga_alison_dining.jpg",
+        "caption": "Brittany and Aunt Alison enjoying morning coffee and breakfast by the sunlit window."
+      },
+      {
+        "url": "assets/photos/40_bistro_nohga_pancakes_family_table.jpg",
+        "thumb": "assets/photos/40_bistro_nohga_pancakes_family_table.jpg",
+        "caption": "Towering fluffy Japanese souffl\u00e9 pancakes, fresh summer berry bowl, and morning coffee spread!"
+      },
+      {
+        "url": "assets/photos/41_bistro_nohga_evelyn_mom_table.jpg",
+        "thumb": "assets/photos/41_bistro_nohga_evelyn_mom_table.jpg",
+        "caption": "Evelyn and Mom ready to dig into breakfast."
+      },
+      {
+        "url": "assets/photos/42_bistro_nohga_evelyn_clapping.jpg",
+        "thumb": "assets/photos/42_bistro_nohga_evelyn_clapping.jpg",
+        "caption": "Evelyn clapping with excitement at the breakfast table as the food arrives!"
+      },
+      {
+        "url": "assets/photos/43_evelyn_instax_camera_print.jpg",
+        "thumb": "assets/photos/43_evelyn_instax_camera_print.jpg",
+        "caption": "Evelyn showing off her freshly printed instant Polaroid on the morning streets of Ueno."
+      },
+      {
+        "url": "assets/photos/44_ueno_morning_street_stroll.jpg",
+        "thumb": "assets/photos/44_ueno_morning_street_stroll.jpg",
+        "caption": "Strolling through the quiet morning neighborhood streets of Ueno toward the park."
+      }
+    ]
+  },
+  {
+    "id": "post-9",
+    "date": "Sun Aug 23, 2026 \u00b7 3:30 AM JST",
+    "location": "Don Quijote & McDonald's \u00b7 Ueno, Tokyo",
+    "tag": "Midnight run",
+    "title": "Donki Mega-Store Hunt & Late-Night McDonald's Fries! \ud83d\udc27\ud83c\udf5f\u2728",
+    "caption": "Since we were already up and exploring, we kept the momentum rolling! First stop: the massive multi-level Don Quijote in Ueno for some essential contact solution for Alison. With Donki being gigantic, a quick essentials run naturally turned into browsing character goods, plushie aisles, and towering toy shelves.\n\nAfter winding through the neon aisles, we capped off the early morning expedition at McDonald's for fresh hot fries, piggyback rides by the touchscreen kiosks, and order pickups before strolling back through the quiet Tokyo streets. Now back to bed!",
+    "media": [
+      {
+        "url": "assets/photos/32_mcdonalds_piggyback_kiosk.jpg",
+        "thumb": "assets/photos/32_mcdonalds_piggyback_kiosk.jpg",
+        "caption": "Piggyback rides and smiles at the late-night McDonald's touchscreen ordering kiosks!"
+      },
+      {
+        "url": "assets/photos/28_don_quijote_sanrio_plush_wall.jpg",
+        "thumb": "assets/photos/28_don_quijote_sanrio_plush_wall.jpg",
+        "caption": "Evelyn in absolute Sanrio heaven browsing the Hello Kitty and plushie wall at Donki."
+      },
+      {
+        "url": "assets/photos/30_don_quijote_boy_excited_aisle.jpg",
+        "thumb": "assets/photos/30_don_quijote_boy_excited_aisle.jpg",
+        "caption": "Pure midnight excitement exploring the packed Don Quijote aisles!"
+      },
+      {
+        "url": "assets/photos/31_don_quijote_contact_solution_hunt.jpg",
+        "thumb": "assets/photos/31_don_quijote_contact_solution_hunt.jpg",
+        "caption": "Aunt Alison and Mom tracking down contact solution and browsing the mega-store."
+      },
+      {
+        "url": "assets/photos/29_don_quijote_toy_aisle_shopping.jpg",
+        "thumb": "assets/photos/29_don_quijote_toy_aisle_shopping.jpg",
+        "caption": "Navigating the character floor mats and endless shelves at Don Quijote."
+      },
+      {
+        "url": "assets/photos/33_mcdonalds_fries_order_pickup.jpg",
+        "thumb": "assets/photos/33_mcdonalds_fries_order_pickup.jpg",
+        "caption": "Hot fry run secured at the counter before heading back to sleep."
+      }
+    ]
+  },
+  {
+    "id": "post-8",
+    "date": "Sun Aug 23, 2026 \u00b7 3:00 AM JST",
+    "location": "Higashiueno Alleys \u00b7 Ueno, Tokyo",
+    "tag": "Early morning",
+    "title": "3:00 AM Ueno Alley Walk & Konbini Snack Raid! \ud83c\udfea\u2728",
+    "caption": "With everyone fully awake from the flight time change and the earthquake excitement, we laced up and headed out into the quiet Tokyo night air. Walked the brick-paved alleyways of Higashiueno, raided the local 7-Eleven for drinks, fruit jellies, yogurts, and iced coffees, and hit the illuminated street vending machines for epic ninja pose-downs. Pure Tokyo midnight adventure!",
+    "media": [
+      {
+        "url": "assets/photos/26_7eleven_early_snack_raid.jpg",
+        "thumb": "assets/photos/26_7eleven_early_snack_raid.jpg",
+        "caption": "Victory snack haul in the 7-Eleven refrigerated aisle!"
+      },
+      {
+        "url": "assets/photos/27_ueno_vending_machine_poses.jpg",
+        "thumb": "assets/photos/27_ueno_vending_machine_poses.jpg",
+        "caption": "Power poses outside the glowing Kirin & Asahi vending machines."
+      },
+      {
+        "url": "assets/photos/25_early_am_ueno_alley_walk.jpg",
+        "thumb": "assets/photos/25_early_am_ueno_alley_walk.jpg",
+        "caption": "Quiet brick-paved alleys of Higashiueno under the streetlamps."
+      }
+    ]
+  },
+  {
+    "id": "post-7",
+    "date": "Sun Aug 23, 2026 \u00b7 2:00 AM JST",
+    "location": "Tabi Ueno \u00b7 Tokyo Base",
+    "tag": "Earthquake update",
+    "title": "2:00 AM Earthquake Wake-Up Call! \ud83d\udea8 (All Safe & Sound)",
+    "caption": "Right at 2:00 AM, the Japanese emergency cell broadcast alarm went off across Tokyo followed by a noticeable jolt and room swaying (Magnitude 5.9 centered in Southern Ibaraki, registered Shindo 4 here in Ueno).\n\nWoke everyone right up! But modern Tokyo buildings are built like tanks \u2014 zero issues, zero damage, and JMA confirmed zero tsunami risk. Kids are wide awake, making goofy faces in the mirror, and completely unfazed. Everyone is safe, happy, and heading back to sleep!",
+    "media": [
+      {
+        "url": "assets/photos/24_kids_awake_mirror_goofy.jpg",
+        "thumb": "assets/photos/24_kids_awake_mirror_goofy.jpg",
+        "caption": "Wide awake and making faces in the room mirror post-earthquake."
+      },
+      {
+        "url": "assets/photos/23_earthquake_phone_alert.jpg",
+        "thumb": "assets/photos/23_earthquake_phone_alert.jpg",
+        "caption": "The 2:00 AM emergency broadcast alert that woke up the room."
+      }
+    ]
+  },
+  {
+    "id": "post-6",
+    "date": "Sat Aug 22, 2026 \u00b7 Evening",
+    "location": "Tabi Ueno \u00b7 Tokyo Base",
+    "tag": "Tokyo arrival",
+    "title": "Torrential Downpour, Wrong Hotel & Cozy Reunion! \ud83c\udf27\ufe0f\ud83c\udfe8",
+    "caption": "Touchdown Tokyo! The taxi ride from Narita turned into an absolute torrential downpour. To add to the adventure, we accidentally got dropped off at the wrong hotel first and got thoroughly soaked running for cover! \ud83e\udd23\n\nWe quickly sorted it out, made it to our real home base at Tabi Ueno, got dried off, and settled in. Reunited with Aunt Alison for a late-night room picnic and dinner spread on the floor. Everyone is exhausted from the long travel day but in great spirits \u2014 Evelyn already has high-priority demands to hit up some Tokyo thrift stores tomorrow!",
+    "media": [
+      {
+        "url": "assets/photos/21_tabi_ueno_family_room_dinner.jpg",
+        "thumb": "assets/photos/21_tabi_ueno_family_room_dinner.jpg",
+        "caption": "Room picnic and late-night dinner spread after drying off from the storm."
+      },
+      {
+        "url": "assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg",
+        "thumb": "assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg",
+        "caption": "Catching up over dinner with Aunt Alison at Tabi Ueno."
+      },
+      {
+        "url": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
+        "thumb": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
+        "caption": "Evelyn testing out the bed bounce before lights out!"
+      }
+    ]
+  },
+  {
+    "id": "post-5",
+    "date": "Sat Aug 22, 2026 \u00b7 Rest & Relaxation",
+    "location": "ANA NH11 In-Flight",
+    "tag": "Rest",
+    "title": "Movies & Lie-Flat Suites",
+    "caption": "Cabin lights dimmed over the Northern Pacific for rest. Lie-flat beds made up with plush comforters, Japanese anime on the 24-inch 4K screens, and some much-needed sleep before touchdown.",
+    "media": [
+      {
+        "url": "assets/photos/09_inflight_boy_watching_doraemon.jpg",
+        "thumb": "assets/photos/09_inflight_boy_watching_doraemon.jpg",
+        "caption": "Watching Doraemon on the ultra-wide in-flight screen."
+      },
+      {
+        "url": "assets/photos/08_inflight_boy_sleeping_dark.jpg",
+        "thumb": "assets/photos/08_inflight_boy_sleeping_dark.jpg",
+        "caption": "Sound asleep in the lie-flat bed under the cabin ambient lighting."
+      }
+    ]
+  },
+  {
+    "id": "post-4",
+    "date": "Sat Aug 22, 2026 \u00b7 Mid-Flight Surprise",
+    "location": "ANA NH11 In-Flight",
+    "tag": "Family",
+    "title": "Birthday Celebration at 35,000 Feet! \ud83c\udf82",
+    "caption": "A wonderful surprise from the ANA cabin crew! They brought out a special \"Happy Birthday\" dessert plate crafted with fruit and sweet treats to celebrate mid-air.",
+    "media": [
+      {
+        "url": "assets/photos/07_inflight_family_birthday_cake_sharp.jpg",
+        "thumb": "assets/photos/07_inflight_family_birthday_cake_sharp.jpg",
+        "caption": "Surprise birthday plate and smiles in the suite."
+      }
+    ]
+  },
+  {
+    "id": "post-3",
+    "date": "Fri Aug 21, 2026 \u00b7 In-Flight Dining",
+    "location": "Cruising over the Pacific Ocean",
+    "tag": "In-flight",
+    "title": "Multi-Course Dining & Chopsticks Practice",
+    "caption": "In-flight dining service started over the Pacific. Full Japanese meal service on crisp white tablecloths, noodle bowls, fresh fruit, and some serious chopstick practice before landing in Tokyo.",
+    "media": [
+      {
+        "url": "assets/photos/14_inflight_boy_holding_chopsticks.jpg",
+        "thumb": "assets/photos/14_inflight_boy_holding_chopsticks.jpg",
+        "caption": "Demonstrating chopstick mastery with the lunch spread."
+      },
+      {
+        "url": "assets/photos/10_inflight_boy_eating_noodles.jpg",
+        "thumb": "assets/photos/10_inflight_boy_eating_noodles.jpg",
+        "caption": "Enjoying hot Japanese noodle soup at 35,000 feet."
+      },
+      {
+        "url": "assets/photos/15_inflight_mom_girl_dining.jpg",
+        "thumb": "assets/photos/15_inflight_mom_girl_dining.jpg",
+        "caption": "White-tablecloth dinner service in the adjoining middle suite."
+      }
+    ]
+  },
+  {
+    "id": "post-2",
+    "date": "Fri Aug 21, 2026 \u00b7 11:50 AM Departure",
+    "location": "ANA NH11 \u00b7 Boeing 777-300ER (\"The Room\")",
+    "tag": "Flight day",
+    "title": "Boarding ANA to Tokyo Narita",
+    "caption": "Settled into ANA\u2019s \"The Room\" business class suites for the 12+ hour flight across the international date line. Huge lie-flat beds, private sliding privacy doors, and plenty of room for everyone to stretch out and settle in.",
+    "media": [
+      {
+        "url": "assets/photos/01_inflight_girl_mom.jpg",
+        "thumb": "assets/photos/01_inflight_girl_mom.jpg",
+        "caption": "Headphones on, games loaded, and cozy in the suite with Mom."
+      },
+      {
+        "url": "assets/photos/16_inflight_boy_headphones_smile.jpg",
+        "thumb": "assets/photos/16_inflight_boy_headphones_smile.jpg",
+        "caption": "All smiles and ready for 12 hours of flight time in comfort."
+      },
+      {
+        "url": "assets/photos/04_inflight_boy_3ds_straight.jpg",
+        "thumb": "assets/photos/04_inflight_boy_3ds_straight.jpg",
+        "caption": "Nintendo 3DS fired up and making quick work of the flight hours."
+      }
+    ]
+  },
+  {
+    "id": "post-1",
+    "date": "Fri Aug 21, 2026 \u00b7 Morning",
+    "location": "Chicago O\u2019Hare (ORD) \u00b7 Terminal 1",
+    "tag": "Pre-flight",
+    "title": "Checked In & Recharged at O\u2019Hare",
+    "caption": "Arrived at O\u2019Hare, checked our bags with ANA, and breezed through security. After the morning road rally from Kalamazoo, everyone got to sit back, grab breakfast in the lounge, and get excited for the long haul across the Pacific!",
+    "media": [
+      {
+        "url": "assets/photos/19_ohare_terminal_family_kids_luggage.jpg",
+        "thumb": "assets/photos/19_ohare_terminal_family_kids_luggage.jpg",
+        "caption": "All rolling together through the terminal \u2014 luggage in tow and ready for the gate."
+      },
+      {
+        "url": "assets/photos/18_ohare_terminal_boy_luggage.jpg",
+        "thumb": "assets/photos/18_ohare_terminal_boy_luggage.jpg",
+        "caption": "Mastering the terminal wheelie roll across O\u2019Hare\u2019s classic checkerboard floors."
+      },
+      {
+        "url": "assets/photos/17_polaris_lounge_boy_breakfast.jpg",
+        "thumb": "assets/photos/17_polaris_lounge_boy_breakfast.jpg",
+        "caption": "Pre-flight breakfast parfait and dining recharge before boarding."
+      }
+    ]
+  },
+  {
+    "id": "post-0",
+    "date": "Fri Aug 21, 2026 \u00b7 Early Morning",
+    "location": "Kalamazoo (AZO) \u2192 Chicago O\u2019Hare (ORD)",
+    "tag": "Road trip detour",
+    "title": "The Great O\u2019Hare Dash (Bird Strike Detour!) \ud83e\udd85\ud83d\ude97\ud83d\udca8",
+    "caption": "Trip started with pure chaos! We got to Kalamazoo Airport for our 6:00 AM flight, waited an hour, and then learned birds had gotten caught in the engine with the flight delayed until at least noon. Rather than miss our ANA flight to Tokyo, we grabbed our gear, booked it out of the airport, and drove to Chicago O\u2019Hare like a bat out of hell. Made it to Terminal 1 with plenty of time to spare!",
+    "media": []
+  }
+];
+
+const recentHighlights = [
+  {
+    "url": "assets/photos/300_pearl_star_onsen_lincoln_evelyn_water_dolphins.jpg",
+    "thumb": "assets/photos/300_pearl_star_onsen_lincoln_evelyn_water_dolphins.jpg",
+    "caption": "Lincoln and Evelyn in their element\u2014water dolphins swimming in the open-air balcony bath!",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Atami Pearl Star Hotel \u00b7 Private Balcony Onsen"
+  },
+  {
+    "url": "assets/photos/296_pearl_star_balcony_atami_beach_castle_panorama.jpg",
+    "thumb": "assets/photos/296_pearl_star_balcony_atami_beach_castle_panorama.jpg",
+    "caption": "Panoramic coastal view from our balcony overlooking Atami Sun Beach, the marina, and Atami Castle atop the mountain ridge.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Atami Pearl Star Hotel \u00b7 Suite Balcony Terrace"
+  },
+  {
+    "url": "assets/photos/295_pearl_star_balcony_dad_mom_ocean_selfie.jpg",
+    "thumb": "assets/photos/295_pearl_star_balcony_dad_mom_ocean_selfie.jpg",
+    "caption": "John and Brittany smiling together on the private balcony with the bay and mountains behind them.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Atami Pearl Star Hotel \u00b7 Suite Balcony Terrace"
+  },
+  {
+    "url": "assets/photos/294_pearl_star_balcony_evelyn_deck_dance_pose.jpg",
+    "thumb": "assets/photos/294_pearl_star_balcony_evelyn_deck_dance_pose.jpg",
+    "caption": "Evelyn striking a happy pose on the wooden deck outside the sliding glass suite doors.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Atami Pearl Star Hotel \u00b7 Suite Balcony Terrace"
+  },
+  {
+    "url": "assets/photos/291_pearl_star_suite_grand_tatami_beds_layout.jpg",
+    "thumb": "assets/photos/291_pearl_star_suite_grand_tatami_beds_layout.jpg",
+    "caption": "The expansive suite layout with tatami lounge, twin beds, separate living zone, and floor-to-ceiling windows.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Atami Pearl Star Hotel \u00b7 Grand Ocean Suite"
+  },
+  {
+    "url": "assets/photos/290_pearl_star_suite_tatami_ocean_terrace_view.jpg",
+    "thumb": "assets/photos/290_pearl_star_suite_tatami_ocean_terrace_view.jpg",
+    "caption": "Tatami mat living area looking straight out to the private balcony onsen and Sagami Bay.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Atami Pearl Star Hotel \u00b7 Grand Ocean Suite"
+  },
+  {
+    "url": "assets/photos/292_pearl_star_suite_lincoln_peace_sign_entry.jpg",
+    "thumb": "assets/photos/292_pearl_star_suite_lincoln_peace_sign_entry.jpg",
+    "caption": "Lincoln giving a big peace sign in his cap and green tee in the new suite hallway.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Atami Pearl Star Hotel \u00b7 Grand Ocean Suite"
+  },
+  {
+    "url": "assets/photos/301_pearl_star_onsen_kids_soaking_terrace_bath.jpg",
+    "thumb": "assets/photos/301_pearl_star_onsen_kids_soaking_terrace_bath.jpg",
+    "caption": "Lincoln and Evelyn soaking happily in the warm thermal water with wooden bath buckets on hand.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Atami Pearl Star Hotel \u00b7 Private Balcony Onsen"
+  },
+  {
+    "url": "assets/photos/282_karuizawa_station_evelyn_pink_poncho_suitcase.jpg",
+    "thumb": "assets/photos/282_karuizawa_station_evelyn_pink_poncho_suitcase.jpg",
+    "caption": "Evelyn in her hooded pink rain poncho holding her suitcase handle at the station.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Karuizawa Station Concourse"
+  },
+  {
+    "url": "assets/photos/283_karuizawa_station_lincoln_red_rain_jacket.jpg",
+    "thumb": "assets/photos/283_karuizawa_station_lincoln_red_rain_jacket.jpg",
+    "caption": "Lincoln in his bright red rain jacket and cap carrying his backpack at the concourse.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Karuizawa Station Concourse"
+  },
+  {
+    "url": "assets/photos/284_karuizawa_platform_dad_holding_lincoln_trains.jpg",
+    "thumb": "assets/photos/284_karuizawa_platform_dad_holding_lincoln_trains.jpg",
+    "caption": "John holding Lincoln up on the platform as Lincoln takes photos of the Shinkansen.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Karuizawa Station Shinkansen Platform"
+  },
+  {
+    "url": "assets/photos/285_shinkansen_evelyn_laughing_seat_joy.jpg",
+    "thumb": "assets/photos/285_shinkansen_evelyn_laughing_seat_joy.jpg",
+    "caption": "Evelyn laughing with pure joy in her Gran Class leather armchair seat.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Hokuriku Shinkansen Gran Class"
+  },
+  {
+    "url": "assets/photos/286_shinkansen_evelyn_doll_window_smile.jpg",
+    "thumb": "assets/photos/286_shinkansen_evelyn_doll_window_smile.jpg",
+    "caption": "Evelyn smiling happily with her doll perched in the bullet train window.",
+    "day": "Day 7 \u00b7 Thu Aug 27",
+    "location": "Hokuriku Shinkansen Gran Class"
+  },
+  {
+    "url": "assets/photos/279_church_street_evelyn_glowing_heart_arch_lookout.jpg",
+    "thumb": "assets/photos/279_church_street_evelyn_glowing_heart_arch_lookout.jpg",
+    "caption": "Evelyn standing beneath the giant glowing heart arch at Church Street Karuizawa.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Church Street Karuizawa Courtyard"
+  },
+  {
+    "url": "assets/photos/280_church_street_evelyn_heart_sculpture_owl_pose.jpg",
+    "thumb": "assets/photos/280_church_street_evelyn_heart_sculpture_owl_pose.jpg",
+    "caption": "Evelyn posing beside the carved wooden owl at the heart sculpture base.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Church Street Karuizawa Courtyard"
+  },
+  {
+    "url": "assets/photos/281_church_street_evelyn_illuminated_heart_smile.jpg",
+    "thumb": "assets/photos/281_church_street_evelyn_illuminated_heart_smile.jpg",
+    "caption": "Evelyn smiling in the twilight courtyard framed by the illuminated heart.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Church Street Karuizawa Courtyard"
+  },
+  {
+    "url": "assets/photos/268_toy_kingdom_adventure_evelyn_aerial_cable_car.jpg",
+    "thumb": "assets/photos/268_toy_kingdom_adventure_evelyn_aerial_cable_car.jpg",
+    "caption": "Evelyn riding the wooden aerial cable car across the forest clearing.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Waku-Waku Great Adventure Forest"
+  },
+  {
+    "url": "assets/photos/278_toy_kingdom_adventure_evelyn_treetop_cable_ride.jpg",
+    "thumb": "assets/photos/278_toy_kingdom_adventure_evelyn_treetop_cable_ride.jpg",
+    "caption": "Evelyn gliding smoothly in the suspended wooden crate ride.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Waku-Waku Great Adventure Forest"
+  },
+  {
+    "url": "assets/photos/269_toy_kingdom_adventure_evelyn_obstacle_ramp_climb.jpg",
+    "thumb": "assets/photos/269_toy_kingdom_adventure_evelyn_obstacle_ramp_climb.jpg",
+    "caption": "Evelyn scrambling up the wooden timber obstacle ramp.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Waku-Waku Great Adventure Forest"
+  },
+  {
+    "url": "assets/photos/270_toy_kingdom_adventure_lincoln_rock_wall_scramble.jpg",
+    "thumb": "assets/photos/270_toy_kingdom_adventure_lincoln_rock_wall_scramble.jpg",
+    "caption": "Lincoln scaling the natural rock scramble beneath the treetop bridges.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Waku-Waku Great Adventure Forest"
+  },
+  {
+    "url": "assets/photos/271_toy_kingdom_adventure_lincoln_stump_stepping_path.jpg",
+    "thumb": "assets/photos/271_toy_kingdom_adventure_lincoln_stump_stepping_path.jpg",
+    "caption": "Lincoln balancing across the wooden tree stump path.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Waku-Waku Great Adventure Forest"
+  },
+  {
+    "url": "assets/photos/272_toy_kingdom_pottery_dad_helping_evelyn_paint.jpg",
+    "thumb": "assets/photos/272_toy_kingdom_pottery_dad_helping_evelyn_paint.jpg",
+    "caption": "John helping Evelyn detail her ceramic piece at the pottery studio table.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Handmade Workshop Hands!"
+  },
+  {
+    "url": "assets/photos/273_toy_kingdom_pottery_lincoln_focus_brushwork.jpg",
+    "thumb": "assets/photos/273_toy_kingdom_pottery_lincoln_focus_brushwork.jpg",
+    "caption": "Lincoln applying glaze with careful brushwork.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Handmade Workshop Hands!"
+  },
+  {
+    "url": "assets/photos/276_toy_kingdom_pottery_studio_table_wide_instructor.jpg",
+    "thumb": "assets/photos/276_toy_kingdom_pottery_studio_table_wide_instructor.jpg",
+    "caption": "Wide view of the family and studio instructor around the glaze painting table.",
+    "day": "Day 6 \u00b7 Wed Aug 26",
+    "location": "Handmade Workshop Hands!"
+  }
 ];
 
 // --- MAP PINS & ROUTE DATA ---
@@ -2327,6 +2901,33 @@ const plannedRouteCoords = [
 ];
 
 // --- RENDER FUNCTIONS ---
+
+function renderHighlights() {
+  const grid = document.getElementById('highlightsGrid');
+  if (!grid || typeof recentHighlights === 'undefined') return;
+  grid.innerHTML = recentHighlights.map((item, idx) => {
+    return '<div class="highlight-card" onclick="openLightbox(\'' + item.url + '\', \'image\', \'' + esc(item.caption) + '\')">' +
+      '<div class="highlight-thumb">' +
+        '<img src="' + item.thumb + '" alt="' + esc(item.caption) + '" loading="lazy">' +
+      '</div>' +
+      '<div class="highlight-meta">' +
+        '<div>' +
+          '<div class="highlight-loc">📍 ' + esc(item.location) + '</div>' +
+          '<p class="highlight-caption">' + esc(item.caption) + '</p>' +
+        '</div>' +
+        '<div class="highlight-day-tag">📅 ' + esc(item.day) + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function scrollToHighlights() {
+  const el = document.getElementById('newPhotosHighlights');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
@@ -2660,6 +3261,7 @@ function zoomTo(region) {
 
 // Init
 document.addEventListener('DOMContentLoaded', () => {
+  renderHighlights();
   renderDayFilter();
   renderFeed();
   initMap();
