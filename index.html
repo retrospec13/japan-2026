@@ -249,8 +249,8 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
         <div class="map-container" id="map"></div>
         <div class="map-quick-buttons">
           <button class="quick-btn" onclick="zoomTo('japan')">🇯🇵 All Japan</button>
-          <button class="quick-btn" onclick="zoomTo('karuizawa')">🌲 Karuizawa (Current)</button>
-          <button class="quick-btn" onclick="zoomTo('atami')">🏖️ Atami (Next Stop)</button>
+          <button class="quick-btn" onclick="zoomTo('atami')">🏖️ Atami (Current)</button>
+          <button class="quick-btn" onclick="zoomTo('karuizawa')">🌲 Karuizawa (Visited)</button>
           <button class="quick-btn" onclick="zoomTo('tokyo')">🗼 Tokyo (Visited)</button>
           <button class="quick-btn" onclick="zoomTo('kansai')">🏯 Osaka & Kyoto (Ahead)</button>
           <button class="quick-btn" onclick="zoomTo('coast')">🌊 Coast & Onsen (Ahead)</button>
@@ -281,6 +281,106 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 const tripPosts = [
+  {
+    "id": "post-40",
+    "date": "Thu Aug 27, 2026 · Afternoon",
+    "location": "Atami Pearl Star Hotel (熱海パールスターホテル) · Atami, Shizuoka",
+    "tag": "Seaside Arrival & Ocean Lounge",
+    "title": "Arriving in Atami and relaxing in the ocean lounge at Pearl Star Hotel",
+    "caption": "Two train rides later, we arrived at our coastal destination: Atami Pearl Star Hotel, perched right on Sagami Bay overlooking Atami Sun Beach.\n\nWhile waiting to check in, we settled into the beautiful open lounge with floor-to-ceiling windows looking out over the water. The staff welcomed us with iced Japanese tea and sweet wagashi treats. The kids relaxed in the comfortable booths after the morning of travel, and the ocean view is stunning.",
+    "media": [
+      {
+        "url": "assets/photos/260_pearl_star_hotel_lounge_dad_brittany_kids_welcome_tea.jpg",
+        "thumb": "assets/photos/260_pearl_star_hotel_lounge_dad_brittany_kids_welcome_tea.jpg",
+        "caption": "John, Brittany, Lincoln, and Evelyn in the Pearl Star Hotel ocean lounge with welcome tea."
+      },
+      {
+        "url": "assets/photos/261_pearl_star_hotel_lounge_family_table_welcome_sweets.jpg",
+        "thumb": "assets/photos/261_pearl_star_hotel_lounge_family_table_welcome_sweets.jpg",
+        "caption": "Family gathered around the lounge table with Japanese tea and sweet wagashi pastries."
+      },
+      {
+        "url": "assets/photos/262_pearl_star_hotel_lounge_evelyn_lincoln_tea_service.jpg",
+        "thumb": "assets/photos/262_pearl_star_hotel_lounge_evelyn_lincoln_tea_service.jpg",
+        "caption": "Evelyn and Lincoln at the table checking out the welcome tea and dessert presentation."
+      },
+      {
+        "url": "assets/photos/263_pearl_star_hotel_lounge_dad_evelyn_selfie.jpg",
+        "thumb": "assets/photos/263_pearl_star_hotel_lounge_dad_evelyn_selfie.jpg",
+        "caption": "John and Evelyn sharing a warm smile in the Pearl Star Hotel lounge."
+      },
+      {
+        "url": "assets/photos/264_pearl_star_hotel_lounge_dad_brittany_kids_lobby.jpg",
+        "thumb": "assets/photos/264_pearl_star_hotel_lounge_dad_brittany_kids_lobby.jpg",
+        "caption": "Lounge view of John and Brittany with Lincoln sitting back at the table."
+      },
+      {
+        "url": "assets/photos/265_pearl_star_hotel_lounge_dad_evelyn_smiles.jpg",
+        "thumb": "assets/photos/265_pearl_star_hotel_lounge_dad_evelyn_smiles.jpg",
+        "caption": "Evelyn smiling with Dad as we wait to check into our room."
+      },
+      {
+        "url": "assets/photos/266_pearl_star_hotel_lounge_dad_evelyn_happy_selfie.jpg",
+        "thumb": "assets/photos/266_pearl_star_hotel_lounge_dad_evelyn_happy_selfie.jpg",
+        "caption": "Happy arrival selfie in the lobby seating area."
+      },
+      {
+        "url": "assets/photos/267_pearl_star_hotel_lounge_dad_evelyn_warm_welcome.jpg",
+        "thumb": "assets/photos/267_pearl_star_hotel_lounge_dad_evelyn_warm_welcome.jpg",
+        "caption": "Relaxing in the comfortable lounge seats after our train journey from Karuizawa."
+      }
+    ]
+  },
+  {
+    "id": "post-39",
+    "date": "Thu Aug 27, 2026 · Morning",
+    "location": "Karuizawa Station to Shinkansen Gran Class · Nagano & Shizuoka",
+    "tag": "Bullet Train & Rainy Departure",
+    "title": "Leaving Karuizawa in rain ponchos and riding the Shinkansen down to the coast",
+    "caption": "We said goodbye to Karuizawa and headed to the train station in light rain, with Lincoln and Evelyn bundled up in their bright red and pink ponchos. On the platform, Evelyn and Lincoln found the Car 12 Shinkansen boarding marker and posed proudly.\n\nOnce aboard the high-speed bullet train, we settled into the luxurious Gran Class cabin. Evelyn set up her favorite dolls on the window sill to watch the Japanese countryside fly by, while Brittany relaxed with her Kindle. Lincoln waved happily from his roomy seat alongside Dad as we zoomed south toward Tokyo and Atami.",
+    "media": [
+      {
+        "url": "assets/photos/252_karuizawa_platform_rain_poncho_lincoln_evelyn_car12.jpg",
+        "thumb": "assets/photos/252_karuizawa_platform_rain_poncho_lincoln_evelyn_car12.jpg",
+        "caption": "Lincoln and Evelyn in their rain ponchos pointing at the Car 12 Shinkansen platform marker."
+      },
+      {
+        "url": "assets/photos/253_karuizawa_platform_evelyn_pointing_car12_marker.jpg",
+        "thumb": "assets/photos/253_karuizawa_platform_evelyn_pointing_car12_marker.jpg",
+        "caption": "Evelyn pointing down at the platform train car marker with Brittany in Karuizawa."
+      },
+      {
+        "url": "assets/photos/254_karuizawa_platform_evelyn_pink_poncho_brittany.jpg",
+        "thumb": "assets/photos/254_karuizawa_platform_evelyn_pink_poncho_brittany.jpg",
+        "caption": "Evelyn in her pink poncho with Brittany and the luggage on the Karuizawa platform."
+      },
+      {
+        "url": "assets/photos/255_shinkansen_train_ride_lincoln_dad_waving_poncho.jpg",
+        "thumb": "assets/photos/255_shinkansen_train_ride_lincoln_dad_waving_poncho.jpg",
+        "caption": "Lincoln and John smiling and waving from their Shinkansen seats."
+      },
+      {
+        "url": "assets/photos/256_shinkansen_train_ride_lincoln_dad_smiling_seats.jpg",
+        "thumb": "assets/photos/256_shinkansen_train_ride_lincoln_dad_smiling_seats.jpg",
+        "caption": "Lincoln and John enjoying the smooth high-speed ride across the mountains."
+      },
+      {
+        "url": "assets/photos/257_shinkansen_gran_class_brittany_reading_evelyn_dolls.jpg",
+        "thumb": "assets/photos/257_shinkansen_gran_class_brittany_reading_evelyn_dolls.jpg",
+        "caption": "Brittany reading on her Kindle while Evelyn plays with her dolls by the window in Gran Class."
+      },
+      {
+        "url": "assets/photos/258_shinkansen_gran_class_evelyn_brittany_seats.jpg",
+        "thumb": "assets/photos/258_shinkansen_gran_class_evelyn_brittany_seats.jpg",
+        "caption": "Evelyn sitting in the comfortable Gran Class seat with Brittany."
+      },
+      {
+        "url": "assets/photos/259_shinkansen_gran_class_evelyn_window_dolls.jpg",
+        "thumb": "assets/photos/259_shinkansen_gran_class_evelyn_window_dolls.jpg",
+        "caption": "Evelyn looking out the Shinkansen window with her dolls standing guard."
+      }
+    ]
+  },
   {
     "id": "post-38",
     "date": "Wed Aug 26, 2026 · Evening",
@@ -1875,19 +1975,31 @@ const tripPosts = [
 const mapPins = [
   // --- CURRENT BASE ---
   {
-    id: 'karuizawa-hotel',
-    name: 'Kyukaruizawa Kikyo, Curio Collection by Hilton',
-    city: 'karuizawa',
+    id: 'pearl-star-hotel',
+    name: 'Atami Pearl Star Hotel (熱海パールスターホテル)',
+    city: 'atami',
     status: 'current',
-    lat: 36.3551,
-    lon: 138.6348,
-    type: 'karuizawa',
+    lat: 35.0974,
+    lon: 139.0754,
+    type: 'atami',
     icon: '🏨',
-    tag: 'Current Stay · Aug 25–27',
-    desc: 'Our mountain resort base in Karuizawa. The 3rd-floor hallway features the famous "301-307 / EVELYN" wing sign! Evelyn had her 7th birthday dinner celebration here with courtyard garden views, pj dancing in the suite, and surprise birthday cake.'
+    tag: 'Current Base · Aug 27',
+    desc: 'Our luxury seaside hotel facing Sagami Bay and Atami Sun Beach. Welcomed in the top-floor ocean lounge with Japanese tea service and wagashi sweets while checking in.'
   },
 
   // --- PLACES VISITED ---
+  {
+    id: 'karuizawa-hotel',
+    name: 'Kyukaruizawa Kikyo, Curio Collection by Hilton',
+    city: 'karuizawa',
+    status: 'visited',
+    lat: 36.3551,
+    lon: 138.6348,
+    type: 'karuizawa',
+    icon: '🌲',
+    tag: 'Visited · Aug 25–27',
+    desc: 'Our mountain resort base in Karuizawa. The 3rd-floor hallway features the famous "301-307 / EVELYN" wing sign! Evelyn celebrated her 7th birthday here with courtyard garden views and pj dancing.'
+  },
   {
     id: 'tsurutontan-karuizawa',
     name: 'TsuruTonTan UDON NOODLE Brasserie Karuizawa',
@@ -2131,18 +2243,6 @@ const mapPins = [
     desc: 'Future connection point for the high-speed Shinkansen bullet train heading west.'
   },
   {
-    id: 'atami-beach',
-    name: 'Atami Sun Beach & Onsen Coast',
-    city: 'atami',
-    status: 'planned',
-    lat: 35.0968,
-    lon: 139.0760,
-    type: 'atami',
-    icon: '🏖️',
-    tag: 'Planned Stay · Next Stop',
-    desc: 'Upcoming coastal stop: palm-lined Atami Sun Beach on Sagami Bay, ocean breezes, swimming, and seaside onsen relaxation.'
-  },
-  {
     id: 'osaka',
     name: 'Osaka / Namba & Dotonbori',
     city: 'osaka',
@@ -2192,13 +2292,16 @@ const mapPins = [
   }
 ];
 
-// Visited route from airport to Tokyo base to Karuizawa
+// Visited route from airport to Tokyo base to Karuizawa and on to Atami
 const visitedMainRoute = [
   [35.7759, 140.3929], // Narita Airport
   [35.7116, 139.7766], // Tabi Ueno
   [36.2987, 138.7562], // Mount Myogi / Joshin-etsu Pass
-  [36.3551, 138.6348], // Kyukaruizawa Kikyo (Current Base)
-  [36.4731, 138.5427]  // Karuizawa Toy Kingdom
+  [36.3551, 138.6348], // Kyukaruizawa Kikyo (Visited Base)
+  [36.4731, 138.5427], // Karuizawa Toy Kingdom
+  [36.3422, 138.6353], // Karuizawa Station
+  [35.6812, 139.7671], // Tokyo Station Transit
+  [35.0974, 139.0754]  // Atami Pearl Star Hotel (Current Base)
 ];
 
 // Tokyo exploration path across visited spots
@@ -2214,8 +2317,7 @@ const visitedTokyoRoute = [
 
 // Upcoming planned route across Kansai, Coast & Onsen
 const plannedRouteCoords = [
-  [36.3551, 138.6348], // Karuizawa
-  [35.0968, 139.0760], // Atami Sun Beach
+  [35.0974, 139.0754], // Atami (Current Base)
   [34.6686, 135.5017], // Osaka
   [34.9858, 135.7588], // Kyoto
   [35.6178, 135.9701], // Mihama Coast
@@ -2324,6 +2426,7 @@ function renderDayFilter() {
   
   // Custom metadata for rich pill buttons
   const dayMeta = {
+    'Thu Aug 27': { label: "Day 7 · Shinkansen & Atami 🏖️", icon: '🏖️' },
     'Wed Aug 26': { label: "Day 6 · Toy Kingdom & Fishing 🌲", icon: '🌲' },
     'Tue Aug 25': { label: "Day 5 · Karuizawa & Birthday 🎂", icon: '🎂' },
     'Mon Aug 24': { label: "Day 4 · Sanrio Puroland 🎀", icon: '🎀' },
