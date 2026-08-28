@@ -257,8 +257,8 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 
 /* New Content Notification Banner & Tab Showcase */
 .new-photos-notification {
-  background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
-  color: #fff;
+  background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #f9a8d4 100%);
+  color: #831843;
   padding: 14px 18px;
   border-radius: var(--radius);
   margin-bottom: 20px;
@@ -270,7 +270,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: all .15s ease;
-  border: 1px solid rgba(255,255,255,.25);
+  border: 1px solid rgba(244,114,182,.45);
 }
 .new-photos-notification:hover {
   transform: translateY(-1px);
@@ -279,7 +279,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 }
 .new-photos-btn {
   background: #fff;
-  color: #1d4ed8;
+  color: #be185d;
   font-weight: 800;
   font-size: 13px;
   padding: 9px 16px;
@@ -290,7 +290,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
   align-items: center;
   gap: 6px;
   white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  box-shadow: 0 2px 8px rgba(190,24,93,.15);
   transition: all .15s ease;
 }
 .new-photos-btn:hover {
@@ -416,17 +416,17 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
   <main>
     <!-- Live Feed Tab -->
     <section class="tab-pane active" id="paneFeed">
-      <!-- New Photos Notification Banner -->
+      <!-- New Photos Notification Banner (Pastel Pink) -->
       <div class="new-photos-notification" onclick="switchTab('new')">
         <div style="display:flex;align-items:center;gap:12px;">
-          <span style="font-size:24px;">📸</span>
+          <span style="font-size:24px;">🌸</span>
           <div>
-            <div style="font-weight:800;font-size:15px;letter-spacing:-.01em;">New photos have been added for previous days!</div>
-            <div style="font-size:12.5px;opacity:.92;margin-top:2px;">Expanded Karuizawa pottery painting, adventure obstacle courses, Church Street heart arch & rainy station departure to Shinkansen.</div>
+            <div style="font-weight:800;font-size:15.5px;letter-spacing:-.01em;color:#831843;">New updates added for previous days!</div>
+            <div style="font-size:13px;font-weight:600;color:#9d174d;margin-top:2px;">Added our departure morning breakfast at Bakery & Restaurant Sawamura in Kyu-Karuizawa, fresh roastery coffee, and morning rain stroll.</div>
           </div>
         </div>
         <button class="new-photos-btn" onclick="event.stopPropagation();switchTab('new')">
-          Press here to see what was just added →
+          View newly added updates →
         </button>
       </div>
 
@@ -450,8 +450,8 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
       <div class="new-content-header">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
           <div>
-            <h2>✨ Newly Added & Expanded Photos</h2>
-            <p>Highlights of all 19 photos recently added to previous days across Karuizawa Toy Kingdom pottery & adventure, Church Street, and rainy Shinkansen departure.</p>
+            <h2>🌸 Newly Added & Expanded Updates</h2>
+            <p>Highlights of newly added photos from previous days, featuring our departure breakfast feast at Bakery & Restaurant Sawamura in Kyu-Karuizawa, morning street walk, and Karuizawa Toy Kingdom highlights.</p>
           </div>
           <button class="quick-btn" onclick="switchTab('feed')" style="padding:8px 16px;font-size:13px;font-weight:700">← Back to Live Journal</button>
         </div>
@@ -509,6 +509,55 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 <script>
 const recentHighlights = [
   {
+    "url": "assets/photos/353_sawamura_roastery_kyukaruizawa_storefront_rain.jpg",
+    "thumb": "assets/photos/353_sawamura_roastery_kyukaruizawa_storefront_rain.jpg",
+    "caption": "Sawamura Roastery and Bakery storefront along the quiet wet street in Kyu-Karuizawa.",
+    "day": "Day 7 · Thu Aug 27",
+    "location": "Sawamura Roastery Kyu-Karuizawa"
+  },
+  {
+    "url": "assets/photos/354_sawamura_breakfast_brittany_evelyn_alison_john_table.jpg",
+    "thumb": "assets/photos/354_sawamura_breakfast_brittany_evelyn_alison_john_table.jpg",
+    "caption": "John, Brittany, Evelyn, and Alison around our breakfast table in the open Sawamura dining room.",
+    "day": "Day 7 · Thu Aug 27",
+    "location": "Bakery & Restaurant Sawamura"
+  },
+  {
+    "url": "assets/photos/355_sawamura_breakfast_lincoln_brittany_alison_evelyn_smiles.jpg",
+    "thumb": "assets/photos/355_sawamura_breakfast_lincoln_brittany_alison_evelyn_smiles.jpg",
+    "caption": "Lincoln, Brittany, Alison, and Evelyn ready for a warm breakfast feast.",
+    "day": "Day 7 · Thu Aug 27",
+    "location": "Bakery & Restaurant Sawamura"
+  },
+  {
+    "url": "assets/photos/356_sawamura_breakfast_john_evelyn_alison_table.jpg",
+    "thumb": "assets/photos/356_sawamura_breakfast_john_evelyn_alison_table.jpg",
+    "caption": "John and Evelyn smiling at the long wooden table with Alison.",
+    "day": "Day 7 · Thu Aug 27",
+    "location": "Bakery & Restaurant Sawamura"
+  },
+  {
+    "url": "assets/photos/357_kyukaruizawa_rain_walk_evelyn_backwards_cap_smile.jpg",
+    "thumb": "assets/photos/357_kyukaruizawa_rain_walk_evelyn_backwards_cap_smile.jpg",
+    "caption": "Evelyn rocking her backwards trucker cap and beaming on the morning walk.",
+    "day": "Day 7 · Thu Aug 27",
+    "location": "Kyu-Karuizawa Streets"
+  },
+  {
+    "url": "assets/photos/358_kyukaruizawa_rain_walk_family_wet_street_stroll.jpg",
+    "thumb": "assets/photos/358_kyukaruizawa_rain_walk_family_wet_street_stroll.jpg",
+    "caption": "Morning stroll down the quiet, rain-washed street in Kyu-Karuizawa with mountain mist.",
+    "day": "Day 7 · Thu Aug 27",
+    "location": "Kyu-Karuizawa Streets"
+  },
+  {
+    "url": "assets/photos/359_kyukaruizawa_rain_walk_evelyn_skipping_street_turn.jpg",
+    "thumb": "assets/photos/359_kyukaruizawa_rain_walk_evelyn_skipping_street_turn.jpg",
+    "caption": "Evelyn turning back with a big smile as we walk back together.",
+    "day": "Day 7 · Thu Aug 27",
+    "location": "Kyu-Karuizawa Streets"
+  },
+    {
     "url": "assets/photos/282_karuizawa_station_evelyn_pink_poncho_suitcase.jpg",
     "thumb": "assets/photos/282_karuizawa_station_evelyn_pink_poncho_suitcase.jpg",
     "caption": "Evelyn in her hooded pink rain poncho holding her suitcase handle at the station.",
@@ -1139,6 +1188,51 @@ const tripPosts = [
         "caption": "Relaxing in the comfortable lounge seats after our train journey from Karuizawa."
       }
     ]
+  },
+  {
+      "id": "post-38-b",
+      "date": "Thu Aug 27, 2026 · Morning",
+      "location": "Bakery & Restaurant Sawamura Kyukaruizawa (ベーカリー&レストラン 沢村) · Nagano",
+      "tag": "Roastery Breakfast & Morning Stroll",
+      "title": "Departure breakfast feast at Bakery & Restaurant Sawamura and strong roastery coffee",
+      "caption": "Before catching our train out of Karuizawa, we walked down the quiet, rain-washed morning streets of Kyu-Karuizawa for breakfast at Bakery & Restaurant Sawamura.\n\nThe restaurant sits right across from their artisan roastery (Sawamura Roastery Karuizawa) with a gorgeous high-ceiling dining hall and open second-floor loft. The food was incredible—artisan freshly baked breads, hot breakfast platters, scrambled eggs, and delicious strong roast coffee. Evelyn rocked her backwards trucker cap and skipped down the wet asphalt with Lincoln, Brittany, and Alison as we walked back to grab our bags for the station.",
+      "media": [
+          {
+              "url": "assets/photos/353_sawamura_roastery_kyukaruizawa_storefront_rain.jpg",
+              "thumb": "assets/photos/353_sawamura_roastery_kyukaruizawa_storefront_rain.jpg",
+              "caption": "Sawamura Roastery and Bakery storefront along the quiet wet street in Kyu-Karuizawa."
+          },
+          {
+              "url": "assets/photos/354_sawamura_breakfast_brittany_evelyn_alison_john_table.jpg",
+              "thumb": "assets/photos/354_sawamura_breakfast_brittany_evelyn_alison_john_table.jpg",
+              "caption": "John, Brittany, Evelyn, and Alison around our breakfast table in the open Sawamura dining room."
+          },
+          {
+              "url": "assets/photos/355_sawamura_breakfast_lincoln_brittany_alison_evelyn_smiles.jpg",
+              "thumb": "assets/photos/355_sawamura_breakfast_lincoln_brittany_alison_evelyn_smiles.jpg",
+              "caption": "Lincoln, Brittany, Alison, and Evelyn ready for a warm breakfast feast."
+          },
+          {
+              "url": "assets/photos/356_sawamura_breakfast_john_evelyn_alison_table.jpg",
+              "thumb": "assets/photos/356_sawamura_breakfast_john_evelyn_alison_table.jpg",
+              "caption": "John and Evelyn smiling at the long wooden table with Alison."
+          },
+          {
+              "url": "assets/photos/357_kyukaruizawa_rain_walk_evelyn_backwards_cap_smile.jpg",
+              "thumb": "assets/photos/357_kyukaruizawa_rain_walk_evelyn_backwards_cap_smile.jpg",
+              "caption": "Evelyn rocking her backwards trucker cap and beaming on the morning walk."
+          },
+          {
+              "url": "assets/photos/358_kyukaruizawa_rain_walk_family_wet_street_stroll.jpg",
+              "thumb": "assets/photos/358_kyukaruizawa_rain_walk_family_wet_street_stroll.jpg",
+              "caption": "Morning stroll down the quiet, rain-washed street in Kyu-Karuizawa with mountain mist in the distance."
+          },
+          {
+              "url": "assets/photos/359_kyukaruizawa_rain_walk_evelyn_skipping_street_turn.jpg",
+              "thumb": "assets/photos/359_kyukaruizawa_rain_walk_evelyn_skipping_street_turn.jpg",
+              "caption": "Evelyn turning back with a big smile as we walk back together."
+          }
+      ]
   },
   {
     "id": "post-39",
@@ -2891,6 +2985,18 @@ const mapPins = [
   },
 
   // --- PLACES VISITED ---
+  {
+    id: 'sawamura-kyukaruizawa',
+    name: 'Bakery & Restaurant Sawamura Kyukaruizawa (ベーカリー&レストラン 沢村)',
+    city: 'karuizawa',
+    status: 'visited',
+    lat: 36.3578,
+    lon: 138.6342,
+    type: 'karuizawa',
+    icon: '☕',
+    tag: 'Visited · Aug 27 Breakfast',
+    desc: 'Acclaimed artisan bakery, roastery, and high-ceiling dining hall in Kyu-Karuizawa. Fantastic freshly baked breads, hot breakfast platters, and strong fresh-roasted coffee.'
+  },
   {
     id: 'osakana-shokudo-atami',
     name: 'Atami Ginza Osakana Shokudo (熱海銀座おさかな食堂)',
