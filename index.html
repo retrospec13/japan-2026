@@ -400,6 +400,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
       <span class="route-tag">Tokyo / Ueno</span>
       <span class="route-tag">Karuizawa (Nagano)</span>
       <span class="route-tag">Atami Beach</span>
+      <span class="route-tag">Shibuya / Tokyo</span>
       <span class="route-tag">Osaka</span>
       <span class="route-tag">Kyoto</span>
       <span class="route-tag">Mihama Coast</span>
@@ -409,7 +410,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 
   <nav class="nav-wrap">
     <button class="nav-btn active" id="tabFeed" onclick="switchTab('feed')">📸 Live Journal</button>
-    <button class="nav-btn" id="tabNew" onclick="switchTab('new')">✨ New Content <span style="font-size:11px;background:#2563eb;color:#fff;padding:2px 7px;border-radius:999px;font-weight:800;margin-left:2px">19</span></button>
+    <button class="nav-btn" id="tabNew" onclick="switchTab('new')">✨ New Content <span style="font-size:11px;background:#2563eb;color:#fff;padding:2px 7px;border-radius:999px;font-weight:800;margin-left:2px">28</span></button>
     <button class="nav-btn" id="tabMap" onclick="switchTab('map')">🗺️ Trip Map</button>
   </nav>
 
@@ -422,7 +423,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
           <span style="font-size:24px;">🌸</span>
           <div>
             <div style="font-weight:800;font-size:15.5px;letter-spacing:-.01em;color:#831843;">New updates added for previous days!</div>
-            <div style="font-size:13px;font-weight:600;color:#9d174d;margin-top:2px;">Added raw oyster feast at Oyster Bar Kagiya, Evelyn dancing on the waterfront compass mosaic, and Sawamura roastery breakfast in Kyu-Karuizawa.</div>
+            <div style="font-size:13px;font-weight:600;color:#9d174d;margin-top:2px;">Added Day 9 Shibuya arrival, Japanese Suite at Cerulean Tower, Mandarake underground, Dipper Dan crepes, Bic Camera 3D Pokémon screen, and John's new hairstyle at MEGA Donki!</div>
           </div>
         </div>
         <button class="new-photos-btn" onclick="event.stopPropagation();switchTab('new')">
@@ -451,7 +452,7 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
           <div>
             <h2>🌸 Newly Added & Expanded Updates</h2>
-            <p>Highlights of newly added photos from previous days, featuring our departure breakfast feast at Bakery & Restaurant Sawamura in Kyu-Karuizawa, morning street walk, and Karuizawa Toy Kingdom highlights.</p>
+            <p>Highlights of all 28 photos from Day 9 featuring our arrival in Shibuya, Cerulean Tower Japanese Suite, Mandarake basement vault, Dipper Dan crepes, 3D animated Pokémon cards at Bic Camera, and Dad's hilarious Shibuya hairstyle at MEGA Donki!</p>
           </div>
           <button class="quick-btn" onclick="switchTab('feed')" style="padding:8px 16px;font-size:13px;font-weight:700">← Back to Live Journal</button>
         </div>
@@ -476,7 +477,8 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
         <div class="map-container" id="map"></div>
         <div class="map-quick-buttons">
           <button class="quick-btn" onclick="zoomTo('japan')">🇯🇵 All Japan</button>
-          <button class="quick-btn" onclick="zoomTo('atami')">🏖️ Atami (Current)</button>
+          <button class="quick-btn" onclick="zoomTo('shibuya')">🗼 Shibuya Base (Current)</button>
+          <button class="quick-btn" onclick="zoomTo('atami')">🏖️ Atami (Visited)</button>
           <button class="quick-btn" onclick="zoomTo('karuizawa')">🌲 Karuizawa (Visited)</button>
           <button class="quick-btn" onclick="zoomTo('tokyo')">🗼 Tokyo (Visited)</button>
           <button class="quick-btn" onclick="zoomTo('kansai')">🏯 Osaka & Kyoto (Ahead)</button>
@@ -508,6 +510,132 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
 const recentHighlights = [
+  {
+    "url": "assets/photos/397_shibuya_street_john_local_hairstyle_wig_umbrella.jpg",
+    "thumb": "assets/photos/397_shibuya_street_john_local_hairstyle_wig_umbrella.jpg",
+    "caption": "John rocking the layered Shibuya host wig while holding an umbrella over the kids.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Shibuya Center-gai"
+  },
+  {
+    "url": "assets/photos/398_shibuya_street_john_hairstyle_kids_laughing.jpg",
+    "thumb": "assets/photos/398_shibuya_street_john_hairstyle_kids_laughing.jpg",
+    "caption": "Lincoln and Evelyn cracking up laughing at Dad's new Shibuya hairstyle.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Shibuya Streets"
+  },
+  {
+    "url": "assets/photos/399_shibuya_street_lincoln_evelyn_hysterics_wig.jpg",
+    "thumb": "assets/photos/399_shibuya_street_lincoln_evelyn_hysterics_wig.jpg",
+    "caption": "Lincoln and Evelyn in complete hysterics on the wet sidewalk.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Shibuya Streets"
+  },
+  {
+    "url": "assets/photos/400_shibuya_street_john_host_wig_peace_sign.jpg",
+    "thumb": "assets/photos/400_shibuya_street_john_host_wig_peace_sign.jpg",
+    "caption": "John giving a peace sign with the 10-step temporary hairstyle.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Shibuya Streets"
+  },
+  {
+    "url": "assets/photos/394_shibuya_bic_camera_pokemon_card_screen_john_lincoln.jpg",
+    "thumb": "assets/photos/394_shibuya_bic_camera_pokemon_card_screen_john_lincoln.jpg",
+    "caption": "John and Lincoln watching the 3D animated Pokémon card reveals at Bic Camera.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Bic Camera Shibuya Hachikoguchi"
+  },
+  {
+    "url": "assets/photos/393_shibuya_bic_camera_pokemon_card_3d_display.jpg",
+    "thumb": "assets/photos/393_shibuya_bic_camera_pokemon_card_3d_display.jpg",
+    "caption": "The giant 3D LED screen broadcasting Pokémon Card 151 pack openings.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Bic Camera Shibuya Hachikoguchi"
+  },
+  {
+    "url": "assets/photos/391_udagawa_police_box_family_crepe_selfie.jpg",
+    "thumb": "assets/photos/391_udagawa_police_box_family_crepe_selfie.jpg",
+    "caption": "Family crepe selfie outside the iconic curved Udagawa Police Box.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Udagawa Police Box · Shibuya"
+  },
+  {
+    "url": "assets/photos/390_dipper_dan_crepes_fresh_crepes_boba_tray.jpg",
+    "thumb": "assets/photos/390_dipper_dan_crepes_fresh_crepes_boba_tray.jpg",
+    "caption": "Fresh strawberry whipped cream crepes and iced bubble tea drinks.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Dipper Dan Crepe Shibuya BEAM"
+  },
+  {
+    "url": "assets/photos/385_mandarake_shibuya_spiral_stairs_manga_mural.jpg",
+    "thumb": "assets/photos/385_mandarake_shibuya_spiral_stairs_manga_mural.jpg",
+    "caption": "Descending the spiral stairs surrounded by the vintage manga mural at Mandarake.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Mandarake Shibuya BEAM B2F"
+  },
+  {
+    "url": "assets/photos/386_mandarake_shibuya_john_lincoln_retro_cases.jpg",
+    "thumb": "assets/photos/386_mandarake_shibuya_john_lincoln_retro_cases.jpg",
+    "caption": "John and Lincoln checking out glowing cases of vintage Pokémon cards and retro games.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Mandarake Shibuya"
+  },
+  {
+    "url": "assets/photos/381_cerulean_tokyu_japanese_suite_lincoln_evelyn_tatami.jpg",
+    "thumb": "assets/photos/381_cerulean_tokyu_japanese_suite_lincoln_evelyn_tatami.jpg",
+    "caption": "Lincoln and Evelyn relaxing on the tatami mats in the Japanese Suite Sakura.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Cerulean Tower Tokyu Hotel"
+  },
+  {
+    "url": "assets/photos/382_cerulean_tokyu_suite_shoji_lincoln_evelyn_collectibles.jpg",
+    "thumb": "assets/photos/382_cerulean_tokyu_suite_shoji_lincoln_evelyn_collectibles.jpg",
+    "caption": "Unpacking collectible plushies beside the traditional sliding shoji screens.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Cerulean Tower Tokyu Hotel"
+  },
+  {
+    "url": "assets/photos/378_atami_moon_terrace_evelyn_ballet_pose_fountain.jpg",
+    "thumb": "assets/photos/378_atami_moon_terrace_evelyn_ballet_pose_fountain.jpg",
+    "caption": "Evelyn striking a ballet pose at the Moon Terrace coastal fountain in Atami.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Atami Waterfront Park Moon Terrace"
+  },
+  {
+    "url": "assets/photos/379_atami_moon_terrace_evelyn_monument_arch_jump.jpg",
+    "thumb": "assets/photos/379_atami_moon_terrace_evelyn_monument_arch_jump.jpg",
+    "caption": "Evelyn leaping high inside the Moon Terrace monument arch.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Atami Waterfront Park Moon Terrace"
+  },
+  {
+    "url": "assets/photos/380_atami_moon_terrace_john_brittany_seaside_selfie.jpg",
+    "thumb": "assets/photos/380_atami_moon_terrace_john_brittany_seaside_selfie.jpg",
+    "caption": "John and Brittany seaside selfie overlooking Sagami Bay.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Moon Terrace · Atami"
+  },
+  {
+    "url": "assets/photos/375_atami_promenade_historic_phone_tile_evelyn_lincoln.jpg",
+    "thumb": "assets/photos/375_atami_promenade_historic_phone_tile_evelyn_lincoln.jpg",
+    "caption": "Lincoln and Evelyn exploring the Meiji 22 long-distance telephone service tile.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Atami Sun Beach Promenade"
+  },
+  {
+    "url": "assets/photos/377_atami_promenade_historic_rickshaw_tile_lincoln_evelyn.jpg",
+    "thumb": "assets/photos/377_atami_promenade_historic_rickshaw_tile_lincoln_evelyn.jpg",
+    "caption": "Lincoln and Evelyn standing over the Meiji 14 rickshaw opening story tile.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Atami Sun Beach Promenade"
+  },
+  {
+    "url": "assets/photos/373_pearl_star_breakfast_brittany_evelyn_lap.jpg",
+    "thumb": "assets/photos/373_pearl_star_breakfast_brittany_evelyn_lap.jpg",
+    "caption": "Brittany holding Evelyn on her lap during morning breakfast at Pearl Star Hotel.",
+    "day": "Day 9 · Sat Aug 29",
+    "location": "Atami Pearl Star Hotel"
+  },
   {
     "url": "assets/photos/365_oyster_bar_kagiya_fresh_raw_oysters_platter.jpg",
     "thumb": "assets/photos/365_oyster_bar_kagiya_fresh_raw_oysters_platter.jpg",
@@ -770,6 +898,216 @@ const recentHighlights = [
 ];
 
 const tripPosts = [
+  {
+    "id": "post-59",
+    "date": "Sat Aug 29, 2026 · Night",
+    "location": "MEGA Don Quijote Shibuya Honten (MEGAドン・キホーテ 渋谷本店) · Udagawacho",
+    "tag": "Local Hairstyle Debut & Sidewalk Hysterics",
+    "title": "Picking up a new Shibuya hairstyle to blend in with the locals",
+    "caption": "After grabbing dinner snacks and novelty shopping at the massive multi-story MEGA Don Quijote in Shibuya, John picked up a voluminous layered brown host-style wig to blend in with the locals!\n\nThe family refused to allow him to take more than 10 steps down the rainy sidewalk with his new hairdo, sending Lincoln and Evelyn into complete hysterics while Brittany snapped photos under the umbrellas. The new look is officially going into retirement until Halloween this year!",
+    "media": [
+      {
+        "url": "assets/photos/397_shibuya_street_john_local_hairstyle_wig_umbrella.jpg",
+        "thumb": "assets/photos/397_shibuya_street_john_local_hairstyle_wig_umbrella.jpg",
+        "caption": "John rocking the full Shibuya layered host wig while holding an umbrella over the kids."
+      },
+      {
+        "url": "assets/photos/398_shibuya_street_john_hairstyle_kids_laughing.jpg",
+        "thumb": "assets/photos/398_shibuya_street_john_hairstyle_kids_laughing.jpg",
+        "caption": "Lincoln and Evelyn cracking up at Dad's new Shibuya hairstyle."
+      },
+      {
+        "url": "assets/photos/399_shibuya_street_lincoln_evelyn_hysterics_wig.jpg",
+        "thumb": "assets/photos/399_shibuya_street_lincoln_evelyn_hysterics_wig.jpg",
+        "caption": "Lincoln and Evelyn laughing uncontrollably on the wet Shibuya sidewalk."
+      },
+      {
+        "url": "assets/photos/400_shibuya_street_john_host_wig_peace_sign.jpg",
+        "thumb": "assets/photos/400_shibuya_street_john_host_wig_peace_sign.jpg",
+        "caption": "John throwing up a peace sign with the 10-step temporary Shibuya hairstyle."
+      },
+      {
+        "url": "assets/photos/396_mega_don_quijote_shibuya_storefront_donpen.jpg",
+        "thumb": "assets/photos/396_mega_don_quijote_shibuya_storefront_donpen.jpg",
+        "caption": "The colorful entrance of MEGA Don Quijote Shibuya Honten with Donpen mascot."
+      }
+    ]
+  },
+  {
+    "id": "post-58",
+    "date": "Sat Aug 29, 2026 · Evening",
+    "location": "Bic Camera Shibuya Hachikoguchi (ビックカメラ 渋谷ハチ公口店) · Center-gai",
+    "tag": "Animated Pokémon 151 3D Screen Walk",
+    "title": "Watching 3D animated Pokémon card pack openings on the giant Shibuya screen",
+    "caption": "While strolling through the lively Shibuya Center-gai district in the rain, we stopped right outside Bic Camera Shibuya Hachikoguchi.\n\nThe massive multi-story building facade featured an enormous high-tech 3D LED screen broadcasting dynamic animated Pokémon Trading Card Game pack openings—revealing holographic Charizard and classic Pokémon 151 cards right above the illustrative window displays. John and Lincoln stood under their umbrellas mesmerized by the animated card reveals before heading deeper into the district for lunch.",
+    "media": [
+      {
+        "url": "assets/photos/394_shibuya_bic_camera_pokemon_card_screen_john_lincoln.jpg",
+        "thumb": "assets/photos/394_shibuya_bic_camera_pokemon_card_screen_john_lincoln.jpg",
+        "caption": "John and Lincoln watching the animated Pokémon card pack opening on the giant screen."
+      },
+      {
+        "url": "assets/photos/393_shibuya_bic_camera_pokemon_card_3d_display.jpg",
+        "thumb": "assets/photos/393_shibuya_bic_camera_pokemon_card_3d_display.jpg",
+        "caption": "The 3D digital LED display broadcasting Pokémon Card 151 holographic reveals."
+      },
+      {
+        "url": "assets/photos/392_shibuya_crossing_hachiko_bic_camera_screen.jpg",
+        "thumb": "assets/photos/392_shibuya_crossing_hachiko_bic_camera_screen.jpg",
+        "caption": "Looking across the rain-washed Shibuya intersection toward the Bic Camera facade."
+      },
+      {
+        "url": "assets/photos/395_shibuya_street_rain_walk_umbrella.jpg",
+        "thumb": "assets/photos/395_shibuya_street_rain_walk_umbrella.jpg",
+        "caption": "Walking through the bustling rainy streets of Shibuya under clear umbrellas."
+      }
+    ]
+  },
+  {
+    "id": "post-57",
+    "date": "Sat Aug 29, 2026 · Afternoon",
+    "location": "Dipper Dan Crepe (ディッパーダン 渋谷BEAM店) · Udagawacho, Shibuya",
+    "tag": "Crepes, Bubble Tea & Udagawa Police Box",
+    "title": "Fresh dessert crepes and family photo at the iconic Udagawa Police Box",
+    "caption": "After climbing back up from Mandarake, we grabbed dessert right across the street at Dipper Dan Crepe in the Shibuya BEAM building.\n\nWe ordered fresh crepes packed with whipped cream, chocolate sauce, and fresh strawberries, along with iced boba bubble teas. We enjoyed our afternoon sweets right by the street and snapped a fun family photo outside the famous curved architectural Udagawa Police Box (宇田川交番) before continuing our walk through Shibuya.",
+    "media": [
+      {
+        "url": "assets/photos/391_udagawa_police_box_family_crepe_selfie.jpg",
+        "thumb": "assets/photos/391_udagawa_police_box_family_crepe_selfie.jpg",
+        "caption": "John, Brittany, Lincoln, and Evelyn with fresh crepes outside the Udagawa Police Box."
+      },
+      {
+        "url": "assets/photos/390_dipper_dan_crepes_fresh_crepes_boba_tray.jpg",
+        "thumb": "assets/photos/390_dipper_dan_crepes_fresh_crepes_boba_tray.jpg",
+        "caption": "Freshly made strawberry whipped cream crepes and iced boba tea drinks."
+      },
+      {
+        "url": "assets/photos/389_dipper_dan_crepes_crepe_counter_menu.jpg",
+        "thumb": "assets/photos/389_dipper_dan_crepes_crepe_counter_menu.jpg",
+        "caption": "Checking out the extensive crepe selection and flavors at Dipper Dan."
+      }
+    ]
+  },
+  {
+    "id": "post-56",
+    "date": "Sat Aug 29, 2026 · Midday",
+    "location": "Mandarake Shibuya (まんだらけ 渋谷店) · Shibuya BEAM B2F",
+    "tag": "Basement Vault & Vintage Collectibles",
+    "title": "Diving into Mandarake underground: vintage manga murals and rare card cases",
+    "caption": "Next stop was Mandarake Shibuya, hidden deep beneath the city in Shibuya BEAM B2F.\n\nWe walked down the iconic spiral stairwell five flights down from the street, surrounded by the incredible hand-painted vintage manga mural on the ceiling. Inside the subterranean vault, the glass display cases were glowing with rare vintage Pokémon cards, retro video games, classic action figures, and endless rows of manga. John, Brittany, Lincoln, and Evelyn spent over an hour exploring the treasure trove of collectibles.",
+    "media": [
+      {
+        "url": "assets/photos/385_mandarake_shibuya_spiral_stairs_manga_mural.jpg",
+        "thumb": "assets/photos/385_mandarake_shibuya_spiral_stairs_manga_mural.jpg",
+        "caption": "Descending the spiral stairwell surrounded by the legendary vintage manga ceiling mural."
+      },
+      {
+        "url": "assets/photos/386_mandarake_shibuya_john_lincoln_retro_cases.jpg",
+        "thumb": "assets/photos/386_mandarake_shibuya_john_lincoln_retro_cases.jpg",
+        "caption": "John and Lincoln checking out the glowing glass display cases of rare collectibles."
+      },
+      {
+        "url": "assets/photos/387_mandarake_shibuya_lincoln_brittany_display_aisle.jpg",
+        "thumb": "assets/photos/387_mandarake_shibuya_lincoln_brittany_display_aisle.jpg",
+        "caption": "Lincoln and Brittany browsing the retro character goods and display shelves."
+      },
+      {
+        "url": "assets/photos/388_mandarake_shibuya_brittany_evelyn_manga_aisles.jpg",
+        "thumb": "assets/photos/388_mandarake_shibuya_brittany_evelyn_manga_aisles.jpg",
+        "caption": "Brittany and Evelyn exploring the packed floor-to-ceiling manga aisles."
+      }
+    ]
+  },
+  {
+    "id": "post-55",
+    "date": "Sat Aug 29, 2026 · Midday",
+    "location": "Cerulean Tower Tokyu Hotel (セルリアンタワー東急ホテル) · Shibuya, Tokyo",
+    "tag": "Japanese Suite Sakura & Skyline Views",
+    "title": "Checking into our Japanese Suite Sakura high above Shibuya at Cerulean Tower",
+    "caption": "After our 2-hour taxi ride from Atami into Tokyo, we arrived at Cerulean Tower Tokyu Hotel in Shibuya and checked into our Japanese Suite Sakura (桜).\n\nThe suite is a stunning blend of modern luxury and traditional Japanese design on the high executive floors, featuring tatami mat seating areas, authentic sliding shoji screens, low wooden desks, twin Western beds, and a fragrant Hinoki cypress wood soaking tub. Lincoln and Evelyn immediately unpacked their favorite plushies and toys on the tatami and took in the sweeping views of the rainy Tokyo skyline from the panoramic windows.",
+    "media": [
+      {
+        "url": "assets/photos/381_cerulean_tokyu_japanese_suite_lincoln_evelyn_tatami.jpg",
+        "thumb": "assets/photos/381_cerulean_tokyu_japanese_suite_lincoln_evelyn_tatami.jpg",
+        "caption": "Lincoln and Evelyn relaxing on the tatami mats in the Japanese Suite Sakura."
+      },
+      {
+        "url": "assets/photos/382_cerulean_tokyu_suite_shoji_lincoln_evelyn_collectibles.jpg",
+        "thumb": "assets/photos/382_cerulean_tokyu_suite_shoji_lincoln_evelyn_collectibles.jpg",
+        "caption": "Unpacking collectible plushies and toys beside the sliding shoji screens."
+      },
+      {
+        "url": "assets/photos/384_cerulean_tokyu_suite_evelyn_tatami_room_smile.jpg",
+        "thumb": "assets/photos/384_cerulean_tokyu_suite_evelyn_tatami_room_smile.jpg",
+        "caption": "Evelyn with a big smile exploring our spacious Japanese suite."
+      },
+      {
+        "url": "assets/photos/383_cerulean_tokyu_suite_window_city_view_rain.jpg",
+        "thumb": "assets/photos/383_cerulean_tokyu_suite_window_city_view_rain.jpg",
+        "caption": "Panoramic rainy skyline view looking out over Shibuya from the suite window."
+      }
+    ]
+  },
+  {
+    "id": "post-54",
+    "date": "Sat Aug 29, 2026 · Morning",
+    "location": "Atami Waterfront Park & Moon Terrace (親水公園・ムーンテラス) · Atami, Shizuoka",
+    "tag": "Historic Story Tiles & Moon Terrace Leaps",
+    "title": "Morning stroll along Atami Waterfront Park and historic Meiji story tiles",
+    "caption": "Before our taxi ride into Tokyo, we took a 30-minute morning stroll along Atami Waterfront Park and the Moon Terrace promenade beside the marina.\n\nLincoln and Evelyn loved tracking the historic ceramic story tiles embedded in the promenade walkway—including the tile commemorating Japan's first long-distance telephone service in Meiji 22 (1889) between Tokyo and Atami, the Atami Plum Festival, and the Meiji 14 road and rickshaw opening. Out on the Moon Terrace, Evelyn showed off her ballet moves and leaping poses framed inside the curved monument arches by the fountain, followed by a seaside selfie with John and Brittany.",
+    "media": [
+      {
+        "url": "assets/photos/378_atami_moon_terrace_evelyn_ballet_pose_fountain.jpg",
+        "thumb": "assets/photos/378_atami_moon_terrace_evelyn_ballet_pose_fountain.jpg",
+        "caption": "Evelyn striking an elegant ballet pose at the tip of Moon Terrace fountain."
+      },
+      {
+        "url": "assets/photos/379_atami_moon_terrace_evelyn_monument_arch_jump.jpg",
+        "thumb": "assets/photos/379_atami_moon_terrace_evelyn_monument_arch_jump.jpg",
+        "caption": "Evelyn getting major air leaping inside the Moon Terrace monument arch."
+      },
+      {
+        "url": "assets/photos/380_atami_moon_terrace_john_brittany_seaside_selfie.jpg",
+        "thumb": "assets/photos/380_atami_moon_terrace_john_brittany_seaside_selfie.jpg",
+        "caption": "John and Brittany sharing a morning seaside selfie overlooking Sagami Bay."
+      },
+      {
+        "url": "assets/photos/375_atami_promenade_historic_phone_tile_evelyn_lincoln.jpg",
+        "thumb": "assets/photos/375_atami_promenade_historic_phone_tile_evelyn_lincoln.jpg",
+        "caption": "Lincoln and Evelyn exploring the historic Meiji 22 (1889) Tokyo-Atami telephone service tile."
+      },
+      {
+        "url": "assets/photos/376_atami_promenade_historic_plum_festival_tile.jpg",
+        "thumb": "assets/photos/376_atami_promenade_historic_plum_festival_tile.jpg",
+        "caption": "Historic decorative tile celebrating the annual Atami Plum Blossom Festival."
+      },
+      {
+        "url": "assets/photos/377_atami_promenade_historic_rickshaw_tile_lincoln_evelyn.jpg",
+        "thumb": "assets/photos/377_atami_promenade_historic_rickshaw_tile_lincoln_evelyn.jpg",
+        "caption": "Lincoln and Evelyn standing over the Meiji 14 (1881) Odawara-Atami rickshaw road opening tile."
+      }
+    ]
+  },
+  {
+    "id": "post-53",
+    "date": "Sat Aug 29, 2026 · Early Morning",
+    "location": "Atami Pearl Star Hotel (熱海パールスターホテル) · Atami, Shizuoka",
+    "tag": "Morning Breakfast & Farewell to Sagami Bay",
+    "title": "Morning breakfast and taking in the final ocean views from Pearl Star Hotel",
+    "caption": "We started Day 9 with a peaceful breakfast at Atami Pearl Star Hotel overlooking Sagami Bay. Brittany held Evelyn on her lap while sipping morning coffee and enjoying fresh fruit and breakfast dishes, while John took in the morning view from the balcony looking out over the palm trees, coastal highway, and the quiet morning waters of the bay before packing up for our taxi ride into Tokyo.",
+    "media": [
+      {
+        "url": "assets/photos/373_pearl_star_breakfast_brittany_evelyn_lap.jpg",
+        "thumb": "assets/photos/373_pearl_star_breakfast_brittany_evelyn_lap.jpg",
+        "caption": "Brittany holding Evelyn on her lap during morning breakfast at Pearl Star Hotel."
+      },
+      {
+        "url": "assets/photos/374_pearl_star_balcony_morning_water_park_view.jpg",
+        "thumb": "assets/photos/374_pearl_star_balcony_morning_water_park_view.jpg",
+        "caption": "Morning balcony view overlooking Sagami Bay and the offshore water park."
+      }
+    ]
+  },
   {
   "id": "post-52",
   "date": "Fri Aug 28, 2026 · Night",
@@ -3124,19 +3462,91 @@ const tripPosts = [
 const mapPins = [
   // --- CURRENT BASE ---
   {
+    id: 'cerulean-tower-hotel',
+    name: 'Cerulean Tower Tokyu Hotel (セルリアンタワー東急ホテル)',
+    city: 'shibuya',
+    status: 'current',
+    lat: 35.6563,
+    lon: 139.6994,
+    type: 'tokyo',
+    icon: '🏨',
+    tag: 'Current Base · Aug 29',
+    desc: 'Our luxury high-rise hotel base in Shibuya. Staying in the spacious Japanese Suite Sakura (桜) on the high executive floors featuring tatami mats, authentic sliding shoji screens, hinoki cypress bath, and sweeping Tokyo skyline views.'
+  },
+
+  // --- PLACES VISITED ---
+  {
+    id: 'mega-donki-shibuya',
+    name: 'MEGA Don Quijote Shibuya Honten (MEGAドン・キホーテ 渋谷本店)',
+    city: 'shibuya',
+    status: 'visited',
+    lat: 35.6606,
+    lon: 139.6975,
+    type: 'tokyo',
+    icon: '🐧',
+    tag: 'Visited · Aug 29 Night',
+    desc: 'Multi-story MEGA Donki flagship store in Udagawacho. Novelty shopping, snacks, and the debut of John\'s famous local Shibuya host wig!'
+  },
+  {
+    id: 'bic-camera-hachiko',
+    name: 'Bic Camera Shibuya Hachikoguchi (ビックカメラ 渋谷ハチ公口店)',
+    city: 'shibuya',
+    status: 'visited',
+    lat: 35.6596,
+    lon: 139.7005,
+    type: 'tokyo',
+    icon: '✨',
+    tag: 'Visited · Aug 29 Evening',
+    desc: 'Bustling electronics landmark featuring an enormous 3D animated LED screen facade broadcasting Pokémon Card 151 pack openings and holographic Charizard reveals.'
+  },
+  {
+    id: 'dipper-dan-shibuya',
+    name: 'Dipper Dan Crepe & Udagawa Police Box (ディッパーダン 渋谷BEAM店)',
+    city: 'shibuya',
+    status: 'visited',
+    lat: 35.6610,
+    lon: 139.6981,
+    type: 'tokyo',
+    icon: '🍓',
+    tag: 'Visited · Aug 29 Afternoon',
+    desc: 'Fresh strawberry dessert crepes and iced boba tea right across from the iconic architectural Udagawa Police Box.'
+  },
+  {
+    id: 'mandarake-shibuya',
+    name: 'Mandarake Shibuya (まんだらけ 渋谷店)',
+    city: 'shibuya',
+    status: 'visited',
+    lat: 35.6608,
+    lon: 139.6983,
+    type: 'tokyo',
+    icon: '👾',
+    tag: 'Visited · Aug 29 Midday',
+    desc: 'Iconic underground collectible mecca located 5 flights down in Shibuya BEAM B2F. Hand-painted vintage manga ceiling stairwell, rare Pokémon cards, and retro games.'
+  },
+  {
+    id: 'atami-moon-terrace',
+    name: 'Atami Waterfront Park & Moon Terrace (親水公園・ムーンテラス)',
+    city: 'atami',
+    status: 'visited',
+    lat: 35.0935,
+    lon: 139.0758,
+    type: 'atami',
+    icon: '🌊',
+    tag: 'Visited · Aug 29 Morning',
+    desc: 'Tiled coastal promenade along Atami marina featuring historic Meiji telephone & rickshaw story tiles and curved monument arches at the fountain.'
+  },
+  {
     id: 'pearl-star-hotel',
     name: 'Atami Pearl Star Hotel (熱海パールスターホテル)',
     city: 'atami',
-    status: 'current',
+    status: 'visited',
     lat: 35.0974,
     lon: 139.0754,
     type: 'atami',
     icon: '🏨',
-    tag: 'Current Base · Aug 27',
-    desc: 'Our luxury seaside hotel facing Sagami Bay and Atami Sun Beach. Welcomed in the top-floor ocean lounge with Japanese tea service and wagashi sweets while checking in.'
+    tag: 'Visited Base · Aug 27–29',
+    desc: 'Our luxury seaside hotel facing Sagami Bay and Atami Sun Beach. Private balcony onsen bath with sweeping bay views and morning buffet.'
   },
-
-  // --- PLACES VISITED ---
   {
     id: 'oyster-bar-kagiya',
     name: 'Oyster Bar Kagiya (オイスターバー かぎや)',
@@ -3523,7 +3933,8 @@ const visitedMainRoute = [
   [36.4731, 138.5427], // Karuizawa Toy Kingdom
   [36.3422, 138.6353], // Karuizawa Station
   [35.6812, 139.7671], // Tokyo Station Transit
-  [35.0974, 139.0754]  // Atami Pearl Star Hotel (Current Base)
+  [35.0974, 139.0754], // Atami Pearl Star Hotel (Visited Base)
+  [35.6563, 139.6994]  // Cerulean Tower Tokyu Hotel Shibuya (Current Base)
 ];
 
 // Tokyo exploration path across visited spots
@@ -3534,12 +3945,17 @@ const visitedTokyoRoute = [
   [35.7100, 139.7747], // Ameyoko / Yamashiroya
   [35.6904, 139.7056], // Godzilla Store (Shinjuku)
   [35.6685, 139.7052], // Harakado & Tamagotchi Factory (Harajuku)
-  [35.6255, 139.4287]  // Sanrio Puroland (Tama Center)
+  [35.6255, 139.4287], // Sanrio Puroland (Tama Center)
+  [35.6563, 139.6994], // Cerulean Tower Tokyu Hotel (Shibuya Base)
+  [35.6608, 139.6983], // Mandarake Shibuya (BEAM B2F)
+  [35.6610, 139.6981], // Dipper Dan Crepe & Udagawa Police Box
+  [35.6596, 139.7005], // Bic Camera Shibuya Hachikoguchi (3D Pokémon Screen)
+  [35.6606, 139.6975]  // MEGA Don Quijote Shibuya Honten
 ];
 
 // Upcoming planned route across Kansai, Coast & Onsen
 const plannedRouteCoords = [
-  [35.0974, 139.0754], // Atami (Current Base)
+  [35.6563, 139.6994], // Shibuya Cerulean Base
   [34.6686, 135.5017], // Osaka
   [34.9858, 135.7588], // Kyoto
   [35.6178, 135.9701], // Mihama Coast
@@ -3649,6 +4065,7 @@ function renderDayFilter() {
   
   // Custom metadata for rich pill buttons
   const dayMeta = {
+    'Sat Aug 29': { label: "Day 9 · Shibuya & Cerulean Base 🗼", icon: '🗼' },
     'Fri Aug 28': { label: "Day 8 · Water Park & Atami Bay 🌊", icon: '🌊' },
     'Thu Aug 27': { label: "Day 7 · Shinkansen & Atami 🏖️", icon: '🏖️' },
     'Wed Aug 26': { label: "Day 6 · Toy Kingdom & Fishing 🌲", icon: '🌲' },
@@ -3926,6 +4343,8 @@ function zoomTo(region) {
     map.flyTo([35.695, 139.755], 12, { duration: 0.8 });
   } else if (region === 'kansai') {
     map.flyTo([34.85, 135.65], 10, { duration: 0.8 });
+  } else if (region === 'shibuya') {
+    map.flyTo([35.658, 139.699], 15, { duration: 0.8 });
   } else if (region === 'atami') {
     map.flyTo([35.097, 139.076], 13, { duration: 0.8 });
   } else if (region === 'coast') {
