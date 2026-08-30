@@ -422,8 +422,8 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
         <div style="display:flex;align-items:center;gap:12px;">
           <span style="font-size:24px;">🌸</span>
           <div>
-            <div style="font-weight:800;font-size:15.5px;letter-spacing:-.01em;color:#831843;">New updates added for previous days!</div>
-            <div style="font-size:13px;font-weight:600;color:#9d174d;margin-top:2px;">Added Day 9 Shibuya arrival, Japanese Suite at Cerulean Tower, Mandarake underground, Dipper Dan crepes, Bic Camera 3D Pokémon screen, and John's new hairstyle at MEGA Donki!</div>
+            <div style="font-weight:800;font-size:15.5px;letter-spacing:-.01em;color:#831843;">✨ Day 10 Live from Tokyo!</div>
+            <div style="font-size:13px;font-weight:600;color:#9d174d;margin-top:2px;">Added Super Yosakoi dancing festival at Yoyogi Park, custom engraved wooden charms, Shibuya PARCO (Pokémon Center Mewtwo, Nintendo TOKYO, Sylvanian Families), rooftop matcha, Ebisu Rocket Park, WAREHOUSE vintage denim, and claw machine arcade fun!</div>
           </div>
         </div>
         <button class="new-photos-btn" onclick="event.stopPropagation();switchTab('new')">
@@ -511,393 +511,304 @@ footer{text-align:center;padding:24px 16px;color:var(--muted);font-size:13px;bor
 <script>
 const recentHighlights = [
   {
-    "url": "assets/photos/382_mega_don_quijote_shibuya_storefront_crosswalk.jpg",
-    "thumb": "assets/photos/382_mega_don_quijote_shibuya_storefront_crosswalk.jpg",
-    "caption": "Crossing the wet Shibuya street toward the massive yellow MEGA Don Quijote entrance.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "MEGA Don Quijote Shibuya Honten"
+    "url": "assets/photos/401_super_yosakoi_wooden_charms_engraving_lincoln.jpg",
+    "thumb": "assets/photos/401_super_yosakoi_wooden_charms_engraving_lincoln.jpg",
+    "caption": "Custom engraved festival wooden charm necklaces with Lincoln and Evelyn's names and Thunder God artwork.",
+    "day": "Day 10 · Sun Aug 30",
+    "location": "Super Yosakoi Festival · Yoyogi Park"
   },
   {
-    "url": "assets/photos/389_shibuya_street_john_host_wig_umbrella.jpg",
-    "thumb": "assets/photos/389_shibuya_street_john_host_wig_umbrella.jpg",
-    "caption": "John rocking the layered Shibuya host wig under a clear umbrella.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Shibuya Center-gai"
+    "url": "assets/photos/404_super_yosakoi_parade_team_fan_dance.jpg",
+    "thumb": "assets/photos/404_super_yosakoi_parade_team_fan_dance.jpg",
+    "caption": "Yosakoi dance troupe performing synchronized fan movements along the Yoyogi Zelkova avenue.",
+    "day": "Day 10 · Sun Aug 30",
+    "location": "Yoyogi Park Zelkova Avenue"
   },
   {
-    "url": "assets/photos/390_shibuya_street_john_host_wig_family_laughing.jpg",
-    "thumb": "assets/photos/390_shibuya_street_john_host_wig_family_laughing.jpg",
-    "caption": "Brittany, Lincoln, and Evelyn cracking up laughing at Dad's new Shibuya hairstyle.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Shibuya Streets"
+    "url": "assets/photos/415_shibuya_parco_pokemon_center_mewtwo_tank.jpg",
+    "thumb": "assets/photos/415_shibuya_parco_pokemon_center_mewtwo_tank.jpg",
+    "caption": "The life-sized Mewtwo suspended in the cryogenic incubation tank at Pokémon Center SHIBUYA.",
+    "day": "Day 10 · Sun Aug 30",
+    "location": "Pokémon Center SHIBUYA · PARCO 6F"
   },
   {
-    "url": "assets/photos/394_shibuya_street_john_host_wig_lincoln_boba.jpg",
-    "thumb": "assets/photos/394_shibuya_street_john_host_wig_lincoln_boba.jpg",
-    "caption": "Lincoln enjoying his boba drink while John poses in the temporary Shibuya hairstyle.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Shibuya Streets"
+    "url": "assets/photos/417_shibuya_parco_nintendo_tokyo_mario_statue.jpg",
+    "thumb": "assets/photos/417_shibuya_parco_nintendo_tokyo_mario_statue.jpg",
+    "caption": "Lincoln greeting Mario leaping out of the warp pipe at Nintendo TOKYO.",
+    "day": "Day 10 · Sun Aug 30",
+    "location": "Nintendo TOKYO · PARCO 6F"
   },
   {
-    "url": "assets/photos/388_udagawa_police_box_family_crepe_selfie.jpg",
-    "thumb": "assets/photos/388_udagawa_police_box_family_crepe_selfie.jpg",
-    "caption": "Family crepe selfie outside the iconic curved Udagawa Police Box.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Udagawa Police Box · Shibuya"
+    "url": "assets/photos/420_shibuya_parco_sylvanian_families_evelyn_storefront.jpg",
+    "thumb": "assets/photos/420_shibuya_parco_sylvanian_families_evelyn_storefront.jpg",
+    "caption": "Evelyn outside the Sylvanian Families (Calico Critters) specialty store on 5F of Shibuya PARCO.",
+    "day": "Day 10 · Sun Aug 30",
+    "location": "Sylvanian Families Store · PARCO 5F"
   },
   {
-    "url": "assets/photos/391_shibuya_bic_camera_3d_pokemon_screen_pack_opening.jpg",
-    "thumb": "assets/photos/391_shibuya_bic_camera_3d_pokemon_screen_pack_opening.jpg",
-    "caption": "The giant 3D curved screen at Bic Camera broadcasting animated Pokémon 151 card reveals.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Bic Camera Shibuya Hachikoguchi"
+    "url": "assets/photos/423_shibuya_parco_rooftop_garden_family_selfie.jpg",
+    "thumb": "assets/photos/423_shibuya_parco_rooftop_garden_family_selfie.jpg",
+    "caption": "Family selfie on the breezy 10F Rooftop Park of Shibuya PARCO with Lincoln wearing his Snorlax visor.",
+    "day": "Day 10 · Sun Aug 30",
+    "location": "Shibuya PARCO Rooftop Park"
   },
   {
-    "url": "assets/photos/397_mandarake_shibuya_spiral_stairs_manga_mural_view.jpg",
-    "thumb": "assets/photos/397_mandarake_shibuya_spiral_stairs_manga_mural_view.jpg",
-    "caption": "Looking down the iconic spiral staircase surrounded by the vintage manga ceiling mural at Mandarake.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Mandarake Shibuya BEAM B2F"
+    "url": "assets/photos/428_ebisu_park_rocket_train_playground_wide.jpg",
+    "thumb": "assets/photos/428_ebisu_park_rocket_train_playground_wide.jpg",
+    "caption": "Ebisu Rocket Park featuring the concrete playground locomotive and rocket slide tower.",
+    "day": "Day 10 · Sun Aug 30",
+    "location": "Ebisu Park (Rocket Park)"
   },
   {
-    "url": "assets/photos/384_mandarake_shibuya_retro_cases_john_lincoln_selfie.jpg",
-    "thumb": "assets/photos/384_mandarake_shibuya_retro_cases_john_lincoln_selfie.jpg",
-    "caption": "John and Lincoln checking out glowing cases of vintage Pokémon cards and retro games.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Mandarake Shibuya"
-  },
-  {
-    "url": "assets/photos/385_mandarake_shibuya_lincoln_gengar_brittany_evelyn_aisle.jpg",
-    "thumb": "assets/photos/385_mandarake_shibuya_lincoln_gengar_brittany_evelyn_aisle.jpg",
-    "caption": "Lincoln in his Gengar tee exploring the collectibles aisle with Brittany and Evelyn.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Mandarake Shibuya"
-  },
-  {
-    "url": "assets/photos/399_cerulean_tokyu_japanese_suite_twin_beds_city_view.jpg",
-    "thumb": "assets/photos/399_cerulean_tokyu_japanese_suite_twin_beds_city_view.jpg",
-    "caption": "Lincoln and Evelyn in our Japanese Suite Sakura at Cerulean Tower Tokyu Hotel.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Cerulean Tower Tokyu Hotel"
-  },
-  {
-    "url": "assets/photos/400_cerulean_tokyu_japanese_suite_lincoln_evelyn_play.jpg",
-    "thumb": "assets/photos/400_cerulean_tokyu_japanese_suite_lincoln_evelyn_play.jpg",
-    "caption": "Playing on the tatami mats beside the low writing desk in our suite.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Cerulean Tower Tokyu Hotel"
-  },
-  {
-    "url": "assets/photos/378_atami_moon_terrace_evelyn_ballet_pose_fountain.jpg",
-    "thumb": "assets/photos/378_atami_moon_terrace_evelyn_ballet_pose_fountain.jpg",
-    "caption": "Evelyn striking a ballet pose at the Moon Terrace coastal fountain in Atami.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Atami Waterfront Park Moon Terrace"
-  },
-  {
-    "url": "assets/photos/379_atami_moon_terrace_evelyn_monument_arch_jump.jpg",
-    "thumb": "assets/photos/379_atami_moon_terrace_evelyn_monument_arch_jump.jpg",
-    "caption": "Evelyn leaping high inside the Moon Terrace monument arch.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Atami Waterfront Park Moon Terrace"
-  },
-  {
-    "url": "assets/photos/380_atami_moon_terrace_john_brittany_seaside_selfie.jpg",
-    "thumb": "assets/photos/380_atami_moon_terrace_john_brittany_seaside_selfie.jpg",
-    "caption": "John and Brittany seaside selfie overlooking Sagami Bay.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Moon Terrace · Atami"
-  },
-  {
-    "url": "assets/photos/375_atami_promenade_historic_phone_tile_lincoln_evelyn.jpg",
-    "thumb": "assets/photos/375_atami_promenade_historic_phone_tile_lincoln_evelyn.jpg",
-    "caption": "Lincoln and Evelyn exploring the Meiji 22 long-distance telephone service tile.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Atami Sun Beach Promenade"
-  },
-  {
-    "url": "assets/photos/381_atami_promenade_historic_rickshaw_tile_evelyn.jpg",
-    "thumb": "assets/photos/381_atami_promenade_historic_rickshaw_tile_evelyn.jpg",
-    "caption": "Evelyn exploring the Meiji 14 rickshaw opening story tile.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Atami Sun Beach Promenade"
-  },
-  {
-    "url": "assets/photos/374_pearl_star_breakfast_brittany_evelyn_lap.jpg",
-    "thumb": "assets/photos/374_pearl_star_breakfast_brittany_evelyn_lap.jpg",
-    "caption": "Brittany holding Evelyn on her lap during morning breakfast at Pearl Star Hotel.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Atami Pearl Star Hotel"
-  },
-  {
-    "url": "assets/photos/373_pearl_star_balcony_morning_water_park_view.jpg",
-    "thumb": "assets/photos/373_pearl_star_balcony_morning_water_park_view.jpg",
-    "caption": "Morning balcony view over Sagami Bay and the offshore water park.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Atami Pearl Star Hotel"
-  },
-  {
-    "url": "assets/photos/365_oyster_bar_kagiya_fresh_raw_oysters_platter.jpg",
-    "thumb": "assets/photos/365_oyster_bar_kagiya_fresh_raw_oysters_platter.jpg",
-    "caption": "Platter of fresh raw oysters on crushed ice at Oyster Bar Kagiya.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Oyster Bar Kagiya · Atami Ginza"
-  },
-  {
-    "url": "assets/photos/370_oyster_bar_kagiya_lincoln_slurping_raw_oyster.jpg",
-    "thumb": "assets/photos/370_oyster_bar_kagiya_lincoln_slurping_raw_oyster.jpg",
-    "caption": "Lincoln slurping down his very first raw oyster in one go!",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Oyster Bar Kagiya · Atami Ginza"
-  },
-  {
-    "url": "assets/photos/371_oyster_bar_kagiya_lincoln_proud_oyster_smile.jpg",
-    "thumb": "assets/photos/371_oyster_bar_kagiya_lincoln_proud_oyster_smile.jpg",
-    "caption": "Lincoln beaming with pride after finishing his raw oyster.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Oyster Bar Kagiya · Atami Ginza"
-  },
-  {
-    "url": "assets/photos/372_oyster_bar_kagiya_lincoln_showing_empty_shell.jpg",
-    "thumb": "assets/photos/372_oyster_bar_kagiya_lincoln_showing_empty_shell.jpg",
-    "caption": "Lincoln proudly displaying the clean empty oyster shell with both hands.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Oyster Bar Kagiya · Atami Ginza"
-  },
-  {
-    "url": "assets/photos/366_oyster_bar_kagiya_lincoln_lemon_sauce_drizzle.jpg",
-    "thumb": "assets/photos/366_oyster_bar_kagiya_lincoln_lemon_sauce_drizzle.jpg",
-    "caption": "Lincoln carefully drizzling citrus dressing over his raw oyster.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Oyster Bar Kagiya · Atami Ginza"
-  },
-  {
-    "url": "assets/photos/369_oyster_bar_kagiya_evelyn_chopstick_game_face.jpg",
-    "thumb": "assets/photos/369_oyster_bar_kagiya_evelyn_chopstick_game_face.jpg",
-    "caption": "Evelyn making a hilarious determined game face with chopsticks at the table.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Oyster Bar Kagiya · Atami Ginza"
-  },
-  {
-    "url": "assets/photos/362_atami_waterfront_park_evelyn_compass_mosaic_run.jpg",
-    "thumb": "assets/photos/362_atami_waterfront_park_evelyn_compass_mosaic_run.jpg",
-    "caption": "Evelyn running across the compass and dancer mosaic tiles at Atami Waterfront Park plaza.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Atami Waterfront Park Plaza"
-  },
-  {
-    "url": "assets/photos/363_atami_waterfront_park_evelyn_mosaic_dance.jpg",
-    "thumb": "assets/photos/363_atami_waterfront_park_evelyn_mosaic_dance.jpg",
-    "caption": "Evelyn dancing happily across the coastal plaza overlooking the harbor.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Atami Waterfront Park Plaza"
-  },
-  {
-    "url": "assets/photos/364_atami_waterfront_park_evelyn_running_castle_view.jpg",
-    "thumb": "assets/photos/364_atami_waterfront_park_evelyn_running_castle_view.jpg",
-    "caption": "Evelyn sprinting across the mosaic terrace with Atami Castle visible on the ridge.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Atami Waterfront Park Plaza"
-  },
-  {
-    "url": "assets/photos/360_pearl_star_balcony_lincoln_gazing_ocean.jpg",
-    "thumb": "assets/photos/360_pearl_star_balcony_lincoln_gazing_ocean.jpg",
-    "caption": "Lincoln sitting back on the balcony lounger gazing out over the water.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Suite Balcony · Atami Pearl Star Hotel"
-  },
-  {
-    "url": "assets/photos/361_pearl_star_balcony_dad_evelyn_piggyback.jpg",
-    "thumb": "assets/photos/361_pearl_star_balcony_dad_evelyn_piggyback.jpg",
-    "caption": "John carrying Evelyn piggyback along the balcony railing overlooking the Atami hills.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Suite Balcony · Atami Pearl Star Hotel"
-  },
-  {
-    "url": "assets/photos/353_sawamura_roastery_kyukaruizawa_storefront_rain.jpg",
-    "thumb": "assets/photos/353_sawamura_roastery_kyukaruizawa_storefront_rain.jpg",
-    "caption": "Sawamura Roastery and Bakery storefront along the quiet wet street in Kyu-Karuizawa.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Sawamura Roastery Kyu-Karuizawa"
-  },
-  {
-    "url": "assets/photos/354_sawamura_breakfast_brittany_evelyn_alison_john_table.jpg",
-    "thumb": "assets/photos/354_sawamura_breakfast_brittany_evelyn_alison_john_table.jpg",
-    "caption": "John, Brittany, Evelyn, and Alison around our breakfast table in the open Sawamura dining room.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Bakery & Restaurant Sawamura"
-  },
-  {
-    "url": "assets/photos/355_sawamura_breakfast_lincoln_brittany_alison_evelyn_smiles.jpg",
-    "thumb": "assets/photos/355_sawamura_breakfast_lincoln_brittany_alison_evelyn_smiles.jpg",
-    "caption": "Lincoln, Brittany, Alison, and Evelyn ready for a warm breakfast feast.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Bakery & Restaurant Sawamura"
-  },
-  {
-    "url": "assets/photos/356_sawamura_breakfast_john_evelyn_alison_table.jpg",
-    "thumb": "assets/photos/356_sawamura_breakfast_john_evelyn_alison_table.jpg",
-    "caption": "John and Evelyn smiling at the long wooden table with Alison.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Bakery & Restaurant Sawamura"
-  },
-  {
-    "url": "assets/photos/357_kyukaruizawa_rain_walk_evelyn_backwards_cap_smile.jpg",
-    "thumb": "assets/photos/357_kyukaruizawa_rain_walk_evelyn_backwards_cap_smile.jpg",
-    "caption": "Evelyn rocking her backwards trucker cap and beaming on the morning walk.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Kyu-Karuizawa Streets"
-  },
-  {
-    "url": "assets/photos/358_kyukaruizawa_rain_walk_family_wet_street_stroll.jpg",
-    "thumb": "assets/photos/358_kyukaruizawa_rain_walk_family_wet_street_stroll.jpg",
-    "caption": "Morning stroll down the quiet, rain-washed street in Kyu-Karuizawa with mountain mist.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Kyu-Karuizawa Streets"
-  },
-  {
-    "url": "assets/photos/359_kyukaruizawa_rain_walk_evelyn_skipping_street_turn.jpg",
-    "thumb": "assets/photos/359_kyukaruizawa_rain_walk_evelyn_skipping_street_turn.jpg",
-    "caption": "Evelyn turning back with a big smile as we walk back together.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Kyu-Karuizawa Streets"
-  },
-  {
-    "url": "assets/photos/282_karuizawa_station_evelyn_pink_poncho_suitcase.jpg",
-    "thumb": "assets/photos/282_karuizawa_station_evelyn_pink_poncho_suitcase.jpg",
-    "caption": "Evelyn in her hooded pink rain poncho holding her suitcase handle at the station.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Karuizawa Station Concourse"
-  },
-  {
-    "url": "assets/photos/283_karuizawa_station_lincoln_red_rain_jacket.jpg",
-    "thumb": "assets/photos/283_karuizawa_station_lincoln_red_rain_jacket.jpg",
-    "caption": "Lincoln in his bright red rain jacket and cap carrying his backpack at the concourse.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Karuizawa Station Concourse"
-  },
-  {
-    "url": "assets/photos/284_karuizawa_platform_dad_holding_lincoln_trains.jpg",
-    "thumb": "assets/photos/284_karuizawa_platform_dad_holding_lincoln_trains.jpg",
-    "caption": "John holding Lincoln up on the platform as Lincoln takes photos of the Shinkansen.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Karuizawa Station Shinkansen Platform"
-  },
-  {
-    "url": "assets/photos/285_shinkansen_evelyn_laughing_seat_joy.jpg",
-    "thumb": "assets/photos/285_shinkansen_evelyn_laughing_seat_joy.jpg",
-    "caption": "Evelyn laughing with pure joy in her Gran Class leather armchair seat.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Hokuriku Shinkansen Gran Class"
-  },
-  {
-    "url": "assets/photos/286_shinkansen_evelyn_doll_window_smile.jpg",
-    "thumb": "assets/photos/286_shinkansen_evelyn_doll_window_smile.jpg",
-    "caption": "Evelyn smiling happily with her doll perched in the bullet train window.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Hokuriku Shinkansen Gran Class"
-  },
-  {
-    "url": "assets/photos/279_church_street_evelyn_glowing_heart_arch_lookout.jpg",
-    "thumb": "assets/photos/279_church_street_evelyn_glowing_heart_arch_lookout.jpg",
-    "caption": "Evelyn standing beneath the giant glowing heart arch at Church Street Karuizawa.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Church Street Karuizawa Courtyard"
-  },
-  {
-    "url": "assets/photos/280_church_street_evelyn_heart_sculpture_owl_pose.jpg",
-    "thumb": "assets/photos/280_church_street_evelyn_heart_sculpture_owl_pose.jpg",
-    "caption": "Evelyn posing beside the carved wooden owl at the heart sculpture base.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Church Street Karuizawa Courtyard"
-  },
-  {
-    "url": "assets/photos/281_church_street_evelyn_illuminated_heart_smile.jpg",
-    "thumb": "assets/photos/281_church_street_evelyn_illuminated_heart_smile.jpg",
-    "caption": "Evelyn smiling in the twilight courtyard framed by the illuminated heart.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Church Street Karuizawa Courtyard"
-  },
-  {
-    "url": "assets/photos/268_toy_kingdom_adventure_evelyn_aerial_cable_car.jpg",
-    "thumb": "assets/photos/268_toy_kingdom_adventure_evelyn_aerial_cable_car.jpg",
-    "caption": "Evelyn riding the wooden aerial cable car across the forest clearing.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Waku-Waku Great Adventure Forest"
-  },
-  {
-    "url": "assets/photos/278_toy_kingdom_adventure_evelyn_treetop_cable_ride.jpg",
-    "thumb": "assets/photos/278_toy_kingdom_adventure_evelyn_treetop_cable_ride.jpg",
-    "caption": "Evelyn gliding smoothly in the suspended wooden crate ride.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Waku-Waku Great Adventure Forest"
-  },
-  {
-    "url": "assets/photos/269_toy_kingdom_adventure_evelyn_obstacle_ramp_climb.jpg",
-    "thumb": "assets/photos/269_toy_kingdom_adventure_evelyn_obstacle_ramp_climb.jpg",
-    "caption": "Evelyn scrambling up the wooden timber obstacle ramp.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Waku-Waku Great Adventure Forest"
-  },
-  {
-    "url": "assets/photos/270_toy_kingdom_adventure_lincoln_rock_wall_scramble.jpg",
-    "thumb": "assets/photos/270_toy_kingdom_adventure_lincoln_rock_wall_scramble.jpg",
-    "caption": "Lincoln scaling the natural rock scramble beneath the treetop bridges.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Waku-Waku Great Adventure Forest"
-  },
-  {
-    "url": "assets/photos/271_toy_kingdom_adventure_lincoln_stump_stepping_path.jpg",
-    "thumb": "assets/photos/271_toy_kingdom_adventure_lincoln_stump_stepping_path.jpg",
-    "caption": "Lincoln balancing across the wooden tree stump path.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Waku-Waku Great Adventure Forest"
-  },
-  {
-    "url": "assets/photos/274_toy_kingdom_adventure_evelyn_timber_scramble.jpg",
-    "thumb": "assets/photos/274_toy_kingdom_adventure_evelyn_timber_scramble.jpg",
-    "caption": "Evelyn navigating the log incline course in her safety helmet and pads.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Waku-Waku Great Adventure Forest"
-  },
-  {
-    "url": "assets/photos/275_toy_kingdom_kids_train_rail_ride.jpg",
-    "thumb": "assets/photos/275_toy_kingdom_kids_train_rail_ride.jpg",
-    "caption": "The colorful mini kids train rolling along the park tracks.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Karuizawa Toy Kingdom Grounds"
-  },
-  {
-    "url": "assets/photos/277_toy_kingdom_adventure_evelyn_bridge_helmet_smile.jpg",
-    "thumb": "assets/photos/277_toy_kingdom_adventure_evelyn_bridge_helmet_smile.jpg",
-    "caption": "Evelyn smiling brightly from the forest canopy walkway.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Waku-Waku Great Adventure Forest"
-  },
-  {
-    "url": "assets/photos/272_toy_kingdom_pottery_dad_helping_evelyn_paint.jpg",
-    "thumb": "assets/photos/272_toy_kingdom_pottery_dad_helping_evelyn_paint.jpg",
-    "caption": "John helping Evelyn detail her ceramic piece at the pottery studio table.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Handmade Workshop Hands!"
-  },
-  {
-    "url": "assets/photos/273_toy_kingdom_pottery_lincoln_focus_brushwork.jpg",
-    "thumb": "assets/photos/273_toy_kingdom_pottery_lincoln_focus_brushwork.jpg",
-    "caption": "Lincoln applying glaze with careful brushwork.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Handmade Workshop Hands!"
-  },
-  {
-    "url": "assets/photos/276_toy_kingdom_pottery_studio_table_wide_instructor.jpg",
-    "thumb": "assets/photos/276_toy_kingdom_pottery_studio_table_wide_instructor.jpg",
-    "caption": "Wide view of the family and studio instructor around the glaze painting table.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Handmade Workshop Hands!"
+    "url": "assets/photos/436_gigo_arcade_brittany_claw_machine_intense.jpg",
+    "thumb": "assets/photos/436_gigo_arcade_brittany_claw_machine_intense.jpg",
+    "caption": "Brittany crouched down in total focus lining up the UFO catcher prize drop at GiGO arcade.",
+    "day": "Day 10 · Sun Aug 30",
+    "location": "GiGO Amusement Arcade"
   }
 ];
 
 const tripPosts = [
+  {
+    "id": "post-56",
+    "date": "Sun Aug 30, 2026 · Morning",
+    "location": "Yoyogi Park Outdoor Stage & Zelkova Tree Avenue · Harajuku, Tokyo",
+    "tag": "Harajuku Omotesando Genki Matsuri Super Yosakoi 2026",
+    "title": "Super Yosakoi dance festival, custom engraved charms, and clapping along at Yoyogi Park",
+    "caption": "Started early with burgers and fries for breakfast, then walked right into the energy of the Harajuku Omotesando Genki Matsuri Super Yosakoi (原宿表参道元氣祭スーパーよさこい2026) — one of Tokyo’s most electrifying summer dance festivals!\n\nAt the festival craftsmen booths, we got Lincoln and Evelyn custom wooden charm necklaces (木札) engraved with their names in Kanji (林肯 and 恵美利音) paired with the Thunder God Raijin and cherry blossom carvings. Down the tree-lined Zelkova avenue (ケヤキ並木) and at the massive Yoyogi Park Outdoor Stage (代々木公園野外ステージ), dozens of costumed troupes from across Japan kicked off the road dance competition. We got the kids their own traditional wooden Naruko clappers (鳴子) and they were dancing and clacking away in rhythm as giant team banners flew overhead!",
+    "media": [
+      {
+        "type": "video",
+        "url": "assets/videos/super_yosakoi_parade_performance.mp4",
+        "caption": "Live parade action of Super Yosakoi troupes dancing with Naruko clappers down the Yoyogi Zelkova tree avenue."
+      },
+      {
+        "url": "assets/photos/401_super_yosakoi_wooden_charms_engraving_lincoln.jpg",
+        "thumb": "assets/photos/401_super_yosakoi_wooden_charms_engraving_lincoln.jpg",
+        "caption": "Custom laser-engraved festival wooden charm necklaces with Lincoln and Evelyn's names and Thunder God artwork."
+      },
+      {
+        "url": "assets/photos/402_super_yosakoi_wooden_charms_back_view.jpg",
+        "thumb": "assets/photos/402_super_yosakoi_wooden_charms_back_view.jpg",
+        "caption": "Back view of the custom carved festival charms showing detailed wood grain and red-and-white braided cords."
+      },
+      {
+        "url": "assets/photos/403_super_yosakoi_wooden_charms_macro_table.jpg",
+        "thumb": "assets/photos/403_super_yosakoi_wooden_charms_macro_table.jpg",
+        "caption": "Close-up of the finished festival charms: Lincoln with Raijin (Thunder God) and Evelyn with delicate cherry blossoms."
+      },
+      {
+        "url": "assets/photos/404_super_yosakoi_parade_team_fan_dance.jpg",
+        "thumb": "assets/photos/404_super_yosakoi_parade_team_fan_dance.jpg",
+        "caption": "Yosakoi dance troupe performing synchronized fan movements along the tree-lined Yoyogi Park Zelkova avenue."
+      },
+      {
+        "url": "assets/photos/405_super_yosakoi_parade_troupe_blue_costumes.jpg",
+        "thumb": "assets/photos/405_super_yosakoi_parade_troupe_blue_costumes.jpg",
+        "caption": "Vibrant blue and white costumed dancers moving energetically in formation down the competition parade route."
+      },
+      {
+        "url": "assets/photos/406_super_yosakoi_naruko_clappers_dance_action.jpg",
+        "thumb": "assets/photos/406_super_yosakoi_naruko_clappers_dance_action.jpg",
+        "caption": "Dancers rhythmically snapping wooden Naruko clappers during the high-energy road competition."
+      },
+      {
+        "url": "assets/photos/407_super_yosakoi_troupe_flags_banners.jpg",
+        "thumb": "assets/photos/407_super_yosakoi_troupe_flags_banners.jpg",
+        "caption": "Massive team flags soaring high above the dancers in the tree-canopied festival lane."
+      },
+      {
+        "url": "assets/photos/408_super_yosakoi_large_troupe_choreography.jpg",
+        "thumb": "assets/photos/408_super_yosakoi_large_troupe_choreography.jpg",
+        "caption": "Full team performance sweeping along the parade stretch with thunderous music and synchronized formations."
+      },
+      {
+        "url": "assets/photos/409_super_yosakoi_outdoor_stage_showcase.jpg",
+        "thumb": "assets/photos/409_super_yosakoi_outdoor_stage_showcase.jpg",
+        "caption": "Main outdoor stage performance with dancers executing dynamic choreography before the crowd."
+      },
+      {
+        "url": "assets/photos/410_yoyogi_park_stage_john_carrying_evelyn.jpg",
+        "thumb": "assets/photos/410_yoyogi_park_stage_john_carrying_evelyn.jpg",
+        "caption": "John carrying Evelyn on his shoulders while watching the main stage competition at Yoyogi Park."
+      },
+      {
+        "url": "assets/photos/411_yoyogi_park_stage_john_evelyn_smile.jpg",
+        "thumb": "assets/photos/411_yoyogi_park_stage_john_evelyn_smile.jpg",
+        "caption": "John and Evelyn taking in the festival atmosphere with their Super Yosakoi hand fans."
+      },
+      {
+        "url": "assets/photos/412_yoyogi_park_walkway_lincoln_evelyn_naruko.jpg",
+        "thumb": "assets/photos/412_yoyogi_park_walkway_lincoln_evelyn_naruko.jpg",
+        "caption": "Lincoln and Evelyn practicing their Naruko clappers together on the brick walkway in Yoyogi Park."
+      },
+      {
+        "url": "assets/photos/413_yoyogi_park_walkway_kids_dancing_clappers.jpg",
+        "thumb": "assets/photos/413_yoyogi_park_walkway_kids_dancing_clappers.jpg",
+        "caption": "Lincoln getting into full festival dance spirit while Evelyn watches."
+      }
+    ]
+  },
+  {
+    "id": "post-57",
+    "date": "Sun Aug 30, 2026 · Midday",
+    "location": "Shibuya PARCO (6F CYBERSPACE & 10F Rooftop Park) · Shibuya, Tokyo",
+    "tag": "Pokémon Center, Nintendo TOKYO, Sylvanian Families & Rooftop Matcha",
+    "title": "Nintendo TOKYO, Pokémon Center Mewtwo, Sylvanian Families, and rooftop matcha garden at PARCO",
+    "caption": "Walking back from Yoyogi Park toward Shibuya, we made a beeline for Shibuya PARCO. We headed straight up to CYBERSPACE SHIBUYA on the 6th floor — Lincoln was mesmerized by the glowing life-sized Mewtwo suspended in the cryogenic incubation tank at Pokémon Center SHIBUYA, and both kids posed with giant 8-bit Mario and the life-sized Link statue from Tears of the Kingdom at Nintendo TOKYO!\n\nOn the 5th floor, Evelyn went straight to the Sylvanian Families (Calico Critters) shop to explore the miniature houses, tiny animal cottages, and the giant chocolate rabbit display. Afterward, we headed up to the 10F Rooftop Park for fresh air, beautiful open-air skyline views over Shibuya, and treated Mom to an iced matcha latte while relaxing among the rooftop gardens before descending down Spain-zaka (スペイン坂).",
+    "media": [
+      {
+        "url": "assets/photos/414_shibuya_parco_cyberspace_top_floor.jpg",
+        "thumb": "assets/photos/414_shibuya_parco_cyberspace_top_floor.jpg",
+        "caption": "Entering CYBERSPACE SHIBUYA on the 6th floor of Shibuya PARCO, home to Nintendo TOKYO and Pokémon Center."
+      },
+      {
+        "url": "assets/photos/415_shibuya_parco_pokemon_center_mewtwo_tank.jpg",
+        "thumb": "assets/photos/415_shibuya_parco_pokemon_center_mewtwo_tank.jpg",
+        "caption": "The iconic life-sized Mewtwo suspended in the cryogenic incubation tank at Pokémon Center SHIBUYA."
+      },
+      {
+        "url": "assets/photos/416_shibuya_parco_pokemon_center_lincoln_mewtwo.jpg",
+        "thumb": "assets/photos/416_shibuya_parco_pokemon_center_lincoln_mewtwo.jpg",
+        "caption": "Lincoln posing right beside the illuminated Mewtwo tank in Pokémon Center SHIBUYA."
+      },
+      {
+        "url": "assets/photos/417_shibuya_parco_nintendo_tokyo_mario_statue.jpg",
+        "thumb": "assets/photos/417_shibuya_parco_nintendo_tokyo_mario_statue.jpg",
+        "caption": "Lincoln greeting the giant Mario leaping out of the green warp pipe at Nintendo TOKYO."
+      },
+      {
+        "url": "assets/photos/418_shibuya_parco_nintendo_tokyo_evelyn_mario.jpg",
+        "thumb": "assets/photos/418_shibuya_parco_nintendo_tokyo_evelyn_mario.jpg",
+        "caption": "Evelyn posing happily beside Mario at Nintendo TOKYO."
+      },
+      {
+        "url": "assets/photos/419_shibuya_parco_nintendo_tokyo_lincoln_link_statue.jpg",
+        "thumb": "assets/photos/419_shibuya_parco_nintendo_tokyo_lincoln_link_statue.jpg",
+        "caption": "Lincoln striking an adventurous pose in front of the life-sized Link statue from Zelda: Tears of the Kingdom."
+      },
+      {
+        "url": "assets/photos/420_shibuya_parco_sylvanian_families_evelyn_storefront.jpg",
+        "thumb": "assets/photos/420_shibuya_parco_sylvanian_families_evelyn_storefront.jpg",
+        "caption": "Evelyn in front of the giant chocolate rabbit and cottage at the Sylvanian Families specialty shop on 5F."
+      },
+      {
+        "url": "assets/photos/421_shibuya_parco_sylvanian_families_evelyn_display.jpg",
+        "thumb": "assets/photos/421_shibuya_parco_sylvanian_families_evelyn_display.jpg",
+        "caption": "Evelyn admiring the intricate village displays and tiny miniature animal figures."
+      },
+      {
+        "url": "assets/photos/422_shibuya_parco_rooftop_garden_family_walk.jpg",
+        "thumb": "assets/photos/422_shibuya_parco_rooftop_garden_family_walk.jpg",
+        "caption": "Brittany, Lincoln (in Snorlax visor), and Evelyn walking across the expansive 10F Rooftop Park overlooking Shibuya."
+      },
+      {
+        "url": "assets/photos/423_shibuya_parco_rooftop_garden_family_selfie.jpg",
+        "thumb": "assets/photos/423_shibuya_parco_rooftop_garden_family_selfie.jpg",
+        "caption": "Full family selfie on the breezy 10F Rooftop Park of Shibuya PARCO with Lincoln wearing his Snorlax visor."
+      },
+      {
+        "url": "assets/photos/424_shibuya_parco_rooftop_garden_wayfinding_sign.jpg",
+        "thumb": "assets/photos/424_shibuya_parco_rooftop_garden_wayfinding_sign.jpg",
+        "caption": "Wayfinding sign on the 10F Rooftop Park pointing toward Spain-zaka Park and the 4F terrace."
+      },
+      {
+        "url": "assets/photos/425_shibuya_parco_rooftop_garden_bench_relax.jpg",
+        "thumb": "assets/photos/425_shibuya_parco_rooftop_garden_bench_relax.jpg",
+        "caption": "John, Lincoln, and Evelyn taking a peaceful break surrounded by lush rooftop greenery."
+      },
+      {
+        "url": "assets/photos/426_shibuya_spain_zaka_slope_family_walk.jpg",
+        "thumb": "assets/photos/426_shibuya_spain_zaka_slope_family_walk.jpg",
+        "caption": "Walking down the iconic brick-paved Spain-zaka (Spanish Slope) alley after enjoying matcha lattes on the rooftop."
+      }
+    ]
+  },
+  {
+    "id": "post-58",
+    "date": "Sun Aug 30, 2026 · Afternoon",
+    "location": "Cerulean Tower & Ebisu Park (Rocket Park) · Shibuya & Ebisu, Tokyo",
+    "tag": "Princess Peach Hotel Dance & Rocket Playground",
+    "title": "Princess Peach dancing at the suite and burning off energy at Ebisu Rocket Park",
+    "caption": "Back at Cerulean Tower for lunch and a recharge, Evelyn changed into her Princess Peach dress and put on a full energetic dance recital in the living room!\n\nTo burn off the extra afternoon energy, we headed down to Ebisu Park (恵比寿公園) — known locally as Rocket Park for its iconic rocket ship tower slide and concrete steam engine locomotive. Lincoln sprinted straight through the locomotive crawl tunnels, climbed the train roof, and tackled the blue monkey bars while Evelyn explored the climbing jungle gym and swings in the leafy neighborhood courtyard.",
+    "media": [
+      {
+        "url": "assets/photos/427_cerulean_hotel_evelyn_princess_peach_dance.jpg",
+        "thumb": "assets/photos/427_cerulean_hotel_evelyn_princess_peach_dance.jpg",
+        "caption": "Evelyn full of afternoon energy spinning and dancing in her Princess Peach dress in our hotel room!"
+      },
+      {
+        "url": "assets/photos/428_ebisu_park_rocket_train_playground_wide.jpg",
+        "thumb": "assets/photos/428_ebisu_park_rocket_train_playground_wide.jpg",
+        "caption": "Wide view of Ebisu Park (Rocket Park) with its iconic concrete playground train and rocket tower slide."
+      },
+      {
+        "url": "assets/photos/429_ebisu_park_lincoln_running_train_tunnel.jpg",
+        "thumb": "assets/photos/429_ebisu_park_lincoln_running_train_tunnel.jpg",
+        "caption": "Lincoln sprinting past the concrete train play tunnel in the shaded gravel courtyard of Ebisu Park."
+      },
+      {
+        "url": "assets/photos/430_ebisu_park_kids_climbing_train_rocket.jpg",
+        "thumb": "assets/photos/430_ebisu_park_kids_climbing_train_rocket.jpg",
+        "caption": "Lincoln and Evelyn climbing atop the blue steam engine structure with the rocket slide in the background."
+      },
+      {
+        "url": "assets/photos/431_ebisu_park_lincoln_monkey_bars.jpg",
+        "thumb": "assets/photos/431_ebisu_park_lincoln_monkey_bars.jpg",
+        "caption": "Lincoln hanging from the blue monkey bars in the park playground."
+      },
+      {
+        "url": "assets/photos/432_ebisu_park_kids_jungle_gym_monkey_bars.jpg",
+        "thumb": "assets/photos/432_ebisu_park_kids_jungle_gym_monkey_bars.jpg",
+        "caption": "Lincoln swinging on monkey bars while Evelyn scales the climbing frame in her pink dress."
+      },
+      {
+        "url": "assets/photos/433_ebisu_park_entrance_john_brittany_selfie.jpg",
+        "thumb": "assets/photos/433_ebisu_park_entrance_john_brittany_selfie.jpg",
+        "caption": "John and Brittany smiling at the Ebisu Park entrance on a great breezy afternoon."
+      }
+    ]
+  },
+  {
+    "id": "post-59",
+    "date": "Sun Aug 30, 2026 · Evening & Night",
+    "location": "WAREHOUSE & CO. Ebisu & GiGO Arcade · Ebisu & Shibuya, Tokyo",
+    "tag": "Vintage Denim Haul & UFO Catcher Showdown",
+    "title": "Picking up new duds at WAREHOUSE Ebisu and an intense family crane game showdown",
+    "caption": "After the park, we stopped by WAREHOUSE & CO. Ebisu (ウエアハウス東京店) — the world-renowned Japanese heritage denim specialist recreating vintage American workwear with obsessive historical precision. John picked up some classic new duds to take home.\n\nWe capped off the night diving into the glowing aisles of a multi-floor GiGO arcade for some classic Japanese claw machine action! Lincoln zeroed in on the giant Yoshi plush crane machine, and Mom got into full competition mode — crouched low to the glass, studying the drop angle, and lining up coordinate buttons with surgical precision. The perfect finish to Day 10 in Tokyo!",
+    "media": [
+      {
+        "url": "assets/photos/434_warehouse_ebisu_denim_shopping_haul.jpg",
+        "thumb": "assets/photos/434_warehouse_ebisu_denim_shopping_haul.jpg",
+        "caption": "Brittany carrying Dad's new vintage workwear haul from WAREHOUSE & CO. Ebisu flagship store."
+      },
+      {
+        "url": "assets/photos/435_gigo_arcade_lincoln_ufo_catcher_yoshi.jpg",
+        "thumb": "assets/photos/435_gigo_arcade_lincoln_ufo_catcher_yoshi.jpg",
+        "caption": "Lincoln working the crane claw controls on the giant Yoshi plush machine at the arcade."
+      },
+      {
+        "url": "assets/photos/436_gigo_arcade_brittany_claw_machine_intense.jpg",
+        "thumb": "assets/photos/436_gigo_arcade_brittany_claw_machine_intense.jpg",
+        "caption": "Brittany crouched down in total focus timing the drop on the UFO catcher prize chute."
+      },
+      {
+        "url": "assets/photos/437_gigo_arcade_brittany_claw_machine_close.jpg",
+        "thumb": "assets/photos/437_gigo_arcade_brittany_claw_machine_close.jpg",
+        "caption": "Mom lining up the 2-button claw coordinates with expert concentration!"
+      },
+      {
+        "url": "assets/photos/438_gigo_arcade_claw_machine_aisle_family.jpg",
+        "thumb": "assets/photos/438_gigo_arcade_claw_machine_aisle_family.jpg",
+        "caption": "Lincoln and Evelyn exploring rows of glowing UFO Catchers, anime figures, and plushies."
+      },
+      {
+        "url": "assets/photos/439_gigo_arcade_brightly_lit_prize_floors.jpg",
+        "thumb": "assets/photos/439_gigo_arcade_brightly_lit_prize_floors.jpg",
+        "caption": "Vibrant neon-lit arcade floors with endless plushies and anime game cabinets wrapping up our night."
+      }
+    ]
+  },
   {
     "id": "post-54",
     "date": "Sat Aug 29, 2026 · Evening & Night",
@@ -3419,6 +3330,71 @@ const tripPosts = [
 ];;
 
 const mapPins = [
+  {
+    "id": "yoyogi-park-yosakoi",
+    "name": "Yoyogi Park Outdoor Stage (代々木公園野外ステージ)",
+    "city": "shibuya",
+    "lat": 35.6673,
+    "lon": 139.6968,
+    "type": "culture",
+    "icon": "🎭",
+    "status": "visited",
+    "time": "Day 10 · Morning",
+    "badge": "Super Yosakoi Festival 2026",
+    "desc": "Harajuku Omotesando Genki Matsuri Super Yosakoi festival main outdoor stage and Zelkova avenue road competition dance route."
+  },
+  {
+    "id": "shibuya-parco",
+    "name": "Shibuya PARCO (渋谷PARCO · 6F CYBERSPACE & 10F Rooftop)",
+    "city": "shibuya",
+    "lat": 35.6619,
+    "lon": 139.6987,
+    "type": "shopping",
+    "icon": "🎮",
+    "status": "visited",
+    "time": "Day 10 · Midday",
+    "badge": "Nintendo TOKYO & Pokémon Center",
+    "desc": "CYBERSPACE SHIBUYA 6F featuring life-sized Mewtwo tank at Pokémon Center, Nintendo TOKYO, Sylvanian Families 5F, and 10F Rooftop Park garden."
+  },
+  {
+    "id": "ebisu-park",
+    "name": "Ebisu Park / Rocket Park (恵比寿公園)",
+    "city": "shibuya",
+    "lat": 35.647,
+    "lon": 139.707,
+    "type": "play",
+    "icon": "🚀",
+    "status": "visited",
+    "time": "Day 10 · Afternoon",
+    "badge": "Rocket Slide & Train Playground",
+    "desc": "Neighborhood playground in Ebisu West featuring a concrete steam locomotive crawl-through train, rocket tower slide, and monkey bars."
+  },
+  {
+    "id": "warehouse-ebisu",
+    "name": "WAREHOUSE & CO. Tokyo Ebisu (ウエアハウス東京店)",
+    "city": "shibuya",
+    "lat": 35.6488,
+    "lon": 139.7118,
+    "type": "shopping",
+    "icon": "👖",
+    "status": "visited",
+    "time": "Day 10 · Evening",
+    "badge": "Vintage Heritage Denim",
+    "desc": "Legendary Japanese vintage denim and heritage workwear flagship store in Ebisu recreating classic American garments."
+  },
+  {
+    "id": "gigo-arcade",
+    "name": "GiGO Amusement Arcade (GiGO クレーンゲーム)",
+    "city": "shibuya",
+    "lat": 35.6598,
+    "lon": 139.7005,
+    "type": "play",
+    "icon": "🕹️",
+    "status": "visited",
+    "time": "Day 10 · Night",
+    "badge": "UFO Catcher Arcade",
+    "desc": "Multi-floor Japanese arcade packed with UFO catcher claw machines, character plushies, and crane games."
+  },
   // --- CURRENT BASE ---
   {
     id: 'cerulean-tower-hotel',
@@ -4024,6 +4000,7 @@ function renderDayFilter() {
   
   // Custom metadata for rich pill buttons
   const dayMeta = {
+    'Sun Aug 30': { label: "Day 10 · Super Yosakoi, PARCO & Ebisu 🎭", icon: '🎭' },
     'Sat Aug 29': { label: "Day 9 · Shibuya & Cerulean Base 🗼", icon: '🗼' },
     'Fri Aug 28': { label: "Day 8 · Water Park & Atami Bay 🌊", icon: '🌊' },
     'Thu Aug 27': { label: "Day 7 · Shinkansen & Atami 🏖️", icon: '🏖️' },
