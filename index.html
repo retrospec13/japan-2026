@@ -319,28 +319,68 @@ button { font: inherit; outline: none; }
   gap: 5px;
 }
 
-/* 2-column or 3-column photo grid below title */
-.story-sub-grid {
+/* Full Photo Grid Layouts (Every single image visible) */
+.story-full-gallery {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 6px;
+  border-radius: var(--radius-inner);
+  overflow: hidden;
+  margin-top: 12px;
 }
 
-.story-sub-grid.grid-1 {
+.story-full-gallery.grid-1 {
   grid-template-columns: 1fr;
 }
+.story-full-gallery.grid-1 .story-gallery-item {
+  height: 280px;
+}
 
-.story-sub-item {
+.story-full-gallery.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+.story-full-gallery.grid-2 .story-gallery-item {
+  height: 180px;
+}
+
+.story-full-gallery.grid-3 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 150px 150px;
+}
+.story-full-gallery.grid-3 .story-gallery-item:first-child {
+  grid-row: span 2;
+  height: 306px;
+}
+.story-full-gallery.grid-3 .story-gallery-item {
+  height: 150px;
+}
+
+.story-full-gallery.grid-4 {
+  grid-template-columns: 1fr 1fr;
+}
+.story-full-gallery.grid-4 .story-gallery-item {
+  height: 150px;
+}
+
+.story-full-gallery.grid-5,
+.story-full-gallery.grid-6,
+.story-full-gallery.grid-many {
+  grid-template-columns: repeat(3, 1fr);
+}
+.story-full-gallery.grid-5 .story-gallery-item,
+.story-full-gallery.grid-6 .story-gallery-item,
+.story-full-gallery.grid-many .story-gallery-item {
   height: 130px;
-  border-radius: var(--radius-inner);
+}
+
+.story-gallery-item {
+  border-radius: 8px;
   overflow: hidden;
   background: #1e293b;
   position: relative;
   cursor: pointer;
 }
 
-.story-sub-item img {
+.story-gallery-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -348,21 +388,21 @@ button { font: inherit; outline: none; }
   transition: transform 0.25s ease;
 }
 
-.story-sub-item:hover img {
+.story-gallery-item:hover img {
   transform: scale(1.04);
 }
 
-.story-more-badge {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 800;
-  backdrop-filter: blur(2px);
+@media (max-width: 480px) {
+  .story-full-gallery.grid-5,
+  .story-full-gallery.grid-6,
+  .story-full-gallery.grid-many {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .story-full-gallery.grid-5 .story-gallery-item,
+  .story-full-gallery.grid-6 .story-gallery-item,
+  .story-full-gallery.grid-many .story-gallery-item {
+    height: 140px;
+  }
 }
 
 .story-caption-text {
@@ -4391,52 +4431,60 @@ function renderFeed() {
   
   container.innerHTML = filteredPosts.map((post) => {
     const pIdx = tripPosts.indexOf(post);
-    let heroMediaHtml = '';
-    let subGridHtml = '';
+    let videosHtml = '';
+    let galleryHtml = '';
 
     if (post.media && post.media.length > 0) {
-      const firstMedia = post.media[0];
-      
-      // Top Hero Media
-      if (firstMedia.type === 'video') {
-        heroMediaHtml = '<div class="story-hero-media" onclick="openLightbox(\'' + firstMedia.url + '\', \'video\', \'' + esc(firstMedia.caption || post.title) + '\')">' +
-          '<video src="' + firstMedia.url + '" preload="metadata" playsinline></video>' +
-        '</div>';
-      } else {
-        heroMediaHtml = '<div class="story-hero-media" onclick="openLightbox(\'' + firstMedia.url + '\', \'image\', \'' + esc(firstMedia.caption || post.title) + '\')">' +
-          '<img src="' + (firstMedia.thumb || firstMedia.url) + '" alt="' + esc(post.title) + '" loading="lazy">' +
-        '</div>';
+      const videos = [];
+      const photos = [];
+
+      post.media.forEach((m, mIdx) => {
+        if (m.type === 'video') {
+          videos.push({ media: m, mIdx });
+        } else {
+          photos.push({ media: m, mIdx });
+        }
+      });
+
+      // 1. Featured Videos (Inline players)
+      if (videos.length > 0) {
+        videosHtml = videos.map(vObj => {
+          return '<div class="story-video-wrap" style="margin-bottom:12px;border-radius:var(--radius-inner);overflow:hidden;background:#000;">' +
+            '<video src="' + vObj.media.url + '" controls preload="metadata" playsinline style="width:100%;max-height:400px;display:block;"></video>' +
+            (vObj.media.caption ? '<div style="padding:8px 14px;background:#111827;color:#e5e7eb;font-size:12px;font-weight:600;">🎬 ' + esc(vObj.media.caption) + '</div>' : '') +
+          '</div>';
+        }).join('');
       }
 
-      // Secondary photos in 2-column or 3-column rounded grid below
-      if (post.media.length > 1) {
-        const remaining = post.media.slice(1);
-        const displayPhotos = remaining.slice(0, 2);
-        const extraCount = remaining.length - displayPhotos.length;
+      // 2. All Photos in Grid (Every single photo visible!)
+      if (photos.length > 0) {
+        const len = photos.length;
+        let gridClass = 'grid-many';
+        if (len === 1) gridClass = 'grid-1';
+        else if (len === 2) gridClass = 'grid-2';
+        else if (len === 3) gridClass = 'grid-3';
+        else if (len === 4) gridClass = 'grid-4';
+        else if (len === 5) gridClass = 'grid-5';
+        else if (len === 6) gridClass = 'grid-6';
 
-        const subItemsHtml = displayPhotos.map((m, idx) => {
-          const actualMIdx = idx + 1;
-          const isLast = idx === displayPhotos.length - 1 && extraCount > 0;
-          const overlayHtml = isLast ? '<div class="story-more-badge">+' + extraCount + ' more</div>' : '';
-          
-          return '<div class="story-sub-item" onclick="openLightbox(\'' + m.url + '\', \'' + (m.type || 'image') + '\', \'' + esc(m.caption || post.title) + '\')">' +
-            '<img src="' + (m.thumb || m.url) + '" alt="' + esc(m.caption || post.title) + '" loading="lazy">' +
-            overlayHtml +
+        const photosHtml = photos.map(pObj => {
+          return '<div class="story-gallery-item" onclick="openLightbox(\'' + pObj.media.url + '\', \'image\', \'' + esc(pObj.media.caption || post.title) + '\')">' +
+            '<img src="' + (pObj.media.thumb || pObj.media.url) + '" alt="' + esc(pObj.media.caption || post.title) + '" loading="lazy">' +
           '</div>';
         }).join('');
 
-        subGridHtml = '<div class="story-sub-grid grid-2">' + subItemsHtml + '</div>';
+        galleryHtml = '<div class="story-full-gallery ' + gridClass + '">' + photosHtml + '</div>';
       }
     }
 
     return '<article class="story-card">' +
-      heroMediaHtml +
       '<div class="story-content-wrap">' +
         '<h2 class="story-title">' + esc(post.title) + '</h2>' +
         '<div class="story-meta-time">' + esc(post.date) + (post.location ? ' · 📍 ' + esc(post.location) : '') + '</div>' +
         '<p class="story-caption-text">' + esc(post.caption) + '</p>' +
-        subGridHtml +
       '</div>' +
+      videosHtml +
+      galleryHtml +
     '</article>';
   }).join('');
 }

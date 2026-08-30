@@ -306,28 +306,68 @@ button { font: inherit; outline: none; }
   gap: 5px;
 }
 
-/* 2-column or 3-column photo grid below title */
-.story-sub-grid {
+/* Full Photo Grid Layouts (Every single image visible) */
+.story-full-gallery {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 6px;
+  border-radius: var(--radius-inner);
+  overflow: hidden;
+  margin-top: 10px;
 }
 
-.story-sub-grid.grid-1 {
+.story-full-gallery.grid-1 {
   grid-template-columns: 1fr;
 }
+.story-full-gallery.grid-1 .story-gallery-item {
+  height: 280px;
+}
 
-.story-sub-item {
-  height: 130px;
-  border-radius: var(--radius-inner);
+.story-full-gallery.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+.story-full-gallery.grid-2 .story-gallery-item {
+  height: 180px;
+}
+
+.story-full-gallery.grid-3 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 150px 150px;
+}
+.story-full-gallery.grid-3 .story-gallery-item:first-child {
+  grid-row: span 2;
+  height: 306px;
+}
+.story-full-gallery.grid-3 .story-gallery-item {
+  height: 150px;
+}
+
+.story-full-gallery.grid-4 {
+  grid-template-columns: 1fr 1fr;
+}
+.story-full-gallery.grid-4 .story-gallery-item {
+  height: 150px;
+}
+
+.story-full-gallery.grid-5,
+.story-full-gallery.grid-6,
+.story-full-gallery.grid-many {
+  grid-template-columns: repeat(3, 1fr);
+}
+.story-full-gallery.grid-5 .story-gallery-item,
+.story-full-gallery.grid-6 .story-gallery-item,
+.story-full-gallery.grid-many .story-gallery-item {
+  height: 120px;
+}
+
+.story-gallery-item {
+  border-radius: 8px;
   overflow: hidden;
   background: #1e293b;
   position: relative;
   cursor: pointer;
 }
 
-.story-sub-item img {
+.story-gallery-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -335,21 +375,21 @@ button { font: inherit; outline: none; }
   transition: transform 0.25s ease;
 }
 
-.story-sub-item:hover img {
+.story-gallery-item:hover img {
   transform: scale(1.04);
 }
 
-.story-more-badge {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 800;
-  backdrop-filter: blur(2px);
+@media (max-width: 480px) {
+  .story-full-gallery.grid-5,
+  .story-full-gallery.grid-6,
+  .story-full-gallery.grid-many {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .story-full-gallery.grid-5 .story-gallery-item,
+  .story-full-gallery.grid-6 .story-gallery-item,
+  .story-full-gallery.grid-many .story-gallery-item {
+    height: 130px;
+  }
 }
 
 .story-caption-text {
