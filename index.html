@@ -4431,52 +4431,51 @@ function renderFeed() {
   
   container.innerHTML = filteredPosts.map((post) => {
     const pIdx = tripPosts.indexOf(post);
-    let topHeroPhotoHtml = '';
-    let videosHtml = '';
+    let heroMediaHtml = '';
+    let extraVideosHtml = '';
     let companionGridHtml = '';
 
     if (post.media && post.media.length > 0) {
-      const videos = [];
-      const photos = [];
-
-      post.media.forEach((m, mIdx) => {
-        if (m.type === 'video') {
-          videos.push({ media: m, mIdx });
-        } else {
-          photos.push({ media: m, mIdx });
-        }
-      });
-
-      // 1. Featured Videos (Inline players)
-      if (videos.length > 0) {
-        videosHtml = videos.map(vObj => {
-          return '<div class="story-video-wrap" style="margin-bottom:14px;border-radius:var(--radius-inner);overflow:hidden;background:#000;">' +
-            '<video src="' + vObj.media.url + '" controls preload="metadata" playsinline style="width:100%;max-height:420px;display:block;"></video>' +
-            (vObj.media.caption ? '<div style="padding:8px 14px;background:#111827;color:#e5e7eb;font-size:12px;font-weight:600;">🎬 ' + esc(vObj.media.caption) + '</div>' : '') +
-          '</div>';
-        }).join('');
+      const firstMedia = post.media[0];
+      
+      // 1. Primary Hero Media (Top of Card: Video or 1st Photo)
+      if (firstMedia.type === 'video') {
+        heroMediaHtml = '<div class="story-hero-media" style="height:auto;max-height:420px;background:#000;">' +
+          '<video src="' + firstMedia.url + '" controls preload="metadata" playsinline style="width:100%;max-height:420px;display:block;"></video>' +
+          (firstMedia.caption ? '<div style="padding:8px 14px;background:#111827;color:#e5e7eb;font-size:12px;font-weight:600;">🎬 ' + esc(firstMedia.caption) + '</div>' : '') +
+        '</div>';
+      } else {
+        heroMediaHtml = '<div class="story-hero-media" onclick="openLightbox(\'' + firstMedia.url + '\', \'image\', \'' + esc(firstMedia.caption || post.title) + '\')">' +
+          '<img src="' + (firstMedia.thumb || firstMedia.url) + '" alt="' + esc(post.title) + '" loading="lazy">' +
+        '</div>';
       }
 
-      // 2. All Photos: Hero Photo (1st) on Top + Companion Grid Below Story Text
-      if (photos.length > 0) {
-        const firstPhoto = photos[0];
-        topHeroPhotoHtml = '<div class="story-hero-media" onclick="openLightbox(\'' + firstPhoto.media.url + '\', \'image\', \'' + esc(firstPhoto.media.caption || post.title) + '\')">' +
-          '<img src="' + (firstPhoto.media.thumb || firstPhoto.media.url) + '" alt="' + esc(post.title) + '" loading="lazy">' +
-        '</div>';
+      // 2. Additional Media (Remaining videos & photos)
+      if (post.media.length > 1) {
+        const remaining = post.media.slice(1);
+        const extraVideos = remaining.filter(m => m.type === 'video');
+        const remainingPhotos = remaining.filter(m => m.type !== 'video');
 
-        // Secondary Photos Grid below story caption
-        if (photos.length > 1) {
-          const companionPhotos = photos.slice(1);
-          const len = companionPhotos.length;
+        if (extraVideos.length > 0) {
+          extraVideosHtml = extraVideos.map(v => {
+            return '<div class="story-video-wrap" style="margin-top:12px;border-radius:var(--radius-inner);overflow:hidden;background:#000;">' +
+              '<video src="' + v.url + '" controls preload="metadata" playsinline style="width:100%;max-height:360px;display:block;"></video>' +
+              (v.caption ? '<div style="padding:6px 12px;background:#111827;color:#e5e7eb;font-size:11.5px;font-weight:600;">🎬 ' + esc(v.caption) + '</div>' : '') +
+            '</div>';
+          }).join('');
+        }
+
+        if (remainingPhotos.length > 0) {
+          const len = remainingPhotos.length;
           let gridClass = 'grid-many';
           if (len === 1) gridClass = 'grid-1';
           else if (len === 2) gridClass = 'grid-2';
           else if (len === 3) gridClass = 'grid-3';
           else if (len === 4) gridClass = 'grid-4';
 
-          const companionHtml = companionPhotos.map(pObj => {
-            return '<div class="story-gallery-item" onclick="openLightbox(\'' + pObj.media.url + '\', \'image\', \'' + esc(pObj.media.caption || post.title) + '\')">' +
-              '<img src="' + (pObj.media.thumb || pObj.media.url) + '" alt="' + esc(pObj.media.caption || post.title) + '" loading="lazy">' +
+          const companionHtml = remainingPhotos.map(pObj => {
+            return '<div class="story-gallery-item" onclick="openLightbox(\'' + pObj.url + '\', \'image\', \'' + esc(pObj.caption || post.title) + '\')">' +
+              '<img src="' + (pObj.thumb || pObj.url) + '" alt="' + esc(pObj.caption || post.title) + '" loading="lazy">' +
             '</div>';
           }).join('');
 
@@ -4486,14 +4485,14 @@ function renderFeed() {
     }
 
     return '<article class="story-card">' +
-      topHeroPhotoHtml +
+      heroMediaHtml +
       '<div class="story-content-wrap">' +
         '<h2 class="story-title">' + esc(post.title) + '</h2>' +
         '<div class="story-meta-time">' + esc(post.date) + (post.location ? ' · 📍 ' + esc(post.location) : '') + '</div>' +
-        '<p class="story-caption-text">' + esc(post.caption) + '</p>' +
+        companionGridHtml +
+        extraVideosHtml +
+        '<p class="story-caption-text" style="margin-top:12px;">' + esc(post.caption) + '</p>' +
       '</div>' +
-      videosHtml +
-      companionGridHtml +
     '</article>';
   }).join('');
 }
