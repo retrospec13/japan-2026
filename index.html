@@ -3,40 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#f8fafc">
 <meta name="robots" content="noindex, nofollow, noarchive">
-<title>Japan Journey 2026 · Live Family Journal & Map</title>
+<title>Japan Journey 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
 /* ==========================================================================
-   Japan 2026 Live Journal · Tokyo Modern Minimal Theme (Polished)
+   Japan Journey 2026 · Tokyo Modern Minimal Theme (Exact Pixel Polish)
    ========================================================================== */
 
 :root {
   --bg: #f8fafc;
   --panel: #ffffff;
-  --panel-subtle: #f1f5f9;
-  --ink: #0f172a;
-  --ink-secondary: #334155;
-  --muted: #64748b;
-  --line: #e2e8f0;
-  --line-subtle: #f8fafc;
-  --accent: #ff4d2e;           /* Electric persimmon / Tokyo warm red */
-  --accent-soft: #fff1ee;
-  --accent-blue: #2563eb;
-  --accent-blue-soft: #eff6ff;
-  --green: #10b981;
-  --green-soft: #ecfdf5;
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius: 18px;
+  --panel-gray: #f3f4f6;
+  --ink: #111827;
+  --ink-secondary: #4b5563;
+  --muted: #9ca3af;
+  --border-card: #e5e7eb;
+  --orange: #ff5722;
+  --orange-light: #fff2ed;
+  --orange-border: #ff7a50;
+  --blue: #2563eb;
+  --blue-light: #eff6ff;
+  --radius-card: 20px;
+  --radius-inner: 14px;
   --radius-pill: 999px;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.04);
+  --shadow-dock: 0 10px 30px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 * { box-sizing: border-box; }
@@ -45,497 +41,306 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 15px/1.55 "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font: 14.5px/1.5 -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "SF Pro Display", "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
-  padding-bottom: 84px;
+  padding-bottom: 96px;
 }
 
-a { color: var(--accent-blue); text-decoration: none; }
-button { font: inherit; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; outline: none; }
 
-.app {
-  max-width: 860px;
+.app-container {
+  max-width: 580px;
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  padding: 16px 14px 40px;
 }
 
 /* --------------------------------------------------------------------------
    1. Brand Header
    -------------------------------------------------------------------------- */
-.brand-header {
-  background: #ffffff;
-  border-bottom: 1px solid var(--line);
-  padding: 18px 16px 14px;
+.header-wrap {
+  margin-bottom: 14px;
 }
 
-.brand-main-row {
+.header-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.brand-title-wrap h1 {
+.header-title {
   margin: 0;
-  font-size: clamp(22px, 5vw, 28px);
+  font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--ink);
-  line-height: 1.15;
+  line-height: 1.1;
 }
 
-.brand-title-wrap p {
-  margin: 3px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.brand-day-pill {
-  flex-shrink: 0;
-  background: var(--ink);
-  color: #ffffff;
+.day-badge-top {
+  background: #ffffff;
+  color: var(--ink-secondary);
+  border: 1px solid var(--border-card);
   padding: 5px 12px;
   border-radius: var(--radius-pill);
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
+  font-weight: 600;
   white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
 }
 
-/* Family Avatar Row */
-.family-strip {
+.avatar-crew-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid var(--line-subtle);
+  gap: 10px;
 }
 
-.family-cluster {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.avatar-stack {
+.avatar-group {
   display: flex;
   align-items: center;
 }
 
-.avatar-stack img {
-  width: 28px;
-  height: 28px;
+.avatar-group img {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #ffffff;
-  margin-left: -7px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-left: -9px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
 }
 
-.avatar-stack img:first-child {
+.avatar-group img:first-child {
   margin-left: 0;
 }
 
-.family-names-label {
-  font-size: 12px;
-  font-weight: 700;
+.crew-names-text {
+  font-size: 12.5px;
+  line-height: 1.3;
   color: var(--ink-secondary);
-}
-
-.brand-live-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #047857;
-  background: var(--green-soft);
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  border: 1px solid #a7f3d0;
-}
-
-.brand-live-badge::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 2.5px #a7f3d0;
+  font-weight: 600;
 }
 
 /* --------------------------------------------------------------------------
-   2. Modern Dispatch Bento Widget (Compact & Punchy)
+   2. Bento Hero Card (Compact, Exact Layout, No Overflow)
    -------------------------------------------------------------------------- */
-.bento-hero-widget {
-  margin: 14px 16px 0;
+.bento-card {
   background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  padding: 14px 16px;
-  position: relative;
+  border: 1.5px solid var(--orange-border);
+  border-radius: var(--radius-card);
+  padding: 14px 14px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.bento-header-line {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.bento-hero-widget::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent) 0%, #f97316 50%, var(--accent-blue) 100%);
-}
-
-.bento-widget-top {
+.bento-content-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 12px;
 }
 
-.bento-live-status {
+.bento-stats-group {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.3;
-}
-
-.bento-latest-btn {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--accent);
-  background: var(--accent-soft);
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  border: none;
-  transition: all 0.15s ease;
-  white-space: nowrap;
-}
-
-.bento-latest-btn:hover {
-  background: var(--accent);
-  color: #ffffff;
-}
-
-.bento-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  background: var(--panel-subtle);
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line);
 }
 
-.bento-stat-item {
-  text-align: center;
+.bento-stat-col {
+  display: flex;
+  flex-direction: column;
+  padding-right: 8px;
+  border-right: 1px solid #f3f4f6;
 }
 
-.bento-stat-num {
-  font-size: 18px;
+.bento-stat-col:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.bento-stat-top {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 15px;
   font-weight: 800;
   color: var(--ink);
-  letter-spacing: -0.02em;
   line-height: 1;
 }
 
-.bento-stat-label {
-  font-size: 10.5px;
-  font-weight: 700;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  margin-top: 3px;
+.bento-stat-top svg {
+  width: 14px;
+  height: 14px;
+  color: #6b7280;
+  flex-shrink: 0;
 }
 
-.bento-route-info {
-  font-size: 12px;
+.bento-stat-sub {
+  font-size: 10px;
   color: var(--muted);
-  margin: 10px 0 0;
-  display: flex;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.bento-action-btn {
+  background: var(--orange);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 8px 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
   gap: 4px;
-  line-height: 1.4;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25);
+  transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
-.bento-route-info strong {
-  color: var(--ink-secondary);
+.bento-action-btn:hover {
+  background: #e64a19;
 }
 
 /* --------------------------------------------------------------------------
-   3. Sticky Nav Bar (Slim & Elegant)
+   3. Segmented Switcher (Feed vs Live Map)
    -------------------------------------------------------------------------- */
-.sticky-nav-container {
-  position: sticky;
-  top: 0;
-  z-index: 900;
-  background: rgba(248, 250, 252, 0.96);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 10px 16px 8px;
-  border-bottom: 1px solid var(--line);
-}
-
-.segmented-control {
-  display: flex;
-  background: #e2e8f0;
+.switcher-bar {
+  background: var(--panel-gray);
   padding: 3px;
   border-radius: var(--radius-pill);
+  display: flex;
   gap: 3px;
-  max-width: 440px;
-  margin: 0 auto 8px;
+  margin-bottom: 16px;
 }
 
-.seg-btn {
+.switcher-btn {
   flex: 1;
+  border: none;
+  background: transparent;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 7px 12px;
-  border-radius: var(--radius-pill);
-  border: none;
-  background: transparent;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.seg-btn:hover {
-  color: var(--ink);
-}
-
-.seg-btn.active {
-  background: var(--ink);
-  color: #ffffff;
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.15);
-}
-
-.seg-badge {
-  font-size: 10px;
-  font-weight: 800;
-  background: var(--accent);
-  color: #ffffff;
-  padding: 1px 6px;
-  border-radius: var(--radius-pill);
-}
-
-/* Day Filter Horizontal Scroll */
-.day-scroll-strip {
-  display: flex;
   gap: 6px;
-  overflow-x: auto;
-  padding: 2px 0 4px;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.day-scroll-strip::-webkit-scrollbar {
-  display: none;
-}
-
-.day-pill {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 12px;
-  border: 1px solid var(--line);
-  background: #ffffff;
-  color: var(--ink-secondary);
-  border-radius: var(--radius-pill);
-  font-size: 12.5px;
-  font-weight: 700;
-  cursor: pointer;
   transition: all 0.15s ease;
-  box-shadow: var(--shadow-sm);
-  white-space: nowrap;
 }
 
-.day-pill:hover {
-  border-color: #cbd5e1;
-  color: var(--ink);
-  background: #f8fafc;
-}
-
-.day-pill.active {
+.switcher-btn.active {
   background: var(--ink);
   color: #ffffff;
-  border-color: var(--ink);
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
-}
-
-.day-pill .day-pill-count {
-  font-size: 10.5px;
-  font-weight: 800;
-  background: rgba(0, 0, 0, 0.06);
-  color: inherit;
-  padding: 1px 6px;
-  border-radius: var(--radius-pill);
-}
-
-.day-pill.active .day-pill-count {
-  background: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
 /* --------------------------------------------------------------------------
-   4. Content Panes & Feed
+   4. Story Post Cards (Clean Visual Hierarchy)
    -------------------------------------------------------------------------- */
-main {
-  flex: 1;
-  padding: 14px 16px 32px;
-}
-
-.tab-pane {
-  display: none;
-}
-
-.tab-pane.active {
-  display: block;
-}
-
-/* Feed Stream */
-.feed-stream {
+.story-feed {
   display: grid;
-  gap: 20px;
+  gap: 18px;
 }
 
-.feed-card {
+.story-card {
   background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 14px;
+  box-shadow: var(--shadow-card);
   overflow: hidden;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.feed-card:hover {
-  box-shadow: var(--shadow-lg);
+/* Top Hero Media inside card */
+.story-hero-media {
+  width: 100%;
+  border-radius: var(--radius-inner);
+  overflow: hidden;
+  background: #1e293b;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 12px;
 }
 
-.feed-header {
-  padding: 16px 18px 12px;
-  border-bottom: 1px solid var(--line-subtle);
+.story-hero-media img,
+.story-hero-media video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
 }
 
-.feed-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 600;
-  margin-bottom: 4px;
+.story-hero-media:hover img {
+  transform: scale(1.02);
 }
 
-.feed-loc {
-  color: var(--accent-blue);
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+.story-content-wrap {
+  padding: 0 2px 2px;
 }
 
-.feed-title {
+.story-title {
   margin: 0;
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 800;
   color: var(--ink);
   letter-spacing: -0.02em;
   line-height: 1.25;
 }
 
-/* Media Gallery Layouts */
-.feed-gallery {
+.story-meta-time {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 3px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 2-column or 3-column photo grid below title */
+.story-sub-grid {
   display: grid;
-  gap: 3px;
-  background: #0f172a;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
-.feed-gallery.grid-1 { grid-template-columns: 1fr; }
-.feed-gallery.grid-2 { grid-template-columns: 1fr 1fr; }
-.feed-gallery.grid-3 { grid-template-columns: 1fr 1fr; grid-template-rows: 240px 240px; }
-.feed-gallery.grid-3 .gallery-item:first-child { grid-row: span 2; }
-.feed-gallery.grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px; }
-.feed-gallery.grid-5 { grid-template-columns: repeat(6, 1fr); grid-template-rows: 220px 200px; }
-.feed-gallery.grid-5 .gallery-item:nth-child(1) { grid-column: span 3; }
-.feed-gallery.grid-5 .gallery-item:nth-child(2) { grid-column: span 3; }
-.feed-gallery.grid-5 .gallery-item:nth-child(3) { grid-column: span 2; }
-.feed-gallery.grid-5 .gallery-item:nth-child(4) { grid-column: span 2; }
-.feed-gallery.grid-5 .gallery-item:nth-child(5) { grid-column: span 2; }
-.feed-gallery.grid-6 { grid-template-columns: repeat(3, 1fr); grid-template-rows: 200px 200px; }
-.feed-gallery.grid-7, .feed-gallery.grid-8, .feed-gallery.grid-9, .feed-gallery.grid-10, .feed-gallery.grid-many {
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
+.story-sub-grid.grid-1 {
+  grid-template-columns: 1fr;
 }
 
-.gallery-item {
-  position: relative;
-  height: 340px;
+.story-sub-item {
+  height: 130px;
+  border-radius: var(--radius-inner);
   overflow: hidden;
-  cursor: pointer;
   background: #1e293b;
+  position: relative;
+  cursor: pointer;
 }
 
-.feed-gallery.grid-1 .gallery-item { height: 440px; }
-.feed-gallery.grid-4 .gallery-item { height: 220px; }
-.feed-gallery.grid-5 .gallery-item,
-.feed-gallery.grid-6 .gallery-item,
-.feed-gallery.grid-7 .gallery-item,
-.feed-gallery.grid-8 .gallery-item,
-.feed-gallery.grid-9 .gallery-item,
-.feed-gallery.grid-10 .gallery-item,
-.feed-gallery.grid-many .gallery-item { height: 200px; }
-
-@media (max-width: 640px) {
-  .gallery-item { height: 260px; }
-  .feed-gallery.grid-1 .gallery-item { height: 320px; }
-  .feed-gallery.grid-3 { grid-template-columns: 1fr; grid-template-rows: auto; }
-  .feed-gallery.grid-3 .gallery-item:first-child { grid-row: auto; height: 280px; }
-  .feed-gallery.grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-  .feed-gallery.grid-4 .gallery-item { height: 180px; }
-  .feed-gallery.grid-5, .feed-gallery.grid-6, .feed-gallery.grid-7, .feed-gallery.grid-8, .feed-gallery.grid-9, .feed-gallery.grid-10, .feed-gallery.grid-many {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-  }
-  .feed-gallery.grid-5 .gallery-item:nth-child(1),
-  .feed-gallery.grid-5 .gallery-item:nth-child(2),
-  .feed-gallery.grid-5 .gallery-item:nth-child(3),
-  .feed-gallery.grid-5 .gallery-item:nth-child(4),
-  .feed-gallery.grid-5 .gallery-item:nth-child(5) { grid-column: auto; }
-  .feed-gallery.grid-5 .gallery-item:first-child { grid-column: span 2; height: 240px; }
-  .feed-gallery.grid-5 .gallery-item,
-  .feed-gallery.grid-6 .gallery-item,
-  .feed-gallery.grid-7 .gallery-item,
-  .feed-gallery.grid-8 .gallery-item,
-  .feed-gallery.grid-9 .gallery-item,
-  .feed-gallery.grid-10 .gallery-item,
-  .feed-gallery.grid-many .gallery-item { height: 160px; }
-}
-
-.gallery-item img {
+.story-sub-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -543,260 +348,306 @@ main {
   transition: transform 0.25s ease;
 }
 
-.gallery-item:hover img {
-  transform: scale(1.03);
+.story-sub-item:hover img {
+  transform: scale(1.04);
 }
 
-.feed-body {
-  padding: 16px 18px 18px;
+.story-more-badge {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  backdrop-filter: blur(2px);
 }
 
-.feed-text {
-  font-size: 14.5px;
-  line-height: 1.65;
+.story-caption-text {
+  font-size: 13.5px;
+  line-height: 1.55;
   color: var(--ink-secondary);
   margin: 0;
   white-space: pre-line;
 }
 
-.feed-tag {
-  margin-top: 12px;
-  display: inline-flex;
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--accent-blue);
-  background: var(--accent-blue-soft);
-  padding: 3px 9px;
-  border-radius: var(--radius-sm);
+/* --------------------------------------------------------------------------
+   5. Interactive Map & Highlights Tabs
+   -------------------------------------------------------------------------- */
+.tab-content-pane {
+  display: none;
 }
 
-/* Featured Video Wrap */
-.feed-video-featured {
-  background: #090d16;
-  border-bottom: 1px solid var(--line);
-  position: relative;
-}
-
-.feed-video-player-wrap {
-  width: 100%;
-  max-height: 480px;
-  background: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.feed-video-player-wrap video {
-  width: 100%;
-  max-height: 480px;
-  object-fit: contain;
+.tab-content-pane.active {
   display: block;
 }
 
-/* --------------------------------------------------------------------------
-   5. Highlights Section
-   -------------------------------------------------------------------------- */
-.highlights-header {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px 18px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow-sm);
-}
-
-.highlights-header h2 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--ink);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.highlights-header p {
-  margin: 4px 0 0;
-  color: var(--muted);
-  font-size: 13.5px;
-}
-
-.new-content-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 14px;
-}
-
-.new-content-card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
+.map-card-container {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
+  box-shadow: var(--shadow-card);
 }
 
-.new-content-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--accent-blue);
-}
-
-.new-content-thumb {
-  height: 170px;
-  overflow: hidden;
-  background: #1e293b;
-  position: relative;
-}
-
-.new-content-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.25s ease;
-}
-
-.new-content-card:hover .new-content-thumb img {
-  transform: scale(1.05);
-}
-
-.new-content-body {
-  padding: 12px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.new-content-loc {
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--accent-blue);
-  margin-bottom: 4px;
-}
-
-.new-content-caption {
-  font-size: 13px;
-  color: var(--ink-secondary);
-  line-height: 1.45;
-  margin: 0;
-}
-
-.new-content-tag {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--muted);
-  margin-top: 8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* --------------------------------------------------------------------------
-   6. Map Section
-   -------------------------------------------------------------------------- */
-.map-card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-
-.map-header {
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--line);
+.map-header-bar {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-card);
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
-.map-header h2 {
+.map-header-bar h2 {
   margin: 0;
   font-size: 17px;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
-.map-header p {
-  margin: 2px 0 0;
-  font-size: 12.5px;
-  color: var(--muted);
-}
-
-.map-container {
-  height: 65vh;
-  min-height: 420px;
-  max-height: 680px;
+.map-viewport {
+  height: 60vh;
+  min-height: 400px;
+  max-height: 600px;
   width: 100%;
-  position: relative;
 }
 
-.map-quick-buttons {
+.map-pills-row {
   display: flex;
   gap: 6px;
   overflow-x: auto;
-  padding: 10px 14px;
+  padding: 10px 12px;
   background: #ffffff;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--border-card);
 }
 
-.quick-btn {
+.map-quick-pill {
   flex: 0 0 auto;
-  border: 1px solid var(--line);
-  background: var(--panel-subtle);
+  background: var(--panel-gray);
+  border: 1px solid var(--border-card);
   padding: 5px 12px;
   border-radius: var(--radius-pill);
   font-size: 12px;
   font-weight: 700;
   color: var(--ink-secondary);
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
-.quick-btn:hover {
-  background: #e2e8f0;
+/* Highlights Grid */
+.highlights-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.highlight-item-card {
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-inner);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.highlight-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.highlight-thumb-box {
+  height: 140px;
+  overflow: hidden;
+  background: #1e293b;
+}
+
+.highlight-thumb-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.highlight-body-box {
+  padding: 10px 12px;
+}
+
+.highlight-loc-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 2px;
+}
+
+.highlight-caption-text {
+  font-size: 12px;
+  color: var(--ink-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   6. Search & Day Filter Drawer
+   -------------------------------------------------------------------------- */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1800;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+.drawer-backdrop.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.drawer-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 580px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 24px 24px 0 0;
+  padding: 20px 16px 32px;
+  z-index: 1810;
+  transform: translateY(100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.drawer-sheet.show {
+  transform: translateY(0);
+}
+
+.drawer-drag-handle {
+  width: 36px;
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  margin: -8px auto 14px;
+}
+
+.drawer-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.drawer-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
   color: var(--ink);
 }
 
-.map-legend {
+.drawer-search-input {
+  width: 100%;
+  background: var(--panel-gray);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-inner);
+  padding: 10px 12px;
+  font-size: 13.5px;
+  color: var(--ink);
+  outline: none;
+  margin-bottom: 14px;
+}
+
+.drawer-days-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.drawer-day-pill {
+  background: var(--panel-gray);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-inner);
+  padding: 9px 12px;
+  text-align: left;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
-  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.legend-item {
-  display: inline-flex;
+.drawer-day-pill.active {
+  background: var(--ink);
+  color: #ffffff;
+  border-color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   7. Floating Bottom Navigation Dock (1:1 with Mockup)
+   -------------------------------------------------------------------------- */
+.bottom-nav-dock {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: space-around;
+  background: #ffffff;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-dock);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  width: calc(100% - 28px);
+  max-width: 420px;
 }
 
-.legend-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
+.dock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 5px 10px;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.15s ease;
 }
 
-.legend-dot.visited { background: var(--accent-blue); }
-.legend-dot.current { background: var(--green); box-shadow: 0 0 0 2px #a7f3d0; }
-.legend-dot.planned { background: #94a3b8; }
+.dock-item svg {
+  width: 19px;
+  height: 19px;
+  stroke-width: 2.2;
+}
 
-/* Custom Map Pins */
+.dock-item-label {
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.dock-item.active {
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   8. Modals, Pins, Lightbox
+   -------------------------------------------------------------------------- */
 .custom-pin {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: var(--accent-blue);
+  background: var(--blue);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -805,117 +656,18 @@ main {
   box-shadow: 0 2px 8px rgba(0,0,0,0.25);
   border: 2px solid #ffffff;
   cursor: pointer;
-  position: relative;
-  transition: transform 0.15s ease;
 }
-
-.custom-pin:hover {
-  transform: scale(1.15);
-  z-index: 1000;
-}
-
-.custom-pin.tokyo { background: var(--accent-blue); }
-.custom-pin.karuizawa { background: #059669; }
-.custom-pin.atami { background: #0ea5e9; }
-.custom-pin.osaka { background: #f97316; }
-.custom-pin.kyoto { background: #8b5cf6; }
-.custom-pin.coast { background: #06b6d4; }
-.custom-pin.onsen { background: #10b981; }
-.custom-pin.transit { background: #475569; }
 
 .custom-pin.current {
-  background: var(--green);
-  border-color: #ffffff;
+  background: #10b981;
   box-shadow: 0 0 0 4px rgba(16,185,129,0.4), 0 4px 12px rgba(0,0,0,0.3);
 }
 
-.custom-pin.current::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  border: 2px solid var(--green);
-  animation: pinPulse 1.8s infinite;
-}
-
-@keyframes pinPulse {
-  0% { transform: scale(0.9); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
-}
-
-.custom-pin.planned {
-  background: #94a3b8;
-  opacity: 0.85;
-  border-style: dashed;
-}
-
-/* --------------------------------------------------------------------------
-   7. Floating Frosted Glass Bottom Dock
-   -------------------------------------------------------------------------- */
-.floating-bottom-dock {
-  position: fixed;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(15, 23, 42, 0.94);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 5px 8px;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  max-width: calc(100vw - 28px);
-}
-
-.dock-btn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 7px 12px;
-  border-radius: var(--radius-pill);
-  border: none;
-  background: transparent;
-  color: #94a3b8;
-  font-size: 12.5px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  white-space: nowrap;
-}
-
-.dock-btn:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.dock-btn.active {
-  background: #ffffff;
-  color: var(--ink);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
-}
-
-.dock-badge {
-  font-size: 10px;
-  font-weight: 800;
-  background: var(--accent);
-  color: #ffffff;
-  padding: 1px 5px;
-  border-radius: var(--radius-pill);
-}
-
-/* --------------------------------------------------------------------------
-   8. Modals & Lightbox
-   -------------------------------------------------------------------------- */
 .lightbox-modal {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.94);
+  background: rgba(17, 24, 39, 0.94);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -946,12 +698,12 @@ main {
   max-width: 100%;
   max-height: 76vh;
   border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
   object-fit: contain;
 }
 
 .lightbox-caption {
-  color: #f1f5f9;
+  color: #f3f4f6;
   margin-top: 12px;
   font-size: 14px;
   text-align: center;
@@ -975,20 +727,13 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s ease;
 }
 
-.lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.35);
-}
-
-/* Place Detail Modal */
 .place-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(17, 24, 39, 0.5);
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   z-index: 1500;
   visibility: hidden;
   opacity: 0;
@@ -1010,8 +755,8 @@ main {
   width: min(500px, calc(100vw - 32px));
   max-height: 85vh;
   background: #ffffff;
-  border-radius: var(--radius);
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+  border-radius: var(--radius-card);
+  box-shadow: 0 20px 50px rgba(17, 24, 39, 0.25);
   z-index: 1510;
   overflow-y: auto;
   padding: 22px;
@@ -1033,7 +778,7 @@ main {
   top: 14px;
   right: 14px;
   border: 0;
-  background: var(--panel-subtle);
+  background: var(--panel-gray);
   color: var(--ink-secondary);
   width: 30px;
   height: 30px;
@@ -1046,201 +791,153 @@ main {
   justify-content: center;
 }
 
-.place-modal h3 {
-  margin: 0 0 6px;
-  font-size: 19px;
-  font-weight: 800;
-  color: var(--ink);
-}
-
-.modal-status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
-  font-size: 11px;
-  font-weight: 800;
-  margin-right: 6px;
-}
-
-.modal-status-badge.visited { background: var(--accent-blue-soft); color: var(--accent-blue); }
-.modal-status-badge.current { background: var(--green-soft); color: #047857; }
-.modal-status-badge.planned { background: var(--panel-subtle); color: var(--muted); }
-
-.place-modal-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--ink);
-  color: #ffffff;
-  padding: 9px 15px;
-  border-radius: var(--radius-sm);
-  font-weight: 700;
-  font-size: 13.5px;
-  margin-top: 8px;
-  transition: background 0.15s ease;
-}
-
-.place-modal-link:hover {
-  background: var(--accent-blue);
-  color: #ffffff;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px 16px 40px;
-  color: var(--muted);
-  font-size: 12.5px;
-  border-top: 1px solid var(--line);
-  background: #ffffff;
-  margin-top: auto;
-}
-
 </style>
 </head>
 <body>
-<div class="app">
+<div class="app-container">
 
-  <!-- Brand Header -->
-  <header class="brand-header">
-    <div class="brand-main-row">
-      <div class="brand-title-wrap">
-        <h1>Japan Journey 2026</h1>
-        <p>Family Travel Journal, Photo Gallery & Route</p>
-      </div>
-      <div class="brand-day-pill">Day 10 of 13</div>
+  <!-- 1. Header (1:1 with Mockup) -->
+  <header class="header-wrap">
+    <div class="header-top">
+      <h1 class="header-title">Japan Journey 2026</h1>
+      <div class="day-badge-top">Day 10 of 13</div>
     </div>
     
-    <div class="family-strip">
-      <div class="family-cluster" title="The Travel Crew">
-        <div class="avatar-stack">
-          <img src="assets/photos/53_ueno_father_son_smiling_selfie.jpg" alt="John" title="John (Dad)">
-          <img src="assets/photos/374_pearl_star_breakfast_brittany_evelyn_lap.jpg" alt="Brittany" title="Brittany (Mom)">
-          <img src="assets/photos/415_yoyogi_park_lincoln_naruko_dance_pose.jpg" alt="Lincoln" title="Lincoln">
-          <img src="assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg" alt="Evelyn" title="Evelyn">
-          <img src="assets/photos/22_tabi_ueno_dinner_aunt_alison.jpg" alt="Alison" title="Alison (Aunt)">
-        </div>
-        <div class="family-names-label">John · Brittany · Lincoln · Evelyn · Alison</div>
+    <div class="avatar-crew-row">
+      <div class="avatar-group">
+        <img src="assets/photos/53_ueno_father_son_smiling_selfie.jpg" alt="John" title="John">
+        <img src="assets/photos/374_pearl_star_breakfast_brittany_evelyn_lap.jpg" alt="Brittany" title="Brittany">
+        <img src="assets/photos/415_yoyogi_park_lincoln_naruko_dance_pose.jpg" alt="Lincoln" title="Lincoln">
+        <img src="assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg" alt="Evelyn" title="Evelyn">
       </div>
-      
-      <div class="brand-live-badge">Live in Shibuya</div>
+      <div class="crew-names-text">
+        John, Brittany,<br>Lincoln, Evelyn
+      </div>
     </div>
   </header>
 
-  <!-- Modern Dispatch Bento Widget -->
-  <section class="bento-hero-widget">
-    <div class="bento-widget-top">
-      <div class="bento-live-status">
-        <span>🔥 <strong>Latest Dispatch:</strong> Super Yosakoi Festival, PARCO & Arcades</span>
-      </div>
-      <button class="bento-latest-btn" onclick="switchTab('new')">
-        28 Highlights →
-      </button>
+  <!-- 2. Bento Card (1:1 with Mockup) -->
+  <section class="bento-card">
+    <div class="bento-header-line">
+      <span>🔥</span>
+      <span>Latest Update · 2h ago in Shibuya</span>
     </div>
 
-    <div class="bento-stats-grid">
-      <div class="bento-stat-item">
-        <div class="bento-stat-num">57</div>
-        <div class="bento-stat-label">Dispatches</div>
+    <div class="bento-content-row">
+      <div class="bento-stats-group">
+        <div class="bento-stat-col">
+          <div class="bento-stat-top">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span>61</span>
+          </div>
+          <div class="bento-stat-sub">Stories</div>
+        </div>
+
+        <div class="bento-stat-col">
+          <div class="bento-stat-top">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span>440</span>
+          </div>
+          <div class="bento-stat-sub">Photos</div>
+        </div>
+
+        <div class="bento-stat-col">
+          <div class="bento-stat-top">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            <span>18</span>
+          </div>
+          <div class="bento-stat-sub">Cities</div>
+        </div>
       </div>
-      <div class="bento-stat-item">
-        <div class="bento-stat-num">440+</div>
-        <div class="bento-stat-label">Photos</div>
-      </div>
-      <div class="bento-stat-item">
-        <div class="bento-stat-num">18</div>
-        <div class="bento-stat-label">Stops</div>
-      </div>
-    </div>
-    
-    <div class="bento-route-info">
-      <span>📍 <strong>Base:</strong> Cerulean Tower Suite · <strong>Route:</strong> Tokyo → Karuizawa → Atami → Shibuya → Kansai</span>
+
+      <button class="bento-action-btn" onclick="switchTab('favorites')">
+        View Latest Dispatch →
+      </button>
     </div>
   </section>
 
-  <!-- Sticky Segmented Control & Horizontal Date Strip -->
-  <div class="sticky-nav-container">
-    <div class="segmented-control">
-      <button class="seg-btn active" id="segFeed" onclick="switchTab('feed')">
-        📖 Journal
-      </button>
-      <button class="seg-btn" id="segNew" onclick="switchTab('new')">
-        ✨ Highlights <span class="seg-badge">28</span>
-      </button>
-      <button class="seg-btn" id="segMap" onclick="switchTab('map')">
-        🗺️ Map
-      </button>
-    </div>
-
-    <!-- Horizontal Day Scroller -->
-    <div class="day-scroll-strip" id="dayFilterContainer"></div>
+  <!-- 3. Segmented Switcher (Feed vs Live Map) -->
+  <div class="switcher-bar">
+    <button class="switcher-btn active" id="btnSwitchFeed" onclick="switchTab('feed')">
+      Feed
+    </button>
+    <button class="switcher-btn" id="btnSwitchMap" onclick="switchTab('map')">
+      Live Map
+    </button>
   </div>
 
+  <!-- Main Panes -->
   <main>
-    <!-- 1. Live Feed Tab -->
-    <section class="tab-pane active" id="paneFeed">
-      <div class="feed-stream" id="feedContainer"></div>
+    <!-- Pane 1: Feed -->
+    <section class="tab-content-pane active" id="paneFeed">
+      <div class="story-feed" id="feedContainer"></div>
     </section>
 
-    <!-- 2. Highlights Tab -->
-    <section class="tab-pane" id="paneNew">
-      <div class="highlights-header">
-        <h2>✨ Newly Added Highlights</h2>
-        <p>Curated photo collection from our latest adventures in Tokyo, Shibuya, Harajuku, and Ebisu.</p>
+    <!-- Pane 2: Map -->
+    <section class="tab-content-pane" id="paneMap">
+      <div class="map-card-container">
+        <div class="map-header-bar">
+          <h2>Interactive Travel Map</h2>
+          <div style="font-size:12.5px;color:var(--muted);font-weight:600;">🟢 Current Base: Shibuya</div>
+        </div>
+        <div class="map-viewport" id="map"></div>
+        <div class="map-pills-row">
+          <button class="map-quick-pill" onclick="zoomTo('japan')">🇯🇵 Japan</button>
+          <button class="map-quick-pill" onclick="zoomTo('shibuya')">🗼 Shibuya Base</button>
+          <button class="map-quick-pill" onclick="zoomTo('atami')">🏖️ Atami</button>
+          <button class="map-quick-pill" onclick="zoomTo('karuizawa')">🌲 Karuizawa</button>
+          <button class="map-quick-pill" onclick="zoomTo('tokyo')">🗼 Tokyo</button>
+          <button class="map-quick-pill" onclick="zoomTo('kansai')">🏯 Kansai</button>
+          <button class="map-quick-pill" onclick="zoomTo('coast')">🌊 Coast</button>
+        </div>
       </div>
-      <div class="new-content-grid" id="newContentContainer"></div>
     </section>
 
-    <!-- 3. Trip Map Tab -->
-    <section class="tab-pane" id="paneMap">
-      <div class="map-card">
-        <div class="map-header">
-          <div>
-            <h2>Route & Travel Stops</h2>
-            <p>Solid pins show places visited; pulsing green dot is our active Shibuya base.</p>
-          </div>
-          <div class="map-legend">
-            <span class="legend-item"><span class="legend-dot current"></span> Base</span>
-            <span class="legend-item"><span class="legend-dot visited"></span> Visited</span>
-            <span class="legend-item"><span class="legend-dot planned"></span> Ahead</span>
-          </div>
-        </div>
-        <div class="map-container" id="map"></div>
-        <div class="map-quick-buttons">
-          <button class="quick-btn" onclick="zoomTo('japan')">🇯🇵 All Japan</button>
-          <button class="quick-btn" onclick="zoomTo('shibuya')">🗼 Shibuya (Base)</button>
-          <button class="quick-btn" onclick="zoomTo('atami')">🏖️ Atami</button>
-          <button class="quick-btn" onclick="zoomTo('karuizawa')">🌲 Karuizawa</button>
-          <button class="quick-btn" onclick="zoomTo('tokyo')">🗼 Tokyo</button>
-          <button class="quick-btn" onclick="zoomTo('kansai')">🏯 Osaka & Kyoto</button>
-          <button class="quick-btn" onclick="zoomTo('coast')">🌊 Coast & Onsen</button>
-        </div>
+    <!-- Pane 3: Favorites / Highlights -->
+    <section class="tab-content-pane" id="paneFavorites">
+      <div style="margin-bottom:16px;">
+        <h2 style="margin:0 0 4px;font-size:20px;font-weight:800;">✨ Curated Highlights</h2>
+        <p style="margin:0;font-size:13px;color:var(--muted);">Favorite moments and top photos from the journey.</p>
       </div>
+      <div class="highlights-card-grid" id="highlightsContainer"></div>
     </section>
   </main>
 
-  <!-- Floating Bottom Navigation Dock -->
-  <nav class="floating-bottom-dock" aria-label="Quick Navigation">
-    <button class="dock-btn active" id="dockFeed" onclick="switchTab('feed')">
-      📖 Journal
+  <!-- 4. Floating Bottom Navigation Dock (1:1 with Mockup) -->
+  <nav class="bottom-nav-dock">
+    <button class="dock-item active" id="dockTimeline" onclick="switchTab('feed')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+      <span class="dock-item-label">Timeline</span>
     </button>
-    <button class="dock-btn" id="dockNew" onclick="switchTab('new')">
-      ✨ Highlights <span class="dock-badge">28</span>
+
+    <button class="dock-item" id="dockMap" onclick="switchTab('map')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+      <span class="dock-item-label">Interactive Map</span>
     </button>
-    <button class="dock-btn" id="dockMap" onclick="switchTab('map')">
-      🗺️ Map
+
+    <button class="dock-item" id="dockFavorites" onclick="switchTab('favorites')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+      <span class="dock-item-label">Favorites</span>
     </button>
-    <button class="dock-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-      ↑ Top
+
+    <button class="dock-item" id="dockSearch" onclick="openDrawer()">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      <span class="dock-item-label">Search</span>
     </button>
   </nav>
 
-  <!-- Footer -->
-  <footer>
-    <p>Japan Family Trip · August 21 – September 2, 2026 · Built with love for family & friends</p>
-  </footer>
+</div>
+
+<!-- Drawer Sheet for Day Filter & Search -->
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+<div class="drawer-sheet" id="drawerSheet">
+  <div class="drawer-drag-handle"></div>
+  <div class="drawer-header-row">
+    <h3 class="drawer-title">Filter by Day or Keyword</h3>
+    <button style="border:none;background:none;font-weight:700;color:var(--muted);cursor:pointer;font-size:16px;" onclick="closeDrawer()">✕</button>
+  </div>
+  <input type="text" class="drawer-search-input" placeholder="Search places, stories, or activities..." oninput="onSearchInput(this.value)">
+  <div class="drawer-days-grid" id="drawerDaysContainer"></div>
 </div>
 
 <!-- Lightbox Modal -->
@@ -4651,14 +4348,18 @@ const plannedRouteCoords = [
 
 
 
+
+
+
 // --- RENDER FUNCTIONS ---
 
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
-// Day Filtering State & Helpers
+// Day Filtering State
 let selectedDay = 'all';
+let searchQuery = '';
 
 function getPostDayKey(dateStr) {
   if (!dateStr) return '';
@@ -4666,10 +4367,95 @@ function getPostDayKey(dateStr) {
   return match ? match[1] : dateStr.split('·')[0].trim();
 }
 
-function renderDayFilter() {
-  const container = document.getElementById('dayFilterContainer');
+function renderFeed() {
+  const container = document.getElementById('feedContainer');
   if (!container) return;
   
+  let filteredPosts = selectedDay === 'all' 
+    ? tripPosts 
+    : tripPosts.filter(p => getPostDayKey(p.date) === selectedDay);
+
+  if (searchQuery.trim()) {
+    const q = searchQuery.toLowerCase();
+    filteredPosts = filteredPosts.filter(p => 
+      (p.title && p.title.toLowerCase().includes(q)) ||
+      (p.caption && p.caption.toLowerCase().includes(q)) ||
+      (p.location && p.location.toLowerCase().includes(q))
+    );
+  }
+
+  if (!filteredPosts.length) {
+    container.innerHTML = '<div class="story-card" style="padding:40px;text-align:center;"><p style="color:var(--muted);margin:0;">No updates found.</p></div>';
+    return;
+  }
+  
+  container.innerHTML = filteredPosts.map((post) => {
+    const pIdx = tripPosts.indexOf(post);
+    let heroMediaHtml = '';
+    let subGridHtml = '';
+
+    if (post.media && post.media.length > 0) {
+      const firstMedia = post.media[0];
+      
+      // Top Hero Media
+      if (firstMedia.type === 'video') {
+        heroMediaHtml = '<div class="story-hero-media" onclick="openLightbox(\'' + firstMedia.url + '\', \'video\', \'' + esc(firstMedia.caption || post.title) + '\')">' +
+          '<video src="' + firstMedia.url + '" preload="metadata" playsinline></video>' +
+        '</div>';
+      } else {
+        heroMediaHtml = '<div class="story-hero-media" onclick="openLightbox(\'' + firstMedia.url + '\', \'image\', \'' + esc(firstMedia.caption || post.title) + '\')">' +
+          '<img src="' + (firstMedia.thumb || firstMedia.url) + '" alt="' + esc(post.title) + '" loading="lazy">' +
+        '</div>';
+      }
+
+      // Secondary photos in 2-column or 3-column rounded grid below
+      if (post.media.length > 1) {
+        const remaining = post.media.slice(1);
+        const displayPhotos = remaining.slice(0, 2);
+        const extraCount = remaining.length - displayPhotos.length;
+
+        const subItemsHtml = displayPhotos.map((m, idx) => {
+          const actualMIdx = idx + 1;
+          const isLast = idx === displayPhotos.length - 1 && extraCount > 0;
+          const overlayHtml = isLast ? '<div class="story-more-badge">+' + extraCount + ' more</div>' : '';
+          
+          return '<div class="story-sub-item" onclick="openLightbox(\'' + m.url + '\', \'' + (m.type || 'image') + '\', \'' + esc(m.caption || post.title) + '\')">' +
+            '<img src="' + (m.thumb || m.url) + '" alt="' + esc(m.caption || post.title) + '" loading="lazy">' +
+            overlayHtml +
+          '</div>';
+        }).join('');
+
+        subGridHtml = '<div class="story-sub-grid grid-2">' + subItemsHtml + '</div>';
+      }
+    }
+
+    return '<article class="story-card">' +
+      heroMediaHtml +
+      '<div class="story-content-wrap">' +
+        '<h2 class="story-title">' + esc(post.title) + '</h2>' +
+        '<div class="story-meta-time">' + esc(post.date) + (post.location ? ' · 📍 ' + esc(post.location) : '') + '</div>' +
+        '<p class="story-caption-text">' + esc(post.caption) + '</p>' +
+        subGridHtml +
+      '</div>' +
+    '</article>';
+  }).join('');
+}
+
+// Drawer Controls
+function openDrawer() {
+  document.getElementById('drawerBackdrop').classList.add('show');
+  document.getElementById('drawerSheet').classList.add('show');
+}
+
+function closeDrawer() {
+  document.getElementById('drawerBackdrop').classList.remove('show');
+  document.getElementById('drawerSheet').classList.remove('show');
+}
+
+function renderDrawerDays() {
+  const container = document.getElementById('drawerDaysContainer');
+  if (!container) return;
+
   const dayCounts = {};
   const dayOrder = [];
   
@@ -4682,129 +4468,48 @@ function renderDayFilter() {
     }
     dayCounts[k]++;
   });
-  
-  const dayMeta = {
-    'Sun Aug 30': { label: "Day 10 · Shibuya & Yoyogi", icon: "🎭" },
-    'Sat Aug 29': { label: "Day 9 · Shibuya Base", icon: "🗼" },
-    'Fri Aug 28': { label: "Day 8 · Atami Water Park", icon: "🌊" },
-    'Thu Aug 27': { label: "Day 7 · Shinkansen to Atami", icon: "🏖️" },
-    'Wed Aug 26': { label: "Day 6 · Toy Kingdom", icon: "🌲" },
-    'Tue Aug 25': { label: "Day 5 · Karuizawa", icon: "🎂" },
-    'Mon Aug 24': { label: "Day 4 · Sanrio Puroland", icon: "🎀" },
-    'Sun Aug 23': { label: 'Day 3 · Akihabara & Ueno', icon: '⛩️' },
-    'Sat Aug 22': { label: 'Day 2 · Tokyo Arrival', icon: '🗼' },
-    'Fri Aug 21': { label: 'Day 1 · The O’Hare Dash', icon: '✈️' }
+
+  const dayLabels = {
+    'Sun Aug 30': 'Day 10 · Shibuya & Yoyogi',
+    'Sat Aug 29': 'Day 9 · Shibuya Base',
+    'Fri Aug 28': 'Day 8 · Atami Water Park',
+    'Thu Aug 27': 'Day 7 · Shinkansen to Atami',
+    'Wed Aug 26': 'Day 6 · Toy Kingdom',
+    'Tue Aug 25': 'Day 5 · Karuizawa',
+    'Mon Aug 24': 'Day 4 · Sanrio Puroland',
+    'Sun Aug 23': 'Day 3 · Akihabara & Ueno',
+    'Sat Aug 22': 'Day 2 · Tokyo Arrival',
+    'Fri Aug 21': 'Day 1 · The O’Hare Dash'
   };
 
-  let html = '<button class="day-pill ' + (selectedDay === 'all' ? 'active' : '') + '" onclick="selectDay(\'all\')">' +
-    '✨ All Days <span class="day-pill-count">' + tripPosts.length + '</span>' +
+  let html = '<button class="drawer-day-pill ' + (selectedDay === 'all' ? 'active' : '') + '" onclick="selectDayFromDrawer(\'all\')">' +
+    '<span>✨ All Days</span> <span>' + tripPosts.length + '</span>' +
     '</button>';
 
   dayOrder.forEach(dayKey => {
-    const meta = dayMeta[dayKey] || { label: dayKey, icon: '📅' };
+    const label = dayLabels[dayKey] || dayKey;
     const isActive = selectedDay === dayKey;
     const count = dayCounts[dayKey] || 0;
-    html += '<button class="day-pill ' + (isActive ? 'active' : '') + '" onclick="selectDay(\'' + esc(dayKey) + '\')">' +
-      meta.icon + ' ' + esc(meta.label) + ' <span class="day-pill-count">' + count + '</span>' +
+    html += '<button class="drawer-day-pill ' + (isActive ? 'active' : '') + '" onclick="selectDayFromDrawer(\'' + esc(dayKey) + '\')">' +
+      '<span>' + esc(label) + '</span> <span>' + count + '</span>' +
       '</button>';
   });
 
   container.innerHTML = html;
 }
 
-function selectDay(dayKey) {
+function selectDayFromDrawer(dayKey) {
   selectedDay = dayKey;
-  renderDayFilter();
+  renderDrawerDays();
+  renderFeed();
+  closeDrawer();
+  switchTab('feed');
+}
+
+function onSearchInput(val) {
+  searchQuery = val;
   renderFeed();
 }
-
-function renderFeed() {
-  const container = document.getElementById('feedContainer');
-  if (!container) return;
-  
-  const filteredPosts = selectedDay === 'all' 
-    ? tripPosts 
-    : tripPosts.filter(p => getPostDayKey(p.date) === selectedDay);
-
-  if (!filteredPosts.length) {
-    container.innerHTML = '<div class="feed-card" style="padding:40px;text-align:center"><p style="color:var(--muted)">No updates found for this day.</p></div>';
-    return;
-  }
-  
-  container.innerHTML = filteredPosts.map((post) => {
-    const pIdx = tripPosts.indexOf(post);
-    let featuredVideosHtml = '';
-    let galleryHtml = '';
-
-    if (post.media && post.media.length > 0) {
-      const videos = [];
-      const photos = [];
-
-      post.media.forEach((m, mIdx) => {
-        if (m.type === 'video') {
-          videos.push({ media: m, mIdx });
-        } else {
-          photos.push({ media: m, mIdx });
-        }
-      });
-
-      // Featured Top Videos
-      if (videos.length > 0) {
-        featuredVideosHtml = videos.map(vObj => {
-          return '<div class="feed-video-featured">' +
-            '<div class="feed-video-player-wrap">' +
-              '<video src="' + vObj.media.url + '" controls preload="metadata" playsinline></video>' +
-            '</div>' +
-            (vObj.media.caption ? '<div style="padding:10px 18px;background:#0f172a;color:#e2e8f0;font-size:13px;font-weight:600;">🎬 ' + esc(vObj.media.caption) + '</div>' : '') +
-          '</div>';
-        }).join('');
-      }
-
-      // Photo Gallery Grid
-      if (photos.length > 0) {
-        const len = photos.length;
-        const gridClass = len === 1 ? 'grid-1' : len === 2 ? 'grid-2' : len === 3 ? 'grid-3' : len === 4 ? 'grid-4' : len === 5 ? 'grid-5' : len === 6 ? 'grid-6' : len === 7 ? 'grid-7' : len === 8 ? 'grid-8' : len === 9 ? 'grid-9' : len === 10 ? 'grid-10' : 'grid-many';
-        const itemsHtml = photos.map(pObj => {
-          return '<div class="gallery-item" data-post-idx="' + pIdx + '" data-media-idx="' + pObj.mIdx + '">' +
-            '<img src="' + pObj.media.thumb + '" alt="' + esc(pObj.media.caption || post.title) + '" loading="lazy">' +
-          '</div>';
-        }).join('');
-        galleryHtml = '<div class="feed-gallery ' + gridClass + '">' + itemsHtml + '</div>';
-      }
-    }
-
-    return '<article class="feed-card">' +
-      '<div class="feed-header">' +
-        '<div class="feed-meta">' +
-          '<span>' + esc(post.date) + '</span>' +
-          (post.location ? '<span class="feed-loc">📍 ' + esc(post.location) + '</span>' : '') +
-        '</div>' +
-        '<h2 class="feed-title">' + esc(post.title) + '</h2>' +
-      '</div>' +
-      featuredVideosHtml +
-      galleryHtml +
-      '<div class="feed-body">' +
-        '<p class="feed-text">' + esc(post.caption) + '</p>' +
-        (post.tag ? '<div class="feed-tag">#' + esc(post.tag) + '</div>' : '') +
-      '</div>' +
-    '</article>';
-  }).join('');
-}
-
-// Global click delegation for gallery items
-document.addEventListener('click', (e) => {
-  const item = e.target.closest('.gallery-item');
-  if (!item) return;
-  const pIdx = item.getAttribute('data-post-idx');
-  const mIdx = item.getAttribute('data-media-idx');
-  if (pIdx !== null && mIdx !== null) {
-    const post = tripPosts[parseInt(pIdx, 10)];
-    if (post && post.media && post.media[parseInt(mIdx, 10)]) {
-      const m = post.media[parseInt(mIdx, 10)];
-      openLightbox(m.url, m.type || 'image', m.caption || post.title);
-    }
-  }
-});
 
 // Lightbox
 function openLightbox(url, type, caption) {
@@ -4835,16 +4540,13 @@ function openPlaceModal(pin) {
   const content = document.getElementById('placeContent');
   if (!modal || !content) return;
   
-  const statusLabel = pin.status === 'current' ? '🟢 Current Base' : pin.status === 'visited' ? '✅ Visited' : '⏳ Planned Ahead';
-  const statusClass = pin.status || 'visited';
-
-  content.innerHTML = '<h3>' + pin.icon + ' ' + esc(pin.name) + '</h3>' +
+  content.innerHTML = '<h3 style="margin:0 0 6px;font-size:18px;font-weight:800;">' + pin.icon + ' ' + esc(pin.name) + '</h3>' +
     '<div style="margin-bottom:12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">' +
-      '<span class="modal-status-badge ' + statusClass + '">' + statusLabel + '</span>' +
-      (pin.tag ? '<span class="modal-status-badge" style="background:#f1f5f9;color:#334155;">' + esc(pin.tag) + '</span>' : '') +
+      '<span style="background:#fff2ed;color:#ff5722;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:800;">' + (pin.status === 'current' ? '🟢 Current Base' : pin.status === 'visited' ? '✅ Visited' : '⏳ Planned') + '</span>' +
+      (pin.tag ? '<span style="background:#f3f4f6;color:#4b5563;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;">' + esc(pin.tag) + '</span>' : '') +
     '</div>' +
-    '<p style="font-size:14px;line-height:1.6;color:#334155;margin:0 0 12px;">' + esc(pin.desc) + '</p>' +
-    '<a class="place-modal-link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(pin.lat + ',' + pin.lon) + '">📍 Open in Google Maps ↗</a>';
+    '<p style="font-size:14px;line-height:1.6;color:#4b5563;margin:0 0 12px;">' + esc(pin.desc) + '</p>' +
+    '<a style="display:inline-flex;align-items:center;gap:6px;background:#111827;color:#fff;padding:9px 15px;border-radius:8px;font-weight:700;font-size:13.5px;" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(pin.lat + ',' + pin.lon) + '">📍 Open in Google Maps ↗</a>';
   backdrop.classList.add('show');
   modal.classList.add('show');
 }
@@ -4854,23 +4556,27 @@ function closePlaceModal() {
   document.getElementById('placeModal').classList.remove('show');
 }
 
-// Tab Switch
+// Tab Switching
 function switchTab(tab) {
-  // Update Segmented Control Buttons
-  document.getElementById('segFeed').classList.toggle('active', tab === 'feed');
-  document.getElementById('segNew').classList.toggle('active', tab === 'new');
-  document.getElementById('segMap').classList.toggle('active', tab === 'map');
-  
-  // Update Dock Buttons
-  document.getElementById('dockFeed').classList.toggle('active', tab === 'feed');
-  document.getElementById('dockNew').classList.toggle('active', tab === 'new');
+  // Top Switcher
+  const btnFeed = document.getElementById('btnSwitchFeed');
+  const btnMap = document.getElementById('btnSwitchMap');
+  if (btnFeed && btnMap) {
+    btnFeed.classList.toggle('active', tab === 'feed');
+    btnMap.classList.toggle('active', tab === 'map');
+  }
+
+  // Dock Buttons
+  document.getElementById('dockTimeline').classList.toggle('active', tab === 'feed');
   document.getElementById('dockMap').classList.toggle('active', tab === 'map');
-  
-  // Update Panes
+  document.getElementById('dockFavorites').classList.toggle('active', tab === 'favorites');
+  document.getElementById('dockSearch').classList.toggle('active', false);
+
+  // Panes
   document.getElementById('paneFeed').classList.toggle('active', tab === 'feed');
-  document.getElementById('paneNew').classList.toggle('active', tab === 'new');
   document.getElementById('paneMap').classList.toggle('active', tab === 'map');
-  
+  document.getElementById('paneFavorites').classList.toggle('active', tab === 'favorites');
+
   window.scrollTo({ top: 0, behavior: 'instant' });
   if (tab === 'map' && window.map) {
     setTimeout(() => {
@@ -4880,22 +4586,19 @@ function switchTab(tab) {
   }
 }
 
-function renderNewContent() {
-  const container = document.getElementById('newContentContainer');
+function renderHighlights() {
+  const container = document.getElementById('highlightsContainer');
   if (!container || typeof recentHighlights === 'undefined') return;
   container.innerHTML = recentHighlights.map((item) => {
-    return '<article class="new-content-card" onclick="openLightbox(\'' + item.url + '\', \'image\', \'' + esc(item.caption) + '\')">' +
-      '<div class="new-content-thumb">' +
+    return '<div class="highlight-item-card" onclick="openLightbox(\'' + item.url + '\', \'image\', \'' + esc(item.caption) + '\')">' +
+      '<div class="highlight-thumb-box">' +
         '<img src="' + item.thumb + '" alt="' + esc(item.caption) + '" loading="lazy">' +
       '</div>' +
-      '<div class="new-content-body">' +
-        '<div>' +
-          '<div class="new-content-loc">📍 ' + esc(item.location) + '</div>' +
-          '<p class="new-content-caption">' + esc(item.caption) + '</p>' +
-        '</div>' +
-        '<div class="new-content-tag">📅 ' + esc(item.day) + '</div>' +
+      '<div class="highlight-body-box">' +
+        '<div class="highlight-loc-tag">📍 ' + esc(item.location) + '</div>' +
+        '<p class="highlight-caption-text">' + esc(item.caption) + '</p>' +
       '</div>' +
-    '</article>';
+    '</div>';
   }).join('');
 }
 
@@ -4912,32 +4615,10 @@ function initMap() {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; CARTO'
   }).addTo(map);
 
-  // 1. Visited Journey Line
-  L.polyline(visitedMainRoute, {
-    color: '#2563eb',
-    weight: 4.5,
-    opacity: 0.9,
-    lineCap: 'round',
-    lineJoin: 'round'
-  }).addTo(map);
-
-  // 2. Visited Tokyo Exploration
-  L.polyline(visitedTokyoRoute, {
-    color: '#ff4d2e',
-    weight: 3.5,
-    opacity: 0.85,
-    dashArray: '6, 8',
-    lineCap: 'round'
-  }).addTo(map);
-
-  // 3. Planned Upcoming Journey Line
-  L.polyline(plannedRouteCoords, {
-    color: '#94a3b8',
-    weight: 2.5,
-    opacity: 0.6,
-    dashArray: '4, 8',
-    lineCap: 'round'
-  }).addTo(map);
+  // Routes
+  L.polyline(visitedMainRoute, { color: '#2563eb', weight: 4, opacity: 0.9, lineCap: 'round', lineJoin: 'round' }).addTo(map);
+  L.polyline(visitedTokyoRoute, { color: '#ff5722', weight: 3.5, opacity: 0.85, dashArray: '6, 8', lineCap: 'round' }).addTo(map);
+  L.polyline(plannedRouteCoords, { color: '#9ca3af', weight: 2.5, opacity: 0.6, dashArray: '4, 8', lineCap: 'round' }).addTo(map);
 
   // Markers
   mapPins.forEach(pin => {
@@ -4960,10 +4641,7 @@ function initMap() {
 function zoomTo(region) {
   if (!map) return;
   if (region === 'japan') {
-    map.fitBounds([
-      [34.4, 134.5],
-      [36.6, 140.6]
-    ], { padding: [30, 30] });
+    map.fitBounds([[34.4, 134.5], [36.6, 140.6]], { padding: [30, 30] });
   } else if (region === 'karuizawa') {
     map.flyTo([36.355, 138.635], 14, { duration: 0.8 });
   } else if (region === 'tokyo') {
@@ -4981,8 +4659,8 @@ function zoomTo(region) {
 
 // Init
 document.addEventListener('DOMContentLoaded', () => {
-  renderNewContent();
-  renderDayFilter();
+  renderHighlights();
+  renderDrawerDays();
   renderFeed();
   initMap();
 });
