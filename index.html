@@ -898,7 +898,7 @@ button { font: inherit; outline: none; }
 
   <!-- 3. Segmented Switcher (Feed vs Live Map) -->
   <div class="switcher-bar">
-    <button class="switcher-btn active" id="btnSwitchFeed" onclick="switchTab('feed')">
+    <button class="switcher-btn active" id="btnSwitchFeed" onclick="switchTab('feed', true)">
       Feed
     </button>
     <button class="switcher-btn" id="btnSwitchMap" onclick="switchTab('map')">
@@ -945,7 +945,7 @@ button { font: inherit; outline: none; }
 
   <!-- 4. Floating Bottom Navigation Dock (1:1 with Mockup) -->
   <nav class="bottom-nav-dock">
-    <button class="dock-item active" id="dockTimeline" onclick="switchTab('feed')">
+    <button class="dock-item active" id="dockTimeline" onclick="switchTab('feed', true)">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
       <span class="dock-item-label">Timeline</span>
     </button>
@@ -4407,6 +4407,15 @@ function getPostDayKey(dateStr) {
   return match ? match[1] : dateStr.split('·')[0].trim();
 }
 
+function clearAllFilters() {
+  selectedDay = 'all';
+  searchQuery = '';
+  const searchInput = document.querySelector('.drawer-search-input');
+  if (searchInput) searchInput.value = '';
+  renderDrawerDays();
+  renderFeed();
+}
+
 function renderFeed() {
   const container = document.getElementById('feedContainer');
   if (!container) return;
@@ -4424,12 +4433,32 @@ function renderFeed() {
     );
   }
 
+  let filterBarHtml = '';
+  if (selectedDay !== 'all' || searchQuery.trim()) {
+    let filterLabel = '';
+    if (selectedDay !== 'all' && searchQuery.trim()) {
+      filterLabel = esc(selectedDay) + ' · "' + esc(searchQuery) + '"';
+    } else if (selectedDay !== 'all') {
+      filterLabel = esc(selectedDay);
+    } else {
+      filterLabel = '"' + esc(searchQuery) + '"';
+    }
+
+    filterBarHtml = '<div class="active-filter-bar" style="background:#ffffff;border:1.5px solid var(--orange-border);border-radius:var(--radius-pill);padding:8px 14px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow-card);">' +
+      '<div style="font-size:12.5px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;">' +
+        '<span>🔍</span> <span>Showing <strong style="color:var(--orange);">' + filterLabel + '</strong></span>' +
+        '<span style="font-size:11.5px;color:var(--muted);font-weight:600;">(' + filteredPosts.length + ' update' + (filteredPosts.length === 1 ? '' : 's') + ')</span>' +
+      '</div>' +
+      '<button onclick="clearAllFilters()" style="border:none;background:var(--panel-gray);color:var(--ink);font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:var(--radius-pill);cursor:pointer;">✕ Show All</button>' +
+    '</div>';
+  }
+
   if (!filteredPosts.length) {
-    container.innerHTML = '<div class="story-card" style="padding:40px;text-align:center;"><p style="color:var(--muted);margin:0;">No updates found.</p></div>';
+    container.innerHTML = filterBarHtml + '<div class="story-card" style="padding:40px;text-align:center;"><p style="color:var(--muted);margin:0 0 12px;">No updates found matching your filter.</p><button onclick="clearAllFilters()" style="border:none;background:var(--ink);color:#fff;padding:8px 16px;border-radius:var(--radius-pill);font-size:13px;font-weight:700;cursor:pointer;">Show All Trip Updates</button></div>';
     return;
   }
   
-  container.innerHTML = filteredPosts.map((post) => {
+  const cardsHtml = filteredPosts.map((post) => {
     const pIdx = tripPosts.indexOf(post);
     let heroMediaHtml = '';
     let extraVideosHtml = '';
@@ -4503,6 +4532,8 @@ function renderFeed() {
       '</div>' +
     '</article>';
   }).join('');
+
+  container.innerHTML = filterBarHtml + cardsHtml;
 }
 
 // Drawer Controls
@@ -4621,7 +4652,16 @@ function closePlaceModal() {
 }
 
 // Tab Switching
-function switchTab(tab) {
+function switchTab(tab, resetFilters = false) {
+  if (tab === 'feed' && resetFilters) {
+    selectedDay = 'all';
+    searchQuery = '';
+    const searchInput = document.querySelector('.drawer-search-input');
+    if (searchInput) searchInput.value = '';
+    renderDrawerDays();
+    renderFeed();
+  }
+
   // Top Switcher
   const btnFeed = document.getElementById('btnSwitchFeed');
   const btnMap = document.getElementById('btnSwitchMap');
@@ -4641,7 +4681,7 @@ function switchTab(tab) {
   document.getElementById('paneMap').classList.toggle('active', tab === 'map');
   document.getElementById('paneFavorites').classList.toggle('active', tab === 'favorites');
 
-  window.scrollTo({ top: 0, behavior: 'instant' });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   if (tab === 'map' && window.map) {
     setTimeout(() => {
       window.map.invalidateSize();
