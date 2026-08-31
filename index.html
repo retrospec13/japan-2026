@@ -6,6 +6,8 @@
 <meta name="theme-color" content="#f8fafc">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>Japan Journey 2026</title>
+<link rel="icon" type="image/png" href="assets/mojo_icon.png">
+<link rel="apple-touch-icon" href="assets/mojo_icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -631,7 +633,7 @@ button { font: inherit; outline: none; }
 }
 
 /* --------------------------------------------------------------------------
-   7. Floating Bottom Navigation Dock (1:1 with Mockup)
+   7. Floating Bottom Navigation Dock (Contrasting Pastel-Matched Dark Pill)
    -------------------------------------------------------------------------- */
 .bottom-nav-dock {
   position: fixed;
@@ -642,11 +644,13 @@ button { font: inherit; outline: none; }
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: #ffffff;
-  padding: 5px 12px;
+  background: linear-gradient(135deg, #181528 0%, #1e1935 100%);
+  padding: 6px 12px;
   border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-dock);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 12px 36px -4px rgba(24, 21, 40, 0.45), 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 1.5px solid rgba(210, 180, 255, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   width: calc(100% - 28px);
   max-width: 420px;
 }
@@ -655,29 +659,41 @@ button { font: inherit; outline: none; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: 5px 10px;
+  gap: 3px;
+  padding: 5px 12px;
   border: none;
   background: transparent;
-  color: #6b7280;
+  color: #9d98b8;
   cursor: pointer;
-  border-radius: 10px;
-  transition: all 0.15s ease;
+  border-radius: 12px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dock-item svg {
-  width: 19px;
-  height: 19px;
+  width: 20px;
+  height: 20px;
   stroke-width: 2.2;
 }
 
 .dock-item-label {
   font-size: 10.5px;
   font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.dock-item:hover {
+  color: #e5e0ff;
 }
 
 .dock-item.active {
-  color: var(--ink);
+  background: linear-gradient(135deg, rgba(255, 160, 180, 0.22) 0%, rgba(180, 160, 255, 0.22) 100%);
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(255, 200, 220, 0.35);
+}
+
+.dock-item.active svg {
+  stroke: #ffafc2;
+  filter: drop-shadow(0 0 6px rgba(255, 175, 194, 0.5));
 }
 
 /* --------------------------------------------------------------------------
@@ -839,20 +855,31 @@ button { font: inherit; outline: none; }
   <!-- 1. Header (1:1 with Mockup) -->
   <header class="header-wrap">
     <div class="header-top">
-      <h1 class="header-title">Japan Journey 2026</h1>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="assets/mojo_icon.png" alt="Icon" style="width:38px;height:38px;border-radius:11px;box-shadow:0 3px 10px rgba(220, 160, 255, 0.35);display:block;border:1px solid rgba(255, 255, 255, 0.8);">
+        <h1 class="header-title">Japan Journey 2026</h1>
+      </div>
       <div class="day-badge-top">Day 10 of 13</div>
     </div>
     
-    <div class="avatar-crew-row">
-      <div class="avatar-group">
-        <img src="assets/photos/53_ueno_father_son_smiling_selfie.jpg" alt="John" title="John">
-        <img src="assets/photos/374_pearl_star_breakfast_brittany_evelyn_lap.jpg" alt="Brittany" title="Brittany">
-        <img src="assets/photos/415_yoyogi_park_lincoln_naruko_dance_pose.jpg" alt="Lincoln" title="Lincoln">
-        <img src="assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg" alt="Evelyn" title="Evelyn">
+    <div class="avatar-crew-row" style="justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="avatar-group">
+          <img src="assets/photos/53_ueno_father_son_smiling_selfie.jpg" alt="John" title="John">
+          <img src="assets/photos/374_pearl_star_breakfast_brittany_evelyn_lap.jpg" alt="Brittany" title="Brittany">
+          <img src="assets/photos/415_yoyogi_park_lincoln_naruko_dance_pose.jpg" alt="Lincoln" title="Lincoln">
+          <img src="assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg" alt="Evelyn" title="Evelyn">
+        </div>
+        <div class="crew-names-text">
+          John, Brittany,<br>Lincoln, Evelyn
+        </div>
       </div>
-      <div class="crew-names-text">
-        John, Brittany,<br>Lincoln, Evelyn
-      </div>
+
+      <!-- Frictionless 1-Tap Add to iMessage Contact Button -->
+      <a href="assets/mojo.vcf" download="Live-Travel-Journal.vcf" style="text-decoration:none;display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg, #fff0f5 0%, #f0f3ff 100%);border:1px solid rgba(210, 180, 255, 0.45);color:#1e1935;font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:var(--radius-pill);box-shadow:0 2px 6px rgba(0,0,0,0.04);transition:all 0.2s ease;">
+        <span style="font-size:13px;">💬</span>
+        <span>+ Add Contact</span>
+      </a>
     </div>
   </header>
 
