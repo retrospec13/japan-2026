@@ -864,7 +864,7 @@ button { font: inherit; outline: none; }
         <img src="assets/mojo_icon.png" alt="Icon" style="width:38px;height:38px;border-radius:12px;box-shadow:0 3px 10px rgba(255, 107, 157, 0.22);display:block;">
         <h1 class="header-title">Japan Journey 2026</h1>
       </div>
-      <div class="day-badge-top">Day 10 of 13</div>
+      <div class="day-badge-top">Day 11 of 13</div>
     </div>
     
     <div class="avatar-crew-row">
@@ -1021,64 +1021,394 @@ button { font: inherit; outline: none; }
 <script>
 const recentHighlights = [
   {
-    "url": "assets/photos/401_super_yosakoi_custom_wooden_charms.jpg",
-    "thumb": "assets/photos/401_super_yosakoi_custom_wooden_charms.jpg",
-    "caption": "Custom laser-engraved festival wooden charm necklaces with Lincoln and Evelyn's names in Kanji.",
-    "day": "Day 10 · Sun Aug 30",
-    "location": "Super Yosakoi Festival · Yoyogi Park"
+    "url": "assets/photos/458_shinagawa_aquarium_evelyn_silly_face_jellyfish_1.jpg",
+    "thumb": "assets/photos/458_shinagawa_aquarium_evelyn_silly_face_jellyfish_1.jpg",
+    "caption": "Evelyn making hilarious faces as a giant moon jellyfish floats above at Shinagawa Aquarium.",
+    "day": "Day 11 · Mon Aug 31",
+    "location": "Shinagawa Aquarium Jellyfish Gallery"
   },
   {
-    "url": "assets/photos/404_festival_breakfast_table_kids_charms.jpg",
-    "thumb": "assets/photos/404_festival_breakfast_table_kids_charms.jpg",
-    "caption": "Lincoln and Evelyn showing off their festival charms at our breakfast table.",
-    "day": "Day 10 · Sun Aug 30",
-    "location": "Festival Breakfast Stalls"
+    "url": "assets/photos/470_shinagawa_aquarium_dolphin_show_family_grandstand.jpg",
+    "thumb": "assets/photos/470_shinagawa_aquarium_dolphin_show_family_grandstand.jpg",
+    "caption": "Family selfie in the grandstand at the Dolphin Stadium.",
+    "day": "Day 11 · Mon Aug 31",
+    "location": "Dolphin Stadium · Shinagawa Aquarium"
   },
   {
-    "url": "assets/photos/409_yoyogi_park_outdoor_stage_competition_crowd.jpg",
-    "thumb": "assets/photos/409_yoyogi_park_outdoor_stage_competition_crowd.jpg",
-    "caption": "The massive crowd watching costumed dancers at Yoyogi Park Outdoor Stage.",
-    "day": "Day 10 · Sun Aug 30",
-    "location": "Yoyogi Park Outdoor Stage"
+    "url": "assets/photos/476_shinagawa_kumin_park_scenic_lake_reflection.jpg",
+    "thumb": "assets/photos/476_shinagawa_kumin_park_scenic_lake_reflection.jpg",
+    "caption": "The scenic lake and lush green trails of Shinagawa-Kumin Park.",
+    "day": "Day 11 · Mon Aug 31",
+    "location": "Shinagawa-Kumin Park (勝島の海)"
   },
   {
-    "url": "assets/photos/414_yoyogi_park_walkway_lincoln_evelyn_clappers.jpg",
-    "thumb": "assets/photos/414_yoyogi_park_walkway_lincoln_evelyn_clappers.jpg",
-    "caption": "Lincoln and Evelyn clicking their Naruko clappers together in Yoyogi Park.",
-    "day": "Day 10 · Sun Aug 30",
-    "location": "Yoyogi Park Walkway"
+    "url": "assets/photos/477_shinagawa_kumin_park_lincoln_stepping_stones.jpg",
+    "thumb": "assets/photos/477_shinagawa_kumin_park_lincoln_stepping_stones.jpg",
+    "caption": "Lincoln hopping across boulder stepping stones over the park stream.",
+    "day": "Day 11 · Mon Aug 31",
+    "location": "Shinagawa-Kumin Park Stream Crossing"
   },
   {
-    "url": "assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg",
-    "thumb": "assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg",
-    "caption": "Evelyn smiling beside the giant chocolate rabbit at Sylvanian Families in Shibuya PARCO.",
-    "day": "Day 10 · Sun Aug 30",
-    "location": "Sylvanian Families · Shibuya PARCO 5F"
+    "url": "assets/photos/488_shinagawa_kumin_park_evelyn_concrete_whale_slide_smile.jpg",
+    "thumb": "assets/photos/488_shinagawa_kumin_park_evelyn_concrete_whale_slide_smile.jpg",
+    "caption": "Evelyn all smiles at the top of the wide blue concrete whale slide.",
+    "day": "Day 11 · Mon Aug 31",
+    "location": "Adventure Playground · Shinagawa-Kumin Park"
   },
   {
-    "url": "assets/photos/426_shibuya_parco_rooftop_family_selfie.jpg",
-    "thumb": "assets/photos/426_shibuya_parco_rooftop_family_selfie.jpg",
-    "caption": "Family selfie on the 10F Rooftop Park of Shibuya PARCO.",
-    "day": "Day 10 · Sun Aug 30",
-    "location": "Shibuya PARCO Rooftop Park"
+    "url": "assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg",
+    "thumb": "assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg",
+    "caption": "Lincoln crawling inside the blue whale sandbox playground beneath Shinjuku skyscrapers.",
+    "day": "Day 11 · Mon Aug 31",
+    "location": "Shinjuku Chuo Park Whale Playground"
   },
   {
-    "url": "assets/photos/431_ebisu_park_rocket_train_playground_wide.jpg",
-    "thumb": "assets/photos/431_ebisu_park_rocket_train_playground_wide.jpg",
-    "caption": "Ebisu Rocket Park featuring the concrete playground locomotive and rocket slide tower.",
-    "day": "Day 10 · Sun Aug 30",
-    "location": "Ebisu Park (Rocket Park)"
+    "url": "assets/photos/492_shinjuku_chuo_park_evelyn_monkey_bars_hanging.jpg",
+    "thumb": "assets/photos/492_shinjuku_chuo_park_evelyn_monkey_bars_hanging.jpg",
+    "caption": "Evelyn hanging playfully from monkey bars at Shinjuku Chuo Park.",
+    "day": "Day 11 · Mon Aug 31",
+    "location": "Shinjuku Chuo Park Playground"
   },
   {
-    "url": "assets/photos/439_arcade_brittany_claw_machine_intense_focus.jpg",
-    "thumb": "assets/photos/439_arcade_brittany_claw_machine_intense_focus.jpg",
-    "caption": "Mom crouched low in intense focus lining up the claw machine drop at the arcade.",
+    "url": "assets/photos/440_late_night_ramen_lincoln_squid_ball.jpg",
+    "thumb": "assets/photos/440_late_night_ramen_lincoln_squid_ball.jpg",
+    "caption": "Lincoln eating late-night 9 PM seafood ramen after our big Shibuya day.",
     "day": "Day 10 · Sun Aug 30",
-    "location": "GiGO Amusement Arcade"
+    "location": "Shibuya Late Night Ramen"
   }
 ];
 
 const tripPosts = [
+  {
+    "id": "post-60",
+    "date": "Mon Aug 31, 2026 · Morning",
+    "location": "Shinagawa Aquarium (しながわ水族館) · Shinagawa, Tokyo",
+    "tag": "Underwater Tunnel, Jellyfish Faces & Dolphin Stadium",
+    "title": "Ocean tunnel arch, glowing jellyfish faces, sea lions, and dolphins at Shinagawa Aquarium",
+    "caption": "After enjoying a relaxing breakfast at the hotel, we took a ride down to Shinagawa Aquarium (しながわ水族館) for a fun morning under the sea!\n\nWe walked right through the panoramic underwater glass tunnel as spotted leopard sharks, stingrays, and sea turtles glided directly over our heads. We checked out the giant Japanese spider crabs (タカアシガニ) with their massive legs, axolotls, and playful river otters, and had an absolute blast by the jellyfish displays where Evelyn made hilarious faces behind the floating moon jellies! Before heading out, we measured ourselves against the sea creature height charts and cheered at the energetic dolphin show in the outdoor Dolphin Stadium.",
+    "media": [
+      {
+        "type": "video",
+        "url": "assets/videos/shinagawa_aquarium_penguin_statues.mp4",
+        "caption": "Lincoln and Evelyn playing and posing with the cute penguin statues outside the aquarium."
+      },
+      {
+        "url": "assets/photos/441_shinagawa_aquarium_entrance_evelyn_dolphin_statue.jpg",
+        "thumb": "assets/photos/441_shinagawa_aquarium_entrance_evelyn_dolphin_statue.jpg",
+        "caption": "Evelyn striking a playful pose inside the blue dolphin statue at the aquarium entrance."
+      },
+      {
+        "url": "assets/photos/442_shinagawa_aquarium_chrome_entrance_sign.jpg",
+        "thumb": "assets/photos/442_shinagawa_aquarium_chrome_entrance_sign.jpg",
+        "caption": "The gleaming stainless steel entrance gate for Shinagawa Aquarium (しながわ水族館)."
+      },
+      {
+        "url": "assets/photos/443_shinagawa_aquarium_walk_john_brittany_evelyn_selfie.jpg",
+        "thumb": "assets/photos/443_shinagawa_aquarium_walk_john_brittany_evelyn_selfie.jpg",
+        "caption": "Morning walk selfie with John, Evelyn, and Brittany arriving at the aquarium plaza."
+      },
+      {
+        "url": "assets/photos/444_shinagawa_aquarium_lincoln_evelyn_penguin_bench.jpg",
+        "thumb": "assets/photos/444_shinagawa_aquarium_lincoln_evelyn_penguin_bench.jpg",
+        "caption": "Lincoln and Evelyn posing together on the penguin statue bench outside the aquarium."
+      },
+      {
+        "url": "assets/photos/445_shinagawa_aquarium_evelyn_lincoln_hugging_penguin.jpg",
+        "thumb": "assets/photos/445_shinagawa_aquarium_evelyn_lincoln_hugging_penguin.jpg",
+        "caption": "Evelyn hugging the cute little penguin sculpture with Lincoln smiling behind."
+      },
+      {
+        "url": "assets/photos/446_shinagawa_aquarium_lincoln_evelyn_penguin_flowers.jpg",
+        "thumb": "assets/photos/446_shinagawa_aquarium_lincoln_evelyn_penguin_flowers.jpg",
+        "caption": "Lincoln and Evelyn framed by the lush flower garden beds outside the entrance."
+      },
+      {
+        "url": "assets/photos/448_shinagawa_aquarium_admission_tickets_dolphin.jpg",
+        "thumb": "assets/photos/448_shinagawa_aquarium_admission_tickets_dolphin.jpg",
+        "caption": "Our Shinagawa Aquarium admission tickets featuring jumping dolphins."
+      },
+      {
+        "url": "assets/photos/449_shinagawa_aquarium_pink_axolotl_tank.jpg",
+        "thumb": "assets/photos/449_shinagawa_aquarium_pink_axolotl_tank.jpg",
+        "caption": "A cute pink axolotl resting peacefully in its exhibit tank."
+      },
+      {
+        "url": "assets/photos/450_shinagawa_aquarium_underwater_tunnel_crowd.jpg",
+        "thumb": "assets/photos/450_shinagawa_aquarium_underwater_tunnel_crowd.jpg",
+        "caption": "Looking down the vibrant blue underwater tunnel arch at Shinagawa Aquarium."
+      },
+      {
+        "url": "assets/photos/451_shinagawa_aquarium_giant_japanese_spider_crab.jpg",
+        "thumb": "assets/photos/451_shinagawa_aquarium_giant_japanese_spider_crab.jpg",
+        "caption": "The massive Japanese spider crab (タカアシガニ) with its gigantic leg span."
+      },
+      {
+        "url": "assets/photos/452_shinagawa_aquarium_large_reef_fish_tank.jpg",
+        "thumb": "assets/photos/452_shinagawa_aquarium_large_reef_fish_tank.jpg",
+        "caption": "Large marine reef fish cruising along the sandy seafloor habitat."
+      },
+      {
+        "url": "assets/photos/453_shinagawa_aquarium_brittany_kids_viewing_coral_reef.jpg",
+        "thumb": "assets/photos/453_shinagawa_aquarium_brittany_kids_viewing_coral_reef.jpg",
+        "caption": "Brittany, Lincoln, and Evelyn watching hundreds of fish in the panoramic ocean tank."
+      },
+      {
+        "url": "assets/photos/454_shinagawa_aquarium_giant_spider_crab_tank.jpg",
+        "thumb": "assets/photos/454_shinagawa_aquarium_giant_spider_crab_tank.jpg",
+        "caption": "A live giant spider crab perched upon the underwater rocky reef."
+      },
+      {
+        "url": "assets/photos/455_shinagawa_aquarium_lincoln_evelyn_blue_jellyfish_tank.jpg",
+        "thumb": "assets/photos/455_shinagawa_aquarium_lincoln_evelyn_blue_jellyfish_tank.jpg",
+        "caption": "Lincoln and Evelyn smiling in front of the glowing blue jellyfish tank."
+      },
+      {
+        "url": "assets/photos/456_shinagawa_aquarium_evelyn_lincoln_jellyfish_glow.jpg",
+        "thumb": "assets/photos/456_shinagawa_aquarium_evelyn_lincoln_jellyfish_glow.jpg",
+        "caption": "The kids illuminated by the serene blue glow of the jellyfish gallery."
+      },
+      {
+        "url": "assets/photos/457_shinagawa_aquarium_kids_reaching_for_moon_jellyfish.jpg",
+        "thumb": "assets/photos/457_shinagawa_aquarium_kids_reaching_for_moon_jellyfish.jpg",
+        "caption": "Lincoln and Evelyn playfully reaching up toward floating moon jellyfish."
+      },
+      {
+        "url": "assets/photos/458_shinagawa_aquarium_evelyn_silly_face_jellyfish_1.jpg",
+        "thumb": "assets/photos/458_shinagawa_aquarium_evelyn_silly_face_jellyfish_1.jpg",
+        "caption": "Evelyn making funny faces as a giant jellyfish floats right above Lincoln."
+      },
+      {
+        "url": "assets/photos/459_shinagawa_aquarium_evelyn_silly_face_jellyfish_2.jpg",
+        "thumb": "assets/photos/459_shinagawa_aquarium_evelyn_silly_face_jellyfish_2.jpg",
+        "caption": "Lincoln pretending to balance the floating moon jellyfish on Evelyn's head!"
+      },
+      {
+        "url": "assets/photos/460_shinagawa_aquarium_evelyn_silly_face_jellyfish_3.jpg",
+        "thumb": "assets/photos/460_shinagawa_aquarium_evelyn_silly_face_jellyfish_3.jpg",
+        "caption": "Evelyn going full jellyfish monster mode while Lincoln cracks up laughing."
+      },
+      {
+        "url": "assets/photos/461_shinagawa_aquarium_blue_tang_dory_coral_reef.jpg",
+        "thumb": "assets/photos/461_shinagawa_aquarium_blue_tang_dory_coral_reef.jpg",
+        "caption": "A bright blue tang (Dory) gliding among the coral reef branches."
+      },
+      {
+        "url": "assets/photos/462_shinagawa_aquarium_lincoln_inspecting_small_tank.jpg",
+        "thumb": "assets/photos/462_shinagawa_aquarium_lincoln_inspecting_small_tank.jpg",
+        "caption": "Lincoln inspecting a specialized small aquatic creature exhibit tank."
+      },
+      {
+        "url": "assets/photos/463_shinagawa_aquarium_camouflaged_toad_moss_terrarium.jpg",
+        "thumb": "assets/photos/463_shinagawa_aquarium_camouflaged_toad_moss_terrarium.jpg",
+        "caption": "A perfectly camouflaged horned toad nestled in the mossy terrarium habitat."
+      },
+      {
+        "url": "assets/photos/464_shinagawa_aquarium_talking_tree_spirit_face.jpg",
+        "thumb": "assets/photos/464_shinagawa_aquarium_talking_tree_spirit_face.jpg",
+        "caption": "The whimsical talking tree spirit face carved into the enchanted forest hall column."
+      },
+      {
+        "url": "assets/photos/465_shinagawa_aquarium_kids_watching_swimming_sea_lion.jpg",
+        "thumb": "assets/photos/465_shinagawa_aquarium_kids_watching_swimming_sea_lion.jpg",
+        "caption": "Lincoln and Evelyn kneeling together watching a graceful sea lion swim right past."
+      },
+      {
+        "url": "assets/photos/466_shinagawa_aquarium_lincoln_evelyn_creature_height_chart.jpg",
+        "thumb": "assets/photos/466_shinagawa_aquarium_lincoln_evelyn_creature_height_chart.jpg",
+        "caption": "Lincoln and Evelyn checking their heights against dolphins, seals, and penguins on the wall chart."
+      },
+      {
+        "url": "assets/photos/467_shinagawa_aquarium_evelyn_penguin_height_chart.jpg",
+        "thumb": "assets/photos/467_shinagawa_aquarium_evelyn_penguin_height_chart.jpg",
+        "caption": "Evelyn sizing herself up next to the Magellanic penguin marker."
+      },
+      {
+        "url": "assets/photos/468_shinagawa_aquarium_evelyn_watching_river_otters.jpg",
+        "thumb": "assets/photos/468_shinagawa_aquarium_evelyn_watching_river_otters.jpg",
+        "caption": "Evelyn mesmerized by the playful river otter swimming in the emerald pool."
+      },
+      {
+        "url": "assets/photos/469_shinagawa_aquarium_dolphin_stadium_outdoor_pool.jpg",
+        "thumb": "assets/photos/469_shinagawa_aquarium_dolphin_stadium_outdoor_pool.jpg",
+        "caption": "The outdoor Dolphin Stadium pool surrounded by green park trees."
+      },
+      {
+        "url": "assets/photos/470_shinagawa_aquarium_dolphin_show_family_grandstand.jpg",
+        "thumb": "assets/photos/470_shinagawa_aquarium_dolphin_show_family_grandstand.jpg",
+        "caption": "Grandstand family selfie with Lincoln, Evelyn, Brittany, Aunt Alison, and John waiting for the dolphin show."
+      },
+      {
+        "url": "assets/photos/471_shinagawa_aquarium_underwater_ray_shark_belly.jpg",
+        "thumb": "assets/photos/471_shinagawa_aquarium_underwater_ray_shark_belly.jpg",
+        "caption": "Looking straight up from the tunnel as a leopard shark glides overhead."
+      },
+      {
+        "url": "assets/photos/472_shinagawa_aquarium_magellanic_penguins_rocky_burrows.jpg",
+        "thumb": "assets/photos/472_shinagawa_aquarium_magellanic_penguins_rocky_burrows.jpg",
+        "caption": "Magellanic penguins resting along their rocky nesting burrows and pool."
+      },
+      {
+        "url": "assets/photos/473_shinagawa_aquarium_john_evelyn_penguin_exhibit_hug.jpg",
+        "thumb": "assets/photos/473_shinagawa_aquarium_john_evelyn_penguin_exhibit_hug.jpg",
+        "caption": "John and Evelyn sharing a warm hug with the penguin pool in the background."
+      },
+      {
+        "url": "assets/photos/474_shinagawa_aquarium_brittany_john_evelyn_penguin_selfie.jpg",
+        "thumb": "assets/photos/474_shinagawa_aquarium_brittany_john_evelyn_penguin_selfie.jpg",
+        "caption": "Brittany, John, and Evelyn smiling above the penguin habitat."
+      },
+      {
+        "url": "assets/photos/475_shinagawa_aquarium_john_lincoln_penguin_pool_smile.jpg",
+        "thumb": "assets/photos/475_shinagawa_aquarium_john_lincoln_penguin_pool_smile.jpg",
+        "caption": "Father and son selfie with John and Lincoln by the penguin pool."
+      }
+    ]
+  },
+  {
+    "id": "post-61",
+    "date": "Mon Aug 31, 2026 · Midday",
+    "location": "Shinagawa-Kumin Park (勝島の海 & こども冒険ひろば) · Shinagawa, Tokyo",
+    "tag": "Lakeside Bamboo Trails, Stream Stepping Stones & Whale Slide",
+    "title": "Scenic lakeside walk, stepping stone stream crossings, bamboo trails, and concrete whale slide",
+    "caption": "Right outside the aquarium, we strolled through the sprawling, peaceful grounds of Shinagawa-Kumin Park (しながわ区民公園).\n\nWe crossed natural boulder stepping stones across the running stream, followed quiet winding earthen trails shaded by lush green bamboo groves, and enjoyed the serene lake reflections across Katsushima no Umi (勝島の海). We walked through the pedestrian tunnel filled with vibrant hand-painted marine and wildlife murals to reach the Children's Adventure Playground (こども冒険ひろば). Evelyn loved spinning on the palm tree climber pole, and the kids scrambled inside the mouth of the giant blue concrete whale before zooming down its wide slide! After a wonderful nature walk, we took a taxi back to our hotel base for an afternoon break while Mom & Dad headed out for their anniversary lunch.",
+    "media": [
+      {
+        "type": "video",
+        "url": "assets/videos/shinagawa_park_evelyn_whale_slide_fun.mp4",
+        "caption": "Evelyn happily running around the concrete whale playground slide at Shinagawa-Kumin Park."
+      },
+      {
+        "url": "assets/photos/447_shinagawa_kumin_park_map_guide_board.jpg",
+        "thumb": "assets/photos/447_shinagawa_kumin_park_map_guide_board.jpg",
+        "caption": "Detailed trail and facilities map of Shinagawa-Kumin Park (しながわ区民公園)."
+      },
+      {
+        "url": "assets/photos/476_shinagawa_kumin_park_scenic_lake_reflection.jpg",
+        "thumb": "assets/photos/476_shinagawa_kumin_park_scenic_lake_reflection.jpg",
+        "caption": "The scenic lake and lush green trees reflecting on Katsushima no Umi (勝島の海)."
+      },
+      {
+        "url": "assets/photos/477_shinagawa_kumin_park_lincoln_stepping_stones.jpg",
+        "thumb": "assets/photos/477_shinagawa_kumin_park_lincoln_stepping_stones.jpg",
+        "caption": "Lincoln leaping across the boulder stepping stone crossing over the stream."
+      },
+      {
+        "url": "assets/photos/478_shinagawa_kumin_park_evelyn_stream_crossing.jpg",
+        "thumb": "assets/photos/478_shinagawa_kumin_park_evelyn_stream_crossing.jpg",
+        "caption": "Evelyn carefully navigating the stone boulders across the clear flowing water."
+      },
+      {
+        "url": "assets/photos/479_shinagawa_kumin_park_lincoln_forest_bamboo_trail.jpg",
+        "thumb": "assets/photos/479_shinagawa_kumin_park_lincoln_forest_bamboo_trail.jpg",
+        "caption": "Lincoln exploring along the dirt nature trail surrounded by bamboo groves."
+      },
+      {
+        "url": "assets/photos/480_shinagawa_kumin_park_brittany_kids_nature_walk.jpg",
+        "thumb": "assets/photos/480_shinagawa_kumin_park_brittany_kids_nature_walk.jpg",
+        "caption": "Brittany leading Lincoln and Evelyn along the secluded forest park paths."
+      },
+      {
+        "url": "assets/photos/481_shinagawa_kumin_park_family_bamboo_forest_walk.jpg",
+        "thumb": "assets/photos/481_shinagawa_kumin_park_family_bamboo_forest_walk.jpg",
+        "caption": "Brittany and Evelyn walking hand-in-hand through the tranquil bamboo canopy."
+      },
+      {
+        "url": "assets/photos/482_shinagawa_kumin_park_underpass_mural_dolphin.jpg",
+        "thumb": "assets/photos/482_shinagawa_kumin_park_underpass_mural_dolphin.jpg",
+        "caption": "Vibrant dolphin and ocean mural painted on the pedestrian tunnel wall."
+      },
+      {
+        "url": "assets/photos/483_shinagawa_kumin_park_mural_tunnel_walk.jpg",
+        "thumb": "assets/photos/483_shinagawa_kumin_park_mural_tunnel_walk.jpg",
+        "caption": "Family walking through the illustrated pedestrian tunnel connecting the park sections."
+      },
+      {
+        "url": "assets/photos/484_shinagawa_kumin_park_lincoln_swan_mural.jpg",
+        "thumb": "assets/photos/484_shinagawa_kumin_park_lincoln_swan_mural.jpg",
+        "caption": "Lincoln walking past the painted swan and duck pond mural."
+      },
+      {
+        "url": "assets/photos/485_shinagawa_kumin_park_evelyn_palm_tree_pole_spin.jpg",
+        "thumb": "assets/photos/485_shinagawa_kumin_park_evelyn_palm_tree_pole_spin.jpg",
+        "caption": "Evelyn having fun climbing and spinning on the palm tree pole in the playground."
+      },
+      {
+        "url": "assets/photos/486_shinagawa_kumin_park_evelyn_whale_slide_inside.jpg",
+        "thumb": "assets/photos/486_shinagawa_kumin_park_evelyn_whale_slide_inside.jpg",
+        "caption": "Evelyn exploring inside the mouth chamber of the concrete whale slide."
+      },
+      {
+        "url": "assets/photos/487_shinagawa_kumin_park_lincoln_concrete_whale_slide_top.jpg",
+        "thumb": "assets/photos/487_shinagawa_kumin_park_lincoln_concrete_whale_slide_top.jpg",
+        "caption": "Lincoln at the top of the wide blue concrete whale slide."
+      },
+      {
+        "url": "assets/photos/488_shinagawa_kumin_park_evelyn_concrete_whale_slide_smile.jpg",
+        "thumb": "assets/photos/488_shinagawa_kumin_park_evelyn_concrete_whale_slide_smile.jpg",
+        "caption": "Evelyn flashing a big smile at the top of the whale slide."
+      },
+      {
+        "url": "assets/photos/489_shinagawa_kumin_park_park_center_trail_signs.jpg",
+        "thumb": "assets/photos/489_shinagawa_kumin_park_park_center_trail_signs.jpg",
+        "caption": "Directional signs pointing to the Aquarium, Barbecue Site, and Children's Playground."
+      }
+    ]
+  },
+  {
+    "id": "post-62",
+    "date": "Mon Aug 31, 2026 · Afternoon",
+    "location": "Shinjuku Chuo Park (新宿中央公園) · Nishi-Shinjuku, Tokyo",
+    "tag": "Skyscraper Playground, Whale Sandbox & Giant Slides",
+    "title": "Anniversary lunch, high-rise park playgrounds, whale sandbox crawl, and big slide races at Shinjuku Chuo Park",
+    "caption": "After Mom and Dad enjoyed a special anniversary lunch date together in the city, the whole crew headed out back to another fantastic Tokyo playground — Shinjuku Chuo Park (新宿中央公園), nestled right beneath the towering Nishi-Shinjuku skyscrapers and the Tokyo Metropolitan Government Building.\n\nThe park was decked out for the Enjoy SUMMER Park season. Lincoln and Evelyn had endless energy on the multi-deck playground climbing towers, scaling monkey bars, playing in the huge sandbox with the iconic crawl-through blue whale, racing through agility cones, and zooming down the giant wide yellow slide together. A perfectly balanced, fun, and relaxing Day 11 before returning to our Shibuya hotel for a quiet evening.",
+    "media": [
+      {
+        "type": "video",
+        "url": "assets/videos/shinjuku_chuo_park_kids_wide_slide_zoom.mp4",
+        "caption": "Lincoln and Evelyn zooming down the giant wide yellow playground slide together at Shinjuku Chuo Park."
+      },
+      {
+        "type": "video",
+        "url": "assets/videos/shinjuku_chuo_park_evelyn_happy_dance.mp4",
+        "caption": "Evelyn doing her happy dance and running with joy in the park plaza."
+      },
+      {
+        "type": "video",
+        "url": "assets/videos/shinjuku_chuo_park_lincoln_cone_dash.mp4",
+        "caption": "Lincoln doing high-speed agility drills and dodging orange cones in the playground."
+      },
+      {
+        "type": "video",
+        "url": "assets/videos/shinjuku_chuo_park_lincoln_running_plaza.mp4",
+        "caption": "Lincoln sprinting across the open gravel plaza under the tall green trees."
+      },
+      {
+        "url": "assets/photos/490_shinjuku_chuo_park_multi_directional_signs.jpg",
+        "thumb": "assets/photos/490_shinjuku_chuo_park_multi_directional_signs.jpg",
+        "caption": "Trail markers at Shinjuku Chuo Park pointing to the Lawn Area, Water Plaza, and Eco Gallery."
+      },
+      {
+        "url": "assets/photos/491_shinjuku_chuo_park_playground_slide_structure.jpg",
+        "thumb": "assets/photos/491_shinjuku_chuo_park_playground_slide_structure.jpg",
+        "caption": "The multi-deck climbing structure and dual slides at the Shinjuku Chuo Park playground."
+      },
+      {
+        "url": "assets/photos/492_shinjuku_chuo_park_evelyn_monkey_bars_hanging.jpg",
+        "thumb": "assets/photos/492_shinjuku_chuo_park_evelyn_monkey_bars_hanging.jpg",
+        "caption": "Evelyn hanging upside down playfully from the monkey bars."
+      },
+      {
+        "url": "assets/photos/493_shinjuku_chuo_park_summer_festival_banner.jpg",
+        "thumb": "assets/photos/493_shinjuku_chuo_park_summer_festival_banner.jpg",
+        "caption": "The bright 'Enjoy SUMMER Park · Shinjuku Chuo Park (Since 1968)' banner among the zelkova trees."
+      },
+      {
+        "url": "assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg",
+        "thumb": "assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg",
+        "caption": "Lincoln crawling inside the iconic blue whale sculpture inside the sandbox playground with skyscrapers overhead."
+      }
+    ]
+  },
   {
     "id": "post-56",
     "date": "Sun Aug 30, 2026 · Morning",
@@ -1302,6 +1632,11 @@ const tripPosts = [
     "title": "Picking up new duds at WAREHOUSE Ebisu and claw machine fun with Mom",
     "caption": "After the park, we did some shopping at WAREHOUSE & CO. Ebisu (ウエアハウス東京店) to pick up Dad some classic new duds.\n\nWe wrapped up the night with some claw machine fun at the arcade! Lincoln took on the giant Yoshi plush crane machine, and even Mom got in on the action this time — getting right down to eye level with the glass and carefully lining up the UFO catcher claw. A great finish to Day 10 in Tokyo!",
     "media": [
+      {
+        "url": "assets/photos/440_late_night_ramen_lincoln_squid_ball.jpg",
+        "thumb": "assets/photos/440_late_night_ramen_lincoln_squid_ball.jpg",
+        "caption": "Lincoln happily eating a late-night bowl of hot seafood ramen at 9 PM to wrap up Day 10."
+      },
       {
         "url": "assets/photos/437_arcade_brittany_warehouse_shopping_bag.jpg",
         "thumb": "assets/photos/437_arcade_brittany_warehouse_shopping_bag.jpg",
@@ -3841,6 +4176,45 @@ const tripPosts = [
 
 const mapPins = [
   {
+    "id": "shinagawa-aquarium",
+    "name": "Shinagawa Aquarium (しながわ水族館)",
+    "city": "shinagawa",
+    "lat": 35.5878,
+    "lon": 139.7397,
+    "type": "culture",
+    "icon": "🐬",
+    "status": "visited",
+    "time": "Day 11 · Morning",
+    "badge": "Aquarium & Underwater Tunnel",
+    "desc": "Public aquarium in Shinagawa-Kumin Park featuring a 500-ton panoramic tank with underwater tunnel, dolphin and sea lion stadiums, axolotls, and glowing jellyfish exhibits."
+  },
+  {
+    "id": "shinagawa-kumin-park",
+    "name": "Shinagawa-Kumin Park (しながわ区民公園)",
+    "city": "shinagawa",
+    "lat": 35.5895,
+    "lon": 139.739,
+    "type": "play",
+    "icon": "🌳",
+    "status": "visited",
+    "time": "Day 11 · Midday",
+    "badge": "Lakeside Trails & Whale Playground",
+    "desc": "Sprawling waterside park with Katsushima no Umi lake, bamboo groves, boulder stepping-stone streams, illustrated pedestrian tunnels, and children's adventure playground with concrete whale slides."
+  },
+  {
+    "id": "shinjuku-chuo-park",
+    "name": "Shinjuku Chuo Park (新宿中央公園)",
+    "city": "shinjuku",
+    "lat": 35.6896,
+    "lon": 139.6903,
+    "type": "play",
+    "icon": "🐳",
+    "status": "visited",
+    "time": "Day 11 · Afternoon",
+    "badge": "Skyscraper Park & Whale Playground",
+    "desc": "Urban park adjacent to the Tokyo Metropolitan Government Building featuring lush zelkova trees, multi-deck adventure climbing towers, giant wide slides, and iconic whale sandbox play structure."
+  },
+  {
     "id": "yoyogi-park-yosakoi",
     "name": "Yoyogi Park Outdoor Stage (代々木公園野外ステージ)",
     "city": "shibuya",
@@ -4379,7 +4753,10 @@ const visitedMainRoute = [
   [36.3422, 138.6353], // Karuizawa Station
   [35.6812, 139.7671], // Tokyo Station Transit
   [35.0974, 139.0754], // Atami Pearl Star Hotel (Visited Base)
-  [35.6563, 139.6994]  // Cerulean Tower Tokyu Hotel Shibuya (Current Base)
+  [35.6563, 139.6994], // Cerulean Tower Tokyu Hotel Shibuya (Current Base)
+  [35.5878, 139.7397], // Shinagawa Aquarium
+  [35.5895, 139.7390], // Shinagawa-Kumin Park
+  [35.6896, 139.6903]  // Shinjuku Chuo Park
 ];
 
 // Tokyo exploration path across visited spots
@@ -4589,6 +4966,7 @@ function renderDrawerDays() {
   });
 
   const dayLabels = {
+    'Mon Aug 31': 'Day 11 · Shinagawa & Shinjuku',
     'Sun Aug 30': 'Day 10 · Shibuya & Yoyogi',
     'Sat Aug 29': 'Day 9 · Shibuya Base',
     'Fri Aug 28': 'Day 8 · Atami Water Park',
