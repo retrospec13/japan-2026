@@ -4692,7 +4692,7 @@ function switchTab(tab, resetFilters = false) {
   const btnFeed = document.getElementById('btnSwitchFeed');
   const btnMap = document.getElementById('btnSwitchMap');
   if (btnFeed && btnMap) {
-    btnFeed.classList.toggle('active', tab === 'feed');
+    btnFeed.classList.toggle('active', tab === 'map' ? false : (tab === 'feed'));
     btnMap.classList.toggle('active', tab === 'map');
   }
 
@@ -4723,11 +4723,15 @@ function switchTab(tab, resetFilters = false) {
   document.getElementById('paneFavorites').classList.toggle('active', tab === 'favorites');
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (tab === 'map' && window.map) {
-    setTimeout(() => {
-      window.map.invalidateSize();
-      zoomTo('japan');
-    }, 100);
+  if (tab === 'map') {
+    if (!map) {
+      initMap();
+    } else {
+      setTimeout(() => {
+        map.invalidateSize();
+        zoomTo('japan');
+      }, 50);
+    }
   }
 }
 
@@ -4786,9 +4790,10 @@ function initMap() {
     worldCopyJump: false
   }).setView([35.4, 137.5], 7);
 
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 18,
-    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    maxZoom: 19,
+    subdomains: 'abcd',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
   }).addTo(map);
 
   // Routes
