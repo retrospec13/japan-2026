@@ -148,9 +148,8 @@ button { font: inherit; outline: none; }
   display: flex;
   align-items: center;
   gap: 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.4;
 }
 
 .bento-content-row {
@@ -454,9 +453,9 @@ button { font: inherit; outline: none; }
 }
 
 .map-viewport {
-  height: 60vh;
-  min-height: 400px;
-  max-height: 600px;
+  height: 58vh;
+  min-height: 420px;
+  max-height: 560px;
   width: 100%;
 }
 
@@ -467,6 +466,7 @@ button { font: inherit; outline: none; }
   padding: 10px 12px;
   background: #ffffff;
   border-top: 1px solid var(--border-card);
+  margin-bottom: 20px;
 }
 
 .map-quick-pill {
@@ -705,23 +705,69 @@ button { font: inherit; outline: none; }
    8. Modals, Pins, Lightbox
    -------------------------------------------------------------------------- */
 .custom-pin {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--blue);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  font-size: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
   border: 2px solid #ffffff;
   cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.custom-pin:hover {
+  transform: scale(1.15);
+  z-index: 1000;
+}
+
+/* Category & Region Accent Colors */
+.custom-pin.tokyo { background: #2563eb; }
+.custom-pin.shibuya { background: #6366f1; }
+.custom-pin.karuizawa { background: #059669; }
+.custom-pin.atami { background: #0891b2; }
+.custom-pin.shinagawa { background: #0284c7; }
+.custom-pin.shinjuku { background: #4f46e5; }
+.custom-pin.osaka { background: #ea580c; }
+.custom-pin.kyoto { background: #7c3aed; }
+.custom-pin.coast { background: #0d9488; }
+.custom-pin.onsen { background: #16a34a; }
+.custom-pin.transit { background: #475569; }
+.custom-pin.culture { background: #d97706; }
+.custom-pin.shopping { background: #9333ea; }
+.custom-pin.play { background: #e11d48; }
+
 .custom-pin.current {
-  background: #10b981;
-  box-shadow: 0 0 0 4px rgba(16,185,129,0.4), 0 4px 12px rgba(0,0,0,0.3);
+  background: #10b981 !important;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.4), 0 4px 14px rgba(0, 0, 0, 0.35);
+  z-index: 900;
+}
+
+.custom-pin.current::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid #10b981;
+  pointer-events: none;
+  animation: pinPulse 1.8s infinite;
+}
+
+@keyframes pinPulse {
+  0% { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+.custom-pin.planned {
+  background: #94a3b8;
+  opacity: 0.85;
+  border-style: dashed;
 }
 
 .lightbox-modal {
@@ -948,6 +994,7 @@ button { font: inherit; outline: none; }
         <div class="map-pills-row">
           <button class="map-quick-pill" onclick="zoomTo('japan')">🇯🇵 Japan</button>
           <button class="map-quick-pill" onclick="zoomTo('shibuya')">🗼 Shibuya Base</button>
+          <button class="map-quick-pill" onclick="zoomTo('shinagawa')">🐬 Shinagawa</button>
           <button class="map-quick-pill" onclick="zoomTo('atami')">🏖️ Atami</button>
           <button class="map-quick-pill" onclick="zoomTo('karuizawa')">🌲 Karuizawa</button>
           <button class="map-quick-pill" onclick="zoomTo('tokyo')">🗼 Tokyo</button>
@@ -5166,9 +5213,9 @@ function initMap() {
     worldCopyJump: false
   }).setView([35.4, 137.5], 7);
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  L.tileLayer('https://mt1.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    attribution: '&copy; Google'
   }).addTo(map);
 
   // Routes
@@ -5179,13 +5226,16 @@ function initMap() {
   // Markers
   mapPins.forEach(pin => {
     const statusClass = pin.status === 'current' ? 'current' : pin.status === 'planned' ? 'planned' : 'visited';
+    const classType = pin.type || pin.city || 'tokyo';
+    const classCity = pin.city || '';
     const icon = L.divIcon({
       className: '',
-      html: '<div class="custom-pin ' + pin.type + ' ' + statusClass + '" title="' + esc(pin.name) + '">' + pin.icon + '</div>',
-      iconSize: [30, 30],
-      iconAnchor: [15, 15]
+      html: '<div class="custom-pin ' + classType + ' ' + classCity + ' ' + statusClass + '" title="' + esc(pin.name) + '">' + pin.icon + '</div>',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16]
     });
-    const marker = L.marker([pin.lat, pin.lon], { icon }).addTo(map);
+    const zIndexOffset = pin.status === 'current' ? 1000 : (pin.status === 'visited' ? 100 : 0);
+    const marker = L.marker([pin.lat, pin.lon], { icon, zIndexOffset }).addTo(map);
     marker.on('click', () => {
       openPlaceModal(pin);
     });
@@ -5206,6 +5256,8 @@ function zoomTo(region) {
     map.flyTo([34.85, 135.65], 10, { duration: 0.8 });
   } else if (region === 'shibuya') {
     map.flyTo([35.658, 139.699], 15, { duration: 0.8 });
+  } else if (region === 'shinagawa') {
+    map.flyTo([35.588, 139.739], 14, { duration: 0.8 });
   } else if (region === 'atami') {
     map.flyTo([35.097, 139.076], 13, { duration: 0.8 });
   } else if (region === 'coast') {
