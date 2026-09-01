@@ -433,10 +433,11 @@ button { font: inherit; outline: none; }
   border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: var(--shadow-card);
+  position: relative;
 }
 
 .map-header-bar {
-  padding: 14px 16px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--border-card);
   display: flex;
   align-items: center;
@@ -447,38 +448,236 @@ button { font: inherit; outline: none; }
 
 .map-header-bar h2 {
   margin: 0;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--ink);
 }
 
 .map-viewport {
-  height: 58vh;
-  min-height: 420px;
-  max-height: 560px;
+  height: 60vh;
+  min-height: 440px;
+  max-height: 580px;
   width: 100%;
+}
+
+.map-category-filter-bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 10px 14px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-card);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.map-category-filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.map-filter-chip {
+  flex: 0 0 auto;
+  background: #f8fafc;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.map-filter-chip.active {
+  background: #FF6B9D;
+  color: #ffffff;
+  border-color: #FF6B9D;
+  box-shadow: 0 2px 8px rgba(255, 107, 157, 0.35);
 }
 
 .map-pills-row {
   display: flex;
   gap: 6px;
   overflow-x: auto;
-  padding: 10px 12px;
-  background: #ffffff;
+  padding: 8px 12px;
+  background: #fafafa;
   border-top: 1px solid var(--border-card);
-  margin-bottom: 20px;
+  scrollbar-width: none;
+}
+.map-pills-row::-webkit-scrollbar {
+  display: none;
 }
 
 .map-quick-pill {
   flex: 0 0 auto;
-  background: var(--panel-gray);
+  background: #ffffff;
   border: 1px solid var(--border-card);
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: var(--radius-pill);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
   color: var(--ink-secondary);
   cursor: pointer;
+}
+
+/* Photo Bubble Teardrop Marker Pin System */
+.photo-pin-wrap {
+  position: relative;
+  width: 44px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.photo-pin-wrap:hover, .photo-pin-wrap.active {
+  transform: translateY(-4px) scale(1.12);
+  z-index: 1000 !important;
+}
+
+.photo-pin-bubble {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #FF6B9D;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-pin-bubble img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-pin-bubble .fallback-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.photo-pin-stem {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #FF6B9D;
+  margin-top: -2px;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25));
+}
+
+.photo-pin-wrap.current .photo-pin-bubble {
+  border-color: #10B981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.35), 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+.photo-pin-wrap.current .photo-pin-stem {
+  border-top-color: #10B981;
+}
+
+.photo-pin-wrap.planned {
+  opacity: 0.75;
+}
+.photo-pin-wrap.planned .photo-pin-bubble {
+  border-color: #94A3B8;
+  border-style: dashed;
+}
+.photo-pin-wrap.planned .photo-pin-stem {
+  border-top-color: #94A3B8;
+}
+
+/* Floating Selected Place Bottom Card */
+.map-selected-card {
+  position: absolute;
+  bottom: 50px;
+  left: 12px;
+  right: 12px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.22), 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid rgba(255, 107, 157, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 800;
+  animation: slideUpCard 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+}
+
+@keyframes slideUpCard {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.map-selected-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1.5px solid #FF6B9D;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.map-selected-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.map-selected-tag {
+  font-size: 10px;
+  font-weight: 800;
+  color: #FF6B9D;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.map-selected-title {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.map-selected-meta {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-selected-close {
+  background: #f1f5f9;
+  border: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: #64748b;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* Highlights Grid */
@@ -988,11 +1187,36 @@ button { font: inherit; outline: none; }
       <div class="map-card-container">
         <div class="map-header-bar">
           <h2>Interactive Travel Map</h2>
-          <div style="font-size:12.5px;color:var(--muted);font-weight:600;">🟢 Current Base: Shibuya</div>
+          <div style="font-size:12px;color:#FF6B9D;font-weight:800;background:#fff0f5;padding:3px 10px;border-radius:var(--radius-pill);border:1px solid rgba(255,107,157,0.3);">🟢 Current Base: Shibuya</div>
         </div>
+
+        <!-- Category Filter Pills (Mockup-Matched) -->
+        <div class="map-category-filter-bar" id="mapCategoryBar">
+          <button class="map-filter-chip active" onclick="filterMapCategory('all')">✨ All Stops (<span id="mapStopsTotal">38</span>)</button>
+          <button class="map-filter-chip" onclick="filterMapCategory('play')">🎡 Parks & Play (<span id="mapStopsPlay">0</span>)</button>
+          <button class="map-filter-chip" onclick="filterMapCategory('culture')">🎭 Culture & Sights (<span id="mapStopsCulture">0</span>)</button>
+          <button class="map-filter-chip" onclick="filterMapCategory('shopping')">🛍️ Shopping & Arcade (<span id="mapStopsShopping">0</span>)</button>
+          <button class="map-filter-chip" onclick="filterMapCategory('food')">🍣 Food & Dining (<span id="mapStopsFood">0</span>)</button>
+          <button class="map-filter-chip" onclick="filterMapCategory('hotel')">🏨 Stays & Bases (<span id="mapStopsHotel">0</span>)</button>
+        </div>
+
         <div class="map-viewport" id="map"></div>
+
+        <!-- Floating Selected Place Preview Card -->
+        <div class="map-selected-card" id="mapSelectedCard" style="display:none;">
+          <img class="map-selected-thumb" id="mapSelectedThumb" src="" alt="">
+          <div class="map-selected-info">
+            <div class="map-selected-tag" id="mapSelectedTag">SELECTED PIN</div>
+            <div class="map-selected-title" id="mapSelectedTitle">Place Title</div>
+            <div class="map-selected-meta" id="mapSelectedMeta">
+              <span>🕒 Time</span> · <span>📍 Location</span>
+            </div>
+          </div>
+          <button class="map-selected-close" onclick="closeSelectedPinCard(event)">✕</button>
+        </div>
+
         <div class="map-pills-row">
-          <button class="map-quick-pill" onclick="zoomTo('japan')">🇯🇵 Japan</button>
+          <button class="map-quick-pill" onclick="zoomTo('japan')">🇯🇵 Whole Japan</button>
           <button class="map-quick-pill" onclick="zoomTo('shibuya')">🗼 Shibuya Base</button>
           <button class="map-quick-pill" onclick="zoomTo('shinagawa')">🐬 Shinagawa</button>
           <button class="map-quick-pill" onclick="zoomTo('atami')">🏖️ Atami</button>
@@ -5084,13 +5308,20 @@ function openPlaceModal(pin) {
   const content = document.getElementById('placeContent');
   if (!modal || !content) return;
   
-  content.innerHTML = '<h3 style="margin:0 0 6px;font-size:18px;font-weight:800;">' + pin.icon + ' ' + esc(pin.name) + '</h3>' +
+  const photoUrl = pinPhotoLookup[pin.id] || '';
+  const photoHeader = photoUrl ? '<div style="width:100%;height:180px;border-radius:12px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.1);"><img src="' + photoUrl + '" style="width:100%;height:100%;object-fit:cover;display:block;"></div>' : '';
+
+  content.innerHTML = photoHeader +
+    '<h3 style="margin:0 0 6px;font-size:18px;font-weight:800;color:#0f172a;">' + (pin.icon || '📍') + ' ' + esc(pin.name) + '</h3>' +
     '<div style="margin-bottom:12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">' +
-      '<span style="background:#fff2ed;color:#ff5722;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:800;">' + (pin.status === 'current' ? '🟢 Current Base' : pin.status === 'visited' ? '✅ Visited' : '⏳ Planned') + '</span>' +
-      (pin.tag ? '<span style="background:#f3f4f6;color:#4b5563;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;">' + esc(pin.tag) + '</span>' : '') +
+      '<span style="background:#fff0f5;color:#FF6B9D;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:800;border:1px solid rgba(255,107,157,0.3);">' + (pin.status === 'current' ? '🟢 Current Base' : pin.status === 'visited' ? '✅ Visited Stop' : '⏳ Planned Stop') + '</span>' +
+      (pin.time ? '<span style="background:#f8fafc;color:#475569;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;border:1px solid #e2e8f0;">🕒 ' + esc(pin.time) + '</span>' : '') +
+      (pin.badge ? '<span style="background:#f0fdf4;color:#16a34a;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;">' + esc(pin.badge) + '</span>' : '') +
     '</div>' +
-    '<p style="font-size:14px;line-height:1.6;color:#4b5563;margin:0 0 12px;">' + esc(pin.desc) + '</p>' +
-    '<a style="display:inline-flex;align-items:center;gap:6px;background:#111827;color:#fff;padding:9px 15px;border-radius:8px;font-weight:700;font-size:13.5px;" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(pin.lat + ',' + pin.lon) + '">📍 Open in Google Maps ↗</a>';
+    '<p style="font-size:13.5px;line-height:1.6;color:#334155;margin:0 0 16px;">' + esc(pin.desc) + '</p>' +
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
+      '<a style="display:inline-flex;align-items:center;gap:6px;background:#FF6B9D;color:#fff;padding:9px 15px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 2px 8px rgba(255,107,157,0.3);" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(pin.lat + ',' + pin.lon) + '">📍 Open in Google Maps ↗</a>' +
+    '</div>';
   backdrop.classList.add('show');
   modal.classList.add('show');
 }
@@ -5153,7 +5384,8 @@ function switchTab(tab, resetFilters = false) {
       setTimeout(() => {
         map.invalidateSize();
         zoomTo('japan');
-      }, 50);
+        renderMapMarkers();
+      }, 150);
     }
   }
 }
@@ -5205,6 +5437,66 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Pin Photo & Category Lookup Helper
+const pinPhotoLookup = {
+  'shinagawa-aquarium': 'assets/photos/441_shinagawa_aquarium_entrance_evelyn_dolphin_statue.jpg',
+  'shinagawa-kumin-park': 'assets/photos/488_shinagawa_kumin_park_evelyn_concrete_whale_slide_smile.jpg',
+  'shinjuku-chuo-park': 'assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg',
+  'yoyogi-park-yosakoi': 'assets/photos/415_yoyogi_park_lincoln_naruko_dance_pose.jpg',
+  'shibuya-parco': 'assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg',
+  'ebisu-park': 'assets/photos/389_ebisu_park_lincoln_climbing_train_engine.jpg',
+  'warehouse-ebisu': 'assets/photos/433_warehouse_ebisu_denim_storefront_entrance.jpg',
+  'gigo-arcade': 'assets/photos/437_shibuya_arcade_lincoln_ufo_claw_machine.jpg',
+  'cerulean-tower-hotel': 'assets/photos/382_cerulean_tower_room_evelyn_dancing_peach_dress.jpg',
+  'mega-donki-shibuya': 'assets/photos/379_don_quijote_shibuya_entrance_donpen_penguin.jpg',
+  'bic-camera-hachiko': 'assets/photos/378_bic_camera_shibuya_curved_led_screen.jpg',
+  'dipper-dan-shibuya': 'assets/photos/377_dipper_dan_crepe_john_evelyn_crepe_smile.jpg',
+  'mandarake-shibuya': 'assets/photos/375_mandarake_shibuya_stairwell_manga_mural.jpg',
+  'atami-moon-terrace': 'assets/photos/370_atami_waterfront_park_family_morning_walk.jpg',
+  'pearl-star-hotel': 'assets/photos/374_pearl_star_breakfast_brittany_evelyn_lap.jpg',
+  'oyster-bar-kagiya': 'assets/photos/369_atami_kagiya_oyster_dinner_table_spread.jpg',
+  'sawamura-kyukaruizawa': 'assets/photos/353_sawamura_roastery_kyukaruizawa_storefront_rain.jpg',
+  'osakana-shokudo-atami': 'assets/photos/368_atami_osakana_shokudo_tonkatsu_donburi.jpg',
+  'atami-water-park': 'assets/photos/364_atami_sun_beach_water_park_inflatables.jpg',
+  'fukiyotei-sushi': 'assets/photos/362_atami_fukiyotei_sushi_chef_omakase_counter.jpg',
+  'atami-sun-beach': 'assets/photos/360_atami_sun_beach_family_ocean_swim.jpg',
+  'karuizawa-hotel': 'assets/photos/255_karuizawa_kikyo_curio_hotel_courtyard.jpg',
+  'tsurutontan-karuizawa': 'assets/photos/250_tsurutontan_karuizawa_udon_bowls_table.jpg',
+  'church-street-karuizawa': 'assets/photos/245_church_street_karuizawa_heart_monument.jpg',
+  'karuizawa-toy-kingdom': 'assets/photos/240_toy_kingdom_kids_ferris_wheel_ride.jpg',
+  'myogi-pass': 'assets/photos/230_myogi_pass_mountain_expressway_view.jpg',
+  'ueno-zoo': 'assets/photos/54_ueno_zoo_giant_panda_munching_bamboo.jpg',
+  'yamashiroya': 'assets/photos/52_yamashiroya_ueno_toy_store_facade.jpg',
+  'tokyo-izakaya': 'assets/photos/50_ueno_izakaya_yakitori_dinner_table.jpg',
+  'harakado': 'assets/photos/45_harakado_harajuku_mirrored_facade_entrance.jpg',
+  'tamagotchi-factory': 'assets/photos/40_tamagotchi_factory_custom_device_bar.jpg',
+  'godzilla-store': 'assets/photos/35_godzilla_store_tokyo_giant_figure.jpg',
+  'puroland': 'assets/photos/81_sanrio_puroland_grand_entrance.jpg',
+  'ueno-park-playground': 'assets/photos/25_ueno_park_playground_climbing_pyramid.jpg',
+  'ameyoko-izakaya': 'assets/photos/20_ameyoko_street_market_bustling_alley.jpg',
+  'ameyoko': 'assets/photos/15_ameyoko_neon_arch_market_entrance.jpg',
+  'ueno-park': 'assets/photos/10_ueno_park_hanazono_inari_torii_gates.jpg',
+  'bistro-nohga': 'assets/photos/5_bistro_nohga_ueno_breakfast_pastries.jpg',
+  'donki-ueno': 'assets/photos/2_donki_ueno_late_night_snack_aisles.jpg',
+  'ueno': 'assets/photos/53_ueno_father_son_smiling_selfie.jpg',
+  'nrt': 'assets/photos/1_ana_the_room_business_class_flight_cabin.jpg'
+};
+
+function getPinCategory(pin) {
+  const t = (pin.type || '').toLowerCase();
+  const c = (pin.city || '').toLowerCase();
+  const n = (pin.name || '').toLowerCase();
+  if (t === 'play' || n.includes('park') || n.includes('kingdom') || n.includes('zoo') || n.includes('playground')) return 'play';
+  if (t === 'culture' || n.includes('aquarium') || n.includes('shrine') || n.includes('stage') || n.includes('festival')) return 'culture';
+  if (t === 'shopping' || n.includes('parco') || n.includes('donki') || n.includes('store') || n.includes('arcade') || n.includes('gigo') || n.includes('camera') || n.includes('mandarake') || n.includes('warehouse')) return 'shopping';
+  if (t === 'onsen' || n.includes('food') || n.includes('sushi') || n.includes('oyster') || n.includes('bakery') || n.includes('shokudo') || n.includes('izakaya') || n.includes('udon') || n.includes('crepe') || n.includes('bistro')) return 'food';
+  if (n.includes('hotel') || n.includes('kikyo') || n.includes('nohga') || n.includes('base') || pin.status === 'current') return 'hotel';
+  return 'culture';
+}
+
+let activeMapCategory = 'all';
+let mapMarkers = [];
+
 // Map Initialization
 let map = null;
 function initMap() {
@@ -5213,35 +5505,159 @@ function initMap() {
     worldCopyJump: false
   }).setView([35.4, 137.5], 7);
 
-  L.tileLayer('https://mt1.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}', {
+  // High-Resolution English Carto Voyager Basemap Layer
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png', {
     maxZoom: 20,
-    attribution: '&copy; Google'
+    subdomains: 'abcd',
+    attribution: '&copy; CartoDB &copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // Routes
-  L.polyline(visitedMainRoute, { color: '#2563eb', weight: 4, opacity: 0.9, lineCap: 'round', lineJoin: 'round' }).addTo(map);
-  L.polyline(visitedTokyoRoute, { color: '#ff5722', weight: 3.5, opacity: 0.85, dashArray: '6, 8', lineCap: 'round' }).addTo(map);
-  L.polyline(plannedRouteCoords, { color: '#9ca3af', weight: 2.5, opacity: 0.6, dashArray: '4, 8', lineCap: 'round' }).addTo(map);
+  // Pretty Dotted Travel Paths Matching Mockup
+  L.polyline(visitedMainRoute, { 
+    color: '#FF6B9D', 
+    weight: 3.5, 
+    opacity: 0.9, 
+    dashArray: '5, 8',
+    lineCap: 'round', 
+    lineJoin: 'round' 
+  }).addTo(map);
 
-  // Markers
+  L.polyline(visitedTokyoRoute, { 
+    color: '#3B82F6', 
+    weight: 3, 
+    opacity: 0.85, 
+    dashArray: '4, 7', 
+    lineCap: 'round' 
+  }).addTo(map);
+
+  L.polyline(plannedRouteCoords, { 
+    color: '#94A3B8', 
+    weight: 2.5, 
+    opacity: 0.6, 
+    dashArray: '3, 6', 
+    lineCap: 'round' 
+  }).addTo(map);
+
+  renderMapMarkers();
+  updateMapCategoryCounts();
+  zoomTo('japan');
+}
+
+function renderMapMarkers() {
+  if (!map) return;
+  // Clear existing markers
+  mapMarkers.forEach(m => map.removeLayer(m));
+  mapMarkers = [];
+
   mapPins.forEach(pin => {
+    const cat = getPinCategory(pin);
+    if (activeMapCategory !== 'all' && cat !== activeMapCategory) {
+      return;
+    }
+
+    const photoUrl = pinPhotoLookup[pin.id] || (pin.media && pin.media[0] ? pin.media[0].thumb : null);
     const statusClass = pin.status === 'current' ? 'current' : pin.status === 'planned' ? 'planned' : 'visited';
-    const classType = pin.type || pin.city || 'tokyo';
-    const classCity = pin.city || '';
+    
+    const photoHtml = photoUrl 
+      ? '<img src="' + photoUrl + '" alt="' + esc(pin.name) + '" onerror="this.outerHTML=\'<span class=\\\'fallback-icon\\\'>' + (pin.icon || '📍') + '</span>\'">'
+      : '<span class="fallback-icon">' + (pin.icon || '📍') + '</span>';
+
+    const iconHtml = 
+      '<div class="photo-pin-wrap ' + statusClass + '" id="marker-' + pin.id + '">' +
+        '<div class="photo-pin-bubble">' + photoHtml + '</div>' +
+        '<div class="photo-pin-stem"></div>' +
+      '</div>';
+
     const icon = L.divIcon({
       className: '',
-      html: '<div class="custom-pin ' + classType + ' ' + classCity + ' ' + statusClass + '" title="' + esc(pin.name) + '">' + pin.icon + '</div>',
-      iconSize: [32, 32],
-      iconAnchor: [16, 16]
+      html: iconHtml,
+      iconSize: [44, 52],
+      iconAnchor: [22, 50]
     });
+
     const zIndexOffset = pin.status === 'current' ? 1000 : (pin.status === 'visited' ? 100 : 0);
     const marker = L.marker([pin.lat, pin.lon], { icon, zIndexOffset }).addTo(map);
+    
     marker.on('click', () => {
-      openPlaceModal(pin);
+      selectMapPin(pin);
     });
+
+    mapMarkers.push(marker);
+  });
+}
+
+function updateMapCategoryCounts() {
+  const counts = { all: mapPins.length, play: 0, culture: 0, shopping: 0, food: 0, hotel: 0 };
+  mapPins.forEach(pin => {
+    const cat = getPinCategory(pin);
+    if (counts[cat] !== undefined) counts[cat]++;
   });
 
-  zoomTo('japan');
+  const totalEl = document.getElementById('mapStopsTotal');
+  const playEl = document.getElementById('mapStopsPlay');
+  const cultureEl = document.getElementById('mapStopsCulture');
+  const shopEl = document.getElementById('mapStopsShopping');
+  const foodEl = document.getElementById('mapStopsFood');
+  const hotelEl = document.getElementById('mapStopsHotel');
+
+  if (totalEl) totalEl.textContent = counts.all;
+  if (playEl) playEl.textContent = counts.play;
+  if (cultureEl) cultureEl.textContent = counts.culture;
+  if (shopEl) shopEl.textContent = counts.shopping;
+  if (foodEl) foodEl.textContent = counts.food;
+  if (hotelEl) hotelEl.textContent = counts.hotel;
+}
+
+function filterMapCategory(cat) {
+  activeMapCategory = cat;
+  document.querySelectorAll('.map-filter-chip').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  if (event && event.currentTarget) {
+    event.currentTarget.classList.add('active');
+  }
+  renderMapMarkers();
+}
+
+function selectMapPin(pin) {
+  // Highlight Pin Element
+  document.querySelectorAll('.photo-pin-wrap').forEach(el => el.classList.remove('active'));
+  const pinEl = document.getElementById('marker-' + pin.id);
+  if (pinEl) pinEl.classList.add('active');
+
+  const card = document.getElementById('mapSelectedCard');
+  const thumb = document.getElementById('mapSelectedThumb');
+  const tag = document.getElementById('mapSelectedTag');
+  const title = document.getElementById('mapSelectedTitle');
+  const meta = document.getElementById('mapSelectedMeta');
+
+  if (!card) return;
+
+  const photoUrl = pinPhotoLookup[pin.id] || 'assets/photos/53_ueno_father_son_smiling_selfie.jpg';
+  const cat = getPinCategory(pin).toUpperCase();
+  const statusLabel = pin.status === 'current' ? 'CURRENT BASE' : (pin.status === 'visited' ? 'VISITED' : 'PLANNED');
+
+  thumb.src = photoUrl;
+  tag.textContent = cat + ' · ' + statusLabel;
+  title.textContent = pin.name ? pin.name.split('(')[0].trim() : 'Place';
+  meta.innerHTML = '<span>🕒 ' + esc(pin.time || pin.tag || 'Trip Stop') + '</span> · <span>📍 ' + esc(pin.city ? pin.city.toUpperCase() : 'JAPAN') + '</span>';
+
+  card.style.display = 'flex';
+  card.onclick = (e) => {
+    if (e.target.classList.contains('map-selected-close')) return;
+    openPlaceModal(pin);
+  };
+
+  if (map) {
+    map.panTo([pin.lat, pin.lon], { animate: true, duration: 0.5 });
+  }
+}
+
+function closeSelectedPinCard(e) {
+  if (e) e.stopPropagation();
+  const card = document.getElementById('mapSelectedCard');
+  if (card) card.style.display = 'none';
+  document.querySelectorAll('.photo-pin-wrap').forEach(el => el.classList.remove('active'));
 }
 
 function zoomTo(region) {
