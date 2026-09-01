@@ -491,10 +491,10 @@ button { font: inherit; outline: none; }
 }
 
 .map-filter-chip.active {
-  background: #84cc16;
+  background: #FF6B9D;
   color: #ffffff;
-  border-color: #84cc16;
-  box-shadow: 0 2px 8px rgba(132, 204, 22, 0.35);
+  border-color: #FF6B9D;
+  box-shadow: 0 2px 8px rgba(255, 107, 157, 0.35);
 }
 
 .map-pills-row {
@@ -544,8 +544,8 @@ button { font: inherit; outline: none; }
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 3px solid #84cc16;
-  box-shadow: 0 4px 12px rgba(132, 204, 22, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: 3px solid #FF6B9D;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15);
   background: #ffffff;
   overflow: hidden;
   position: relative;
@@ -572,7 +572,7 @@ button { font: inherit; outline: none; }
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 8px solid #84cc16;
+  border-top: 8px solid #FF6B9D;
   margin-top: -2px;
   position: relative;
   z-index: 1;
@@ -608,7 +608,7 @@ button { font: inherit; outline: none; }
   border-radius: 16px;
   padding: 12px;
   box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.22), 0 2px 8px rgba(0,0,0,0.06);
-  border: 1px solid rgba(132, 204, 22, 0.25);
+  border: 1px solid rgba(255, 107, 157, 0.25);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -628,7 +628,7 @@ button { font: inherit; outline: none; }
   border-radius: 12px;
   object-fit: cover;
   flex-shrink: 0;
-  border: 1.5px solid #84cc16;
+  border: 1.5px solid #FF6B9D;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
@@ -640,7 +640,7 @@ button { font: inherit; outline: none; }
 .map-selected-tag {
   font-size: 10px;
   font-weight: 800;
-  color: #84cc16;
+  color: #FF6B9D;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   margin-bottom: 2px;
@@ -834,7 +834,7 @@ button { font: inherit; outline: none; }
 }
 
 /* --------------------------------------------------------------------------
-   7. Floating Bottom Navigation Dock (Punch Pink #84cc16 Solid Style)
+   7. Floating Bottom Navigation Dock (Punch Pink #FF6B9D Solid Style)
    -------------------------------------------------------------------------- */
 .bottom-nav-dock {
   position: fixed;
@@ -845,10 +845,10 @@ button { font: inherit; outline: none; }
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: #84cc16;
+  background: #FF6B9D;
   padding: 5px 8px;
   border-radius: var(--radius-pill);
-  box-shadow: 0 10px 28px rgba(132, 204, 22, 0.45), 0 2px 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 28px rgba(255, 107, 157, 0.45), 0 2px 6px rgba(0, 0, 0, 0.06);
   border: 2px solid #ffffff;
   width: calc(100% - 28px);
   max-width: 400px;
@@ -893,7 +893,7 @@ button { font: inherit; outline: none; }
 }
 
 .dock-item.active svg {
-  stroke: #84cc16;
+  stroke: #FF6B9D;
 }
 
 .dock-item.active .dock-item-label {
@@ -1106,7 +1106,7 @@ button { font: inherit; outline: none; }
   <header class="header-wrap">
     <div class="header-top">
       <div style="display:flex;align-items:center;gap:10px;">
-        <img src="assets/mojo_icon.png" alt="Icon" style="width:38px;height:38px;border-radius:12px;box-shadow:0 3px 10px rgba(132, 204, 22, 0.22);display:block;">
+        <img src="assets/mojo_icon.png" alt="Icon" style="width:38px;height:38px;border-radius:12px;box-shadow:0 3px 10px rgba(255, 107, 157, 0.22);display:block;">
         <h1 class="header-title">Japan Journey 2026</h1>
       </div>
       <div class="day-badge-top">Day 12 of 13</div>
@@ -1187,7 +1187,7 @@ button { font: inherit; outline: none; }
       <div class="map-card-container">
         <div class="map-header-bar">
           <h2>Interactive Travel Map</h2>
-          <div style="font-size:12px;color:#84cc16;font-weight:800;background:#f7fee7;padding:3px 10px;border-radius:var(--radius-pill);border:1px solid rgba(132,204,22,0.3);">🟢 Current Base: Shibuya</div>
+          <div style="font-size:12px;color:#FF6B9D;font-weight:800;background:#fff0f5;padding:3px 10px;border-radius:var(--radius-pill);border:1px solid rgba(255,107,157,0.3);">🟢 Current Base: Shibuya</div>
         </div>
 
         <!-- Category Filter Pills (Mockup-Matched) -->
@@ -5797,13 +5797,13 @@ function openPlaceModal(pin) {
   content.innerHTML = photoHeader +
     '<h3 style="margin:0 0 6px;font-size:18px;font-weight:800;color:#0f172a;">' + (pin.icon || '📍') + ' ' + esc(pin.name) + '</h3>' +
     '<div style="margin-bottom:12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">' +
-      '<span style="background:#f7fee7;color:#84cc16;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:800;border:1px solid rgba(132,204,22,0.3);">' + (pin.status === 'current' ? '🟢 Current Base' : pin.status === 'visited' ? '✅ Visited Stop' : '⏳ Planned Stop') + '</span>' +
+      '<span style="background:#fff0f5;color:#FF6B9D;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:800;border:1px solid rgba(255,107,157,0.3);">' + (pin.status === 'current' ? '🟢 Current Base' : pin.status === 'visited' ? '✅ Visited Stop' : '⏳ Planned Stop') + '</span>' +
       (pin.time ? '<span style="background:#f8fafc;color:#475569;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;border:1px solid #e2e8f0;">🕒 ' + esc(pin.time) + '</span>' : '') +
       (pin.badge ? '<span style="background:#f0fdf4;color:#16a34a;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;">' + esc(pin.badge) + '</span>' : '') +
     '</div>' +
     '<p style="font-size:13.5px;line-height:1.6;color:#334155;margin:0 0 16px;">' + esc(pin.desc) + '</p>' +
     '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
-      '<a style="display:inline-flex;align-items:center;gap:6px;background:#84cc16;color:#fff;padding:9px 15px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 2px 8px rgba(132,204,22,0.3);" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(pin.lat + ',' + pin.lon) + '">📍 Open in Google Maps ↗</a>' +
+      '<a style="display:inline-flex;align-items:center;gap:6px;background:#FF6B9D;color:#fff;padding:9px 15px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 2px 8px rgba(255,107,157,0.3);" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(pin.lat + ',' + pin.lon) + '">📍 Open in Google Maps ↗</a>' +
     '</div>';
   backdrop.classList.add('show');
   modal.classList.add('show');
@@ -5848,7 +5848,7 @@ function switchTab(tab, resetFilters = false) {
     if (activeBtn) {
       activeBtn.classList.add('active');
       const svg = activeBtn.querySelector('svg');
-      if (svg) svg.style.stroke = '#84cc16';
+      if (svg) svg.style.stroke = '#FF6B9D';
       const label = activeBtn.querySelector('.dock-item-label');
       if (label) label.style.color = '#0f172a';
     }
@@ -6001,7 +6001,7 @@ function initMap() {
 
   // Pretty Dotted Travel Paths Matching Mockup
   L.polyline(visitedMainRoute, { 
-    color: '#84cc16', 
+    color: '#FF6B9D', 
     weight: 3.5, 
     opacity: 0.9, 
     dashArray: '5, 8',
