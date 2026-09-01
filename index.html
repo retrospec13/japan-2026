@@ -1109,7 +1109,7 @@ button { font: inherit; outline: none; }
         <img src="assets/mojo_icon.png" alt="Icon" style="width:38px;height:38px;border-radius:12px;box-shadow:0 3px 10px rgba(255, 107, 157, 0.22);display:block;">
         <h1 class="header-title">Japan Journey 2026</h1>
       </div>
-      <div class="day-badge-top">Day 11 of 13</div>
+      <div class="day-badge-top">Day 12 of 13</div>
     </div>
     
     <div class="avatar-crew-row">
@@ -1292,64 +1292,289 @@ button { font: inherit; outline: none; }
 <script>
 const recentHighlights = [
   {
-    "url": "assets/photos/458_shinagawa_aquarium_evelyn_silly_face_jellyfish_1.jpg",
-    "thumb": "assets/photos/458_shinagawa_aquarium_evelyn_silly_face_jellyfish_1.jpg",
-    "caption": "Evelyn making hilarious faces as a giant moon jellyfish floats above at Shinagawa Aquarium.",
-    "day": "Day 11 · Mon Aug 31",
-    "location": "Shinagawa Aquarium Jellyfish Gallery"
+    "url": "assets/photos/527_pasela_lobby_full_family_birthday_selfie.jpg",
+    "thumb": "assets/photos/527_pasela_lobby_full_family_birthday_selfie.jpg",
+    "caption": "Full family birthday selfie by the sunflower tree outside Luida's Bar at Pasela Akiba.",
+    "day": "Day 12 · Tue Sep 1",
+    "location": "Luida's Bar · Akihabara"
   },
   {
-    "url": "assets/photos/470_shinagawa_aquarium_dolphin_show_family_grandstand.jpg",
-    "thumb": "assets/photos/470_shinagawa_aquarium_dolphin_show_family_grandstand.jpg",
-    "caption": "Family selfie in the grandstand at the Dolphin Stadium.",
-    "day": "Day 11 · Mon Aug 31",
-    "location": "Dolphin Stadium · Shinagawa Aquarium"
+    "url": "assets/photos/530_luidas_bar_john_lincoln_holographic_coasters.jpg",
+    "thumb": "assets/photos/530_luidas_bar_john_lincoln_holographic_coasters.jpg",
+    "caption": "Dad and Lincoln showing off their holographic Dragon Quest monster drink coasters at Luida's Bar.",
+    "day": "Day 12 · Tue Sep 1",
+    "location": "Luida's Bar Dragon Quest Tavern"
   },
   {
-    "url": "assets/photos/476_shinagawa_kumin_park_scenic_lake_reflection.jpg",
-    "thumb": "assets/photos/476_shinagawa_kumin_park_scenic_lake_reflection.jpg",
-    "caption": "The scenic lake and lush green trails of Shinagawa-Kumin Park.",
-    "day": "Day 11 · Mon Aug 31",
-    "location": "Shinagawa-Kumin Park (勝島の海)"
+    "url": "assets/photos/529_luidas_bar_evelyn_slime_coaster_monocle_drawing.jpg",
+    "thumb": "assets/photos/529_luidas_bar_evelyn_slime_coaster_monocle_drawing.jpg",
+    "caption": "Evelyn holding the metallic Slime coaster over her eye like a monocle while sketching in her art book.",
+    "day": "Day 12 · Tue Sep 1",
+    "location": "Luida's Bar · Akihabara"
   },
   {
-    "url": "assets/photos/477_shinagawa_kumin_park_lincoln_stepping_stones.jpg",
-    "thumb": "assets/photos/477_shinagawa_kumin_park_lincoln_stepping_stones.jpg",
-    "caption": "Lincoln hopping across boulder stepping stones over the park stream.",
-    "day": "Day 11 · Mon Aug 31",
-    "location": "Shinagawa-Kumin Park Stream Crossing"
+    "url": "assets/photos/517_green_thumb_bakery_evelyn_cream_pastry_bite.jpg",
+    "thumb": "assets/photos/517_green_thumb_bakery_evelyn_cream_pastry_bite.jpg",
+    "caption": "Evelyn taking a delicious big bite of her fresh milk cream baguette from Green Thumb bakery.",
+    "day": "Day 12 · Tue Sep 1",
+    "location": "Green Thumb Bakery · Shibuya"
   },
   {
-    "url": "assets/photos/488_shinagawa_kumin_park_evelyn_concrete_whale_slide_smile.jpg",
-    "thumb": "assets/photos/488_shinagawa_kumin_park_evelyn_concrete_whale_slide_smile.jpg",
-    "caption": "Evelyn all smiles at the top of the wide blue concrete whale slide.",
-    "day": "Day 11 · Mon Aug 31",
-    "location": "Adventure Playground · Shinagawa-Kumin Park"
+    "url": "assets/photos/514_nakano_central_park_evelyn_food_truck_gapao_thumbsup.jpg",
+    "thumb": "assets/photos/514_nakano_central_park_evelyn_food_truck_gapao_thumbsup.jpg",
+    "caption": "Evelyn giving a huge thumbs-up after enjoying her tasty park lunch from the local Nakano food trucks.",
+    "day": "Day 12 · Tue Sep 1",
+    "location": "Nakano Central Park"
   },
   {
-    "url": "assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg",
-    "thumb": "assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg",
-    "caption": "Lincoln crawling inside the blue whale sandbox playground beneath Shinjuku skyscrapers.",
-    "day": "Day 11 · Mon Aug 31",
-    "location": "Shinjuku Chuo Park Whale Playground"
+    "url": "assets/photos/503_cerulean_room_dad_lincoln_birthday_hug_smile.jpg",
+    "thumb": "assets/photos/503_cerulean_room_dad_lincoln_birthday_hug_smile.jpg",
+    "caption": "Big birthday hugs in our Cerulean suite after Lincoln gave Dad his special birthday sketchbook.",
+    "day": "Day 12 · Tue Sep 1",
+    "location": "Cerulean Tower Tokyu Hotel"
   },
   {
-    "url": "assets/photos/492_shinjuku_chuo_park_evelyn_monkey_bars_hanging.jpg",
-    "thumb": "assets/photos/492_shinjuku_chuo_park_evelyn_monkey_bars_hanging.jpg",
-    "caption": "Evelyn hanging playfully from monkey bars at Shinjuku Chuo Park.",
-    "day": "Day 11 · Mon Aug 31",
-    "location": "Shinjuku Chuo Park Playground"
+    "url": "assets/photos/500_cerulean_breakfast_evelyn_dad_birthday_necklace.jpg",
+    "thumb": "assets/photos/500_cerulean_breakfast_evelyn_dad_birthday_necklace.jpg",
+    "caption": "Evelyn helping Dad put on his handmade birthday star pendant necklace at breakfast.",
+    "day": "Day 12 · Tue Sep 1",
+    "location": "Cerulean Tower Breakfast"
   },
   {
-    "url": "assets/photos/440_late_night_ramen_lincoln_squid_ball.jpg",
-    "thumb": "assets/photos/440_late_night_ramen_lincoln_squid_ball.jpg",
-    "caption": "Lincoln eating late-night 9 PM seafood ramen after our big Shibuya day.",
-    "day": "Day 10 · Sun Aug 30",
-    "location": "Shibuya Late Night Ramen"
+    "url": "assets/photos/504_shibuya_donki_lincoln_evelyn_penguin_cutout.jpg",
+    "thumb": "assets/photos/504_shibuya_donki_lincoln_evelyn_penguin_cutout.jpg",
+    "caption": "Lincoln and Evelyn posing inside the Shibuya MEGA Don Quijote penguin mascot cutout.",
+    "day": "Day 12 · Tue Sep 1",
+    "location": "MEGA Don Quijote Shibuya"
   }
 ];
 
 const tripPosts = [
+  {
+    "id": "post-66",
+    "date": "Tue Sep 1, 2026 · Evening",
+    "location": "Luida's Bar (ルイーダの酒場) · Akihabara Pasela Resorts, Tokyo",
+    "tag": "Dragon Quest RPG Tavern, Slime Coasters & Adventurer Feast",
+    "title": "Leveling up at Luida's Bar: Dragon Quest themed birthday celebration, monster treats, and holographic quest coasters",
+    "caption": "To cap off Dad's birthday in legendary RPG fashion, we ventured into Akihabara to Luida's Bar (ルイーダの酒場) — the official Dragon Quest themed tavern nestled inside Pasela Resorts Akiba Multi Entertainment!\n\nBefore stepping into the tavern, we posed by the giant golden sunflower display tree and took family selfies under the glowing fantasy monster signage. Inside, the tavern was meticulously decorated like a medieval adventurer's guild, complete with timber-framed booths, hanging candle sconces, treasure chests, and weapon racks. We ordered a feast of themed Dragon Quest specialties from the display showcase — including Slime buns, mini Monster curry, and custom adventurer drinks that came with metallic holographic monster coasters! Lincoln and Evelyn loved collecting the Heal Slime, King Slime, and Great Dragon coasters, with Evelyn turning her Slime coaster into a pirate monocle while drawing in her art notebook. An unforgettable, joyful birthday quest for Dad!",
+    "media": [
+      {
+        "url": "assets/photos/527_pasela_lobby_full_family_birthday_selfie.jpg",
+        "thumb": "assets/photos/527_pasela_lobby_full_family_birthday_selfie.jpg",
+        "caption": "Full family birthday celebration selfie in the Pasela Resorts lobby by the blooming sunflower display tree."
+      },
+      {
+        "url": "assets/photos/521_luidas_bar_dragon_quest_pasela_entrance_poster.jpg",
+        "thumb": "assets/photos/521_luidas_bar_dragon_quest_pasela_entrance_poster.jpg",
+        "caption": "The grand emblem poster at 1F Pasela: 'LUIDA'S BAR · Dragon Quest — Where travelers gather to meet companions.'"
+      },
+      {
+        "url": "assets/photos/522_pasela_akiba_exterior_brittany_looking_up.jpg",
+        "thumb": "assets/photos/522_pasela_akiba_exterior_brittany_looking_up.jpg",
+        "caption": "Brittany outside the multi-story Pasela Resorts building along Akihabara's neon avenue."
+      },
+      {
+        "url": "assets/photos/523_luidas_bar_entrance_family_excited_selfie.jpg",
+        "thumb": "assets/photos/523_luidas_bar_entrance_family_excited_selfie.jpg",
+        "caption": "Family selfie outside the tavern entrance poster getting ready to enter the Dragon Quest world."
+      },
+      {
+        "url": "assets/photos/524_luidas_bar_dragon_quest_food_showcase_display.jpg",
+        "thumb": "assets/photos/524_luidas_bar_dragon_quest_food_showcase_display.jpg",
+        "caption": "Showcase filled with Dragon Quest culinary creations: Slime buns, roasted monster meat, honey toast, and potion parfaits."
+      },
+      {
+        "url": "assets/photos/525_pasela_lobby_john_kids_sunflower_tree.jpg",
+        "thumb": "assets/photos/525_pasela_lobby_john_kids_sunflower_tree.jpg",
+        "caption": "John, Evelyn, and Lincoln smiling together by the sunflower tree and plush game characters."
+      },
+      {
+        "url": "assets/photos/526_pasela_lobby_lincoln_funny_face_sunflower_tree.jpg",
+        "thumb": "assets/photos/526_pasela_lobby_lincoln_funny_face_sunflower_tree.jpg",
+        "caption": "Lincoln making an excited happy roar as we get ready for the birthday feast!"
+      },
+      {
+        "url": "assets/photos/528_luidas_bar_adventurer_guild_table_candle_sconce.jpg",
+        "thumb": "assets/photos/528_luidas_bar_adventurer_guild_table_candle_sconce.jpg",
+        "caption": "Our cozy wooden booth in the adventurer tavern beneath the ornate brass candle sconces and Dragon Quest heraldry."
+      },
+      {
+        "url": "assets/photos/529_luidas_bar_evelyn_slime_coaster_monocle_drawing.jpg",
+        "thumb": "assets/photos/529_luidas_bar_evelyn_slime_coaster_monocle_drawing.jpg",
+        "caption": "Evelyn holding the metallic Slime coaster over her eye like a monocle next to her art sketchbook."
+      },
+      {
+        "url": "assets/photos/530_luidas_bar_john_lincoln_holographic_coasters.jpg",
+        "thumb": "assets/photos/530_luidas_bar_john_lincoln_holographic_coasters.jpg",
+        "caption": "Dad and Lincoln proudly showing off their shiny holographic Great Dragon and Heal Slime tavern coasters."
+      },
+      {
+        "url": "assets/photos/531_luidas_bar_lincoln_holding_healslime_dragon_coasters.jpg",
+        "thumb": "assets/photos/531_luidas_bar_lincoln_holding_healslime_dragon_coasters.jpg",
+        "caption": "Lincoln displaying both exclusive Dragon Quest monster coasters from our drink orders."
+      }
+    ]
+  },
+  {
+    "id": "post-65",
+    "date": "Tue Sep 1, 2026 · Mid-Afternoon",
+    "location": "Green Thumb Bakery (グリーンサム) · Sakuragaokacho, Shibuya, Tokyo",
+    "tag": "Artisan Japanese Bakery, Cream Baguettes & Garden Deck",
+    "title": "Fresh sweet pastries, milk cream baguettes, and sunny deck snuggles at Green Thumb Bakery",
+    "caption": "After our morning excursion to Nakano and dropping off our shopping bags back at Cerulean Tower, we walked just a few minutes down the hill into Sakuragaokacho to visit Green Thumb Bakery (グリーンサム).\n\nThe boutique bakery was filled with the irresistible aroma of freshly baked artisan bread, sweet pastries, and French rolls. We picked up a spread of delicious desserts including rich chocolate croissants and fresh sweet milk cream baguettes. We sat out on the sun-dappled wooden patio deck surrounded by lush potted cacti and palm barrels, enjoying every bite while Lincoln and Evelyn played and giggled in the afternoon breeze.",
+    "media": [
+      {
+        "url": "assets/photos/516_green_thumb_bakery_shibuya_storefront_lantern.jpg",
+        "thumb": "assets/photos/516_green_thumb_bakery_shibuya_storefront_lantern.jpg",
+        "caption": "The sleek concrete storefront and glowing amber lantern of Green Thumb Bakery (GREEN THUMB) in Shibuya."
+      },
+      {
+        "url": "assets/photos/517_green_thumb_bakery_evelyn_cream_pastry_bite.jpg",
+        "thumb": "assets/photos/517_green_thumb_bakery_evelyn_cream_pastry_bite.jpg",
+        "caption": "Evelyn taking a joyful bite of her fresh milk cream baguette out on the wooden deck."
+      },
+      {
+        "url": "assets/photos/518_green_thumb_deck_john_lincoln_evelyn_snuggle.jpg",
+        "thumb": "assets/photos/518_green_thumb_deck_john_lincoln_evelyn_snuggle.jpg",
+        "caption": "John, Lincoln, and Evelyn snuggling together on the garden deck bench in front of the tall potted palms."
+      },
+      {
+        "url": "assets/photos/519_green_thumb_deck_lincoln_evelyn_giggle_play.jpg",
+        "thumb": "assets/photos/519_green_thumb_deck_lincoln_evelyn_giggle_play.jpg",
+        "caption": "Lincoln and Evelyn laughing and playing together on the sunny patio deck."
+      },
+      {
+        "url": "assets/photos/520_green_thumb_deck_kids_wrestling_cacti_planters.jpg",
+        "thumb": "assets/photos/520_green_thumb_deck_kids_wrestling_cacti_planters.jpg",
+        "caption": "The kids cracking up and wrestling playfully by the rustic whiskey barrel cactus planters."
+      }
+    ]
+  },
+  {
+    "id": "post-64",
+    "date": "Tue Sep 1, 2026 · Midday",
+    "location": "Nakano Broadway, Sun Mall & Central Park (中野サンモール · 中野四季の森公園) · Nakano, Tokyo",
+    "tag": "Mandarake Art Books, Retro Alleyways & Food Truck Picnic",
+    "title": "Nakano Broadway treasure hunt, Sanban-gai retro alleys, and a sunny food truck feast at Nakano Central Park",
+    "caption": "For Dad's birthday expedition, we hopped over to Nakano — one of Tokyo's premier cultural hubs for anime, vintage manga, and pop-culture history!\n\nWe walked down the vibrant Nakano Sun Mall covered arcade into the multi-level Nakano Broadway complex. We navigated the Mandarake specialty floors (Anime-Kan, Mania-Kan, and Special), admiring the treasure troves of vintage animation cels, original production sketches, and art books, picking up incredible hand-drawn art and illustration books for Dad and the kids. We explored the retro charm of Nakano Sanban-gai alleyway with its traditional izakaya lanterns before heading over to the sprawling lawns of Nakano Central Park (中野四季の森公園). We ordered delicious hot lunches from the local park food trucks — including savory Thai Gapao rice with fried egg and bento bowls — which everyone devoured at the shaded outdoor picnic tables!",
+    "media": [
+      {
+        "url": "assets/photos/505_nakano_sun_mall_arcade_canopy_view.jpg",
+        "thumb": "assets/photos/505_nakano_sun_mall_arcade_canopy_view.jpg",
+        "caption": "Looking down the soaring vaulted glass arcade of Nakano Sun Mall (中野サンモール) leading toward Nakano Broadway."
+      },
+      {
+        "url": "assets/photos/506_nakano_sun_mall_john_brittany_walk_selfie.jpg",
+        "thumb": "assets/photos/506_nakano_sun_mall_john_brittany_walk_selfie.jpg",
+        "caption": "John and Brittany walking through the lively shopping street on our way into Nakano Broadway."
+      },
+      {
+        "url": "assets/photos/507_nakano_sun_mall_family_laughing_selfie.jpg",
+        "thumb": "assets/photos/507_nakano_sun_mall_family_laughing_selfie.jpg",
+        "caption": "Family selfie packed with big smiles and laughter in the center of Nakano Sun Mall."
+      },
+      {
+        "url": "assets/photos/508_nakano_broadway_mandarake_floor_guide.jpg",
+        "thumb": "assets/photos/508_nakano_broadway_mandarake_floor_guide.jpg",
+        "caption": "Floor guide for the legendary Mandarake shops spanning 2F-4F across Nakano Broadway."
+      },
+      {
+        "url": "assets/photos/509_nakano_broadway_elevator_pokemon_cards_display.jpg",
+        "thumb": "assets/photos/509_nakano_broadway_elevator_pokemon_cards_display.jpg",
+        "caption": "Lincoln and Evelyn inspecting rare Pokémon card posters inside the Nakano Broadway elevator."
+      },
+      {
+        "url": "assets/photos/510_nakano_sanban_gai_alleyway_lanterns_shops.jpg",
+        "thumb": "assets/photos/510_nakano_sanban_gai_alleyway_lanterns_shops.jpg",
+        "caption": "The atmospheric pedestrian alleyway of Nakano Sanban-gai (三番街) lined with traditional shops and red lanterns."
+      },
+      {
+        "url": "assets/photos/511_nakano_sanban_gai_dad_lincoln_art_haul_walk.jpg",
+        "thumb": "assets/photos/511_nakano_sanban_gai_dad_lincoln_art_haul_walk.jpg",
+        "caption": "Dad and Lincoln strolling down the alley carrying our shopping bag of art books and drawn sketches."
+      },
+      {
+        "url": "assets/photos/512_nakano_central_park_family_walking_avenue.jpg",
+        "thumb": "assets/photos/512_nakano_central_park_family_walking_avenue.jpg",
+        "caption": "Walking down the wide paved tree-lined promenade entering Nakano Central Park (中野四季の森公園)."
+      },
+      {
+        "url": "assets/photos/513_nakano_central_park_family_green_lawn_selfie.jpg",
+        "thumb": "assets/photos/513_nakano_central_park_family_green_lawn_selfie.jpg",
+        "caption": "Family selfie on the park avenue with the lush green lawns in the background."
+      },
+      {
+        "url": "assets/photos/514_nakano_central_park_evelyn_food_truck_gapao_thumbsup.jpg",
+        "thumb": "assets/photos/514_nakano_central_park_evelyn_food_truck_gapao_thumbsup.jpg",
+        "caption": "Evelyn giving two big thumbs-up with her freshly prepared food truck Gapao chicken and fried egg rice box."
+      },
+      {
+        "url": "assets/photos/515_nakano_central_park_picnic_table_food_truck_bentos.jpg",
+        "thumb": "assets/photos/515_nakano_central_park_picnic_table_food_truck_bentos.jpg",
+        "caption": "Brittany, Lincoln, and Evelyn enjoying their food truck feast at the shaded wooden terrace tables."
+      }
+    ]
+  },
+  {
+    "id": "post-63",
+    "date": "Tue Sep 1, 2026 · Morning",
+    "location": "Cerulean Tower Tokyu Hotel & MEGA Don Quijote · Shibuya, Tokyo",
+    "tag": "Dad's Birthday Morning, Handmade Gifts & Luggage Prep",
+    "title": "Happy Birthday Dad! Morning gifts at breakfast, handmade art books, and luggage compression runs at MEGA Donki",
+    "caption": "We started off a very special Day 12 celebrating Dad's birthday right here in Shibuya!\n\nDown at the hotel breakfast buffet, the kids surprised Dad with sweet birthday presents — Evelyn gave Dad a handmade star pendant necklace and an adorable birthday message in her notebook ('I love you Dady · Love Evelyn'). Back in our Japanese Suite room, Lincoln presented Dad with his own heartfelt birthday sketchbook filled with custom drawings and sweet messages, followed by huge birthday hugs! Afterward, we took a quick morning walk to MEGA Don Quijote Shibuya Honten to pick up heavy-duty compression bags for our luggage packing before embarking on Dad's birthday adventure.",
+    "media": [
+      {
+        "url": "assets/photos/495_cerulean_breakfast_john_lincoln_evelyn_table.jpg",
+        "thumb": "assets/photos/495_cerulean_breakfast_john_lincoln_evelyn_table.jpg",
+        "caption": "Breakfast table selfie at Cerulean Tower with Lincoln waving high and Evelyn enjoying breakfast."
+      },
+      {
+        "url": "assets/photos/496_cerulean_breakfast_john_evelyn_yakult_smile.jpg",
+        "thumb": "assets/photos/496_cerulean_breakfast_john_evelyn_yakult_smile.jpg",
+        "caption": "Dad and Evelyn sharing morning smiles and sweet Yakult yogurt drinks at the breakfast buffet."
+      },
+      {
+        "url": "assets/photos/497_cerulean_breakfast_dad_evelyn_birthday_book_thumb.jpg",
+        "thumb": "assets/photos/497_cerulean_breakfast_dad_evelyn_birthday_book_thumb.jpg",
+        "caption": "Evelyn proudly giving a thumbs-up as Dad reads her handmade birthday card notebook."
+      },
+      {
+        "url": "assets/photos/498_cerulean_breakfast_evelyn_birthday_note_dad_smile.jpg",
+        "thumb": "assets/photos/498_cerulean_breakfast_evelyn_birthday_note_dad_smile.jpg",
+        "caption": "Evelyn smiling brightly as Dad reads her sweet birthday note: 'I LOVE YOU DADY · LOVE EVELYN'."
+      },
+      {
+        "url": "assets/photos/499_cerulean_breakfast_dad_opening_birthday_gift_box.jpg",
+        "thumb": "assets/photos/499_cerulean_breakfast_dad_opening_birthday_gift_box.jpg",
+        "caption": "Dad opening his birthday gift box adorned with shiny red ribbon bows with Evelyn watching eagerly."
+      },
+      {
+        "url": "assets/photos/500_cerulean_breakfast_evelyn_dad_birthday_necklace.jpg",
+        "thumb": "assets/photos/500_cerulean_breakfast_evelyn_dad_birthday_necklace.jpg",
+        "caption": "Evelyn helping Dad reveal his handmade birthday star pendant necklace."
+      },
+      {
+        "url": "assets/photos/501_cerulean_room_lincoln_giving_dad_birthday_book.jpg",
+        "thumb": "assets/photos/501_cerulean_room_lincoln_giving_dad_birthday_book.jpg",
+        "caption": "Back in the hotel suite, Lincoln proudly handing Dad his special birthday drawing sketchbook."
+      },
+      {
+        "url": "assets/photos/502_cerulean_room_dad_reading_lincoln_art_book.jpg",
+        "thumb": "assets/photos/502_cerulean_room_dad_reading_lincoln_art_book.jpg",
+        "caption": "Dad admiring Lincoln's intricate drawings and heartfelt birthday message."
+      },
+      {
+        "url": "assets/photos/503_cerulean_room_dad_lincoln_birthday_hug_smile.jpg",
+        "thumb": "assets/photos/503_cerulean_room_dad_lincoln_birthday_hug_smile.jpg",
+        "caption": "Warm birthday hug between Dad and Lincoln in our Japanese Suite room."
+      },
+      {
+        "url": "assets/photos/504_shibuya_donki_lincoln_evelyn_penguin_cutout.jpg",
+        "thumb": "assets/photos/504_shibuya_donki_lincoln_evelyn_penguin_cutout.jpg",
+        "caption": "Lincoln and Evelyn poking their heads through the Donpen penguin photo board at MEGA Don Quijote Shibuya."
+      }
+    ]
+  },
   {
     "id": "post-60",
     "date": "Mon Aug 31, 2026 · Morning",
@@ -4447,6 +4672,58 @@ const tripPosts = [
 
 const mapPins = [
   {
+    "id": "luidas-bar",
+    "name": "Luida's Bar (ルイーダの酒場 · Pasela Akiba)",
+    "city": "akihabara",
+    "lat": 35.6985,
+    "lon": 139.7715,
+    "type": "food",
+    "icon": "⚔️",
+    "status": "visited",
+    "time": "Day 12 · Evening",
+    "badge": "Dragon Quest RPG Tavern",
+    "desc": "Official Square Enix Dragon Quest themed tavern in Pasela Resorts Akiba featuring themed monster cuisine, Slime buns, holographic coasters, and medieval adventurer guild decor."
+  },
+  {
+    "id": "green-thumb-bakery",
+    "name": "Green Thumb Bakery (グリーンサム 渋谷)",
+    "city": "shibuya",
+    "lat": 35.6558,
+    "lon": 139.7012,
+    "type": "food",
+    "icon": "🥐",
+    "status": "visited",
+    "time": "Day 12 · Mid-Afternoon",
+    "badge": "Artisan Bakery & Patio Deck",
+    "desc": "Beloved artisan bakery in Sakuragaokacho right down from Cerulean Tower serving freshly baked sweet cream baguettes, pastries, and outdoor garden deck seating."
+  },
+  {
+    "id": "nakano-broadway",
+    "name": "Nakano Broadway & Sun Mall (中野ブロードウェイ · 中野サンモール)",
+    "city": "nakano",
+    "lat": 35.7081,
+    "lon": 139.6657,
+    "type": "shopping",
+    "icon": "🎨",
+    "status": "visited",
+    "time": "Day 12 · Midday",
+    "badge": "Mandarake Art Books & Anime Culture",
+    "desc": "Legendary four-story pop culture subculture complex and covered arcade featuring Mandarake vintage anime cels, drawn art books, and retro Sanban-gai alleyways."
+  },
+  {
+    "id": "nakano-central-park",
+    "name": "Nakano Central Park (中野四季の森公園)",
+    "city": "nakano",
+    "lat": 35.7065,
+    "lon": 139.6608,
+    "type": "play",
+    "icon": "🍱",
+    "status": "visited",
+    "time": "Day 12 · Midday",
+    "badge": "Lawn Park & Food Trucks",
+    "desc": "Spacious urban park adjacent to Nakano Central Park office towers featuring expansive grass lawns, tree avenues, and gourmet lunch food trucks with outdoor terrace seating."
+  },
+  {
     "id": "shinagawa-aquarium",
     "name": "Shinagawa Aquarium (しながわ水族館)",
     "city": "shinagawa",
@@ -5043,7 +5320,11 @@ const visitedTokyoRoute = [
   [35.6608, 139.6983], // Mandarake Shibuya (BEAM B2F)
   [35.6610, 139.6981], // Dipper Dan Crepe & Udagawa Police Box
   [35.6596, 139.7005], // Bic Camera Shibuya Hachikoguchi (3D Pokémon Screen)
-  [35.6606, 139.6975]  // MEGA Don Quijote Shibuya Honten
+  [35.6606, 139.6975], // MEGA Don Quijote Shibuya Honten
+  [35.7081, 139.6657], // Nakano Broadway & Sun Mall
+  [35.7065, 139.6608], // Nakano Central Park
+  [35.6558, 139.7012], // Green Thumb Bakery Shibuya
+  [35.6985, 139.7715], // Luida's Bar Dragon Quest Tavern (Akihabara)
 ];
 
 // Upcoming planned route across Kansai, Coast & Onsen
@@ -5237,6 +5518,7 @@ function renderDrawerDays() {
   });
 
   const dayLabels = {
+    'Tue Sep 1': 'Day 12 · Nakano & Dragon Quest',
     'Mon Aug 31': 'Day 11 · Shinagawa & Shinjuku',
     'Sun Aug 30': 'Day 10 · Shibuya & Yoyogi',
     'Sat Aug 29': 'Day 9 · Shibuya Base',
@@ -5439,6 +5721,10 @@ document.addEventListener('click', (e) => {
 
 // Pin Photo & Category Lookup Helper
 const pinPhotoLookup = {
+  'luidas-bar': 'assets/photos/527_pasela_lobby_full_family_birthday_selfie.jpg',
+  'green-thumb-bakery': 'assets/photos/517_green_thumb_bakery_evelyn_cream_pastry_bite.jpg',
+  'nakano-broadway': 'assets/photos/505_nakano_sun_mall_arcade_canopy_view.jpg',
+  'nakano-central-park': 'assets/photos/514_nakano_central_park_evelyn_food_truck_gapao_thumbsup.jpg',
   'shinagawa-aquarium': 'assets/photos/441_shinagawa_aquarium_entrance_evelyn_dolphin_statue.jpg',
   'shinagawa-kumin-park': 'assets/photos/476_shinagawa_kumin_park_scenic_lake_reflection.jpg',
   'shinjuku-chuo-park': 'assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg',
