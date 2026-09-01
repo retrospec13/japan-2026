@@ -1292,6 +1292,13 @@ button { font: inherit; outline: none; }
 <script>
 const recentHighlights = [
   {
+    "url": "assets/photos/542_akiba_night_walk_full_family_taiyaki_pokemon_yoshi_1.jpg",
+    "thumb": "assets/photos/542_akiba_night_walk_full_family_taiyaki_pokemon_yoshi_1.jpg",
+    "caption": "Full family night celebration in Akihabara with fresh red bean taiyaki, giant Yoshi, and Pokémon plushies!",
+    "day": "Day 12 · Tue Sep 1",
+    "location": "GiGO & Akihabara Streets"
+  },
+  {
     "url": "assets/photos/537_luidas_bar_happy_birthday_john_dessert_plate_castle_waffle.jpg",
     "thumb": "assets/photos/537_luidas_bar_happy_birthday_john_dessert_plate_castle_waffle.jpg",
     "caption": "Custom 'Happy Birthday John' Dragon Quest celebration dessert platter with castle waffle and meringues at Luida's Bar.",
@@ -1357,6 +1364,46 @@ const recentHighlights = [
 ];
 
 const tripPosts = [
+  {
+    "id": "post-67",
+    "date": "Tue Sep 1, 2026 · Night",
+    "location": "GiGO Arcade & Akihabara Streets · Akihabara, Tokyo",
+    "tag": "Claw Machine Wins, Giant Yoshi, Umbreon & Warm Taiyaki",
+    "title": "GiGO claw machine jackpot: giant Yoshi first-try win, Pokémon Umbreon & Sylveon, and fresh warm red bean taiyaki",
+    "caption": "After our legendary birthday dinner at Luida's Bar, we couldn't resist stopping by the multi-story GiGO amusement arcade for some evening claw machine excitement!\n\nAunt Alison showed off master-tier UFO catcher skills, winning a rare Pokémon Umbreon and Sylveon for Evie! Then Dad stepped up to the crane game and won a giant plush Yoshi on his very first try! Lincoln proudly carried his massive new green dinosaur buddy through the arcade.\n\nOn our walk back, we stopped by a street stand for freshly baked, piping-hot red bean paste taiyaki pastries (鯛焼き). We snapped hilarious family selfies on the Akihabara crosswalk with our stuffed plushies and delicious fish-shaped waffle pastries before heading back to Shibuya for a well-deserved night's sleep to end an unforgettable birthday!",
+    "media": [
+      {
+        "url": "assets/photos/542_akiba_night_walk_full_family_taiyaki_pokemon_yoshi_1.jpg",
+        "thumb": "assets/photos/542_akiba_night_walk_full_family_taiyaki_pokemon_yoshi_1.jpg",
+        "caption": "Full family night celebration on the Akihabara streets with our freshly baked red bean taiyaki pastries, giant Yoshi, and Pokémon plushies."
+      },
+      {
+        "url": "assets/photos/543_akiba_night_walk_full_family_taiyaki_pokemon_yoshi_2.jpg",
+        "thumb": "assets/photos/543_akiba_night_walk_full_family_taiyaki_pokemon_yoshi_2.jpg",
+        "caption": "Lincoln taking a massive bite of his warm crispy taiyaki pastry while Evelyn clutches her fresh sweet bun."
+      },
+      {
+        "url": "assets/photos/538_gigo_arcade_lincoln_yoshi_alison_pokemon_claw_1.jpg",
+        "thumb": "assets/photos/538_gigo_arcade_lincoln_yoshi_alison_pokemon_claw_1.jpg",
+        "caption": "Aunt Alison locking in on the Pokémon Eeveelutions claw machine while Lincoln clutches his newly won giant Yoshi plush."
+      },
+      {
+        "url": "assets/photos/539_gigo_arcade_lincoln_yoshi_alison_pokemon_claw_2.jpg",
+        "thumb": "assets/photos/539_gigo_arcade_lincoln_yoshi_alison_pokemon_claw_2.jpg",
+        "caption": "Lincoln watching intently as Alison goes for the Umbreon claw drop at GiGO Akihabara."
+      },
+      {
+        "url": "assets/photos/540_akiba_night_walk_john_brittany_alison_plushies_pastries.jpg",
+        "thumb": "assets/photos/540_akiba_night_walk_john_brittany_alison_plushies_pastries.jpg",
+        "caption": "Night walk selfie with John, Alison, and Brittany showing off their prize haul of Yoshi, Umbreon, Sylveon, and hot taiyaki."
+      },
+      {
+        "url": "assets/photos/541_akiba_night_walk_john_brittany_yoshi_taiyaki_selfie.jpg",
+        "thumb": "assets/photos/541_akiba_night_walk_john_brittany_yoshi_taiyaki_selfie.jpg",
+        "caption": "John and Brittany beaming under the Akihabara neon lights with giant Yoshi and checkered taiyaki bags."
+      }
+    ]
+  },
   {
     "id": "post-66",
     "date": "Tue Sep 1, 2026 · Evening",
@@ -4709,6 +4756,19 @@ const tripPosts = [
 
 const mapPins = [
   {
+    "id": "gigo-akihabara",
+    "name": "GiGO Akihabara & Taiyaki (GiGO 秋葉原 · くりこ庵)",
+    "city": "akihabara",
+    "lat": 35.6983,
+    "lon": 139.7718,
+    "type": "play",
+    "icon": "🕹️",
+    "status": "visited",
+    "time": "Day 12 · Night",
+    "badge": "Claw Machines & Fresh Taiyaki",
+    "desc": "Iconic multi-story arcade center in Akihabara featuring UFO catchers where Dad won giant Yoshi on first try, Alison won Umbreon & Sylveon, and family enjoyed fresh red bean taiyaki pastries."
+  },
+  {
     "id": "luidas-bar",
     "name": "Luida's Bar (ルイーダの酒場 · Pasela Akiba)",
     "city": "akihabara",
@@ -5758,6 +5818,7 @@ document.addEventListener('click', (e) => {
 
 // Pin Photo & Category Lookup Helper
 const pinPhotoLookup = {
+  'gigo-akihabara': 'assets/photos/542_akiba_night_walk_full_family_taiyaki_pokemon_yoshi_1.jpg',
   'luidas-bar': 'assets/photos/527_pasela_lobby_full_family_birthday_selfie.jpg',
   'green-thumb-bakery': 'assets/photos/517_green_thumb_bakery_evelyn_cream_pastry_bite.jpg',
   'nakano-broadway': 'assets/photos/505_nakano_sun_mall_arcade_canopy_view.jpg',
