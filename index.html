@@ -19,9 +19,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
 /* ==========================================================================
-   Japan Journey 2026 · v14 "Mojo Pink Refined" (Direction A)
-   48px compact header · day jump ribbon · story text above thumbnails
-   full-height map with in-viewport pin card · no ghost pins
+   Japan Journey 2026 · Tokyo Modern Minimal Theme (Exact Pixel Polish)
    ========================================================================== */
 
 :root {
@@ -32,18 +30,16 @@
   --ink-secondary: #4b5563;
   --muted: #9ca3af;
   --border-card: #e5e7eb;
-  --pink: #FF6B9D;
-  --pink-deep: #e5507f;
-  --pink-soft: #FFF0F5;
-  --pink-border: #FBCFE8;
-  --green: #059669;
-  --green-soft: #ECFDF5;
-  --green-border: #A7F3D0;
-  --radius-card: 18px;
-  --radius-inner: 12px;
+  --orange: #ff5722;
+  --orange-light: #fff2ed;
+  --orange-border: #ff7a50;
+  --blue: #2563eb;
+  --blue-light: #eff6ff;
+  --radius-card: 20px;
+  --radius-inner: 14px;
   --radius-pill: 999px;
-  --shadow-card: 0 2px 10px rgba(15, 23, 42, 0.04);
-  --shadow-dock: 0 8px 24px rgba(255, 107, 157, 0.42);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.04);
+  --shadow-dock: 0 10px 30px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 * { box-sizing: border-box; }
@@ -54,201 +50,386 @@ body {
   color: var(--ink);
   font: 14.5px/1.5 -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "SF Pro Display", "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
-  padding-bottom: 116px;
+  padding-bottom: 96px;
 }
+
 a { color: inherit; text-decoration: none; }
 button { font: inherit; outline: none; }
 
-.app-container { max-width: 580px; margin: 0 auto; min-height: 100vh; }
+.app-container {
+  max-width: 580px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 16px 14px 40px;
+}
 
-/* ---------------- 1. Compact Sticky Header (48px) ---------------- */
-.compact-header {
-  position: sticky;
-  top: 0;
-  z-index: 900;
-  height: 48px;
-  padding: 0 12px;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-card);
+/* --------------------------------------------------------------------------
+   1. Brand Header
+   -------------------------------------------------------------------------- */
+.header-wrap {
+  margin-bottom: 14px;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.day-badge-top {
+  background: #ffffff;
+  color: var(--ink-secondary);
+  border: 1px solid var(--border-card);
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.avatar-crew-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar-group {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-group img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  margin-left: -9px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+
+.avatar-group img:first-child {
+  margin-left: 0;
+}
+
+.crew-names-text {
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: var(--ink-secondary);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   2. Bento Hero Card (Compact, Exact Layout, No Overflow)
+   -------------------------------------------------------------------------- */
+.bento-card {
+  background: #ffffff;
+  border: 1.5px solid var(--orange-border);
+  border-radius: var(--radius-card);
+  padding: 14px 14px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.bento-header-line {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.bento-content-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
-.ch-brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.ch-brand img.ch-icon {
-  width: 30px; height: 30px; border-radius: 9px; display: block;
-  box-shadow: 0 2px 6px rgba(255, 107, 157, 0.25);
-}
-.ch-titles { min-width: 0; }
-.ch-title {
-  font-size: 15px; font-weight: 800; letter-spacing: -0.02em;
-  color: var(--ink); line-height: 1.15;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.ch-sub {
-  font-size: 10px; font-weight: 700; color: var(--pink);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  display: block; margin-top: -1px;
-}
-.ch-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-.ch-crew { display: flex; align-items: center; }
-.ch-crew img {
-  width: 24px; height: 24px; border-radius: 50%; object-fit: cover;
-  border: 1.5px solid #ffffff; margin-left: -6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-}
-.ch-crew img:first-child { margin-left: 0; }
-.ch-crew-pill {
-  background: var(--pink-soft); border: 1px solid var(--pink-border);
-  color: #BE185D; font-size: 10px; font-weight: 800;
-  padding: 3px 7px; border-radius: var(--radius-pill); margin-left: 5px;
-  white-space: nowrap;
-}
-.ch-complete {
-  background: var(--green-soft); border: 1px solid var(--green-border);
-  color: var(--green); font-size: 10px; font-weight: 800;
-  padding: 3px 8px; border-radius: var(--radius-pill); white-space: nowrap;
+
+.bento-stats-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-/* ---------------- 2. Sub-Bar: stats micro row + day ribbon ---------------- */
-.sub-bar {
-  position: sticky;
-  top: 48px;
-  z-index: 890;
-  background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-card);
-  padding: 6px 12px 8px;
+.bento-stat-col {
+  display: flex;
+  flex-direction: column;
+  padding-right: 8px;
+  border-right: 1px solid #f3f4f6;
 }
-.stats-micro-bar {
-  display: flex; align-items: center; justify-content: space-between;
-  font-size: 11px; font-weight: 700; color: var(--ink-secondary);
-  margin-bottom: 6px; padding: 0 2px;
+
+.bento-stat-col:last-child {
+  border-right: none;
+  padding-right: 0;
 }
-.stats-micro-bar strong { color: var(--ink); font-weight: 800; }
-.day-ribbon { display: flex; gap: 5px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.day-ribbon::-webkit-scrollbar { display: none; }
-.day-chip {
-  flex: 0 0 auto; padding: 4px 10px; border-radius: var(--radius-pill);
-  font-size: 11px; font-weight: 700; cursor: pointer;
-  background: var(--panel-gray); color: var(--ink-secondary);
-  border: 1px solid var(--border-card);
+
+.bento-stat-top {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.bento-stat-top svg {
+  width: 14px;
+  height: 14px;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.bento-stat-sub {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.bento-action-btn {
+  background: var(--orange);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 8px 12px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(255, 87, 34, 0.25);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.bento-action-btn:hover {
+  background: #e64a19;
+}
+
+/* --------------------------------------------------------------------------
+   3. Segmented Switcher (Feed vs Live Map)
+   -------------------------------------------------------------------------- */
+.switcher-bar {
+  background: var(--panel-gray);
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  gap: 3px;
+  margin-bottom: 16px;
+}
+
+.switcher-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   transition: all 0.15s ease;
 }
-.day-chip.active {
-  background: var(--pink); color: #ffffff; border-color: var(--pink);
-  box-shadow: 0 2px 6px rgba(255, 107, 157, 0.35);
+
+.switcher-btn.active {
+  background: var(--ink);
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
-/* ---------------- 3. Feed ---------------- */
-.feed-body { padding: 12px 12px 20px; display: grid; gap: 14px; }
+/* --------------------------------------------------------------------------
+   4. Story Post Cards (Clean Visual Hierarchy)
+   -------------------------------------------------------------------------- */
+.story-feed {
+  display: grid;
+  gap: 18px;
+}
 
 .story-card {
   background: var(--panel);
   border: 1px solid var(--border-card);
   border-radius: var(--radius-card);
-  padding: 11px;
+  padding: 14px;
   box-shadow: var(--shadow-card);
   overflow: hidden;
 }
+
+/* Top Hero Media inside card */
 .story-hero-media {
-  position: relative;
-  width: 100%; height: 178px;
+  width: 100%;
   border-radius: var(--radius-inner);
   overflow: hidden;
   background: #1e293b;
+  position: relative;
   cursor: pointer;
-  margin-bottom: 9px;
-}
-.story-hero-media.tall { height: 240px; }
-.story-hero-media img, .story-hero-media video {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-}
-.story-hero-media.video-hero video { height: auto; max-height: 260px; }
-.hero-tag-pill {
-  position: absolute; top: 8px; left: 8px; max-width: calc(100% - 60px);
-  background: rgba(15, 23, 42, 0.82); backdrop-filter: blur(6px);
-  color: #ffffff; font-size: 10px; font-weight: 800;
-  padding: 3px 9px; border-radius: var(--radius-pill);
-  border: 1px solid rgba(255,255,255,0.2);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.hero-count-pill {
-  position: absolute; bottom: 8px; right: 8px;
-  background: rgba(255, 107, 157, 0.95); color: #ffffff;
-  font-size: 10.5px; font-weight: 800; padding: 3px 9px;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-}
-.hero-caption-strip {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(15,23,42,0.88));
-  color: #F8FAFC; font-size: 10.5px; font-weight: 600;
-  padding: 20px 104px 6px 10px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.post-meta {
-  font-size: 11px; font-weight: 700; color: var(--pink);
-  margin-bottom: 3px;
-  display: flex; align-items: center; gap: 5px;
-}
-.post-title {
-  margin: 0; font-size: 15.5px; font-weight: 800; color: var(--ink);
-  letter-spacing: -0.02em; line-height: 1.24; margin-bottom: 5px;
-}
-.post-excerpt {
-  font-size: 12.5px; line-height: 1.5; color: var(--ink-secondary);
-  margin: 0 0 9px; white-space: pre-line;
-}
-.thumb-row {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;
-}
-.thumb-row.expanded { grid-template-columns: repeat(3, 1fr); }
-.thumb-tile {
-  height: 62px; border-radius: 8px; overflow: hidden;
-  position: relative; cursor: pointer; background: #1e293b;
-}
-.thumb-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.2s ease; }
-.thumb-tile:hover img { transform: scale(1.05); }
-.thumb-more-overlay {
-  position: absolute; inset: 0;
-  background: rgba(15, 23, 42, 0.72);
-  color: #ffffff; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 800;
-}
-.thumb-more-overlay span { font-size: 9px; font-weight: 700; color: #FBCFE8; }
-.show-all-btn {
-  margin-top: 7px; width: 100%;
-  border: 1px solid var(--pink-border); background: var(--pink-soft);
-  color: #BE185D; font-size: 11.5px; font-weight: 800;
-  padding: 7px; border-radius: 10px; cursor: pointer;
-}
-.show-all-btn:hover { background: #ffe4ee; }
-
-.story-videos-wrap { margin-top: 9px; display: grid; gap: 9px; }
-.story-video-wrap { border-radius: var(--radius-inner); overflow: hidden; background: #000; }
-.story-video-wrap video { width: 100%; max-height: 340px; display: block; }
-.video-cap {
-  padding: 6px 12px; background: #111827; color: #e5e7eb;
-  font-size: 11.5px; font-weight: 600;
+  margin-bottom: 12px;
 }
 
-.active-filter-bar {
-  background: #ffffff; border: 1.5px solid var(--pink-border);
-  border-radius: var(--radius-pill); padding: 8px 14px;
-  display: flex; align-items: center; justify-content: space-between;
-  box-shadow: var(--shadow-card);
-}
-.empty-state {
-  padding: 40px 20px; text-align: center;
-  background: var(--panel); border: 1px solid var(--border-card);
-  border-radius: var(--radius-card);
+.story-hero-media img,
+.story-hero-media video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
 }
 
-/* ---------------- 4. Map (full-height) ---------------- */
+.story-hero-media:hover img {
+  transform: scale(1.02);
+}
+
+.story-content-wrap {
+  padding: 0 2px 2px;
+}
+
+.story-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.story-meta-time {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 3px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Full Photo Grid Layouts (Every single image visible) */
+.story-full-gallery {
+  display: grid;
+  gap: 6px;
+  border-radius: var(--radius-inner);
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.story-full-gallery.grid-1 {
+  grid-template-columns: 1fr;
+}
+.story-full-gallery.grid-1 .story-gallery-item {
+  height: 280px;
+}
+
+.story-full-gallery.grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+.story-full-gallery.grid-2 .story-gallery-item {
+  height: 180px;
+}
+
+.story-full-gallery.grid-3 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 150px 150px;
+}
+.story-full-gallery.grid-3 .story-gallery-item:first-child {
+  grid-row: span 2;
+  height: 306px;
+}
+.story-full-gallery.grid-3 .story-gallery-item {
+  height: 150px;
+}
+
+.story-full-gallery.grid-4 {
+  grid-template-columns: 1fr 1fr;
+}
+.story-full-gallery.grid-4 .story-gallery-item {
+  height: 150px;
+}
+
+.story-full-gallery.grid-5,
+.story-full-gallery.grid-6,
+.story-full-gallery.grid-many {
+  grid-template-columns: repeat(3, 1fr);
+}
+.story-full-gallery.grid-5 .story-gallery-item,
+.story-full-gallery.grid-6 .story-gallery-item,
+.story-full-gallery.grid-many .story-gallery-item {
+  height: 130px;
+}
+
+.story-gallery-item {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1e293b;
+  position: relative;
+  cursor: pointer;
+}
+
+.story-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.story-gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+@media (max-width: 480px) {
+  .story-full-gallery.grid-5,
+  .story-full-gallery.grid-6,
+  .story-full-gallery.grid-many {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .story-full-gallery.grid-5 .story-gallery-item,
+  .story-full-gallery.grid-6 .story-gallery-item,
+  .story-full-gallery.grid-many .story-gallery-item {
+    height: 140px;
+  }
+}
+
+.story-caption-text {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* --------------------------------------------------------------------------
+   5. Interactive Map & Highlights Tabs
+   -------------------------------------------------------------------------- */
+.tab-content-pane {
+  display: none;
+}
+
+.tab-content-pane.active {
+  display: block;
+}
+
 .map-card-container {
   background: #ffffff;
   border: 1px solid var(--border-card);
@@ -256,430 +437,836 @@ button { font: inherit; outline: none; }
   overflow: hidden;
   box-shadow: var(--shadow-card);
   position: relative;
-  margin: 12px 12px 20px;
-  display: flex;
-  flex-direction: column;
 }
+
 .map-header-bar {
-  padding: 10px 14px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--border-card);
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 8px;
 }
-.map-header-bar h2 { margin: 0; font-size: 15px; font-weight: 800; color: var(--ink); }
-.map-base-chip {
-  background: var(--green-soft); border: 1px solid var(--green-border);
-  color: var(--green); font-size: 10px; font-weight: 800;
-  padding: 3px 8px; border-radius: var(--radius-pill); white-space: nowrap;
+
+.map-header-bar h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
 }
-.map-viewport { height: 66vh; min-height: 430px; width: 100%; position: relative; }
+
+.map-viewport {
+  height: 60vh;
+  min-height: 440px;
+  max-height: 580px;
+  width: 100%;
+}
 
 .map-category-filter-bar {
-  display: flex; gap: 5px; overflow-x: auto;
-  padding: 8px 10px; background: #ffffff;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 10px 14px;
+  background: #ffffff;
   border-bottom: 1px solid var(--border-card);
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
-.map-category-filter-bar::-webkit-scrollbar { display: none; }
-.map-filter-chip {
-  flex: 0 0 auto; background: var(--panel-gray);
-  border: 1px solid var(--border-card);
-  padding: 4px 10px; border-radius: var(--radius-pill);
-  font-size: 11px; font-weight: 700; color: var(--ink-secondary);
-  cursor: pointer; white-space: nowrap;
-  transition: all 0.15s ease;
+.map-category-filter-bar::-webkit-scrollbar {
+  display: none;
 }
-.map-filter-chip.active {
-  background: var(--pink); color: #ffffff; border-color: var(--pink);
-  box-shadow: 0 2px 6px rgba(255, 107, 157, 0.35);
-}
-.map-region-pills {
-  position: absolute; top: 10px; left: 52px; right: 10px; z-index: 800;
-  display: flex; gap: 5px; flex-wrap: wrap; pointer-events: none;
-}
-.map-region-pills .map-quick-pill { pointer-events: auto; }
-.map-quick-pill {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid #CBD5E1;
-  padding: 4px 9px; border-radius: var(--radius-pill);
-  font-size: 10.5px; font-weight: 800; color: var(--ink);
-  cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.12); white-space: nowrap;
-}
-.map-quick-pill.active { background: var(--ink); color: #ffffff; border-color: var(--ink); }
 
-/* Selected stop sheet — docked above dock, always in viewport */
+.map-filter-chip {
+  flex: 0 0 auto;
+  background: #f8fafc;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.map-filter-chip.active {
+  background: #FF6B9D !important;
+  color: #ffffff;
+  border-color: #FF6B9D;
+  box-shadow: 0 2px 8px rgba(255, 107, 157, 0.35);
+}
+
+.map-pills-row {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 8px 12px;
+  background: #fafafa;
+  border-top: 1px solid var(--border-card);
+  scrollbar-width: none;
+}
+.map-pills-row::-webkit-scrollbar {
+  display: none;
+}
+
+.map-quick-pill {
+  flex: 0 0 auto;
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  cursor: pointer;
+}
+
+/* Photo Bubble Teardrop Marker Pin System */
+.photo-pin-wrap {
+  position: relative;
+  width: 44px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.photo-pin-wrap:hover, .photo-pin-wrap.active {
+  transform: translateY(-4px) scale(1.12);
+  z-index: 1000 !important;
+}
+
+.photo-pin-bubble {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #FF6B9D;
+  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-pin-bubble img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-pin-bubble .fallback-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.photo-pin-stem {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #FF6B9D;
+  margin-top: -2px;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25));
+}
+
+.photo-pin-wrap.current .photo-pin-bubble {
+  border-color: #10B981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.35), 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+.photo-pin-wrap.current .photo-pin-stem {
+  border-top-color: #10B981;
+}
+
+.photo-pin-wrap.planned {
+  opacity: 0.75;
+}
+.photo-pin-wrap.planned .photo-pin-bubble {
+  border-color: #94A3B8;
+  border-style: dashed;
+}
+.photo-pin-wrap.planned .photo-pin-stem {
+  border-top-color: #94A3B8;
+}
+
+/* Floating Selected Place Bottom Card */
 .map-selected-card {
   position: absolute;
-  bottom: 12px; left: 12px; right: 12px;
-  background: rgba(255, 255, 255, 0.98);
-  border: 1.5px solid var(--pink-border);
-  border-radius: var(--radius-card);
+  bottom: 50px;
+  left: 12px;
+  right: 12px;
+  background: #ffffff;
+  border-radius: 16px;
   padding: 12px;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.22);
-  z-index: 810;
-  display: none;
+  box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.22), 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid rgba(255, 107, 157, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 800;
   animation: slideUpCard 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
 }
+
 @keyframes slideUpCard {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-.stop-top { display: flex; gap: 11px; align-items: center; margin-bottom: 10px; }
-.stop-thumb {
-  width: 60px; height: 60px; border-radius: 12px; object-fit: cover;
-  border: 2px solid var(--pink); flex-shrink: 0;
-}
-.stop-info { flex: 1; min-width: 0; position: relative; padding-right: 24px; }
-.stop-kicker {
-  font-size: 9.5px; font-weight: 800; color: var(--pink);
-  text-transform: uppercase; letter-spacing: 0.04em;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.stop-name {
-  font-size: 14px; font-weight: 800; color: var(--ink); margin: 1px 0 2px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.stop-sub { font-size: 10.5px; font-weight: 600; color: #64748b; }
-.stop-close {
-  position: absolute; top: 0; right: 0;
-  background: var(--panel-gray); border: none;
-  width: 22px; height: 22px; border-radius: 50%;
-  color: #64748b; font-weight: 800; font-size: 11px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-}
-.stop-actions { display: flex; gap: 8px; }
-.stop-btn-primary {
-  flex: 1; background: var(--pink); color: #ffffff; text-align: center;
-  padding: 8px 10px; border-radius: 10px; font-size: 11.5px; font-weight: 800;
-  cursor: pointer; border: none;
-  box-shadow: 0 2px 8px rgba(255, 107, 157, 0.35);
-}
-.stop-btn-primary:hover { background: var(--pink-deep); }
-.stop-btn-secondary {
-  background: var(--panel-gray); color: var(--ink);
-  padding: 8px 12px; border-radius: 10px; font-size: 11.5px; font-weight: 700;
-  cursor: pointer; border: none; text-decoration: none;
-  display: inline-flex; align-items: center;
+
+.map-selected-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1.5px solid #FF6B9D;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-/* Photo bubble pins */
-.photo-pin-wrap {
-  position: relative; width: 44px; height: 52px;
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: flex-start; cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+.map-selected-info {
+  flex: 1;
+  min-width: 0;
 }
-.photo-pin-wrap:hover, .photo-pin-wrap.active {
-  transform: translateY(-4px) scale(1.12); z-index: 1000 !important;
-}
-.photo-pin-bubble {
-  width: 40px; height: 40px; border-radius: 50%;
-  border: 3px solid var(--pink);
-  box-shadow: 0 4px 12px rgba(255, 107, 157, 0.4), 0 2px 6px rgba(0,0,0,0.15);
-  background: #ffffff; overflow: hidden; position: relative; z-index: 2;
-  display: flex; align-items: center; justify-content: center;
-}
-.photo-pin-bubble img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.photo-pin-bubble .fallback-icon { font-size: 18px; line-height: 1; }
-.photo-pin-stem {
-  width: 0; height: 0;
-  border-left: 6px solid transparent; border-right: 6px solid transparent;
-  border-top: 8px solid var(--pink);
-  margin-top: -2px; position: relative; z-index: 1;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25));
-}
-.photo-pin-wrap.active .photo-pin-bubble { border-color: var(--ink); }
-.photo-pin-wrap.active .photo-pin-stem { border-top-color: var(--ink); }
 
-/* ---------------- 5. Highlights ---------------- */
-.highlights-head { padding: 14px 14px 4px; }
-.highlights-head h2 { margin: 0 0 4px; font-size: 18px; font-weight: 800; }
-.highlights-head p { margin: 0; font-size: 12.5px; color: var(--muted); font-weight: 600; }
+.map-selected-tag {
+  font-size: 10px;
+  font-weight: 800;
+  color: #FF6B9D;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.map-selected-title {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.map-selected-meta {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-selected-close {
+  background: #f1f5f9;
+  border: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: #64748b;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Highlights Grid */
 .highlights-card-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
-  padding: 12px 12px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
 }
+
 .highlight-item-card {
-  background: var(--panel); border: 1px solid var(--border-card);
-  border-radius: var(--radius-inner); overflow: hidden; cursor: pointer;
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-inner);
+  overflow: hidden;
+  cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  position: relative;
 }
-.highlight-item-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
-.highlight-day-stamp {
-  position: absolute; top: 6px; left: 6px; z-index: 5;
-  background: var(--pink); color: #ffffff;
-  font-size: 8.5px; font-weight: 800; padding: 2px 6px;
-  border-radius: 5px; white-space: nowrap;
+
+.highlight-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
 }
-.highlight-thumb-box { height: 112px; overflow: hidden; background: #1e293b; }
-.highlight-thumb-box img { width: 100%; height: 100%; object-fit: cover; }
-.highlight-body-box { padding: 8px 10px 10px; }
-.highlight-loc-tag { font-size: 10px; font-weight: 800; color: var(--pink); margin-bottom: 2px; }
+
+.highlight-thumb-box {
+  height: 140px;
+  overflow: hidden;
+  background: #1e293b;
+}
+
+.highlight-thumb-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.highlight-body-box {
+  padding: 10px 12px;
+}
+
+.highlight-loc-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 2px;
+}
+
 .highlight-caption-text {
-  font-size: 11px; color: var(--ink-secondary); line-height: 1.35; margin: 0;
-  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: 12px;
+  color: var(--ink-secondary);
+  line-height: 1.4;
+  margin: 0;
 }
 
-
-/* Tab panes */
-.tab-content-pane { display: none; }
-.tab-content-pane.active { display: block; }
-
-/* Bottom dock markup */
-/* ---------------- 6. Drawer ---------------- */
+/* --------------------------------------------------------------------------
+   6. Search & Day Filter Drawer
+   -------------------------------------------------------------------------- */
 .drawer-backdrop {
-  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px); z-index: 1800;
-  visibility: hidden; opacity: 0; transition: all 0.2s ease;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 1800;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease;
 }
-.drawer-backdrop.show { visibility: visible; opacity: 1; }
+
+.drawer-backdrop.show {
+  visibility: visible;
+  opacity: 1;
+}
+
 .drawer-sheet {
-  position: fixed; bottom: 0; left: 0; right: 0;
-  max-width: 580px; margin: 0 auto;
-  background: #ffffff; border-radius: 24px 24px 0 0;
-  padding: 20px 16px 32px; z-index: 1810;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 580px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 24px 24px 0 0;
+  padding: 20px 16px 32px;
+  z-index: 1810;
   transform: translateY(100%);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
-  max-height: 80vh; overflow-y: auto;
+  max-height: 80vh;
+  overflow-y: auto;
 }
-.drawer-sheet.show { transform: translateY(0); }
-.drawer-drag-handle { width: 36px; height: 4px; background: #e5e7eb; border-radius: 2px; margin: -8px auto 14px; }
-.drawer-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.drawer-title { margin: 0; font-size: 17px; font-weight: 800; color: var(--ink); }
+
+.drawer-sheet.show {
+  transform: translateY(0);
+}
+
+.drawer-drag-handle {
+  width: 36px;
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  margin: -8px auto 14px;
+}
+
+.drawer-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.drawer-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
 .drawer-search-input {
-  width: 100%; background: var(--panel-gray);
-  border: 1px solid var(--border-card); border-radius: var(--radius-inner);
-  padding: 10px 12px; font-size: 13.5px; color: var(--ink);
-  outline: none; margin-bottom: 14px;
+  width: 100%;
+  background: var(--panel-gray);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-inner);
+  padding: 10px 12px;
+  font-size: 13.5px;
+  color: var(--ink);
+  outline: none;
+  margin-bottom: 14px;
 }
-.drawer-days-grid { display: grid; grid-template-columns: 1fr; gap: 7px; }
+
+.drawer-days-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
 .drawer-day-pill {
-  background: var(--panel-gray); border: 1px solid var(--border-card);
-  border-radius: var(--radius-inner); padding: 10px 12px;
-  text-align: left; font-size: 12.5px; font-weight: 700;
-  color: var(--ink-secondary); cursor: pointer;
-  display: flex; align-items: center; justify-content: space-between;
+  background: var(--panel-gray);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-inner);
+  padding: 9px 12px;
+  text-align: left;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.drawer-day-pill.active { background: var(--ink); color: #ffffff; border-color: var(--ink); }
 
-/* ---------------- 7. Bottom dock ---------------- */
+.drawer-day-pill.active {
+  background: var(--ink);
+  color: #ffffff;
+  border-color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   7. Floating Bottom Navigation Dock (Punch Pink #FF6B9D Solid Style)
+   -------------------------------------------------------------------------- */
 .bottom-nav-dock {
-  position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
-  z-index: 1000; display: flex; align-items: center; justify-content: space-around;
-  background: var(--pink) !important;
-  padding: 5px 8px; border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-dock), 0 2px 6px rgba(0, 0, 0, 0.06);
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #FF6B9D !important;
+  padding: 5px 8px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 10px 28px rgba(255, 107, 157, 0.45), 0 2px 6px rgba(0, 0, 0, 0.06);
   border: 2px solid #ffffff;
-  width: calc(100% - 28px); max-width: 400px;
+  width: calc(100% - 28px);
+  max-width: 400px;
 }
-.dock-item {
-  display: flex; flex-direction: column; align-items: center; gap: 1px;
-  padding: 6px 13px; border: none; background: transparent;
-  color: #ffffff; cursor: pointer; border-radius: var(--radius-pill);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  font-size: 10px; font-weight: 800;
-}
-.dock-item.active { background: #ffffff; color: #0f172a; box-shadow: 0 3px 10px rgba(0,0,0,0.12); }
 
-/* ---------------- 8. Lightbox carousel ---------------- */
+.dock-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dock-item svg {
+  width: 18px;
+  height: 18px;
+  stroke: #ffffff;
+  stroke-width: 2.3;
+}
+
+.dock-item-label {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.dock-item:hover {
+  opacity: 0.9;
+}
+
+.dock-item.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+.dock-item.active svg {
+  stroke: #FF6B9D;
+}
+
+.dock-item.active .dock-item-label {
+  color: #0f172a;
+}
+
+/* --------------------------------------------------------------------------
+   8. Modals, Pins, Lightbox
+   -------------------------------------------------------------------------- */
+.custom-pin {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.custom-pin:hover {
+  transform: scale(1.15);
+  z-index: 1000;
+}
+
+/* Category & Region Accent Colors */
+.custom-pin.tokyo { background: #2563eb; }
+.custom-pin.shibuya { background: #6366f1; }
+.custom-pin.karuizawa { background: #059669; }
+.custom-pin.atami { background: #0891b2; }
+.custom-pin.shinagawa { background: #0284c7; }
+.custom-pin.shinjuku { background: #4f46e5; }
+.custom-pin.osaka { background: #ea580c; }
+.custom-pin.kyoto { background: #7c3aed; }
+.custom-pin.coast { background: #0d9488; }
+.custom-pin.onsen { background: #16a34a; }
+.custom-pin.transit { background: #475569; }
+.custom-pin.culture { background: #d97706; }
+.custom-pin.shopping { background: #9333ea; }
+.custom-pin.play { background: #e11d48; }
+
+.custom-pin.current {
+  background: #10b981 !important;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.4), 0 4px 14px rgba(0, 0, 0, 0.35);
+  z-index: 900;
+}
+
+.custom-pin.current::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid #10b981;
+  pointer-events: none;
+  animation: pinPulse 1.8s infinite;
+}
+
+@keyframes pinPulse {
+  0% { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+.custom-pin.planned {
+  background: #94a3b8;
+  opacity: 0.85;
+  border-style: dashed;
+}
+
 .lightbox-modal {
-  position: fixed; inset: 0; background: rgba(17, 24, 39, 0.94);
-  backdrop-filter: blur(8px); z-index: 2000;
-  display: flex; align-items: center; justify-content: center;
-  padding: 16px; visibility: hidden; opacity: 0; pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.94);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
   transition: all 0.2s ease;
 }
-.lightbox-modal.show { visibility: visible; opacity: 1; pointer-events: auto; }
-.lightbox-box {
-  max-width: min(94vw, 1000px); max-height: min(90vh, 820px);
-  display: flex; flex-direction: column; align-items: center;
-  position: relative; width: 100%;
-}
-.lightbox-stage { display: flex; align-items: center; justify-content: center; width: 100%; position: relative; }
-.lightbox-box img, .lightbox-box video {
-  max-width: 100%; max-height: 74vh; border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.6); object-fit: contain;
-}
-.lb-nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18); color: #ffffff;
-  border: 1px solid rgba(255,255,255,0.25);
-  font-size: 18px; font-weight: 800; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  z-index: 5; backdrop-filter: blur(4px);
-}
-.lb-nav:hover { background: rgba(255, 107, 157, 0.85); }
-.lb-prev { left: 8px; }
-.lb-next { right: 8px; }
-.lb-nav:disabled { opacity: 0.25; cursor: default; }
-.lightbox-caption {
-  color: #f3f4f6; margin-top: 12px; font-size: 14px; text-align: center;
-  max-width: 720px; line-height: 1.5;
-}
-.lightbox-counter {
-  position: absolute; top: -34px; left: 50%; transform: translateX(-50%);
-  background: rgba(255, 107, 157, 0.92); color: #ffffff;
-  font-size: 11.5px; font-weight: 800; padding: 3px 11px;
-  border-radius: var(--radius-pill);
-}
-.lightbox-close {
-  position: absolute; top: 18px; right: 18px;
-  background: rgba(255, 255, 255, 0.2); color: #ffffff;
-  border: 0; border-radius: 50%; width: 40px; height: 40px;
-  font-size: 22px; font-weight: 700; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; z-index: 10;
+
+.lightbox-modal.show {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
-/* ---------------- 9. Place modal ---------------- */
+.lightbox-box {
+  max-width: min(94vw, 1000px);
+  max-height: min(90vh, 820px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-box img,
+.lightbox-box video {
+  max-width: 100%;
+  max-height: 76vh;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  object-fit: contain;
+}
+
+.lightbox-caption {
+  color: #f3f4f6;
+  margin-top: 12px;
+  font-size: 14px;
+  text-align: center;
+  max-width: 720px;
+  line-height: 1.5;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .place-modal-backdrop {
-  position: fixed; inset: 0; background: rgba(17, 24, 39, 0.5);
-  backdrop-filter: blur(4px); z-index: 1500;
-  visibility: hidden; opacity: 0; pointer-events: none; transition: all 0.2s ease;
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1500;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
 }
-.place-modal-backdrop.show { visibility: visible; opacity: 1; pointer-events: auto; }
+
+.place-modal-backdrop.show {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .place-modal {
-  position: fixed; left: 50%; top: 50%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%) scale(0.96);
-  width: min(500px, calc(100vw - 32px)); max-height: 85vh;
-  background: #ffffff; border-radius: var(--radius-card);
+  width: min(500px, calc(100vw - 32px));
+  max-height: 85vh;
+  background: #ffffff;
+  border-radius: var(--radius-card);
   box-shadow: 0 20px 50px rgba(17, 24, 39, 0.25);
-  z-index: 1510; overflow-y: auto; padding: 22px;
-  visibility: hidden; opacity: 0; pointer-events: none; transition: all 0.2s ease;
+  z-index: 1510;
+  overflow-y: auto;
+  padding: 22px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
 }
+
 .place-modal.show {
-  visibility: visible; opacity: 1; pointer-events: auto;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
 }
-.place-modal-close {
-  position: absolute; top: 14px; right: 14px;
-  border: 0; background: var(--panel-gray); color: var(--ink-secondary);
-  width: 30px; height: 30px; border-radius: 50%;
-  font-size: 16px; font-weight: 700; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-}
 
-@media (max-width: 380px) {
-  .thumb-row { grid-template-columns: repeat(4, 1fr); gap: 4px; }
-  .thumb-tile { height: 56px; }
-  .dock-item { padding: 6px 9px; }
+.place-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  border: 0;
+  background: var(--panel-gray);
+  color: var(--ink-secondary);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 </style>
 </head>
 <body>
-
 <div class="app-container">
 
-  <!-- 1. Compact Sticky Header (48px) -->
-  <header class="compact-header">
-    <div class="ch-brand">
-      <img class="ch-icon" src="assets/mojo_icon.png" alt="mj">
-      <div class="ch-titles">
-        <div class="ch-title" id="chTitle">Japan Journey 2026</div>
-        <span class="ch-sub" id="chSub">Aug 21 – Sep 2 · 13-Day Family Log</span>
+  <!-- 1. Header (1:1 with Mockup) -->
+  <header class="header-wrap">
+    <div class="header-top">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="assets/mojo_icon.png" alt="Icon" style="width:38px;height:38px;border-radius:12px;box-shadow:0 3px 10px rgba(255, 107, 157, 0.22);display:block;">
+        <h1 class="header-title">Japan Journey 2026</h1>
       </div>
+      <div class="day-badge-top">Day 12 of 13</div>
     </div>
-    <div class="ch-right" id="chRight">
-      <div class="ch-crew" id="chCrew">
+    
+    <div class="avatar-crew-row">
+      <div class="avatar-group">
         <img src="assets/photos/53_ueno_father_son_smiling_selfie.jpg" alt="John" title="John">
         <img src="assets/photos/374_pearl_star_breakfast_brittany_evelyn_lap.jpg" alt="Brittany" title="Brittany">
         <img src="assets/photos/415_yoyogi_park_lincoln_naruko_dance_pose.jpg" alt="Lincoln" title="Lincoln">
         <img src="assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg" alt="Evelyn" title="Evelyn">
-        <img src="assets/photos/562_ana_the_room_alison_suite_cabin_view.jpg" alt="Alison" title="Aunt Alison">
       </div>
-      <span class="ch-crew-pill">5 Crew</span>
+      <div class="crew-names-text">
+        John, Brittany,<br>Lincoln, Evelyn
+      </div>
     </div>
   </header>
 
-  <!-- 2. Sub-Bar: stats + day jump ribbon (Feed only) -->
-  <div class="sub-bar" id="subBar">
-    <div class="stats-micro-bar">
-      <span id="statsMicro"><strong>–</strong> Stories · <strong>–</strong> Photos · <strong>–</strong> Stops</span>
-      <span class="ch-complete">✓ All 13 Days Complete</span>
+  <!-- 2. Bento Card (Dynamic Live Data from tripPosts & mapPins) -->
+  <section class="bento-card">
+    <div class="bento-header-line">
+      <span>🔥</span>
+      <span id="bentoLatestUpdateText">Latest Update · Shibuya, Tokyo</span>
     </div>
-    <div class="day-ribbon" id="dayRibbon"></div>
+
+    <div class="bento-content-row">
+      <div class="bento-stats-group">
+        <div class="bento-stat-col">
+          <div class="bento-stat-top">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span id="statStoriesCount">61</span>
+          </div>
+          <div class="bento-stat-sub">Stories</div>
+        </div>
+
+        <div class="bento-stat-col">
+          <div class="bento-stat-top">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span id="statPhotosCount">424</span>
+          </div>
+          <div class="bento-stat-sub">Photos</div>
+        </div>
+
+        <div class="bento-stat-col">
+          <div class="bento-stat-top">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <span id="statStopsCount">38</span>
+          </div>
+          <div class="bento-stat-sub">Visited Stops</div>
+        </div>
+      </div>
+
+      <button class="bento-action-btn" onclick="scrollToLatestPost()">
+        View Latest Dispatch →
+      </button>
+    </div>
+  </section>
+
+  <!-- 3. Segmented Switcher (Feed vs Live Map) -->
+  <div class="switcher-bar">
+    <button class="switcher-btn active" id="btnSwitchFeed" onclick="switchTab('feed', true)">
+      Feed
+    </button>
+    <button class="switcher-btn" id="btnSwitchMap" onclick="switchTab('map')">
+      Live Map
+    </button>
   </div>
 
+  <!-- Main Panes -->
   <main>
-    <!-- Feed -->
+    <!-- Pane 1: Feed -->
     <section class="tab-content-pane active" id="paneFeed">
-      <div class="feed-body" id="feedContainer"></div>
+      <div class="story-feed" id="feedContainer"></div>
     </section>
 
-    <!-- Map -->
+    <!-- Pane 2: Map -->
     <section class="tab-content-pane" id="paneMap">
       <div class="map-card-container">
         <div class="map-header-bar">
-          <h2>Interactive Trip Map</h2>
-          <span class="map-base-chip" id="mapBaseChip">✓ Trip Complete · Tokyo · Karuizawa · Atami</span>
+          <h2>Interactive Travel Map</h2>
+          <div style="font-size:12px;color:#FF6B9D;font-weight:800;background:#fff0f5;padding:3px 10px;border-radius:var(--radius-pill);border:1px solid rgba(255,107,157,0.3);">🟢 Current Base: Shibuya</div>
         </div>
+
+        <!-- Category Filter Pills (Mockup-Matched) -->
         <div class="map-category-filter-bar" id="mapCategoryBar">
-          <button class="map-filter-chip active" onclick="filterMapCategory('all')">✨ All (<span id="mapStopsTotal">0</span>)</button>
-          <button class="map-filter-chip" onclick="filterMapCategory('play')">🎡 Play (<span id="mapStopsPlay">0</span>)</button>
-          <button class="map-filter-chip" onclick="filterMapCategory('culture')">🎭 Culture (<span id="mapStopsCulture">0</span>)</button>
-          <button class="map-filter-chip" onclick="filterMapCategory('shopping')">🛍️ Shop (<span id="mapStopsShopping">0</span>)</button>
-          <button class="map-filter-chip" onclick="filterMapCategory('food')">🍣 Food (<span id="mapStopsFood">0</span>)</button>
-          <button class="map-filter-chip" onclick="filterMapCategory('hotel')">🏨 Stays (<span id="mapStopsHotel">0</span>)</button>
+          <button class="map-filter-chip active" onclick="filterMapCategory('all')">✨ All Stops (<span id="mapStopsTotal">38</span>)</button>
+          <button class="map-filter-chip" onclick="filterMapCategory('play')">🎡 Parks & Play (<span id="mapStopsPlay">0</span>)</button>
+          <button class="map-filter-chip" onclick="filterMapCategory('culture')">🎭 Culture & Sights (<span id="mapStopsCulture">0</span>)</button>
+          <button class="map-filter-chip" onclick="filterMapCategory('shopping')">🛍️ Shopping & Arcade (<span id="mapStopsShopping">0</span>)</button>
+          <button class="map-filter-chip" onclick="filterMapCategory('food')">🍣 Food & Dining (<span id="mapStopsFood">0</span>)</button>
+          <button class="map-filter-chip" onclick="filterMapCategory('hotel')">🏨 Stays & Bases (<span id="mapStopsHotel">0</span>)</button>
         </div>
-        <div class="map-viewport" id="mapViewport">
-          <div id="map" style="position:absolute;inset:0;"></div>
-          <div class="map-region-pills" id="mapRegionPills">
-          <button class="map-quick-pill active" onclick="zoomTo('japan', this)">🇯🇵 All Japan</button>
-          <button class="map-quick-pill" onclick="zoomTo('tokyo', this)">🗼 Tokyo</button>
-          <button class="map-quick-pill" onclick="zoomTo('shibuya', this)">🗼 Shibuya</button>
-          <button class="map-quick-pill" onclick="zoomTo('atami', this)">🏖️ Atami</button>
-          <button class="map-quick-pill" onclick="zoomTo('karuizawa', this)">🌲 Karuizawa</button>
-          </div>
-        </div>
-        <div class="map-selected-card" id="mapSelectedCard">
-          <div class="stop-top">
-            <img class="stop-thumb" id="mapSelectedThumb" src="" alt="">
-            <div class="stop-info">
-              <div class="stop-kicker" id="mapSelectedKicker">STOP</div>
-              <div class="stop-name" id="mapSelectedTitle">Place</div>
-              <div class="stop-sub" id="mapSelectedMeta">—</div>
-              <button class="stop-close" onclick="closeSelectedPinCard(event)" aria-label="Close">✕</button>
+
+        <div class="map-viewport" id="map"></div>
+
+        <!-- Floating Selected Place Preview Card -->
+        <div class="map-selected-card" id="mapSelectedCard" style="display:none;">
+          <img class="map-selected-thumb" id="mapSelectedThumb" src="" alt="">
+          <div class="map-selected-info">
+            <div class="map-selected-tag" id="mapSelectedTag">SELECTED PIN</div>
+            <div class="map-selected-title" id="mapSelectedTitle">Place Title</div>
+            <div class="map-selected-meta" id="mapSelectedMeta">
+              <span>🕒 Time</span> · <span>📍 Location</span>
             </div>
           </div>
-          <div class="stop-actions">
-            <button class="stop-btn-primary" id="mapSelectedStoryBtn">Read Story →</button>
-            <a class="stop-btn-secondary" id="mapSelectedMapsBtn" target="_blank" rel="noopener">📍 Maps ↗</a>
-          </div>
+          <button class="map-selected-close" onclick="closeSelectedPinCard(event)">✕</button>
+        </div>
+
+        <div class="map-pills-row">
+          <button class="map-quick-pill" onclick="zoomTo('japan')">🇯🇵 Whole Japan</button>
+          <button class="map-quick-pill" onclick="zoomTo('shibuya')">🗼 Shibuya Base</button>
+          <button class="map-quick-pill" onclick="zoomTo('shinagawa')">🐬 Shinagawa</button>
+          <button class="map-quick-pill" onclick="zoomTo('atami')">🏖️ Atami</button>
+          <button class="map-quick-pill" onclick="zoomTo('karuizawa')">🌲 Karuizawa</button>
+          <button class="map-quick-pill" onclick="zoomTo('tokyo')">🗼 Tokyo</button>
+          <button class="map-quick-pill" onclick="zoomTo('kansai')">🏯 Kansai</button>
+          <button class="map-quick-pill" onclick="zoomTo('coast')">🌊 Coast</button>
         </div>
       </div>
     </section>
 
-    <!-- Highlights -->
+    <!-- Pane 3: Favorites / Highlights -->
     <section class="tab-content-pane" id="paneFavorites">
-      <div class="highlights-head">
-        <h2>✨ Curated Highlights</h2>
-        <p id="highlightsSub">Favorite moments from all 13 days.</p>
+      <div style="margin-bottom:16px;">
+        <h2 style="margin:0 0 4px;font-size:20px;font-weight:800;">✨ Curated Highlights</h2>
+        <p style="margin:0;font-size:13px;color:var(--muted);">Favorite moments and top photos from the journey.</p>
       </div>
       <div class="highlights-card-grid" id="highlightsContainer"></div>
     </section>
   </main>
+
+  <!-- 4. Floating Bottom Navigation Dock (1:1 with Mockup) -->
+  <nav class="bottom-nav-dock">
+    <button class="dock-item active" id="dockTimeline" onclick="switchTab('feed', true)">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+      <span class="dock-item-label">Timeline</span>
+    </button>
+
+    <button class="dock-item" id="dockMap" onclick="switchTab('map')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+      <span class="dock-item-label">Map</span>
+    </button>
+
+    <button class="dock-item" id="dockFavorites" onclick="switchTab('favorites')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+      <span class="dock-item-label">Favorites</span>
+    </button>
+
+    <button class="dock-item" id="dockSearch" onclick="openDrawer()">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      <span class="dock-item-label">Search</span>
+    </button>
+  </nav>
+
 </div>
 
-<!-- Bottom dock -->
-<nav class="bottom-nav-dock" id="bottomDock">
-  <button class="dock-item active" id="dockTimeline" onclick="switchTab('feed', true)">
-    <span style="font-size:18px;line-height:1;">🕐</span> Timeline
-  </button>
-  <button class="dock-item" id="dockMap" onclick="switchTab('map')">
-    <span style="font-size:18px;line-height:1;">🗺️</span> Map
-  </button>
-  <button class="dock-item" id="dockFavorites" onclick="switchTab('favorites')">
-    <span style="font-size:18px;line-height:1;">✨</span> Highlights
-  </button>
-  <button class="dock-item" id="dockSearch" onclick="openDrawer()">
-    <span style="font-size:18px;line-height:1;">🔍</span> Search
-  </button>
-</nav>
-
-<!-- Drawer -->
+<!-- Drawer Sheet for Day Filter & Search -->
 <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
 <div class="drawer-sheet" id="drawerSheet">
   <div class="drawer-drag-handle"></div>
@@ -691,13 +1278,13 @@ button { font: inherit; outline: none; }
   <div class="drawer-days-grid" id="drawerDaysContainer"></div>
 </div>
 
-<!-- Lightbox -->
+<!-- Lightbox Modal -->
 <div class="lightbox-modal" id="lightboxModal" onclick="if(event.target===this)closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">×</button>
   <div class="lightbox-box" id="lightboxBox"></div>
 </div>
 
-<!-- Place modal -->
+<!-- Place Info Modal -->
 <div class="place-modal-backdrop" id="placeBackdrop" onclick="closePlaceModal()"></div>
 <div class="place-modal" id="placeModal">
   <button class="place-modal-close" onclick="closePlaceModal()">×</button>
@@ -839,177 +1426,11 @@ const recentHighlights = [
     "caption": "Lincoln and Evelyn posing inside the Shibuya MEGA Don Quijote penguin mascot cutout.",
     "day": "Day 12 · Tue Sep 1",
     "location": "MEGA Don Quijote Shibuya"
-  },
-  {
-    "url": "assets/photos/441_shinagawa_aquarium_entrance_evelyn_dolphin_statue.jpg",
-    "thumb": "assets/photos/441_shinagawa_aquarium_entrance_evelyn_dolphin_statue.jpg",
-    "caption": "Evelyn striking a playful pose inside the blue dolphin statue at the Shinagawa Aquarium entrance.",
-    "day": "Day 11 · Mon Aug 31",
-    "location": "Shinagawa Aquarium · Tokyo"
-  },
-  {
-    "url": "assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg",
-    "thumb": "assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg",
-    "caption": "Exploring the iconic whale play structure and adventure slides at Shinjuku Chuo Park.",
-    "day": "Day 11 · Mon Aug 31",
-    "location": "Shinjuku Chuo Park · Tokyo"
-  },
-  {
-    "url": "assets/photos/401_super_yosakoi_custom_wooden_charms.jpg",
-    "thumb": "assets/photos/401_super_yosakoi_custom_wooden_charms.jpg",
-    "caption": "Custom laser-engraved festival wooden charm necklaces at the Super Yosakoi Festival in Yoyogi Park.",
-    "day": "Day 10 · Sun Aug 30",
-    "location": "Super Yosakoi · Yoyogi Park"
-  },
-  {
-    "url": "assets/photos/426_shibuya_parco_rooftop_family_selfie.jpg",
-    "thumb": "assets/photos/426_shibuya_parco_rooftop_family_selfie.jpg",
-    "caption": "Family selfie up on the Shibuya PARCO 10F Rooftop Park after visiting Nintendo TOKYO and Pokémon Center.",
-    "day": "Day 10 · Sun Aug 30",
-    "location": "Shibuya PARCO Rooftop"
-  },
-  {
-    "url": "assets/photos/388_udagawa_police_box_family_crepe_selfie.jpg",
-    "thumb": "assets/photos/388_udagawa_police_box_family_crepe_selfie.jpg",
-    "caption": "Family crepe selfie with Brittany, Lincoln, John, and Evelyn outside the curved Udagawa Police Box.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Shibuya BEAM & Udagawa"
-  },
-  {
-    "url": "assets/photos/383_mandarake_shibuya_spiral_stairs_john_brittany_selfie.jpg",
-    "thumb": "assets/photos/383_mandarake_shibuya_spiral_stairs_john_brittany_selfie.jpg",
-    "caption": "Descending the vintage manga mural spiral staircase into the Mandarake Shibuya underground vault.",
-    "day": "Day 9 · Sat Aug 29",
-    "location": "Mandarake Shibuya"
-  },
-  {
-    "url": "assets/photos/370_oyster_bar_kagiya_lincoln_slurping_raw_oyster.jpg",
-    "thumb": "assets/photos/370_oyster_bar_kagiya_lincoln_slurping_raw_oyster.jpg",
-    "caption": "Lincoln tilting his head back and slurping down his very first fresh raw oyster at Oyster Bar Kagiya!",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Oyster Bar Kagiya · Atami"
-  },
-  {
-    "url": "assets/photos/351_osakana_shokudo_family_dinner_table.jpg",
-    "thumb": "assets/photos/351_osakana_shokudo_family_dinner_table.jpg",
-    "caption": "John, Brittany, Lincoln, Evelyn, and Alison around our booth table at Atami Ginza Osakana Shokudo.",
-    "day": "Day 8 · Fri Aug 28",
-    "location": "Osakana Shokudo · Atami"
-  },
-  {
-    "url": "assets/photos/311_atami_beach_mom_kids_stepping_into_ocean.jpg",
-    "thumb": "assets/photos/311_atami_beach_mom_kids_stepping_into_ocean.jpg",
-    "caption": "Stepping into the Sagami Bay surf and splashing in the waves at Atami Sun Beach.",
-    "day": "Day 7 · Thu Aug 27",
-    "location": "Atami Sun Beach · Shizuoka"
-  },
-  {
-    "url": "assets/photos/180_toy_kingdom_arrival_one_day_passes.jpg",
-    "thumb": "assets/photos/180_toy_kingdom_arrival_one_day_passes.jpg",
-    "caption": "Arriving at Karuizawa Toy Kingdom for the treetop adventure forest, pottery kiln, and stream trout catch.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "Karuizawa Toy Kingdom"
-  },
-  {
-    "url": "assets/photos/239_tsurutontan_dinner_kids_holding_matcha_ice_cream.jpg",
-    "thumb": "assets/photos/239_tsurutontan_dinner_kids_holding_matcha_ice_cream.jpg",
-    "caption": "Lincoln and Evelyn with their matcha and vanilla crepe ice cream cones at TsuruTonTan Karuizawa.",
-    "day": "Day 6 · Wed Aug 26",
-    "location": "TsuruTonTan · Karuizawa"
-  },
-  {
-    "url": "assets/photos/147_kikyo_hotel_evelyn_wing_sign_proud.jpg",
-    "thumb": "assets/photos/147_kikyo_hotel_evelyn_wing_sign_proud.jpg",
-    "caption": "Evelyn posing proudly under the famous '301-307 / EVELYN' wing sign at Kyukaruizawa Kikyo on her 7th birthday!",
-    "day": "Day 5 · Tue Aug 25",
-    "location": "Kyukaruizawa Kikyo · Nagano"
-  },
-  {
-    "url": "assets/photos/108_sanrio_puroland_dad_evelyn_selfie.jpg",
-    "thumb": "assets/photos/108_sanrio_puroland_dad_evelyn_selfie.jpg",
-    "caption": "Dad and Evelyn birthday celebration selfie at Sanrio Puroland with her giant Cinnamoroll plush.",
-    "day": "Day 4 · Mon Aug 24",
-    "location": "Sanrio Puroland · Tokyo"
-  },
-  {
-    "url": "assets/photos/126_claw_machine_lincoln_kirby_win_thrill.jpg",
-    "thumb": "assets/photos/126_claw_machine_lincoln_kirby_win_thrill.jpg",
-    "caption": "Lincoln right after winning the giant Kirby plush all by himself at Yamashiroya Arcade.",
-    "day": "Day 4 · Mon Aug 24",
-    "location": "Yamashiroya · Ueno"
-  },
-  {
-    "url": "assets/photos/46_ueno_hanazono_inari_torii_gates.jpg",
-    "thumb": "assets/photos/46_ueno_hanazono_inari_torii_gates.jpg",
-    "caption": "Walking through the vivid crimson torii gate tunnel at Hanazono Inari Shrine in Ueno Park.",
-    "day": "Day 3 · Sun Aug 23",
-    "location": "Ueno Park · Tokyo"
-  },
-  {
-    "url": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
-    "thumb": "assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg",
-    "caption": "Touchdown in Tokyo and checking into our first family home base at Tabi Ueno!",
-    "day": "Day 2 · Sat Aug 22",
-    "location": "Tabi Ueno · Tokyo"
-  },
-  {
-    "url": "assets/photos/01_inflight_girl_mom.jpg",
-    "thumb": "assets/photos/01_inflight_girl_mom.jpg",
-    "caption": "Settled into ANA 'The Room' suites with Mom as our Japan family adventure takes flight from O'Hare!",
-    "day": "Day 1 · Fri Aug 21",
-    "location": "ANA NH11 · Chicago to Tokyo"
   }
 ];
 
-const pinPhotoLookup = {
-  'haneda-departure': 'assets/photos/566_ana_the_room_evelyn_holding_hands_mom_alison_takeoff_2.jpg',
-  'gigo-akihabara': 'assets/photos/542_akiba_night_walk_full_family_taiyaki_pokemon_yoshi_1.jpg',
-  'luidas-bar': 'assets/photos/527_pasela_lobby_full_family_birthday_selfie.jpg',
-  'green-thumb-bakery': 'assets/photos/517_green_thumb_bakery_evelyn_cream_pastry_bite.jpg',
-  'nakano-broadway': 'assets/photos/505_nakano_sun_mall_arcade_canopy_view.jpg',
-  'nakano-central-park': 'assets/photos/514_nakano_central_park_evelyn_food_truck_gapao_thumbsup.jpg',
-  'shinagawa-aquarium': 'assets/photos/441_shinagawa_aquarium_entrance_evelyn_dolphin_statue.jpg',
-  'shinagawa-kumin-park': 'assets/photos/476_shinagawa_kumin_park_scenic_lake_reflection.jpg',
-  'shinjuku-chuo-park': 'assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg',
-  'yoyogi-park-yosakoi': 'assets/photos/409_yoyogi_park_outdoor_stage_competition_crowd.jpg',
-  'shibuya-parco': 'assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg',
-  'ebisu-park': 'assets/photos/428_ebisu_park_rocket_train_playground_wide.jpg',
-  'warehouse-ebisu': 'assets/photos/434_warehouse_ebisu_denim_shopping_haul.jpg',
-  'gigo-arcade': 'assets/photos/435_gigo_arcade_lincoln_ufo_catcher_yoshi.jpg',
-  'cerulean-tower-hotel': 'assets/photos/399_cerulean_tokyu_japanese_suite_twin_beds_city_view.jpg',
-  'mega-donki-shibuya': 'assets/photos/382_mega_don_quijote_shibuya_storefront_crosswalk.jpg',
-  'bic-camera-hachiko': 'assets/photos/391_shibuya_bic_camera_3d_pokemon_screen_pack_opening.jpg',
-  'dipper-dan-shibuya': 'assets/photos/388_udagawa_police_box_family_crepe_selfie.jpg',
-  'mandarake-shibuya': 'assets/photos/383_mandarake_shibuya_spiral_stairs_john_brittany_selfie.jpg',
-  'atami-moon-terrace': 'assets/photos/362_atami_waterfront_park_evelyn_compass_mosaic_run.jpg',
-  'pearl-star-hotel': 'assets/photos/260_pearl_star_hotel_lounge_dad_brittany_kids_welcome_tea.jpg',
-  'oyster-bar-kagiya': 'assets/photos/365_oyster_bar_kagiya_fresh_raw_oysters_platter.jpg',
-  'sawamura-kyukaruizawa': 'assets/photos/353_sawamura_roastery_kyukaruizawa_storefront_rain.jpg',
-  'osakana-shokudo-atami': 'assets/photos/351_osakana_shokudo_family_dinner_table.jpg',
-  'atami-water-park': 'assets/photos/340_atami_sun_beach_water_park_sign.jpg',
-  'fukiyotei-sushi': 'assets/photos/320_fukiyotei_sushi_storefront_display_sign.jpg',
-  'atami-sun-beach': 'assets/photos/311_atami_beach_mom_kids_stepping_into_ocean.jpg',
-  'karuizawa-hotel': 'assets/photos/147_kikyo_hotel_evelyn_wing_sign_proud.jpg',
-  'tsurutontan-karuizawa': 'assets/photos/239_tsurutontan_dinner_kids_holding_matcha_ice_cream.jpg',
-  'church-street-karuizawa': 'assets/photos/279_church_street_evelyn_glowing_heart_arch_lookout.jpg',
-  'karuizawa-toy-kingdom': 'assets/photos/180_toy_kingdom_arrival_one_day_passes.jpg',
-  'myogi-pass': 'assets/photos/141_taxi_highway_myogi_mountains_view.jpg',
-  'ueno-zoo': 'assets/photos/132_ueno_zoo_power_breezer_misting_fan_kids.jpg',
-  'yamashiroya': 'assets/photos/66_yamashiroya_gachapon_wall.jpg',
-  'tokyo-izakaya': 'assets/photos/123_dinner_lincoln_authentic_rolls_chopsticks.jpg',
-  'harakado': 'assets/photos/113_harakado_rooftop_kawaii_monster_statue.jpg',
-  'tamagotchi-factory': 'assets/photos/112_tamagotchi_factory_evelyn_giant_display.jpg',
-  'godzilla-store': 'assets/photos/109_godzilla_store_lincoln_pose.jpg',
-  'puroland': 'assets/photos/108_sanrio_puroland_dad_evelyn_selfie.jpg',
-  'ueno-park-playground': 'assets/photos/73_ueno_playground_evelyn_panda_ride.jpg',
-  'ameyoko-izakaya': 'assets/photos/61_ameyoko_lunch_family_smiles.jpg',
-  'ameyoko': 'assets/photos/57_ameyoko_market_street_walk.jpg',
-  'ueno-park': 'assets/photos/46_ueno_hanazono_inari_torii_gates.jpg',
-  'bistro-nohga': 'assets/photos/36_bistro_nohga_walking_in.jpg',
-  'donki-ueno': 'assets/photos/31_don_quijote_contact_solution_hunt.jpg',
-  'ueno': 'assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg',
-  'nrt': 'assets/photos/01_inflight_girl_mom.jpg'
-};
+
+
 const tripPosts = [
 {
     "id": "post-70",
@@ -4740,12 +5161,12 @@ const mapPins = [
     id: 'cerulean-tower-hotel',
     name: 'Cerulean Tower Tokyu Hotel (セルリアンタワー東急ホテル)',
     city: 'shibuya',
-    status: 'visited',
+    status: 'current',
     lat: 35.6563,
     lon: 139.6994,
     type: 'tokyo',
     icon: '🏨',
-    tag: 'Tokyo Base · Aug 29 – Sep 2',
+    tag: 'Current Base · Aug 29',
     desc: 'Our luxury high-rise hotel base in Shibuya. Staying in the spacious Japanese Suite Sakura (桜) on the high executive floors featuring tatami mats, authentic sliding shoji screens, hinoki cypress bath, and sweeping Tokyo skyline views.'
   },
 
@@ -5252,27 +5673,15 @@ const plannedRouteCoords = [
 
 
 
+// --- RENDER FUNCTIONS ---
 
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
 
-// ================= v14 APP LOGIC (Mojo Pink Refined) =================
-
-const visitedMapPins = mapPins.filter(p => p.status !== 'planned');
-
-const dayLabels = {
-  'Wed Sep 2': 'D13 · Flight Home',
-  'Tue Sep 1': 'D12 · Akiba & DQ Birthday',
-  'Mon Aug 31': 'D11 · Shinagawa & Shinjuku',
-  'Sun Aug 30': 'D10 · Yosakoi & PARCO',
-  'Sat Aug 29': 'D9 · Shibuya Base',
-  'Fri Aug 28': 'D8 · Atami Ginza',
-  'Thu Aug 27': 'D7 · Atami Beach',
-  'Wed Aug 26': 'D6 · Toy Kingdom',
-  'Tue Aug 25': 'D5 · Karuizawa',
-  'Mon Aug 24': 'D4 · Sanrio Puroland',
-  'Sun Aug 23': 'D3 · Akihabara & Ueno',
-  'Sat Aug 22': 'D2 · Tokyo Arrival',
-  'Fri Aug 21': 'D1 · The O\u2019Hare Dash'
-};
+// Day Filtering State
+let selectedDay = 'all';
+let searchQuery = '';
 
 function getPostDayKey(dateStr) {
   if (!dateStr) return '';
@@ -5280,51 +5689,26 @@ function getPostDayKey(dateStr) {
   return match ? match[1] : dateStr.split('·')[0].trim();
 }
 
-let selectedDay = 'all';
-let searchQuery = '';
-let expandedPosts = {};
-
-function esc(s) {
-  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-
-// ---------- Day ribbon ----------
-function buildDayRibbon() {
-  const container = document.getElementById('dayRibbon');
-  if (!container) return;
-  const dayOrder = [];
-  tripPosts.forEach(p => {
-    const k = getPostDayKey(p.date);
-    if (k && !dayOrder.includes(k)) dayOrder.push(k);
-  });
-  let html = '<button class="day-chip ' + (selectedDay === 'all' ? 'active' : '') + '" onclick="selectRibbonDay(\'all\')">All Days</button>';
-  dayOrder.forEach(dayKey => {
-    const label = dayLabels[dayKey] || dayKey;
-    html += '<button class="day-chip ' + (selectedDay === dayKey ? 'active' : '') + '" onclick="selectRibbonDay(\'' + esc(dayKey) + '\')">' + esc(label) + '</button>';
-  });
-  container.innerHTML = html;
-}
-
-function selectRibbonDay(dayKey) {
-  selectedDay = dayKey;
-  buildDayRibbon();
+function clearAllFilters() {
+  selectedDay = 'all';
+  searchQuery = '';
+  const searchInput = document.querySelector('.drawer-search-input');
+  if (searchInput) searchInput.value = '';
   renderDrawerDays();
   renderFeed();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ---------- Feed ----------
 function renderFeed() {
   const container = document.getElementById('feedContainer');
   if (!container) return;
-
-  let filteredPosts = selectedDay === 'all'
-    ? tripPosts
+  
+  let filteredPosts = selectedDay === 'all' 
+    ? tripPosts 
     : tripPosts.filter(p => getPostDayKey(p.date) === selectedDay);
 
   if (searchQuery.trim()) {
     const q = searchQuery.toLowerCase();
-    filteredPosts = filteredPosts.filter(p =>
+    filteredPosts = filteredPosts.filter(p => 
       (p.title && p.title.toLowerCase().includes(q)) ||
       (p.caption && p.caption.toLowerCase().includes(q)) ||
       (p.location && p.location.toLowerCase().includes(q))
@@ -5335,304 +5719,296 @@ function renderFeed() {
   if (selectedDay !== 'all' || searchQuery.trim()) {
     let filterLabel = '';
     if (selectedDay !== 'all' && searchQuery.trim()) {
-      filterLabel = esc(dayLabels[selectedDay] || selectedDay) + ' · "' + esc(searchQuery) + '"';
+      filterLabel = esc(selectedDay) + ' · "' + esc(searchQuery) + '"';
     } else if (selectedDay !== 'all') {
-      filterLabel = esc(dayLabels[selectedDay] || selectedDay);
+      filterLabel = esc(selectedDay);
     } else {
       filterLabel = '"' + esc(searchQuery) + '"';
     }
-    filterBarHtml = '<div class="active-filter-bar">' +
+
+    filterBarHtml = '<div class="active-filter-bar" style="background:#ffffff;border:1.5px solid var(--orange-border);border-radius:var(--radius-pill);padding:8px 14px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow-card);">' +
       '<div style="font-size:12.5px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;">' +
-        '<span>🔍</span> <span>Showing <strong style="color:var(--pink);">' + filterLabel + '</strong></span>' +
-        '<span style="font-size:11.5px;color:var(--muted);font-weight:600;">(' + filteredPosts.length + ')</span>' +
+        '<span>🔍</span> <span>Showing <strong style="color:var(--orange);">' + filterLabel + '</strong></span>' +
+        '<span style="font-size:11.5px;color:var(--muted);font-weight:600;">(' + filteredPosts.length + ' update' + (filteredPosts.length === 1 ? '' : 's') + ')</span>' +
       '</div>' +
       '<button onclick="clearAllFilters()" style="border:none;background:var(--panel-gray);color:var(--ink);font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:var(--radius-pill);cursor:pointer;">✕ Show All</button>' +
     '</div>';
   }
 
   if (!filteredPosts.length) {
-    container.innerHTML = filterBarHtml +
-      '<div class="empty-state"><p style="color:var(--muted);margin:0 0 12px;">No updates found matching your filter.</p>' +
-      '<button onclick="clearAllFilters()" style="border:none;background:var(--ink);color:#fff;padding:8px 16px;border-radius:var(--radius-pill);font-size:13px;font-weight:700;cursor:pointer;">Show All Trip Updates</button></div>';
+    container.innerHTML = filterBarHtml + '<div class="story-card" style="padding:40px;text-align:center;"><p style="color:var(--muted);margin:0 0 12px;">No updates found matching your filter.</p><button onclick="clearAllFilters()" style="border:none;background:var(--ink);color:#fff;padding:8px 16px;border-radius:var(--radius-pill);font-size:13px;font-weight:700;cursor:pointer;">Show All Trip Updates</button></div>';
     return;
   }
-
+  
   const cardsHtml = filteredPosts.map((post) => {
     const pIdx = tripPosts.indexOf(post);
-    const isExpanded = !!expandedPosts[post.id];
-    const media = post.media || [];
-    const videos = media.filter(m => m.type === 'video');
-    const photos = media.filter(m => m.type !== 'video');
-    const firstMedia = media[0];
+    let heroMediaHtml = '';
+    let extraVideosHtml = '';
+    let companionGridHtml = '';
 
-    const photoCount = photos.length;
-    const videoCount = videos.length;
-
-    // Hero
-    let heroHtml = '';
-    if (firstMedia) {
+    if (post.media && post.media.length > 0) {
+      const firstMedia = post.media[0];
+      
+      // 1. Primary Hero Media (Top of Card: Video or 1st Photo)
       if (firstMedia.type === 'video') {
-        heroHtml = '<div class="story-hero-media video-hero">' +
-          '<video src="' + firstMedia.url + '" controls preload="metadata" playsinline></video>' +
+        heroMediaHtml = '<div class="story-hero-media" style="height:auto;max-height:420px;background:#000;">' +
+          '<video src="' + firstMedia.url + '" controls preload="metadata" playsinline style="width:100%;max-height:420px;display:block;"></video>' +
+          (firstMedia.caption ? '<div style="padding:8px 14px;background:#111827;color:#e5e7eb;font-size:12px;font-weight:600;">🎬 ' + esc(firstMedia.caption) + '</div>' : '') +
         '</div>';
       } else {
-        const heroCap = firstMedia.caption || '';
-        const countBits0 = [];
-        if (videoCount) countBits0.push('🎬 ' + videoCount + (videoCount === 1 ? ' Video' : ' Videos'));
-        if (photoCount) countBits0.push('📷 ' + photoCount + (photoCount === 1 ? ' Photo' : ' Photos'));
-        heroHtml = '<div class="story-hero-media story-clickable-media" data-post-idx="' + pIdx + '" data-media-idx="0">' +
+        heroMediaHtml = '<div class="story-hero-media story-clickable-media" data-post-idx="' + pIdx + '" data-media-idx="0">' +
           '<img src="' + (firstMedia.thumb || firstMedia.url) + '" alt="' + esc(post.title) + '" loading="lazy">' +
-          (post.tag ? '<div class="hero-tag-pill">' + esc(post.tag) + '</div>' : '') +
-          '<div class="hero-caption-strip">' + esc(heroCap) + '</div>' +
-          (countBits0.length ? '<div class="hero-count-pill">' + countBits0.join(' · ') + '</div>' : '') +
         '</div>';
+      }
+
+      // 2. Additional Media (Remaining videos & photos)
+      if (post.media.length > 1) {
+        const remaining = [];
+        const extraVideos = [];
+
+        post.media.forEach((m, mIdx) => {
+          if (mIdx === 0) return;
+          if (m.type === 'video') {
+            extraVideos.push({ media: m, mIdx });
+          } else {
+            remaining.push({ media: m, mIdx });
+          }
+        });
+
+        if (extraVideos.length > 0) {
+          extraVideosHtml = extraVideos.map(v => {
+            return '<div class="story-video-wrap" style="margin-top:12px;border-radius:var(--radius-inner);overflow:hidden;background:#000;">' +
+              '<video src="' + v.media.url + '" controls preload="metadata" playsinline style="width:100%;max-height:360px;display:block;"></video>' +
+              (v.media.caption ? '<div style="padding:6px 12px;background:#111827;color:#e5e7eb;font-size:11.5px;font-weight:600;">🎬 ' + esc(v.media.caption) + '</div>' : '') +
+            '</div>';
+          }).join('');
+        }
+
+        if (remaining.length > 0) {
+          const len = remaining.length;
+          let gridClass = 'grid-many';
+          if (len === 1) gridClass = 'grid-1';
+          else if (len === 2) gridClass = 'grid-2';
+          else if (len === 3) gridClass = 'grid-3';
+          else if (len === 4) gridClass = 'grid-4';
+
+          const companionHtml = remaining.map(pObj => {
+            return '<div class="story-gallery-item story-clickable-media" data-post-idx="' + pIdx + '" data-media-idx="' + pObj.mIdx + '">' +
+              '<img src="' + (pObj.media.thumb || pObj.media.url) + '" alt="' + esc(pObj.media.caption || post.title) + '" loading="lazy">' +
+            '</div>';
+          }).join('');
+
+          companionGridHtml = '<div class="story-full-gallery ' + gridClass + '">' + companionHtml + '</div>';
+        }
       }
     }
 
-    // Story text ABOVE thumbnails
-    const textHtml =
-      '<div class="post-meta">' + esc(post.date) + (post.location ? ' · 📍 ' + esc(post.location) : '') + '</div>' +
-      '<h2 class="post-title">' + esc(post.title) + '</h2>' +
-      '<p class="post-excerpt">' + esc(post.caption) + '</p>';
-
-    // Companion thumbnails: first 4 photos (excluding hero photo index 0)
-    let gridHtml = '';
-    const companionPhotos = [];
-    media.forEach((m, mIdx) => {
-      if (mIdx === 0) return;
-      if (m.type === 'video') return;
-      companionPhotos.push({ media: m, mIdx });
-    });
-
-    if (companionPhotos.length) {
-      const visible = isExpanded ? companionPhotos : companionPhotos.slice(0, 4);
-      const tiles = visible.map((pObj, vIdx) => {
-        const isLastHiddenTrigger = !isExpanded && vIdx === 3 && companionPhotos.length > 4;
-        const moreCount = companionPhotos.length - 4;
-        return '<div class="thumb-tile story-clickable-media" data-post-idx="' + pIdx + '" data-media-idx="' + pObj.mIdx + '">' +
-          '<img src="' + (pObj.media.thumb || pObj.media.url) + '" alt="' + esc(pObj.media.caption || post.title) + '" loading="lazy">' +
-          (isLastHiddenTrigger ? '<div class="thumb-more-overlay">+' + moreCount + '<span>Swipe All</span></div>' : '') +
-        '</div>';
-      }).join('');
-      gridHtml = '<div class="thumb-row' + (isExpanded ? ' expanded' : '') + '">' + tiles + '</div>';
-      if (!isExpanded && companionPhotos.length > 4) {
-        gridHtml += '<button class="show-all-btn" onclick="toggleExpandPost(\'' + esc(post.id) + '\')">Show all ' + (companionPhotos.length + 1) + ' photos inline</button>';
-      } else if (isExpanded && companionPhotos.length > 4) {
-        gridHtml += '<button class="show-all-btn" onclick="toggleExpandPost(\'' + esc(post.id) + '\')">Collapse to top 4</button>';
-      }
-    }
-
-    // Extra videos (not the hero)
-    let videosHtml = '';
-    const extraVideos = media.filter((m, mIdx) => m.type === 'video' && mIdx !== 0);
-    if (extraVideos.length) {
-      videosHtml = '<div class="story-videos-wrap">' + extraVideos.map(v =>
-        '<div class="story-video-wrap"><video src="' + v.url + '" controls preload="metadata" playsinline></video>' +
-        (v.caption ? '<div class="video-cap">🎬 ' + esc(v.caption) + '</div>' : '') + '</div>'
-      ).join('') + '</div>';
-    }
-
-    return '<article class="story-card">' + heroHtml +
-      '<div style="padding:0 2px;">' + textHtml + gridHtml + videosHtml + '</div>' +
+    return '<article class="story-card">' +
+      heroMediaHtml +
+      '<div class="story-content-wrap">' +
+        '<h2 class="story-title">' + esc(post.title) + '</h2>' +
+        '<div class="story-meta-time">' + esc(post.date) + (post.location ? ' · 📍 ' + esc(post.location) : '') + '</div>' +
+        companionGridHtml +
+        extraVideosHtml +
+        '<p class="story-caption-text" style="margin-top:12px;">' + esc(post.caption) + '</p>' +
+      '</div>' +
     '</article>';
   }).join('');
 
   container.innerHTML = filterBarHtml + cardsHtml;
 }
 
-function toggleExpandPost(postId) {
-  expandedPosts[postId] = !expandedPosts[postId];
-  renderFeed();
-}
-
-function clearAllFilters() {
-  selectedDay = 'all';
-  searchQuery = '';
-  const searchInput = document.querySelector('.drawer-search-input');
-  if (searchInput) searchInput.value = '';
-  buildDayRibbon();
-  renderDrawerDays();
-  renderFeed();
-}
-
-// ---------- Drawer ----------
+// Drawer Controls
 function openDrawer() {
   document.getElementById('drawerBackdrop').classList.add('show');
   document.getElementById('drawerSheet').classList.add('show');
 }
+
 function closeDrawer() {
   document.getElementById('drawerBackdrop').classList.remove('show');
   document.getElementById('drawerSheet').classList.remove('show');
 }
+
 function renderDrawerDays() {
   const container = document.getElementById('drawerDaysContainer');
   if (!container) return;
+
   const dayCounts = {};
   const dayOrder = [];
+  
   tripPosts.forEach(post => {
     const k = getPostDayKey(post.date);
     if (!k) return;
-    if (!dayCounts[k]) { dayCounts[k] = 0; dayOrder.push(k); }
+    if (!dayCounts[k]) {
+      dayCounts[k] = 0;
+      dayOrder.push(k);
+    }
     dayCounts[k]++;
   });
+
+  const dayLabels = {
+    'Tue Sep 1': 'Day 12 · Nakano & Dragon Quest',
+    'Mon Aug 31': 'Day 11 · Shinagawa & Shinjuku',
+    'Sun Aug 30': 'Day 10 · Shibuya & Yoyogi',
+    'Sat Aug 29': 'Day 9 · Shibuya Base',
+    'Fri Aug 28': 'Day 8 · Atami Water Park',
+    'Thu Aug 27': 'Day 7 · Shinkansen to Atami',
+    'Wed Aug 26': 'Day 6 · Toy Kingdom',
+    'Tue Aug 25': 'Day 5 · Karuizawa',
+    'Mon Aug 24': 'Day 4 · Sanrio Puroland',
+    'Sun Aug 23': 'Day 3 · Akihabara & Ueno',
+    'Sat Aug 22': 'Day 2 · Tokyo Arrival',
+    'Fri Aug 21': 'Day 1 · The O’Hare Dash'
+  };
+
   let html = '<button class="drawer-day-pill ' + (selectedDay === 'all' ? 'active' : '') + '" onclick="selectDayFromDrawer(\'all\')">' +
-    '<span>✨ All Days</span> <span>' + tripPosts.length + '</span></button>';
+    '<span>✨ All Days</span> <span>' + tripPosts.length + '</span>' +
+    '</button>';
+
   dayOrder.forEach(dayKey => {
     const label = dayLabels[dayKey] || dayKey;
     const isActive = selectedDay === dayKey;
+    const count = dayCounts[dayKey] || 0;
     html += '<button class="drawer-day-pill ' + (isActive ? 'active' : '') + '" onclick="selectDayFromDrawer(\'' + esc(dayKey) + '\')">' +
-      '<span>' + esc(label) + '</span> <span>' + (dayCounts[dayKey] || 0) + '</span></button>';
+      '<span>' + esc(label) + '</span> <span>' + count + '</span>' +
+      '</button>';
   });
+
   container.innerHTML = html;
 }
+
 function selectDayFromDrawer(dayKey) {
   selectedDay = dayKey;
-  buildDayRibbon();
   renderDrawerDays();
   renderFeed();
   closeDrawer();
   switchTab('feed');
 }
+
 function onSearchInput(val) {
   searchQuery = val;
   renderFeed();
 }
 
-// ---------- Lightbox carousel ----------
-let lbList = [];
-let lbIndex = 0;
-
-function openLightboxForPost(pIdx, mIdx) {
-  const post = tripPosts[parseInt(pIdx, 10)];
-  if (!post || !post.media) return;
-  lbList = post.media.map(m => ({ url: m.url, type: m.type || 'image', caption: m.caption || post.title }));
-  lbIndex = parseInt(mIdx, 10);
-  renderLightbox();
-  document.getElementById('lightboxModal').classList.add('show');
-}
-function renderLightbox() {
-  const box = document.getElementById('lightboxBox');
-  const item = lbList[lbIndex];
-  if (!box || !item) return;
-  const mediaHtml = item.type === 'video'
-    ? '<video src="' + item.url + '" controls autoplay playsinline></video>'
-    : '<img src="' + item.url + '" alt="' + esc(item.caption) + '">';
-  box.innerHTML =
-    '<div class="lightbox-stage">' +
-      (lbList.length > 1 ? '<button class="lb-nav lb-prev" onclick="lbNav(-1)" aria-label="Previous">‹</button>' : '') +
-      mediaHtml +
-      (lbList.length > 1 ? '<button class="lb-nav lb-next" onclick="lbNav(1)" aria-label="Next">›</button>' : '') +
-      (lbList.length > 1 ? '<div class="lightbox-counter">' + (lbIndex + 1) + ' / ' + lbList.length + '</div>' : '') +
-    '</div>' +
-    '<p class="lightbox-caption">' + esc(item.caption) + '</p>';
-}
-function lbNav(dir) {
-  const next = lbIndex + dir;
-  if (next < 0 || next >= lbList.length) return;
-  lbIndex = next;
-  renderLightbox();
-}
+// Lightbox
 function openLightbox(url, type, caption) {
-  lbList = [{ url: url, type: type || 'image', caption: caption || '' }];
-  lbIndex = 0;
-  renderLightbox();
-  document.getElementById('lightboxModal').classList.add('show');
+  const lb = document.getElementById('lightboxModal');
+  const box = document.getElementById('lightboxBox');
+  if (!lb || !box) return;
+  if (type === 'video') {
+    box.innerHTML = '<video src="' + url + '" controls autoplay playsinline></video><p class="lightbox-caption">' + esc(caption) + '</p>';
+  } else {
+    box.innerHTML = '<img src="' + url + '" alt="' + esc(caption) + '"><p class="lightbox-caption">' + esc(caption) + '</p>';
+  }
+  lb.classList.add('show');
 }
+
 function closeLightbox() {
   const lb = document.getElementById('lightboxModal');
-  if (lb) { lb.classList.remove('show'); document.getElementById('lightboxBox').innerHTML = ''; }
-  lbList = []; lbIndex = 0;
+  if (lb) {
+    lb.classList.remove('show');
+    const box = document.getElementById('lightboxBox');
+    if (box) box.innerHTML = '';
+  }
 }
 
-// ---------- Place modal ----------
+// Place Detail Modal
 function openPlaceModal(pin) {
   const modal = document.getElementById('placeModal');
   const backdrop = document.getElementById('placeBackdrop');
   const content = document.getElementById('placeContent');
   if (!modal || !content) return;
+  
   const photoUrl = pinPhotoLookup[pin.id] || '';
-  const photoHeader = photoUrl
-    ? '<div style="width:100%;height:180px;border-radius:12px;overflow:hidden;margin-bottom:14px;"><img src="' + photoUrl + '" style="width:100%;height:100%;object-fit:cover;display:block;"></div>' : '';
+  const photoHeader = photoUrl ? '<div style="width:100%;height:180px;border-radius:12px;overflow:hidden;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.1);"><img src="' + photoUrl + '" style="width:100%;height:100%;object-fit:cover;display:block;"></div>' : '';
+
   content.innerHTML = photoHeader +
     '<h3 style="margin:0 0 6px;font-size:18px;font-weight:800;color:#0f172a;">' + (pin.icon || '📍') + ' ' + esc(pin.name) + '</h3>' +
     '<div style="margin-bottom:12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">' +
-      '<span style="background:var(--pink-soft);color:var(--pink);padding:3px 8px;border-radius:6px;font-size:11px;font-weight:800;border:1px solid var(--pink-border);">✅ Visited Stop</span>' +
+      '<span style="background:#fff0f5;color:#FF6B9D;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:800;border:1px solid rgba(255,107,157,0.3);">' + (pin.status === 'current' ? '🟢 Current Base' : pin.status === 'visited' ? '✅ Visited Stop' : '⏳ Planned Stop') + '</span>' +
       (pin.time ? '<span style="background:#f8fafc;color:#475569;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;border:1px solid #e2e8f0;">🕒 ' + esc(pin.time) + '</span>' : '') +
       (pin.badge ? '<span style="background:#f0fdf4;color:#16a34a;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;">' + esc(pin.badge) + '</span>' : '') +
     '</div>' +
     '<p style="font-size:13.5px;line-height:1.6;color:#334155;margin:0 0 16px;">' + esc(pin.desc) + '</p>' +
     '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
-      '<a style="display:inline-flex;align-items:center;gap:6px;background:var(--pink);color:#fff;padding:9px 15px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(pin.lat + ',' + pin.lon) + '">📍 Open in Google Maps ↗</a>' +
+      '<a style="display:inline-flex;align-items:center;gap:6px;background:#FF6B9D;color:#fff;padding:9px 15px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 2px 8px rgba(255,107,157,0.3);" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(pin.lat + ',' + pin.lon) + '">📍 Open in Google Maps ↗</a>' +
     '</div>';
   backdrop.classList.add('show');
   modal.classList.add('show');
 }
+
 function closePlaceModal() {
   document.getElementById('placeBackdrop').classList.remove('show');
   document.getElementById('placeModal').classList.remove('show');
 }
 
-// ---------- Tabs ----------
+// Tab Switching
 function switchTab(tab, resetFilters = false) {
   if (tab === 'feed' && resetFilters) {
-    clearAllFilters();
+    selectedDay = 'all';
+    searchQuery = '';
+    const searchInput = document.querySelector('.drawer-search-input');
+    if (searchInput) searchInput.value = '';
+    renderDrawerDays();
+    renderFeed();
   }
+
+  // Top Switcher
+  const btnFeed = document.getElementById('btnSwitchFeed');
+  const btnMap = document.getElementById('btnSwitchMap');
+  if (btnFeed && btnMap) {
+    btnFeed.classList.toggle('active', tab === 'map' ? false : (tab === 'feed'));
+    btnMap.classList.toggle('active', tab === 'map');
+  }
+
+  // Dock Buttons
   const activeId = tab === 'feed' ? 'dockTimeline' : (tab === 'map' ? 'dockMap' : (tab === 'favorites' ? 'dockFavorites' : ''));
-  document.querySelectorAll('.dock-item').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.dock-item').forEach(el => {
+    el.classList.remove('active');
+    const svg = el.querySelector('svg');
+    if (svg) svg.style.stroke = '#ffffff';
+    const label = el.querySelector('.dock-item-label');
+    if (label) label.style.color = '#ffffff';
+  });
+
   if (activeId) {
-    const btn = document.getElementById(activeId);
-    if (btn) btn.classList.add('active');
+    const activeBtn = document.getElementById(activeId);
+    if (activeBtn) {
+      activeBtn.classList.add('active');
+      const svg = activeBtn.querySelector('svg');
+      if (svg) svg.style.stroke = '#FF6B9D';
+      const label = activeBtn.querySelector('.dock-item-label');
+      if (label) label.style.color = '#0f172a';
+    }
   }
+
+  // Panes
   document.getElementById('paneFeed').classList.toggle('active', tab === 'feed');
   document.getElementById('paneMap').classList.toggle('active', tab === 'map');
   document.getElementById('paneFavorites').classList.toggle('active', tab === 'favorites');
-
-  // Header + sub-bar context per tab
-  const chTitle = document.getElementById('chTitle');
-  const chSub = document.getElementById('chSub');
-  const chRight = document.getElementById('chRight');
-  const subBar = document.getElementById('subBar');
-  if (tab === 'map') {
-    chTitle.textContent = 'Interactive Trip Map';
-    chSub.textContent = visitedMapPins.length + ' Visited Stops · 0 Ghost Pins';
-    chRight.innerHTML = '<span class="ch-complete">✓ Trip Complete</span>';
-    subBar.style.display = 'none';
-  } else if (tab === 'favorites') {
-    chTitle.textContent = 'Curated Highlights';
-    chSub.textContent = 'All 13 Days · 5 Crew';
-    chRight.innerHTML = '<span class="ch-complete">' + recentHighlights.length + ' Moments</span>';
-    subBar.style.display = 'none';
-  } else {
-    chTitle.textContent = 'Japan Journey 2026';
-    chSub.textContent = 'Aug 21 – Sep 2 · 13-Day Family Log';
-    chRight.innerHTML = '<div class="ch-crew">' +
-      '<img src="assets/photos/53_ueno_father_son_smiling_selfie.jpg" alt="John" title="John">' +
-      '<img src="assets/photos/374_pearl_star_breakfast_brittany_evelyn_lap.jpg" alt="Brittany" title="Brittany">' +
-      '<img src="assets/photos/415_yoyogi_park_lincoln_naruko_dance_pose.jpg" alt="Lincoln" title="Lincoln">' +
-      '<img src="assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg" alt="Evelyn" title="Evelyn">' +
-      '<img src="assets/photos/562_ana_the_room_alison_suite_cabin_view.jpg" alt="Alison" title="Aunt Alison">' +
-      '</div><span class="ch-crew-pill">5 Crew</span>';
-    subBar.style.display = 'block';
-  }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (tab === 'map') {
     if (!map) {
       initMap();
     } else {
-      setTimeout(() => { map.invalidateSize(); zoomTo('japan'); renderMapMarkers(); }, 150);
+      setTimeout(() => {
+        map.invalidateSize();
+        zoomTo('japan');
+        renderMapMarkers();
+      }, 150);
     }
   }
 }
 
-// ---------- Highlights ----------
 function renderHighlights() {
   const container = document.getElementById('highlightsContainer');
-  if (!container) return;
+  if (!container || typeof recentHighlights === 'undefined') return;
   container.innerHTML = recentHighlights.map((item, hIdx) => {
     return '<div class="highlight-item-card highlight-clickable" data-highlight-idx="' + hIdx + '">' +
-      '<span class="highlight-day-stamp">' + esc(item.day || '') + '</span>' +
-      '<div class="highlight-thumb-box"><img src="' + item.thumb + '" alt="' + esc(item.caption) + '" loading="lazy"></div>' +
+      '<div class="highlight-thumb-box">' +
+        '<img src="' + item.thumb + '" alt="' + esc(item.caption) + '" loading="lazy">' +
+      '</div>' +
       '<div class="highlight-body-box">' +
         '<div class="highlight-loc-tag">📍 ' + esc(item.location) + '</div>' +
         '<p class="highlight-caption-text">' + esc(item.caption) + '</p>' +
@@ -5641,52 +6017,142 @@ function renderHighlights() {
   }).join('');
 }
 
-// ---------- Pin → post matching (for Read Story) ----------
-const pinPostKeywords = {
-  'ebisu-park': ['ebisu park'],
-  'warehouse-ebisu': ['warehouse'],
-  'gigo-arcade': ['gigo arcade'],
-  'ueno-park': ['ueno park']
+// Global click delegation for all lightbox media
+document.addEventListener('click', (e) => {
+  // 1. Story Media Click
+  const mediaItem = e.target.closest('.story-clickable-media');
+  if (mediaItem) {
+    const pIdx = mediaItem.getAttribute('data-post-idx');
+    const mIdx = mediaItem.getAttribute('data-media-idx');
+    if (pIdx !== null && mIdx !== null) {
+      const post = tripPosts[parseInt(pIdx, 10)];
+      if (post && post.media && post.media[parseInt(mIdx, 10)]) {
+        const m = post.media[parseInt(mIdx, 10)];
+        openLightbox(m.url, m.type || 'image', m.caption || post.title);
+        return;
+      }
+    }
+  }
+
+  // 2. Highlights Click
+  const hlItem = e.target.closest('.highlight-clickable');
+  if (hlItem) {
+    const hIdx = hlItem.getAttribute('data-highlight-idx');
+    if (hIdx !== null && typeof recentHighlights !== 'undefined') {
+      const item = recentHighlights[parseInt(hIdx, 10)];
+      if (item) {
+        openLightbox(item.url, 'image', item.caption);
+        return;
+      }
+    }
+  }
+});
+
+// Pin Photo & Category Lookup Helper
+const pinPhotoLookup = {
+  'haneda-departure': 'assets/photos/566_ana_the_room_evelyn_holding_hands_mom_alison_takeoff_2.jpg',
+  'gigo-akihabara': 'assets/photos/542_akiba_night_walk_full_family_taiyaki_pokemon_yoshi_1.jpg',
+  'luidas-bar': 'assets/photos/527_pasela_lobby_full_family_birthday_selfie.jpg',
+  'green-thumb-bakery': 'assets/photos/517_green_thumb_bakery_evelyn_cream_pastry_bite.jpg',
+  'nakano-broadway': 'assets/photos/505_nakano_sun_mall_arcade_canopy_view.jpg',
+  'nakano-central-park': 'assets/photos/514_nakano_central_park_evelyn_food_truck_gapao_thumbsup.jpg',
+  'shinagawa-aquarium': 'assets/photos/441_shinagawa_aquarium_entrance_evelyn_dolphin_statue.jpg',
+  'shinagawa-kumin-park': 'assets/photos/476_shinagawa_kumin_park_scenic_lake_reflection.jpg',
+  'shinjuku-chuo-park': 'assets/photos/494_shinjuku_chuo_park_whale_sandpit_crawl.jpg',
+  'yoyogi-park-yosakoi': 'assets/photos/409_yoyogi_park_outdoor_stage_competition_crowd.jpg',
+  'shibuya-parco': 'assets/photos/422_shibuya_parco_sylvanian_families_evelyn_rabbit.jpg',
+  'ebisu-park': 'assets/photos/428_ebisu_park_rocket_train_playground_wide.jpg',
+  'warehouse-ebisu': 'assets/photos/434_warehouse_ebisu_denim_shopping_haul.jpg',
+  'gigo-arcade': 'assets/photos/435_gigo_arcade_lincoln_ufo_catcher_yoshi.jpg',
+  'cerulean-tower-hotel': 'assets/photos/399_cerulean_tokyu_japanese_suite_twin_beds_city_view.jpg',
+  'mega-donki-shibuya': 'assets/photos/382_mega_don_quijote_shibuya_storefront_crosswalk.jpg',
+  'bic-camera-hachiko': 'assets/photos/391_shibuya_bic_camera_3d_pokemon_screen_pack_opening.jpg',
+  'dipper-dan-shibuya': 'assets/photos/388_udagawa_police_box_family_crepe_selfie.jpg',
+  'mandarake-shibuya': 'assets/photos/383_mandarake_shibuya_spiral_stairs_john_brittany_selfie.jpg',
+  'atami-moon-terrace': 'assets/photos/362_atami_waterfront_park_evelyn_compass_mosaic_run.jpg',
+  'pearl-star-hotel': 'assets/photos/260_pearl_star_hotel_lounge_dad_brittany_kids_welcome_tea.jpg',
+  'oyster-bar-kagiya': 'assets/photos/365_oyster_bar_kagiya_fresh_raw_oysters_platter.jpg',
+  'sawamura-kyukaruizawa': 'assets/photos/353_sawamura_roastery_kyukaruizawa_storefront_rain.jpg',
+  'osakana-shokudo-atami': 'assets/photos/351_osakana_shokudo_family_dinner_table.jpg',
+  'atami-water-park': 'assets/photos/340_atami_sun_beach_water_park_sign.jpg',
+  'fukiyotei-sushi': 'assets/photos/320_fukiyotei_sushi_storefront_display_sign.jpg',
+  'atami-sun-beach': 'assets/photos/311_atami_beach_mom_kids_stepping_into_ocean.jpg',
+  'karuizawa-hotel': 'assets/photos/147_kikyo_hotel_evelyn_wing_sign_proud.jpg',
+  'tsurutontan-karuizawa': 'assets/photos/239_tsurutontan_dinner_kids_holding_matcha_ice_cream.jpg',
+  'church-street-karuizawa': 'assets/photos/279_church_street_evelyn_glowing_heart_arch_lookout.jpg',
+  'karuizawa-toy-kingdom': 'assets/photos/180_toy_kingdom_arrival_one_day_passes.jpg',
+  'myogi-pass': 'assets/photos/141_taxi_highway_myogi_mountains_view.jpg',
+  'ueno-zoo': 'assets/photos/132_ueno_zoo_power_breezer_misting_fan_kids.jpg',
+  'yamashiroya': 'assets/photos/66_yamashiroya_gachapon_wall.jpg',
+  'tokyo-izakaya': 'assets/photos/123_dinner_lincoln_authentic_rolls_chopsticks.jpg',
+  'harakado': 'assets/photos/113_harakado_rooftop_kawaii_monster_statue.jpg',
+  'tamagotchi-factory': 'assets/photos/112_tamagotchi_factory_evelyn_giant_display.jpg',
+  'godzilla-store': 'assets/photos/109_godzilla_store_lincoln_pose.jpg',
+  'puroland': 'assets/photos/108_sanrio_puroland_dad_evelyn_selfie.jpg',
+  'ueno-park-playground': 'assets/photos/73_ueno_playground_evelyn_panda_ride.jpg',
+  'ameyoko-izakaya': 'assets/photos/61_ameyoko_lunch_family_smiles.jpg',
+  'ameyoko': 'assets/photos/57_ameyoko_market_street_walk.jpg',
+  'ueno-park': 'assets/photos/46_ueno_hanazono_inari_torii_gates.jpg',
+  'bistro-nohga': 'assets/photos/36_bistro_nohga_walking_in.jpg',
+  'donki-ueno': 'assets/photos/31_don_quijote_contact_solution_hunt.jpg',
+  'ueno': 'assets/photos/20_tabi_ueno_evelyn_bed_jump.jpg',
+  'nrt': 'assets/photos/01_inflight_girl_mom.jpg'
 };
-
-function findPostForPin(pin) {
-  const photo = pinPhotoLookup[pin.id];
-  let post = null;
-  if (photo) {
-    post = tripPosts.find(p => (p.media || []).some(m => m.url === photo || m.thumb === photo));
-  }
-  if (!post && pinPostKeywords[pin.id]) {
-    const kws = pinPostKeywords[pin.id];
-    post = tripPosts.find(p => kws.some(k => ((p.title || '') + ' ' + (p.location || '')).toLowerCase().includes(k)));
-  }
-  return post || null;
-}
-
-// ---------- Map ----------
-let activeMapCategory = 'all';
-let mapMarkers = [];
-let map = null;
-let selectedPin = null;
 
 function getPinCategory(pin) {
   const t = (pin.type || '').toLowerCase();
+  const c = (pin.city || '').toLowerCase();
   const n = (pin.name || '').toLowerCase();
-  if (t === 'play' || n.includes('park') || n.includes('kingdom') || n.includes('zoo') || n.includes('playground') || n.includes('aquarium')) return 'play';
-  if (t === 'culture' || n.includes('shrine') || n.includes('stage') || n.includes('festival')) return 'culture';
+  if (t === 'play' || n.includes('park') || n.includes('kingdom') || n.includes('zoo') || n.includes('playground')) return 'play';
+  if (t === 'culture' || n.includes('aquarium') || n.includes('shrine') || n.includes('stage') || n.includes('festival')) return 'culture';
   if (t === 'shopping' || n.includes('parco') || n.includes('donki') || n.includes('store') || n.includes('arcade') || n.includes('gigo') || n.includes('camera') || n.includes('mandarake') || n.includes('warehouse')) return 'shopping';
-  if (t === 'onsen' || n.includes('food') || n.includes('sushi') || n.includes('oyster') || n.includes('bakery') || n.includes('shokudo') || n.includes('izakaya') || n.includes('udon') || n.includes('crepe') || n.includes('bistro') || n.includes('bar')) return 'food';
-  if (t === 'hotel' || n.includes('hotel') || n.includes('kikyo') || n.includes('nohga') || n.includes('tabi')) return 'hotel';
+  if (t === 'onsen' || n.includes('food') || n.includes('sushi') || n.includes('oyster') || n.includes('bakery') || n.includes('shokudo') || n.includes('izakaya') || n.includes('udon') || n.includes('crepe') || n.includes('bistro')) return 'food';
+  if (n.includes('hotel') || n.includes('kikyo') || n.includes('nohga') || n.includes('base') || pin.status === 'current') return 'hotel';
   return 'culture';
 }
 
+let activeMapCategory = 'all';
+let mapMarkers = [];
+
+// Map Initialization
+let map = null;
 function initMap() {
-  map = window.map = L.map('map', { zoomControl: true, worldCopyJump: false }).setView([35.4, 137.5], 7);
+  map = window.map = L.map('map', {
+    zoomControl: true,
+    worldCopyJump: false
+  }).setView([35.4, 137.5], 7);
+
+  // High-Resolution English Google Maps Basemap Layer
   L.tileLayer('https://mt1.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}', {
-    maxZoom: 20, attribution: '&copy; Google Maps'
+    maxZoom: 20,
+    attribution: '&copy; Google Maps'
   }).addTo(map);
 
-  L.polyline(visitedMainRoute, { color: '#FF6B9D', weight: 3.5, opacity: 0.9, dashArray: '5, 8', lineCap: 'round', lineJoin: 'round' }).addTo(map);
-  L.polyline(visitedTokyoRoute, { color: '#3B82F6', weight: 3, opacity: 0.85, dashArray: '4, 7', lineCap: 'round' }).addTo(map);
+  // Pretty Dotted Travel Paths Matching Mockup
+  L.polyline(visitedMainRoute, { 
+    color: '#FF6B9D', 
+    weight: 3.5, 
+    opacity: 0.9, 
+    dashArray: '5, 8',
+    lineCap: 'round', 
+    lineJoin: 'round' 
+  }).addTo(map);
+
+  L.polyline(visitedTokyoRoute, { 
+    color: '#3B82F6', 
+    weight: 3, 
+    opacity: 0.85, 
+    dashArray: '4, 7', 
+    lineCap: 'round' 
+  }).addTo(map);
+
+  L.polyline(plannedRouteCoords, { 
+    color: '#94A3B8', 
+    weight: 2.5, 
+    opacity: 0.6, 
+    dashArray: '3, 6', 
+    lineCap: 'round' 
+  }).addTo(map);
 
   renderMapMarkers();
   updateMapCategoryCounts();
@@ -5695,91 +6161,111 @@ function initMap() {
 
 function renderMapMarkers() {
   if (!map) return;
+  // Clear existing markers
   mapMarkers.forEach(m => map.removeLayer(m));
   mapMarkers = [];
-  visitedMapPins.forEach(pin => {
+
+  mapPins.forEach(pin => {
     const cat = getPinCategory(pin);
-    if (activeMapCategory !== 'all' && cat !== activeMapCategory) return;
-    const photoUrl = pinPhotoLookup[pin.id] || null;
-    const photoHtml = photoUrl
-      ? '<img src="' + photoUrl + '" alt="' + esc(pin.name) + '" onerror="this.outerHTML=\'<span class=&quot;fallback-icon&quot;>' + (pin.icon || '📍') + '</span>\'">'
+    if (activeMapCategory !== 'all' && cat !== activeMapCategory) {
+      return;
+    }
+
+    const photoUrl = pinPhotoLookup[pin.id] || (pin.media && pin.media[0] ? pin.media[0].thumb : null);
+    const statusClass = pin.status === 'current' ? 'current' : pin.status === 'planned' ? 'planned' : 'visited';
+    
+    const photoHtml = photoUrl 
+      ? '<img src="' + photoUrl + '" alt="' + esc(pin.name) + '" onerror="this.outerHTML=\'<span class=\\\'fallback-icon\\\'>' + (pin.icon || '📍') + '</span>\'">'
       : '<span class="fallback-icon">' + (pin.icon || '📍') + '</span>';
-    const iconHtml =
-      '<div class="photo-pin-wrap" id="marker-' + pin.id + '">' +
+
+    const iconHtml = 
+      '<div class="photo-pin-wrap ' + statusClass + '" id="marker-' + pin.id + '">' +
         '<div class="photo-pin-bubble">' + photoHtml + '</div>' +
         '<div class="photo-pin-stem"></div>' +
       '</div>';
-    const icon = L.divIcon({ className: '', html: iconHtml, iconSize: [44, 52], iconAnchor: [22, 50] });
-    const marker = L.marker([pin.lat, pin.lon], { icon, zIndexOffset: 100 }).addTo(map);
-    marker.on('click', () => selectMapPin(pin));
+
+    const icon = L.divIcon({
+      className: '',
+      html: iconHtml,
+      iconSize: [44, 52],
+      iconAnchor: [22, 50]
+    });
+
+    const zIndexOffset = pin.status === 'current' ? 1000 : (pin.status === 'visited' ? 100 : 0);
+    const marker = L.marker([pin.lat, pin.lon], { icon, zIndexOffset }).addTo(map);
+    
+    marker.on('click', () => {
+      selectMapPin(pin);
+    });
+
     mapMarkers.push(marker);
   });
 }
 
 function updateMapCategoryCounts() {
-  const counts = { all: visitedMapPins.length, play: 0, culture: 0, shopping: 0, food: 0, hotel: 0 };
-  visitedMapPins.forEach(pin => { const c = getPinCategory(pin); if (counts[c] !== undefined) counts[c]++; });
-  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-  set('mapStopsTotal', counts.all);
-  set('mapStopsPlay', counts.play);
-  set('mapStopsCulture', counts.culture);
-  set('mapStopsShopping', counts.shopping);
-  set('mapStopsFood', counts.food);
-  set('mapStopsHotel', counts.hotel);
+  const counts = { all: mapPins.length, play: 0, culture: 0, shopping: 0, food: 0, hotel: 0 };
+  mapPins.forEach(pin => {
+    const cat = getPinCategory(pin);
+    if (counts[cat] !== undefined) counts[cat]++;
+  });
+
+  const totalEl = document.getElementById('mapStopsTotal');
+  const playEl = document.getElementById('mapStopsPlay');
+  const cultureEl = document.getElementById('mapStopsCulture');
+  const shopEl = document.getElementById('mapStopsShopping');
+  const foodEl = document.getElementById('mapStopsFood');
+  const hotelEl = document.getElementById('mapStopsHotel');
+
+  if (totalEl) totalEl.textContent = counts.all;
+  if (playEl) playEl.textContent = counts.play;
+  if (cultureEl) cultureEl.textContent = counts.culture;
+  if (shopEl) shopEl.textContent = counts.shopping;
+  if (foodEl) foodEl.textContent = counts.food;
+  if (hotelEl) hotelEl.textContent = counts.hotel;
 }
 
 function filterMapCategory(cat) {
   activeMapCategory = cat;
-  document.querySelectorAll('.map-filter-chip').forEach(btn => btn.classList.remove('active'));
-  if (event && event.currentTarget) event.currentTarget.classList.add('active');
+  document.querySelectorAll('.map-filter-chip').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  if (event && event.currentTarget) {
+    event.currentTarget.classList.add('active');
+  }
   renderMapMarkers();
 }
 
 function selectMapPin(pin) {
-  selectedPin = pin;
+  // Highlight Pin Element
   document.querySelectorAll('.photo-pin-wrap').forEach(el => el.classList.remove('active'));
   const pinEl = document.getElementById('marker-' + pin.id);
   if (pinEl) pinEl.classList.add('active');
 
   const card = document.getElementById('mapSelectedCard');
+  const thumb = document.getElementById('mapSelectedThumb');
+  const tag = document.getElementById('mapSelectedTag');
+  const title = document.getElementById('mapSelectedTitle');
+  const meta = document.getElementById('mapSelectedMeta');
+
   if (!card) return;
 
   const photoUrl = pinPhotoLookup[pin.id] || 'assets/photos/53_ueno_father_son_smiling_selfie.jpg';
-  const cat = getPinCategory(pin);
-  const catLabels = { play: 'Parks & Play', culture: 'Culture & Sights', shopping: 'Shopping & Arcade', food: 'Food & Dining', hotel: 'Stays & Bases' };
-  const post = findPostForPin(pin);
-  let mediaLine = pin.city ? '📍 ' + pin.city.toUpperCase() : '📍 JAPAN';
-  if (post) {
-    const pc = (post.media || []).filter(m => m.type !== 'video').length;
-    const vc = (post.media || []).filter(m => m.type === 'video').length;
-    mediaLine = '📍 ' + (pin.city ? pin.city.toUpperCase() : 'JAPAN') + ' · ' + pc + ' Photos' + (vc ? ', ' + vc + ' Video' + (vc > 1 ? 's' : '') : '');
-  }
+  const cat = getPinCategory(pin).toUpperCase();
+  const statusLabel = pin.status === 'current' ? 'CURRENT BASE' : (pin.status === 'visited' ? 'VISITED' : 'PLANNED');
 
-  document.getElementById('mapSelectedThumb').src = photoUrl;
-  document.getElementById('mapSelectedKicker').textContent = (catLabels[cat] || cat).toUpperCase() + (pin.time ? ' · ' + pin.time.toUpperCase() : '');
-  document.getElementById('mapSelectedTitle').textContent = pin.name ? pin.name.split('(')[0].trim() : 'Place';
-  document.getElementById('mapSelectedMeta').textContent = mediaLine;
+  thumb.src = photoUrl;
+  tag.textContent = cat + ' · ' + statusLabel;
+  title.textContent = pin.name ? pin.name.split('(')[0].trim() : 'Place';
+  meta.innerHTML = '<span>🕒 ' + esc(pin.time || pin.tag || 'Trip Stop') + '</span> · <span>📍 ' + esc(pin.city ? pin.city.toUpperCase() : 'JAPAN') + '</span>';
 
-  const storyBtn = document.getElementById('mapSelectedStoryBtn');
-  if (post) {
-    storyBtn.style.display = 'block';
-    storyBtn.textContent = 'Read Story & View ' + ((post.media || []).length) + ' Media →';
-    storyBtn.onclick = () => { closeSelectedPinCard(); switchTab('feed'); setTimeout(() => { scrollToPost(post.id); }, 250); };
-  } else {
-    storyBtn.style.display = 'none';
-  }
-  document.getElementById('mapSelectedMapsBtn').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(pin.lat + ',' + pin.lon);
+  card.style.display = 'flex';
+  card.onclick = (e) => {
+    if (e.target.classList.contains('map-selected-close')) return;
+    openPlaceModal(pin);
+  };
 
-  card.style.display = 'block';
-  if (map) map.panTo([pin.lat, pin.lon], { animate: true, duration: 0.5 });
-}
-
-function scrollToPost(postId) {
-  const cards = document.querySelectorAll('#feedContainer .story-card');
-  // posts render in tripPosts order; find index
-  const pIdx = tripPosts.findIndex(p => p.id === postId);
-  if (pIdx >= 0 && cards[pIdx]) {
-    cards[pIdx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (map) {
+    map.panTo([pin.lat, pin.lon], { animate: true, duration: 0.5 });
   }
 }
 
@@ -5788,51 +6274,72 @@ function closeSelectedPinCard(e) {
   const card = document.getElementById('mapSelectedCard');
   if (card) card.style.display = 'none';
   document.querySelectorAll('.photo-pin-wrap').forEach(el => el.classList.remove('active'));
-  selectedPin = null;
 }
 
-function zoomTo(region, btnEl) {
+function zoomTo(region) {
   if (!map) return;
-  if (document.querySelectorAll) document.querySelectorAll('.map-quick-pill').forEach(b => b.classList.remove('active'));
-  if (btnEl) btnEl.classList.add('active');
-  if (region === 'japan') map.fitBounds([[34.4, 134.5], [36.6, 140.6]], { padding: [30, 30] });
-  else if (region === 'karuizawa') map.flyTo([36.355, 138.635], 14, { duration: 0.8 });
-  else if (region === 'tokyo') map.flyTo([35.695, 139.755], 12, { duration: 0.8 });
-  else if (region === 'shibuya') map.flyTo([35.658, 139.699], 15, { duration: 0.8 });
-  else if (region === 'atami') map.flyTo([35.097, 139.076], 13, { duration: 0.8 });
-}
-
-// ---------- Stats micro bar ----------
-function updateStatsMicro() {
-  const photoCount = tripPosts.reduce((acc, p) => acc + (p.media || []).filter(m => m.type !== 'video').length, 0);
-  const el = document.getElementById('statsMicro');
-  if (el) el.innerHTML = '<strong>' + tripPosts.length + '</strong> Stories · <strong>' + photoCount + '</strong> Photos · <strong>' + visitedMapPins.length + '</strong> Visited Stops';
-  const hs = document.getElementById('highlightsSub');
-  if (hs) hs.textContent = recentHighlights.length + ' favorite moments across all 13 days.';
-}
-
-// ---------- Global click delegation ----------
-document.addEventListener('click', (e) => {
-  const mediaItem = e.target.closest('.story-clickable-media');
-  if (mediaItem) {
-    const pIdx = mediaItem.getAttribute('data-post-idx');
-    const mIdx = mediaItem.getAttribute('data-media-idx');
-    if (pIdx !== null && mIdx !== null) { openLightboxForPost(pIdx, mIdx); return; }
+  if (region === 'japan') {
+    map.fitBounds([[34.4, 134.5], [36.6, 140.6]], { padding: [30, 30] });
+  } else if (region === 'karuizawa') {
+    map.flyTo([36.355, 138.635], 14, { duration: 0.8 });
+  } else if (region === 'tokyo') {
+    map.flyTo([35.695, 139.755], 12, { duration: 0.8 });
+  } else if (region === 'kansai') {
+    map.flyTo([34.85, 135.65], 10, { duration: 0.8 });
+  } else if (region === 'shibuya') {
+    map.flyTo([35.658, 139.699], 15, { duration: 0.8 });
+  } else if (region === 'shinagawa') {
+    map.flyTo([35.588, 139.739], 14, { duration: 0.8 });
+  } else if (region === 'atami') {
+    map.flyTo([35.097, 139.076], 13, { duration: 0.8 });
+  } else if (region === 'coast') {
+    map.flyTo([35.62, 135.4], 9, { duration: 0.8 });
   }
-  const hlItem = e.target.closest('.highlight-clickable');
-  if (hlItem) {
-    const hIdx = hlItem.getAttribute('data-highlight-idx');
-    if (hIdx !== null) {
-      const item = recentHighlights[parseInt(hIdx, 10)];
-      if (item) { openLightbox(item.url, 'image', item.caption); return; }
+}
+
+function scrollToLatestPost() {
+  switchTab('feed', true);
+  const firstCard = document.querySelector('.story-card');
+  if (firstCard) {
+    firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function updateBentoStats() {
+  if (typeof tripPosts === 'undefined') return;
+  const storiesCount = tripPosts.length;
+  let photoCount = 0;
+  tripPosts.forEach(p => {
+    if (p.media) {
+      p.media.forEach(m => {
+        if (m.type !== 'video') photoCount++;
+      });
     }
-  }
-});
+  });
 
-// ---------- Init ----------
+  let visitedStopsCount = 0;
+  if (typeof mapPins !== 'undefined') {
+    visitedStopsCount = mapPins.filter(p => p.status === 'visited' || p.status === 'current').length;
+  }
+
+  const storiesEl = document.getElementById('statStoriesCount');
+  const photosEl = document.getElementById('statPhotosCount');
+  const stopsEl = document.getElementById('statStopsCount');
+  const latestEl = document.getElementById('bentoLatestUpdateText');
+
+  if (storiesEl) storiesEl.textContent = storiesCount;
+  if (photosEl) photosEl.textContent = photoCount;
+  if (stopsEl) stopsEl.textContent = visitedStopsCount;
+  if (latestEl && tripPosts.length > 0) {
+    const latest = tripPosts[0];
+    const locShort = latest.location ? latest.location.split('·')[0].trim() : 'Tokyo';
+    latestEl.textContent = 'Latest Update · ' + locShort;
+  }
+}
+
+// Init
 document.addEventListener('DOMContentLoaded', () => {
-  updateStatsMicro();
-  buildDayRibbon();
+  updateBentoStats();
   renderHighlights();
   renderDrawerDays();
   renderFeed();
